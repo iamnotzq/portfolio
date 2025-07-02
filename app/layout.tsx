@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Orbitron, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+});
+
+const orbitron = Orbitron({
+  subsets: ["latin"],
+  weight: ["400", "700", "900"],
+  variable: "--font-orbitron",
 });
 
 const geistMono = Geist_Mono({
@@ -23,10 +29,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" >
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    // Apply the font variables to the <html> tag so they are globally available
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${orbitron.variable}`}>
+      {/* Apply the default font-sans class to the <body> */}
+      <body className={`font-sans antialiased`}>
         {children}
       </body>
     </html>

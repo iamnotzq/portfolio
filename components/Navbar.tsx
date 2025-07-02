@@ -1,6 +1,7 @@
 "use client";
 import React from 'react'
 import { useState } from "react";
+import { Download } from "lucide-react";
 import {
   Navbar,
   NavBody,
@@ -16,12 +17,12 @@ import {
 const NavbarComponent = () => {
     const navItems = [
         {
-          name: "Features",
-          link: "#features",
+          name: "Projects",
+          link: "#projects",
         },
         {
-          name: "Pricing",
-          link: "#pricing",
+          name: "About",
+          link: "#about",
         },
         {
           name: "Contact",
@@ -38,9 +39,15 @@ const NavbarComponent = () => {
             <NavBody>
               <NavbarLogo />
               <NavItems items={navItems} />
-              <div className="flex items-center gap-4">
-                <NavbarButton variant="secondary">Login</NavbarButton>
-                <NavbarButton variant="primary">Book a call</NavbarButton>
+              <div className="hidden items-center gap-4 md:flex">
+                <a href="#contact">
+                  <NavbarButton variant="secondary">Get In Touch</NavbarButton>
+                </a>
+                <a href="/resume.pdf" download>
+                  <NavbarButton variant="primary" className="flex items-center gap-2">
+                    <Download className="h-4 w-4" /> Resume
+                  </NavbarButton>
+                </a>
               </div>
             </NavBody>
      
@@ -69,20 +76,23 @@ const NavbarComponent = () => {
                   </a>
                 ))}
                 <div className="flex w-full flex-col gap-4">
-                  <NavbarButton
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    variant="primary"
-                    className="w-full"
-                  >
-                    Login
-                  </NavbarButton>
-                  <NavbarButton
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    variant="primary"
-                    className="w-full"
-                  >
-                    Book a call
-                  </NavbarButton>
+                <a href="#contact" className="w-full" onClick={() => setIsMobileMenuOpen(false)}>
+                    <NavbarButton
+                      variant="secondary"
+                      className="w-full"
+                    >
+                      Get In Touch
+                    </NavbarButton>
+                  </a>
+                  <a href="/resume.pdf" download className="w-full" onClick={() => setIsMobileMenuOpen(false)}>
+                    <NavbarButton
+                      variant="primary"
+                      className="w-full flex items-center justify-center gap-2"
+                    >
+                      <Download className="h-4 w-4" />
+                      Resume
+                    </NavbarButton>
+                  </a>
                 </div>
               </MobileNavMenu>
             </MobileNav>

@@ -233,16 +233,16 @@ export const MobileNavToggle = ({
 export const NavbarLogo = () => {
   return (
     <a
-      href="#"
-      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
+      href="/"
+      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal"
     >
       <img
-        src="https://assets.aceternity.com/logo-dark.png"
-        alt="logo"
+        src="/logo.png"
+        alt="Lam Zhi Qiang Logo"
         width={30}
         height={30}
       />
-      <span className="font-medium text-white">Startup</span>
+      <span className="font-medium text-white">LAM ZHI QIANG</span>
     </a>
   );
 };
