@@ -33,21 +33,20 @@ const NavbarComponent = () => {
       const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
      
       return (
-        <div className="relative w-full">
+        // Use absolute positioning to take the navbar out of the document flow.
+        <div className="absolute top-0 left-0 w-full z-50">
           <Navbar>
             
             <NavBody>
               <NavbarLogo />
               <NavItems items={navItems} />
               <div className="hidden items-center gap-4 md:flex">
-                <a href="#contact">
-                  <NavbarButton variant="secondary">Get In Touch</NavbarButton>
-                </a>
-                <a href="/resume.pdf" download>
-                  <NavbarButton variant="primary" className="flex items-center gap-2">
-                    <Download className="h-4 w-4" /> Resume
-                  </NavbarButton>
-                </a>
+                <NavbarButton href="#contact" variant="secondary">
+                  Get In Touch
+                </NavbarButton>
+                <NavbarButton href="/resume.pdf" download variant="primary" className="flex items-center gap-2">
+                  <Download className="h-4 w-4" /> Resume
+                </NavbarButton>
               </div>
             </NavBody>
      
@@ -76,23 +75,24 @@ const NavbarComponent = () => {
                   </a>
                 ))}
                 <div className="flex w-full flex-col gap-4">
-                <a href="#contact" className="w-full" onClick={() => setIsMobileMenuOpen(false)}>
-                    <NavbarButton
-                      variant="secondary"
-                      className="w-full"
-                    >
-                      Get In Touch
-                    </NavbarButton>
-                  </a>
-                  <a href="/resume.pdf" download className="w-full" onClick={() => setIsMobileMenuOpen(false)}>
-                    <NavbarButton
-                      variant="primary"
-                      className="w-full flex items-center justify-center gap-2"
-                    >
-                      <Download className="h-4 w-4" />
-                      Resume
-                    </NavbarButton>
-                  </a>
+                  <NavbarButton
+                    href="#contact"
+                    variant="secondary"
+                    className="w-full"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Get In Touch
+                  </NavbarButton>
+                  <NavbarButton
+                    href="/resume.pdf"
+                    download
+                    variant="primary"
+                    className="w-full flex items-center justify-center gap-2"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <Download className="h-4 w-4" />
+                    Resume
+                  </NavbarButton>
                 </div>
               </MobileNavMenu>
             </MobileNav>
