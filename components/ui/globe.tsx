@@ -1,10 +1,11 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Color, Scene, Fog, PerspectiveCamera, Vector3 } from "three";
 import ThreeGlobe from "three-globe";
 import { useThree, Canvas, extend } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import countries from "@/data/globe.json";
+
 declare module "@react-three/fiber" {
   interface ThreeElements {
     threeGlobe: ThreeElements["mesh"] & {
@@ -17,6 +18,7 @@ extend({ ThreeGlobe: ThreeGlobe });
 
 const RING_PROPAGATION_SPEED = 3;
 const aspect = 1.2;
+// FIX: Reverted camera distance to its original value to fix scaling and dark spot issue.
 const cameraZ = 300;
 
 type Position = {
@@ -60,14 +62,14 @@ interface WorldProps {
   data: Position[];
 }
 
-let numbersOfRings = [0];
-
-export function Globe({ globeConfig, data }: WorldProps) {
+// OPTIMIZATION: Wrapped the Globe component in React.memo to prevent re-renders when props are unchanged.
+export const Globe = React.memo(function Globe({ globeConfig, data }: WorldProps) {
   const globeRef = useRef<ThreeGlobe | null>(null);
   const groupRef = useRef();
   const [isInitialized, setIsInitialized] = useState(false);
 
-  const defaultProps = {
+  // OPTIMIZATION: Used useMemo to prevent re-calculating defaultProps on every render.
+  const defaultProps = useMemo(() => ({
     pointSize: 0.1,
     atmosphereColor: "#ffffff",
     showAtmosphere: true,
@@ -82,9 +84,8 @@ export function Globe({ globeConfig, data }: WorldProps) {
     rings: 1,
     maxRings: 3,
     ...globeConfig,
-  };
+  }), [globeConfig]);
 
-  // Initialize globe only once
   useEffect(() => {
     if (!globeRef.current && groupRef.current) {
       globeRef.current = new ThreeGlobe();
@@ -93,7 +94,6 @@ export function Globe({ globeConfig, data }: WorldProps) {
     }
   }, []);
 
-  // Build material when globe is initialized or when relevant props change
   useEffect(() => {
     if (!globeRef.current || !isInitialized) return;
 
@@ -103,27 +103,18 @@ export function Globe({ globeConfig, data }: WorldProps) {
       emissiveIntensity: number;
       shininess: number;
     };
-    globeMaterial.color = new Color(globeConfig.globeColor);
-    globeMaterial.emissive = new Color(globeConfig.emissive);
-    globeMaterial.emissiveIntensity = globeConfig.emissiveIntensity || 0.1;
-    globeMaterial.shininess = globeConfig.shininess || 0.9;
-  }, [
-    isInitialized,
-    globeConfig.globeColor,
-    globeConfig.emissive,
-    globeConfig.emissiveIntensity,
-    globeConfig.shininess,
-  ]);
+    globeMaterial.color = new Color(defaultProps.globeColor);
+    globeMaterial.emissive = new Color(defaultProps.emissive);
+    globeMaterial.emissiveIntensity = defaultProps.emissiveIntensity;
+    globeMaterial.shininess = defaultProps.shininess;
+  }, [isInitialized, defaultProps]);
 
-  // Build data when globe is initialized or when data changes
-  useEffect(() => {
-    if (!globeRef.current || !isInitialized || !data) return;
-
-    const arcs = data;
-    let points = [];
-    for (let i = 0; i < arcs.length; i++) {
-      const arc = arcs[i];
-      const rgb = hexToRgb(arc.color) as { r: number; g: number; b: number };
+  // OPTIMIZATION: Memoized the points calculation to avoid re-computing on every render.
+  const filteredPoints = useMemo(() => {
+    if (!data) return [];
+    let points: any[] = [];
+    for (let i = 0; i < data.length; i++) {
+      const arc = data[i];
       points.push({
         size: defaultProps.pointSize,
         order: arc.order,
@@ -139,9 +130,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
         lng: arc.endLng,
       });
     }
-
-    // remove duplicates for same lat and lng
-    const filteredPoints = points.filter(
+    return points.filter(
       (v, i, a) =>
         a.findIndex((v2) =>
           ["lat", "lng"].every(
@@ -149,9 +138,14 @@ export function Globe({ globeConfig, data }: WorldProps) {
           ),
         ) === i,
     );
+  }, [data, defaultProps.pointSize]);
+
+  useEffect(() => {
+    if (!globeRef.current || !isInitialized) return;
 
     globeRef.current
       .hexPolygonsData(countries.features)
+      // CHANGE: Increased polygon resolution back to 3 for more detail.
       .hexPolygonResolution(3)
       .hexPolygonMargin(0.7)
       .showAtmosphere(defaultProps.showAtmosphere)
@@ -188,23 +182,10 @@ export function Globe({ globeConfig, data }: WorldProps) {
       .ringRepeatPeriod(
         (defaultProps.arcTime * defaultProps.arcLength) / defaultProps.rings,
       );
-  }, [
-    isInitialized,
-    data,
-    defaultProps.pointSize,
-    defaultProps.showAtmosphere,
-    defaultProps.atmosphereColor,
-    defaultProps.atmosphereAltitude,
-    defaultProps.polygonColor,
-    defaultProps.arcLength,
-    defaultProps.arcTime,
-    defaultProps.rings,
-    defaultProps.maxRings,
-  ]);
+  }, [isInitialized, data, defaultProps, filteredPoints]);
 
-  // Handle rings animation with cleanup
   useEffect(() => {
-    if (!globeRef.current || !isInitialized || !data) return;
+    if (!globeRef.current || !isInitialized || !data || data.length === 0) return;
 
     const interval = setInterval(() => {
       if (!globeRef.current) return;
@@ -232,27 +213,34 @@ export function Globe({ globeConfig, data }: WorldProps) {
   }, [isInitialized, data]);
 
   return <group ref={groupRef} />;
-}
+});
 
 export function WebGLRendererConfig() {
-  const { gl, size } = useThree();
+  const { gl } = useThree();
 
   useEffect(() => {
-    gl.setPixelRatio(window.devicePixelRatio);
-    gl.setSize(size.width, size.height);
     gl.setClearColor(0xffaaff, 0);
-  }, []);
+  }, [gl]);
 
   return null;
 }
 
-export function World(props: WorldProps) {
+// OPTIMIZATION: Wrapped the World component in React.memo
+export const World = React.memo(function World(props: WorldProps) {
   const { globeConfig } = props;
-  const scene = new Scene();
-  scene.fog = new Fog(0xffffff, 400, 2000);
+
+  // OPTIMIZATION: useMemo to create the scene only once.
+  const scene = useMemo(() => {
+    const scene = new Scene();
+    scene.fog = new Fog(0xffffff, 400, 2000);
+    return scene;
+  }, []);
+
   return (
-    <Canvas scene={scene} camera={new PerspectiveCamera(50, aspect, 180, 1800)}>
+    // OPTIMIZATION: Set device pixel ratio to a max of 1.5 for performance.
+    <Canvas dpr={[1, 1.5]} scene={scene} camera={new PerspectiveCamera(50, aspect, 180, 1800)}>
       <WebGLRendererConfig />
+      {/* FIX: Restored original lighting configuration */}
       <ambientLight color={globeConfig.ambientLight} intensity={0.6} />
       <directionalLight
         color={globeConfig.directionalLeftLight}
@@ -273,14 +261,15 @@ export function World(props: WorldProps) {
         enableZoom={false}
         minDistance={cameraZ}
         maxDistance={cameraZ}
-        autoRotateSpeed={1}
+        // CHANGE: Slowed down the auto-rotation speed.
+        autoRotateSpeed={0.1}
         autoRotate={true}
         minPolarAngle={Math.PI / 3.5}
         maxPolarAngle={Math.PI - Math.PI / 3}
       />
     </Canvas>
   );
-}
+});
 
 export function hexToRgb(hex: string) {
   var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
@@ -304,6 +293,5 @@ export function genRandomNumbers(min: number, max: number, count: number) {
     const r = Math.floor(Math.random() * (max - min)) + min;
     if (arr.indexOf(r) === -1) arr.push(r);
   }
-
   return arr;
 }

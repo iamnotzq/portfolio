@@ -1,71 +1,63 @@
 "use client";
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Carousel } from './ui/carousel';
+import React from 'react';
+import { WorldMap } from './ui/world-map';
+import { Carousel, CarouselSlideData } from './ui/carousel';
+
+// The data is now more robust and portfolio-focused.
+const slideData: CarouselSlideData[] = [
+    {
+      title: "Interactive Portfolio",
+      description: "Developed a personal portfolio from scratch, featuring a 3D interactive globe, scroll-based animations, and a dynamic project showcase. Focused on creating a smooth, engaging user experience with a modern aesthetic.",
+      year: 2024,
+      role: "Lead Developer",
+      techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Three.js"],
+      src: "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?q=80&w=1024&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      liveUrl: "#", // Replace with your live URL
+      githubUrl: "#", // Replace with your GitHub URL
+    },
+    {
+      title: "E-commerce Platform",
+      description: "Engineered a full-stack e-commerce solution with a custom CMS for product management, secure payment integration using Stripe, and a responsive user-facing storefront. Built for scalability and ease of use.",
+      year: 2023,
+      role: "Full-Stack Engineer",
+      techStack: ["React", "Node.js", "Express", "MongoDB", "Stripe API"],
+      src: "https://images.unsplash.com/photo-1522199755839-a2bacb67c546?q=80&w=1024&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%D%3D",
+      liveUrl: "#",
+      githubUrl: "#",
+    },
+    {
+      title: "Data Visualization Dashboard",
+      description: "Created a powerful web application for visualizing complex financial datasets. Implemented interactive charts and graphs with D3.js, allowing users to filter, sort, and export data dynamically.",
+      year: 2023,
+      role: "Frontend Developer",
+      techStack: ["Vue.js", "D3.js", "Python", "Flask", "PostgreSQL"],
+      src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1024&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%D%3D",
+      liveUrl: "#",
+      githubUrl: "#",
+    },
+  ];
 
 const Projects = () => {
-    const slideData = [
-        {
-          title: "Mystic Mountains",
-          button: "Explore Component",
-          src: "https://images.unsplash.com/photo-1494806812796-244fe51b774d?q=80&w=3534&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        },
-        {
-          title: "Urban Dreams",
-          button: "Explore Component",
-          src: "https://images.unsplash.com/photo-1518710843675-2540dd79065c?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        },
-        {
-          title: "Neon Nights",
-          button: "Explore Component",
-          src: "https://images.unsplash.com/photo-1590041794748-2d8eb73a571c?q=80&w=3456&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        },
-        {
-          title: "Desert Whispers",
-          button: "Explore Component",
-          src: "https://images.unsplash.com/photo-1679420437432-80cfbf88986c?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        },
-      ];
-  // Create a ref to attach to the component's main container.
-  const ref = useRef(null);
-
-  // useScroll hook tracks the scroll progress of the target element (ref).
-  // The offset defines the start and end points for the animation.
-  // "start end" means the animation starts when the top of the component hits the bottom of the viewport.
-  // "start start" means the animation ends when the top of the component hits the top of the viewport.
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "start start"]
-  });
-
-  // useTransform maps the scroll progress to an opacity value.
-  // Here, the opacity will switch from 0 to 1 when the scroll progress is between 0.99 and 1.
-  // This makes the background and content appear instantly when the section is fully in view.
-  const opacity = useTransform(scrollYProgress, [0.99, 1], [0, 1]);
-
   return (
-    // The main container is now attached to the ref and has a height of h-screen.
-    // It's positioned relatively to act as a container for the animated background.
-    <div ref={ref} className="relative h-screen">
-      {/* This motion.div is the new background.
-          It's positioned absolutely to fill the entire container.
-          Its opacity is controlled by the `useTransform` hook, making it appear instantly on scroll. */}
-      <motion.div
-        style={{ opacity }}
-        className="absolute inset-0 z-0 bg-transparent"
-      />
-      {/* The content is placed in a motion container with a higher z-index
-          and its opacity is linked to the same scroll progress as the background. */}
-      <motion.div
-        style={{ opacity }}
-        className="relative z-10 flex h-full items-center justify-center"
-      >
-        <div className="text-center">
-          <h2 className="text-4xl font-bold text-white">About Me</h2>
-          <Carousel slides={slideData} />
+    <section
+      id="projects"
+     
+      className="relative flex h-[95vh] w-full flex-col items-center justify-center overflow-hidden bg-[#0E0E10] p-6"
+    >
+        <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
+            <WorldMap dots={[]} />
         </div>
-      </motion.div>
-    </div>
+        <div className="relative z-10 flex h-full w-full flex-col items-center justify-center">
+            <div className="flex flex-shrink-0 flex-col items-center text-center">
+                <h2 className="text-3xl font-bold text-white">Projects</h2>
+                <p className="text-neutral-400 mt-1">A collection of my work and experiments.</p>
+            </div>
+        <div className="relative z-10 mt-6 flex-grow w-full flex items-center justify-center min-h-0">
+        
+                <Carousel slides={slideData} />
+            </div>
+        </div>
+    </section>
   );
 };
 
