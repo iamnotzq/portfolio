@@ -33,8 +33,8 @@ const NavbarComponent = () => {
       const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
      
       return (
-        // Use absolute positioning to take the navbar out of the document flow.
-        <div className="absolute top-0 left-0 w-full z-50">
+        // CHANGE: Use 'fixed' positioning to keep the navbar at the top during scroll.
+        <div className="fixed top-0 left-0 w-full z-50">
           <Navbar>
             
             <NavBody>
@@ -97,9 +97,6 @@ const NavbarComponent = () => {
               </MobileNavMenu>
             </MobileNav>
           </Navbar>
-          
-     
-          {/* Navbar */}
         </div>
       );
 }

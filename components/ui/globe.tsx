@@ -68,7 +68,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
   const [isInitialized, setIsInitialized] = useState(false);
 
   const defaultProps = {
-    pointSize: 1,
+    pointSize: 0.1,
     atmosphereColor: "#ffffff",
     showAtmosphere: true,
     atmosphereAltitude: 0.1,
@@ -178,7 +178,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
       .pointColor((e) => (e as { color: string }).color)
       .pointsMerge(true)
       .pointAltitude(0.0)
-      .pointRadius(2);
+      .pointRadius(0);
 
     globeRef.current
       .ringsData([])
