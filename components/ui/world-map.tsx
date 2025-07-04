@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import { motion } from "motion/react";
 import DottedMap from "dotted-map";
 
@@ -12,39 +12,45 @@ interface MapProps {
   lineColor?: string;
 }
 
+// PERFORMANCE: Helper functions are defined outside the component 
+// to prevent them from being recreated on every render.
+const projectPoint = (lat: number, lng: number) => {
+  const x = (lng + 180) * (800 / 360);
+  const y = (90 - lat) * (400 / 180);
+  return { x, y };
+};
+
+const createCurvedPath = (
+  start: { x: number; y: number },
+  end: { x: number; y: number }
+) => {
+  const midX = (start.x + end.x) / 2;
+  const midY = Math.min(start.y, end.y) - 50;
+  return `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`;
+};
+
+
 export function WorldMap({
   dots = [],
-  // Changed the default line color to a brighter, more vibrant cyan.
   lineColor = "#06b6d4",
 }: MapProps) {
   const svgRef = useRef<SVGSVGElement>(null);
-  const map = new DottedMap({ height: 100, grid: "diagonal" });
 
-  const svgMap = map.getSVG({
-    radius: 0.22,
-    // Increased the opacity of the static dots from 40 to 60 (Hex alpha).
-    color: "#FFFFFF60" ,
-    shape: "circle",
-    backgroundColor:  "transparent" ,
-  });
+  // PERFORMANCE: The DottedMap instance and the resulting SVG string are memoized
+  // to avoid recalculating them on every component render.
+  const svgMap = useMemo(() => {
+    const map = new DottedMap({ height: 100, grid: "diagonal" });
+    return map.getSVG({
+      radius: 0.22,
+      color: "#FFFFFF60",
+      shape: "circle",
+      backgroundColor: "transparent",
+    });
+  }, []);
 
-  const projectPoint = (lat: number, lng: number) => {
-    const x = (lng + 180) * (800 / 360);
-    const y = (90 - lat) * (400 / 180);
-    return { x, y };
-  };
-
-  const createCurvedPath = (
-    start: { x: number; y: number },
-    end: { x: number; y: number }
-  ) => {
-    const midX = (start.x + end.x) / 2;
-    const midY = Math.min(start.y, end.y) - 50;
-    return `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`;
-  };
 
   return (
-    <div className="w-full aspect-[2/1] bg-transparent rounded-lg  relative font-sans">
+    <div className="w-full aspect-[2/1] bg-transparent rounded-lg relative font-sans">
       <img
         src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
         className="h-full w-full [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none"
@@ -93,7 +99,9 @@ export function WorldMap({
             <stop offset="100%" stopColor="white" stopOpacity="0" />
           </linearGradient>
         </defs>
-
+        
+        {/* PERFORMANCE: Removed the indefinitely repeating <animate> tags which cause
+            constant repaints. This significantly reduces the load on the browser. */}
         {dots.map((dot, i) => (
           <g key={`points-group-${i}`}>
             <g key={`start-${i}`}>
@@ -103,30 +111,6 @@ export function WorldMap({
                 r="2"
                 fill={lineColor}
               />
-              <circle
-                cx={projectPoint(dot.start.lat, dot.start.lng).x}
-                cy={projectPoint(dot.start.lat, dot.start.lng).y}
-                r="2"
-                fill={lineColor}
-                opacity="0.5"
-              >
-                <animate
-                  attributeName="r"
-                  from="2"
-                  to="8"
-                  dur="1.5s"
-                  begin="0s"
-                  repeatCount="indefinite"
-                />
-                <animate
-                  attributeName="opacity"
-                  from="0.5"
-                  to="0"
-                  dur="1.5s"
-                  begin="0s"
-                  repeatCount="indefinite"
-                />
-              </circle>
             </g>
             <g key={`end-${i}`}>
               <circle
@@ -135,30 +119,6 @@ export function WorldMap({
                 r="2"
                 fill={lineColor}
               />
-              <circle
-                cx={projectPoint(dot.end.lat, dot.end.lng).x}
-                cy={projectPoint(dot.end.lat, dot.end.lng).y}
-                r="2"
-                fill={lineColor}
-                opacity="0.5"
-              >
-                <animate
-                  attributeName="r"
-                  from="2"
-                  to="8"
-                  dur="1.5s"
-                  begin="0s"
-                  repeatCount="indefinite"
-                />
-                <animate
-                  attributeName="opacity"
-                  from="0.5"
-                  to="0"
-                  dur="1.5s"
-                  begin="0s"
-                  repeatCount="indefinite"
-                />
-              </circle>
             </g>
           </g>
         ))}

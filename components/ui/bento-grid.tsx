@@ -11,7 +11,7 @@ export const BentoGrid = ({
   return (
     <div
       className={cn(
-        "grid w-full h-full grid-cols-1 gap-6 md:grid-cols-3",
+        "grid w-full h-full grid-cols-1 gap-6 md:grid-cols-5",
         className
       )}
     >
@@ -27,7 +27,7 @@ export const BentoGridItem = ({
   header,
   icon,
   onClick,
-  children, // MODIFIED: Added children prop
+  children,
 }: {
   className?: string;
   title?: string | React.ReactNode;
@@ -35,19 +35,18 @@ export const BentoGridItem = ({
   header?: React.ReactNode;
   icon?: React.ReactNode;
   onClick?: () => void;
-  children?: React.ReactNode; // MODIFIED: Added children to props type
+  children?: React.ReactNode;
 }) => {
   return (
     <div
       onClick={onClick}
       className={cn(
-        "group/bento shadow-input row-span-1 flex flex-col justify-between space-y-4 rounded-xl border border-white/[0.2] bg-neutral-900/70 p-4 transition duration-200 hover:shadow-xl backdrop-blur-md hover:bg-neutral-950/80",
-        // MODIFIED: Clicks are handled differently if item is expanded (has children)
+        // CORRECTED: Ensure "row-span-1" is removed from this line.
+        "group/bento shadow-input flex flex-col justify-between space-y-4 rounded-xl border border-white/[0.2] bg-neutral-900/90 p-4 transition duration-200 hover:shadow-xl backdrop-blur-md hover:bg-neutral-950/90",
         onClick && !children && "cursor-pointer hover:scale-[1.02] transition-transform",
         className
       )}
     >
-      {/* MODIFIED: If children are provided, render them. Otherwise, render the default content. */}
       {children ? (
         children
       ) : (

@@ -1,5 +1,7 @@
+// Menu.tsx
+
 "use client";
-import React, { useState, useRef, useMemo } from 'react';
+import React, { useRef, useMemo } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import {
     IconBriefcase,
@@ -9,19 +11,17 @@ import {
 } from "@tabler/icons-react";
 import { BentoGrid, BentoGridItem } from './ui/bento-grid';
 import { WorldMap } from './ui/world-map';
+import { Carousel, CarouselSlideData } from './ui/carousel';
+import { cn } from "@/lib/utils";
 
-const handleScroll = (id: string) => {
-  const element = document.getElementById(id);
-  if (element) {
-    element.scrollIntoView({
-      behavior: "smooth",
-    });
-  }
-};
+interface MenuProps {
+    activeItem: string | null;
+    setActiveItem: (id: string | null) => void;
+    id?: string;
+}
 
-// Content for the "About" panel
 const AboutContent = () => (
-    <div className="h-full flex flex-col justify-center">
+    <div className="h-full flex flex-col justify-center p-4">
         <h2 className="text-3xl font-bold text-white mb-4">About Me</h2>
         <p className="text-neutral-300 max-w-lg">
           This is where you can share your story. Talk about your professional journey, the skills you've acquired, and what you're passionate about. Make it personal and engaging!
@@ -29,9 +29,8 @@ const AboutContent = () => (
     </div>
 );
 
-// Content for the "Contact" panel
 const ContactContent = () => (
-    <div className="h-full flex flex-col justify-center">
+    <div className="h-full flex flex-col justify-center p-4">
         <h2 className="text-3xl font-bold text-white mb-4">Contact</h2>
         <p className="text-neutral-300 max-w-lg">
           Here's how to reach out. You can add your email, links to social profiles, or even a contact form component.
@@ -39,24 +38,63 @@ const ContactContent = () => (
     </div>
 );
 
-// Moved items array outside the component to keep it stable.
+const slideData: CarouselSlideData[] = [
+    {
+      title: "Interactive Portfolio",
+      description: "Developed a personal portfolio from scratch, featuring a 3D interactive globe, scroll-based animations, and a dynamic project showcase. Focused on creating a smooth, engaging user experience with a modern aesthetic.",
+      year: 2024,
+      role: "Lead Developer",
+      techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Three.js"],
+      src: "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?q=80&w=1024&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      liveUrl: "#",
+      githubUrl: "#",
+    },
+    {
+      title: "E-commerce Platform",
+      description: "Engineered a full-stack e-commerce solution with a custom CMS for product management, secure payment integration using Stripe, and a responsive user-facing storefront. Built for scalability and ease of use.",
+      year: 2023,
+      role: "Full-Stack Engineer",
+      techStack: ["React", "Node.js", "Express", "MongoDB", "Stripe API"],
+      src: "https://images.unsplash.com/photo-1522199755839-a2bacb67c546?q=80&w=1024&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      liveUrl: "#",
+      githubUrl: "#",
+    },
+    {
+      title: "Data Visualization Dashboard",
+      description: "Created a powerful web application for visualizing complex financial datasets. Implemented interactive charts and graphs with D3.js, allowing users to filter, sort, and export data dynamically.",
+      year: 2023,
+      role: "Frontend Developer",
+      techStack: ["Vue.js", "D3.js", "Python", "Flask", "PostgreSQL"],
+      src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1024&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      liveUrl: "#",
+      githubUrl: "#",
+    },
+];
+
+const ProjectsContent = () => (
+    <div className="h-full w-full flex flex-col justify-center items-center overflow-hidden">
+        <Carousel slides={slideData} />
+    </div>
+);
+
+
 const menuItems = [
     {
         id: "projects",
         title: "Projects",
-        description: "Explore a collection of my work and experiments.",
+        description: "Explore a collection of my work.",
         header: <div />,
-        className: "md:col-span-3",
+        className: "md:col-span-5 md:row-span-1",
         icon: <IconBriefcase className="h-4 w-4 text-neutral-400" />,
-        onClick: () => handleScroll("projects"),
-        isExpandable: false,
+        isExpandable: true,
+        content: <ProjectsContent />,
     },
     {
         id: "about",
         title: "About",
-        description: "Learn more about my journey, skills, and passion.",
+        description: "Learn more about my journey.",
         header: <div />,
-        className: "md:col-span-2",
+        className: "md:col-span-3 md:row-span-1",
         icon: <IconUser className="h-4 w-4 text-neutral-400" />,
         isExpandable: true,
         content: <AboutContent />,
@@ -64,109 +102,115 @@ const menuItems = [
     {
         id: "contact",
         title: "Contact",
-        description: "Let's get in touch and build something great together.",
+        description: "Let's get in touch.",
         header: <div />,
-        className: "md:col-span-1",
+        className: "md:col-span-2 md:row-span-1",
         icon: <IconMail className="h-4 w-4 text-neutral-400" />,
         isExpandable: true,
         content: <ContactContent />,
     },
 ];
 
-const Menu = () => {
-    const [selectedId, setSelectedId] = useState<string | null>(null);
+const Menu = ({ activeItem, setActiveItem, id }: MenuProps) => {
     const ref = useRef(null);
     const { scrollYProgress } = useScroll({
         target: ref,
         offset: ["start end", "start start"]
     });
 
-    const opacity = useTransform(scrollYProgress, [0.7, 1], [0, 1]);
+    const opacity = useTransform(scrollYProgress, [0.7, 1], [0.9, 1]);
     const scale = useTransform(scrollYProgress, [0.7, 1], [0.9, 1]);
-    
-    // This function dynamically determines the CSS class for each grid item.
+
     const getClassName = (item: typeof menuItems[number]) => {
-        if (!selectedId) {
-            return item.className;
-        }
-        if (item.id === selectedId) {
-            return "md:col-span-2 md:row-span-2";
-        }
-        return "md:col-span-1 md:row-span-1";
+      if (!activeItem) return item.className;
+
+      if (activeItem === 'projects') {
+        if (item.id === 'about') return 'md:col-span-1 md:row-span-2';
+        if (item.id === 'projects') return 'md:col-span-3 md:row-span-2';
+        if (item.id === 'contact') return 'md:col-span-1 md:row-span-2';
+      }
+
+      if (activeItem === 'about') {
+        if (item.id === 'about') return 'md:col-span-3 md:row-span-2 md:row-start-1';
+        if (item.id === 'projects') return 'md:col-span-2 md:row-span-1 md:row-start-1';
+        if (item.id === 'contact') return 'md:col-span-2 md:row-span-1 md:row-start-2';
+      }
+
+      if (activeItem === 'contact') {
+        if (item.id === 'projects') return 'md:col-span-2 md:row-span-1 md:row-start-1 md:col-start-1';
+        if (item.id === 'about') return 'md:col-span-2 md:row-span-1 md:row-start-2 md:col-start-1';
+        if (item.id === 'contact') return 'md:col-span-3 md:row-span-2 md:row-start-1 md:col-start-3';
+      }
+
+      return item.className;
     };
 
-    // Reorder items based on which is selected to control layout.
     const sortedItems = useMemo(() => {
-        if (!selectedId) return menuItems;
+        if (!activeItem) return menuItems;
 
-        const selectedItem = menuItems.find((item) => item.id === selectedId);
-        if (!selectedItem) return menuItems;
+        const projects = menuItems.find(i => i.id === 'projects');
+        const about = menuItems.find(i => i.id === 'about');
+        const contact = menuItems.find(i => i.id === 'contact');
 
-        // This logic now creates a specific order when 'contact' is selected
-        // to ensure the CSS grid auto-placement algorithm works as expected.
-        if (selectedId === 'contact') {
-            const projectsItem = menuItems.find(item => item.id === 'projects');
-            const aboutItem = menuItems.find(item => item.id === 'about');
-            // MODIFIED: This order places 'projects' before 'about' to flip their positions.
-            return [projectsItem, selectedItem, aboutItem].filter(Boolean);
+        if (activeItem === 'projects') {
+            return [about, projects, contact].filter(Boolean) as typeof menuItems;
+        }
+        if (activeItem === 'about') {
+            return [about, projects, contact].filter(Boolean) as typeof menuItems;
+        }
+        if (activeItem === 'contact') {
+            return [projects, about, contact].filter(Boolean) as typeof menuItems;
         }
 
-        // Otherwise, place the selected item at the start to align it to the left.
-        const otherItems = menuItems.filter((item) => item.id !== selectedId);
-        return [selectedItem, ...otherItems];
-    }, [selectedId]);
+        return menuItems;
+    }, [activeItem]);
 
 
     return (
-        <div ref={ref} className="h-screen sticky top-0">
+        <div id={id} ref={ref} className="h-screen overflow-hidden">
             <motion.div
                 style={{ opacity }}
-                className="absolute inset-0 z-0 bg-transparent"
+                className="absolute inset-0 z-0"
             />
             <motion.div
                 style={{ opacity, scale }}
                 className="relative z-10 h-full w-full"
             >
-                <div className="relative w-full h-full p-12">
+                <div className="relative w-full h-full p-12 ">
                     <BentoGrid className="w-full h-full md:grid-rows-2">
-                        {/* Map over the newly sorted items array */}
                         {sortedItems.map((item) => (
                             <motion.div
                                 key={item.id}
-                                layout // Enables smooth layout animations
-                                // Spring animation is fast and snappier
+                                layout
                                 transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                                className={getClassName(item)}
+                                className={cn(getClassName(item), "relative", item.id === activeItem ? "z-30" : "z-10")}
                             >
                                 <BentoGridItem
-                                    className="h-full w-full"
-                                    onClick={item.isExpandable ? () => setSelectedId(item.id) : item.onClick}
+                                    className={"h-full w-full"}
+                                    onClick={item.isExpandable ? () => setActiveItem(item.id) : undefined}
                                     title={item.title}
                                     description={item.description}
                                     header={item.header}
                                     icon={item.icon}
                                 >
-                                    {/* If item is selected, render its content inside */}
-                                    {item.id === selectedId && (
+                                    {item.id === activeItem && (
                                         <div className="relative h-full">
                                             <motion.button
-                                                initial={{ opacity: 0 }}
+                                                initial={{ opacity: 1 }}
                                                 animate={{ opacity: 1 }}
-                                                // Delay removed for a faster feel
-                                                transition={{ delay: 0, duration: 0.15 }}
+                                                transition={{ delay: 0.1, duration: 0.2 }}
                                                 onClick={(e) => {
                                                     e.stopPropagation();
-                                                    setSelectedId(null);
+                                                    setActiveItem(null);
                                                 }}
                                                 className="absolute top-2 right-2 text-neutral-400 hover:text-white transition-colors z-20"
                                             >
                                                 <IconX className="h-6 w-6" />
                                             </motion.button>
                                             <motion.div
-                                                initial={{ opacity: 0 }}
+                                                initial={{ opacity: 1 }}
                                                 animate={{ opacity: 1 }}
-                                                // Delay removed for a faster feel
-                                                transition={{ delay: 0, duration: 0.15 }}
+                                                transition={{ delay: 0.1, duration: 0.2 }}
                                                 className="h-full"
                                             >
                                                 {item.content}
@@ -178,8 +222,10 @@ const Menu = () => {
                         ))}
                     </BentoGrid>
                     
-                    {/* WorldMap remains as a persistent overlay on top of the grid. */}
-                    <div className="absolute inset-6 z-10 pointer-events-none opacity-80">
+                    <div
+                        className="absolute inset-6 z-20 pointer-events-none opacity-80"
+                        style={{ mixBlendMode: 'screen' }}
+                    >
                         <WorldMap dots={[]} />
                     </div>
                 </div>

@@ -1,74 +1,35 @@
+// Hero.tsx
+
 "use client";
 import React from 'react';
-// CHANGE: Import useScroll and useTransform for scroll-based animations
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Download } from "lucide-react";
 import { TextHoverEffect } from './ui/text-hover-effect';
 import { AnimatedTooltip } from './ui/animated-tooltip';
 
 const skills = [
-  {
-    id: 1,
-    name: "React Native",
-    designation: "Cross-platform Apps",
-    image:
-      "https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg",
-  },
-  {
-    id: 2,
-    name: "Expo",
-    designation: "Development Toolkit",
-    image:
-      "https://raw.githubusercontent.com/devicons/devicon/master/icons/expo/expo-original.svg",
-  },
-  {
-    id: 3,
-    name: "JavaScript",
-    designation: "Programming Language",
-    image:
-      "https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg",
-  },
-  {
-    id: 4,
-    name: "TypeScript",
-    designation: "Typed Superset of JS",
-    image:
-      "https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg",
-  },
-  {
-    id: 5,
-    name: "Node.js",
-    designation: "Backend Runtime",
-    image:
-      "https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg",
-  },
-  {
-    id: 6,
-    name: "Next.js",
-    designation: "React Framework",
-    image:
-      "https://raw.githubusercontent.com/devicons/devicon/master/icons/nextjs/nextjs-original.svg",
-  },
+  { id: 1, name: "React Native", designation: "Cross-platform Apps", image: "https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg" },
+  { id: 2, name: "Expo", designation: "Development Toolkit", image: "https://raw.githubusercontent.com/devicons/devicon/master/icons/expo/expo-original.svg" },
+  { id: 3, name: "JavaScript", designation: "Programming Language", image: "https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" },
+  { id: 4, name: "TypeScript", designation: "Typed Superset of JS", image: "https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" },
+  { id: 5, name: "Node.js", designation: "Backend Runtime", image: "https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg" },
+  { id: 6, name: "Next.js", designation: "React Framework", image: "https://raw.githubusercontent.com/devicons/devicon/master/icons/nextjs/nextjs-original.svg" },
 ];
 
-const Hero = () => {
-  // CHANGE: Add hooks to track window scroll progress.
+const Hero = ({ id }: { id?: string }) => {
   const { scrollY } = useScroll();
-
-  // CHANGE: Create animations based on scroll position.
-  // As the user scrolls from the top (0px) to 400px down, the opacity will go from 1 to 0.
   const opacity = useTransform(scrollY, [0, 800], [1, 0]);
-  // Similarly, the scale will go from 1 to 0.8, creating a zoom-out effect.
   const scale = useTransform(scrollY, [0, 800], [1, 0.8]);
 
   return (
-    // This container is sticky, so it stays in place while the content animates.
-    <div className="relative h-screen w-full sticky top-0">
-      <div className="absolute inset-0 z-0 flex items-center justify-center">
+    <div id={id} className="relative h-screen w-full sticky top-0">
+      <motion.div
+        style={{ opacity }}
+        className="absolute inset-0 z-0 flex items-center justify-center"
+      >
         <TextHoverEffect text="PORTFOLIO" />
-      </div>
+      </motion.div>
 
-      {/* CHANGE: The main content is wrapped in a motion.div to apply the scroll-based animations. */}
       <motion.div
         style={{ opacity, scale }}
         className="relative z-10 flex h-full flex-col items-center justify-center pointer-events-none"

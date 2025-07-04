@@ -1,9 +1,8 @@
 "use client";
 import React from 'react';
-import { WorldMap } from './ui/world-map';
 import { Carousel, CarouselSlideData } from './ui/carousel';
+import { BackgroundBeams } from './ui/background-beams';
 
-// The data is now more robust and portfolio-focused.
 const slideData: CarouselSlideData[] = [
     {
       title: "Interactive Portfolio",
@@ -12,8 +11,8 @@ const slideData: CarouselSlideData[] = [
       role: "Lead Developer",
       techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Three.js"],
       src: "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?q=80&w=1024&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      liveUrl: "#", // Replace with your live URL
-      githubUrl: "#", // Replace with your GitHub URL
+      liveUrl: "#",
+      githubUrl: "#",
     },
     {
       title: "E-commerce Platform",
@@ -21,7 +20,7 @@ const slideData: CarouselSlideData[] = [
       year: 2023,
       role: "Full-Stack Engineer",
       techStack: ["React", "Node.js", "Express", "MongoDB", "Stripe API"],
-      src: "https://images.unsplash.com/photo-1522199755839-a2bacb67c546?q=80&w=1024&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%D%3D",
+      src: "https://images.unsplash.com/photo-1522199755839-a2bacb67c546?q=80&w=1024&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       liveUrl: "#",
       githubUrl: "#",
     },
@@ -31,7 +30,7 @@ const slideData: CarouselSlideData[] = [
       year: 2023,
       role: "Frontend Developer",
       techStack: ["Vue.js", "D3.js", "Python", "Flask", "PostgreSQL"],
-      src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1024&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%D%3D",
+      src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1024&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       liveUrl: "#",
       githubUrl: "#",
     },
@@ -41,22 +40,19 @@ const Projects = () => {
   return (
     <section
       id="projects"
-     
-      className="relative flex h-[95vh] w-full flex-col items-center justify-center overflow-hidden bg-[#0E0E10] p-6"
+      // Use justify-center to vertically center the content block within the 95vh height.
+      className="relative flex h-[95vh] w-full flex-col items-center justify-center bg-[#0E0E10]"
     >
-        <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
-            <WorldMap dots={[]} />
-        </div>
-        <div className="relative z-10 flex h-full w-full flex-col items-center justify-center">
-            <div className="flex flex-shrink-0 flex-col items-center text-center">
+        {/* This container uses a gap to space its children (title and carousel) vertically. */}
+        <div className="relative z-10 flex w-full flex-col items-center gap-5 ">
+            <div className="text-center">
                 <h2 className="text-3xl font-bold text-white">Projects</h2>
-                <p className="text-neutral-400 mt-1">A collection of my work and experiments.</p>
+                <p className="mt-1 text-neutral-400">A collection of my work and experiments.</p>
             </div>
-        <div className="relative z-10 mt-6 flex-grow w-full flex items-center justify-center min-h-0">
-        
-                <Carousel slides={slideData} />
-            </div>
-        </div>
+            {/* The Carousel component is now a direct child, and its internal layout is handled by flexbox. */}
+            <Carousel slides={slideData} />
+      </div>
+      
     </section>
   );
 };

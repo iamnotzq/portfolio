@@ -49,8 +49,8 @@ export const CardContainer = ({
     <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
       <div
         className={cn(
-          // Added `overflow-hidden` here to clip the 3D transform.
-          "py-20 flex items-center justify-center overflow-hidden",
+          // The `overflow-hidden` class was removed from here to prevent clipping the 3D effect.
+          "flex items-center justify-center",
           containerClassName
         )}
         style={{

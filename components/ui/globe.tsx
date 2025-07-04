@@ -78,7 +78,7 @@ export const Globe = React.memo(function Globe({ globeConfig, data }: WorldProps
     globeColor: "#1d072e",
     emissive: "#000000",
     emissiveIntensity: 0.1,
-    shininess: 0.9,
+    shininess: 0.1,
     arcTime: 2000,
     arcLength: 0.9,
     rings: 1,
@@ -238,10 +238,10 @@ export const World = React.memo(function World(props: WorldProps) {
 
   return (
     // OPTIMIZATION: Set device pixel ratio to a max of 1.5 for performance.
-    <Canvas dpr={[1, 1.5]} scene={scene} camera={new PerspectiveCamera(50, aspect, 180, 1800)}>
+    <Canvas dpr={[1, 1]} scene={scene} camera={new PerspectiveCamera(50, aspect, 180, 1800)}>
       <WebGLRendererConfig />
       {/* FIX: Restored original lighting configuration */}
-      <ambientLight color={globeConfig.ambientLight} intensity={0.6} />
+      <ambientLight color={globeConfig.ambientLight} intensity={0.1} />
       <directionalLight
         color={globeConfig.directionalLeftLight}
         position={new Vector3(-400, 100, 400)}
@@ -253,7 +253,7 @@ export const World = React.memo(function World(props: WorldProps) {
       <pointLight
         color={globeConfig.pointLight}
         position={new Vector3(-200, 500, 200)}
-        intensity={0.8}
+        intensity={0.1}
       />
       <Globe {...props} />
       <OrbitControls
@@ -262,7 +262,7 @@ export const World = React.memo(function World(props: WorldProps) {
         minDistance={cameraZ}
         maxDistance={cameraZ}
         // CHANGE: Slowed down the auto-rotation speed.
-        autoRotateSpeed={0.1}
+        autoRotateSpeed={0.5}
         autoRotate={true}
         minPolarAngle={Math.PI / 3.5}
         maxPolarAngle={Math.PI - Math.PI / 3}
