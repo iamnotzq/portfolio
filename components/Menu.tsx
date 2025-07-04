@@ -183,7 +183,8 @@ const Menu = ({ activeItem, setActiveItem, id }: MenuProps) => {
                                 key={item.id}
                                 layout
                                 transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                                className={cn(getClassName(item), "relative", item.id === activeItem ? "z-30" : "z-10")}
+                                // Add `pointer-events-auto` to make the menu items clickable again.
+                                className={cn(getClassName(item), "relative pointer-events-auto", item.id === activeItem ? "z-30" : "z-10")}
                             >
                                 <BentoGridItem
                                     className={"h-full w-full"}

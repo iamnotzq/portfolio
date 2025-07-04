@@ -22,19 +22,23 @@ const Hero = ({ id }: { id?: string }) => {
   const scale = useTransform(scrollY, [0, 800], [1, 0.8]);
 
   return (
-    <div id={id} className="relative h-screen w-full sticky top-0">
+    // This component's container ignores pointer events...
+    <div id={id} className="relative h-screen w-full sticky top-0 pointer-events-none">
+      {/* ...but we explicitly enable them for the hover effect container. */}
       <motion.div
         style={{ opacity }}
-        className="absolute inset-0 z-0 flex items-center justify-center"
+        className="absolute inset-0 z-0 flex items-center justify-center pointer-events-auto"
       >
         <TextHoverEffect text="PORTFOLIO" />
       </motion.div>
 
+      {/* The foreground content container also ignores pointer events... */}
       <motion.div
         style={{ opacity, scale }}
         className="relative z-10 flex h-full flex-col items-center justify-center pointer-events-none"
       >
         <div className="pointer-events-none mx-auto flex w-full max-w-7xl flex-col items-start px-6 lg:px-8">
+          {/* ...while its children correctly re-enable them. */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

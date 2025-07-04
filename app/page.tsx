@@ -99,7 +99,9 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="relative z-20">
+      {/* This container for Hero and Menu was blocking events. */}
+      {/* Adding `pointer-events-none` allows clicks to pass through to the globe. */}
+      <div className="relative z-20 pointer-events-none">
         <Hero id="home" />
         <Menu id="menu" activeItem={activeMenu} setActiveItem={setActiveMenu} />
       </div>
