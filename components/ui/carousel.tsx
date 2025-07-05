@@ -8,15 +8,15 @@ import React, {
   createContext,
 } from "react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { CarouselSlideData } from "@/lib/projects-data";
+import { ExternalLink, Github, ArrowRight } from "lucide-react"; // Import icons
 
-
-// --- 3D Card Components ---
-// Context for mouse enter state
+// --- 3D Card Components (remains the same) ---
 const MouseEnterContext = createContext<
   [boolean, React.Dispatch<React.SetStateAction<boolean>>] | undefined
 >(undefined);
 
-// Hook to use the mouse enter context
 const useMouseEnter = () => {
   const context = useContext(MouseEnterContext);
   if (context === undefined) {
@@ -25,7 +25,6 @@ const useMouseEnter = () => {
   return context;
 };
 
-// CardContainer: The main 3D perspective container
 export const CardContainer = ({
   children,
   className,
@@ -82,7 +81,6 @@ export const CardContainer = ({
   );
 };
 
-// CardBody: The main content area of the card
 export const CardBody = ({
   children,
   className,
@@ -102,7 +100,6 @@ export const CardBody = ({
   );
 };
 
-// CardItem: An element within the card that can be transformed in 3D space
 export const CardItem = ({
   as: Tag = "div",
   children,
@@ -152,24 +149,11 @@ export const CardItem = ({
 
 // --- Main Carousel Component ---
 
-// Data structure for a single slide
-export interface CarouselSlideData {
-  title: string;
-  description: string;
-  year: number;
-  role: string;
-  techStack: string[];
-  src: string;
-  liveUrl: string;
-  githubUrl: string;
-}
-
 // Slide Component: Renders a single 3D card
 const Slide = ({ slide, index, current, handleSlideClick }: { slide: CarouselSlideData, index: number, current: number, handleSlideClick: (index: number) => void }) => {
-  const { src, title, description, year, techStack, role, liveUrl, githubUrl } = slide;
+  const { slug, src, title, description, year, techStack, role, liveUrl, githubUrl } = slide;
   
   return (
-    // The list item provides the dimensions and spacing for each slide in the carousel.
     <li
       className="w-[80vmin] max-w-lg h-auto flex-shrink-0 px-4"
       onClick={() => handleSlideClick(index)}
@@ -179,6 +163,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: { slide: CarouselSli
         transition: "all 0.5s ease-in-out",
       }}
     >
+      {/* The Link wrapper has been removed from here to prevent nested <a> tags */}
       <CardContainer containerClassName="w-full h-full">
         <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full h-full rounded-xl p-6 border flex flex-col">
           {/* Top content section */}
@@ -215,14 +200,44 @@ const Slide = ({ slide, index, current, handleSlideClick }: { slide: CarouselSli
             />
           </CardItem>
 
-          {/* Bottom content section */}
-          <div className="flex justify-between items-center mt-4 flex-shrink-0">
-            <CardItem translateZ={20} as="a" href={liveUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white">
-              Live Demo →
+          {/* Bottom content section - REVISED to avoid nested links */}
+          <div className="flex justify-between items-center mt-6 flex-shrink-0">
+            <CardItem
+              translateZ={20}
+              className="text-sm font-semibold text-sky-400 hover:text-sky-200 transition-colors"
+            >
+              <Link href={`/project/${slug}`} className="inline-flex items-center gap-1">
+                View Details <ArrowRight className="h-4 w-4" />
+              </Link>
             </CardItem>
-            <CardItem translateZ={20} as="a" href={githubUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold">
-              View Code
-            </CardItem>
+            <div className="flex items-center gap-4">
+                 <CardItem
+                    translateZ={20}
+                 >
+                    <a
+                        href={liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-neutral-400 hover:text-white transition-colors"
+                        title="Live Demo"
+                    >
+                        <ExternalLink className="h-5 w-5" />
+                    </a>
+                 </CardItem>
+                 <CardItem
+                    translateZ={20}
+                 >
+                    <a
+                        href={githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-neutral-400 hover:text-white transition-colors"
+                        title="View Code"
+                    >
+                        <Github className="h-5 w-5" />
+                    </a>
+                 </CardItem>
+            </div>
           </div>
         </CardBody>
       </CardContainer>
@@ -266,22 +281,16 @@ export function Carousel({ slides }: { slides: CarouselSlideData[] }) {
     setCurrent(index);
   };
 
-  // This effect handles the sliding animation.
   useEffect(() => {
     if (carouselRef.current && carouselRef.current.children[0]) {
       const slideWidth = (carouselRef.current.children[0] as HTMLElement).offsetWidth;
-      // This calculation centers the active slide.
       const newTransform = `translateX(calc(50% - ${slideWidth / 2}px - ${current * slideWidth}px))`;
       carouselRef.current.style.transform = newTransform;
     }
   }, [current, slides]);
 
   return (
-    // The main container is a flex column, stacking the slides and controls vertically.
-    // A gap is used to create space between them.
     <div className="w-full flex flex-col items-center gap-8">
-      
-      {/* This wrapper handles horizontal overflow and provides vertical padding for the pop-out animation. */}
       <div className="w-full relative overflow-hidden py-5">
         <ul
           ref={carouselRef}
@@ -298,8 +307,6 @@ export function Carousel({ slides }: { slides: CarouselSlideData[] }) {
           ))}
         </ul>
       </div>
-      
-      {/* The controls are now a regular flex item, not absolutely positioned, preventing overlap. */}
       <div className="flex justify-center">
         <CarouselControl
           type="previous"

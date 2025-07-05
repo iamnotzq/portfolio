@@ -3,10 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils"; // Assuming you have a cn utility for classnames
 
-// A mock cn function if you don't have one in your project
-// const cn = (...inputs) => {
-//   return inputs.filter(Boolean).join(' ');
-// };
+
 
 export const BackgroundBeams = React.memo(
   ({ className }: { className?: string }) => {
@@ -87,8 +84,8 @@ export const BackgroundBeams = React.memo(
               key={`path-${index}`}
               d={path}
               stroke={`url(#gradient-${index})`}
-              strokeWidth="2"
-              strokeOpacity="0.8" 
+              strokeWidth="1"
+              strokeOpacity="0.3" 
             />
           ))}
           <defs>

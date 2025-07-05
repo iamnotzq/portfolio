@@ -14,13 +14,15 @@ import {
 } from "@/components/ui/resizable-navbar";
 
 interface NavbarComponentProps {
-  onMenuClick: (id: 'about' | 'contact') => void;
+  // Updated the type to include 'projects'
+  onMenuClick: (id: 'about' | 'contact' | 'projects') => void;
 }
 
 const NavbarComponent = ({ onMenuClick }: NavbarComponentProps) => {
     const navItems = [
         { name: "Home", link: "#home" },
-        { name: "Projects", link: "#projects" },
+        // Changed 'link' to 'id' to match the behavior of About and Contact
+        { name: "Projects", id: "projects" as const },
         { name: "About", id: "about" as const },
         { name: "Contact", id: "contact" as const },
       ];
@@ -39,6 +41,7 @@ const NavbarComponent = ({ onMenuClick }: NavbarComponentProps) => {
                 }
             }
         } else if ('id' in item && item.id) {
+            // This now handles 'projects' as well
             onMenuClick(item.id);
         }
         setIsMobileMenuOpen(false);

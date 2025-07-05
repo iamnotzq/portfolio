@@ -65,7 +65,8 @@ export default function Home() {
     }
   );
 
-  const handleNavMenuClick = (id: 'about' | 'contact') => {
+  // Updated the type to include 'projects'
+  const handleNavMenuClick = (id: 'about' | 'contact' | 'projects') => {
     const menuElement = document.getElementById('menu');
     if (menuElement) {
       menuElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
