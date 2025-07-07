@@ -20,6 +20,7 @@ export interface ProjectData {
   role: string;
   techStack: string[];
   imageUrl: string; // Main image for cards and hero
+  src: string; // Image for the 3D card component
   liveUrl: string;
   githubUrl: string;
   // New detailed fields for the project page
@@ -37,8 +38,9 @@ export const slideData: ProjectData[] = [
       year: 2024,
       role: "Lead Developer",
       techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Three.js"],
-      imageUrl: "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?q=80&w=1200&auto=format&fit=crop",
-      liveUrl: "#",
+      imageUrl: "/props-factory-website-screenshot.png",
+      src: "/props-factory-website-screenshot.png",
+      liveUrl: "#www.propsfactory.com.sg",
       githubUrl: "#",
       overview: "This project was an opportunity to explore modern web technologies and create a deeply engaging user experience. The goal was to build more than just a static page, but an interactive journey that showcases my skills in frontend development, animation, and 3D graphics. The entire site is designed to be fluid and responsive, providing a seamless experience on all devices.",
       features: [

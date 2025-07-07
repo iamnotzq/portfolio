@@ -194,7 +194,7 @@ const Menu = ({ activeItem, setActiveItem, id }: MenuProps) => {
                     </BentoGrid>
                     
                     <div
-                        className="absolute inset-6 z-20 pointer-events-none opacity-80"
+                        className="absolute inset-6 z-20 pointer-events-none "
                         style={{ mixBlendMode: 'screen' }}
                     >
                         <WorldMap dots={[]} />

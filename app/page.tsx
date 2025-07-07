@@ -9,6 +9,7 @@ import dynamic from "next/dynamic";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Menu from "@/components/Menu";
 import { useState } from "react";
+import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
 
 const World = dynamic(
   () => import("@/components/ui/globe").then((m) => m.World),
@@ -22,8 +23,8 @@ const globeConfig = {
   atmosphereColor: "#FFFFFF",
   atmosphereAltitude: 0.1,
   emissive: "#062056",
-  emissiveIntensity: 0.05,
-  shininess: 0.5,
+  emissiveIntensity: 0.1,
+  shininess: 0.9,
   polygonColor: "rgba(255,255,255,0.7)",
   ambientLight: "#38bdf8",
   directionalLeftLight: "#ffffff",
@@ -58,6 +59,9 @@ export default function Home() {
   const scale = useTransform(scrollY, [0, 1000], [0.05, 1]);
   const translateX = useTransform(scrollY, [0, 500, 1000], [600, 300, 0]);
 
+  // Create a new transform for the stars' scale. It will scale from 1x to 1.2x.
+  const starsScale = useTransform(scrollY, [0, 1000], [1, 1.2]);
+
   const transform = useTransform(
     [scale, translateX],
     ([latestScale, latestX]) => {
@@ -77,35 +81,53 @@ export default function Home() {
   };
 
   return (
-    <main className="relative w-full bg-black">
-      <NavbarComponent onMenuClick={handleNavMenuClick} />
+    <>
+      {/* Black background layer */}
+      <div className="fixed inset-0 -z-20 bg-black"></div>
+      
+    
+      <BackgroundGradientAnimation
+        gradientBackgroundStart="rgb(12, 20, 69)"
+        gradientBackgroundEnd="rgb(76, 29, 12)"
+        firstColor="42, 14, 79"
+        secondColor="12, 20, 69"
+        thirdColor="76, 29, 12"
+        fourthColor="42, 14, 79"
+        fifthColor="12, 20, 69"
+        containerClassName="fixed inset-0 -z-10 opacity-50"
+        interactive={false}
+      />
+      
+      {/* Set a transparent background on main and ensure it takes at least the full screen height */}
+      <main className="relative z-0 w-full min-h-screen bg-transparent">
+        <NavbarComponent onMenuClick={handleNavMenuClick} />
 
-      <div className="fixed top-0 left-0 w-full h-screen pointer-events-none">
-        <div className="absolute inset-0 z-0">
-          <ShootingStars />
-          <StarsBackground />
+        <div className="fixed top-0 left-0 w-full h-screen pointer-events-none">
+          <div className="absolute inset-0 z-0">
+            <ShootingStars />
+            {/* Pass the new `starsScale` prop to the StarsBackground component */}
+            <StarsBackground scale={starsScale} />
+          </div>
+
+          <div className="absolute inset-0 z-10 flex items-center justify-center">
+            <motion.div
+              style={{
+                width: '2048px',
+                height: '2048px',
+                transform: transform,
+              }}
+              className="pointer-events-auto"
+            >
+              <World data={sampleArcs} globeConfig={globeConfig} />
+            </motion.div>
+          </div>
         </div>
 
-        <div className="absolute inset-0 z-10 flex items-center justify-center">
-          <motion.div
-            style={{
-              width: '2048px',
-              height: '2048px',
-              transform: transform,
-            }}
-            className="pointer-events-auto"
-          >
-            <World data={sampleArcs} globeConfig={globeConfig} />
-          </motion.div>
+        <div className="relative z-20 pointer-events-none">
+          <Hero id="home" />
+          <Menu id="menu" activeItem={activeMenu} setActiveItem={setActiveMenu} />
         </div>
-      </div>
-
-      {/* This container for Hero and Menu was blocking events. */}
-      {/* Adding `pointer-events-none` allows clicks to pass through to the globe. */}
-      <div className="relative z-20 pointer-events-none">
-        <Hero id="home" />
-        <Menu id="menu" activeItem={activeMenu} setActiveItem={setActiveMenu} />
-      </div>
-    </main>
+      </main>
+    </>
   );
 }
