@@ -52,14 +52,14 @@ export default function ProjectPage() {
 
       {/* MODIFICATION: Gradient is now semi-transparent and layered on top of the black background. */}
       <BackgroundGradientAnimation
-        gradientBackgroundStart="rgb(0, 15, 10)"
-        gradientBackgroundEnd="rgb(0, 25, 30)"
-        firstColor="10, 80, 70"
-        secondColor="0, 60, 110"
-        thirdColor="10, 120, 100"
-        fourthColor="0, 90, 40"
-        fifthColor="0, 25, 30"
-        containerClassName="fixed inset-0 -z-20 opacity-50"
+        gradientBackgroundStart="rgb(0, 10, 5)"
+        gradientBackgroundEnd="rgb(0, 20, 10)"
+        firstColor="10, 220, 110"
+        secondColor="0, 150, 80"
+        thirdColor="5, 100, 120"
+        fourthColor="50, 255, 150"
+        fifthColor="0, 150, 80"
+        containerClassName="fixed inset-0 -z-20 opacity-20"
         interactive={false}
       />
       

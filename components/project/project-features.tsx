@@ -2,53 +2,77 @@
 import Image from "next/image";
 import { Feature } from "@/lib/projects-data";
 import { AnimatedTestimonials } from "../ui/animated-testimonials";
+import { IconClipboardCopy, IconFileBroken, IconSignature, IconTableColumn, IconArrowWaveRightUp, IconBoxAlignTopLeft, IconBoxAlignRightFilled } from "@tabler/icons-react";
+import { BentoGrid, BentoGridItem } from "../ui/project-grid";
 
 interface ProjectFeaturesProps {
   features: Feature[];
 }
 
 export const ProjectFeatures = ({ features }: ProjectFeaturesProps) => {
-  const testimonials = [
+  const Skeleton = () => (
+    <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100"></div>
+  );
+  const items = [
     {
-      quote:
-        "The attention to detail and innovative features have completely transformed our workflow. This is exactly what we've been looking for.",
-      name: "Sarah Chen",
-      designation: "Product Manager at TechFlow",
-      src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      title: "The Dawn of Innovation",
+      description: "Explore the birth of groundbreaking ideas and inventions.",
+      header: <Skeleton />,
+      icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
     },
     {
-      quote:
-        "Implementation was seamless and the results exceeded our expectations. The platform's flexibility is remarkable.",
-      name: "Michael Rodriguez",
-      designation: "CTO at InnovateSphere",
-      src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      title: "The Digital Revolution",
+      description: "Dive into the transformative power of technology.",
+      header: <Skeleton />,
+      icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
     },
     {
-      quote:
-        "This solution has significantly improved our team's productivity. The intuitive interface makes complex tasks simple.",
-      name: "Emily Watson",
-      designation: "Operations Director at CloudScale",
-      src: "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      title: "The Art of Design",
+      description: "Discover the beauty of thoughtful and functional design.",
+      header: <Skeleton />,
+      icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
     },
     {
-      quote:
-        "Outstanding support and robust features. It's rare to find a product that delivers on all its promises.",
-      name: "James Kim",
-      designation: "Engineering Lead at DataPro",
-      src: "https://images.unsplash.com/photo-1636041293178-808a6762ab39?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      title: "The Power of Communication",
+      description:
+        "Understand the impact of effective communication in our lives.",
+      header: <Skeleton />,
+      icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
     },
     {
-      quote:
-        "The scalability and performance have been game-changing for our organization. Highly recommend to any growing business.",
-      name: "Lisa Thompson",
-      designation: "VP of Technology at FutureNet",
-      src: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      title: "The Pursuit of Knowledge",
+      description: "Join the quest for understanding and enlightenment.",
+      header: <Skeleton />,
+      icon: <IconArrowWaveRightUp className="h-4 w-4 text-neutral-500" />,
+    },
+    {
+      title: "The Joy of Creation",
+      description: "Experience the thrill of bringing ideas to life.",
+      header: <Skeleton />,
+      icon: <IconBoxAlignTopLeft className="h-4 w-4 text-neutral-500" />,
+    },
+    {
+      title: "The Spirit of Adventure",
+      description: "Embark on exciting journeys and thrilling discoveries.",
+      header: <Skeleton />,
+      icon: <IconBoxAlignRightFilled className="h-4 w-4 text-neutral-500" />,
     },
   ];
   return (
     <section>
       <h2 className="text-3xl font-bold text-white text-center mb-12">Key Features</h2>
-      <AnimatedTestimonials testimonials={testimonials} />
+      <BentoGrid className="max-w-4xl mx-auto">
+      {items.map((item, i) => (
+        <BentoGridItem
+          key={i}
+          title={item.title}
+          description={item.description}
+          header={item.header}
+          icon={item.icon}
+          className={i === 3 || i === 6 ? "md:col-span-2" : ""}
+        />
+      ))}
+    </BentoGrid>
     </section>
   );
 };
