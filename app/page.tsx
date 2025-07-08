@@ -6,9 +6,9 @@ import NavbarComponent from "@/components/Navbar";
 import { ShootingStars } from "@/components/ui/shooting-stars";
 import { StarsBackground } from "@/components/ui/stars-background";
 import dynamic from "next/dynamic";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import Menu from "@/components/Menu";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
 
 const World = dynamic(
@@ -56,10 +56,31 @@ export default function Home() {
   const { scrollY } = useScroll();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
+  // State to manage the multi-step loading animation
+  const [loadingState, setLoadingState] = useState('loading'); // loading -> completed -> finished
+  const [loadingText, setLoadingText] = useState("Approaching target...");
+
+  useEffect(() => {
+    // Phase 1: Initial "loading" text
+    const loadingTimer = setTimeout(() => {
+        // Phase 2: Switch to "completed" text
+        setLoadingText("Welcome.");
+        setLoadingState('completed');
+
+        // Phase 3: Wait a moment, then finish to trigger fade-out
+        const completedTimer = setTimeout(() => {
+          setLoadingState('finished');
+        }, 1500); // Show "completed" message for 1.5 seconds
+
+        return () => clearTimeout(completedTimer);
+    }, 5000); // Show "loading" message for 5 seconds
+
+    return () => clearTimeout(loadingTimer);
+  }, []);
+
+
   const scale = useTransform(scrollY, [0, 1000], [0.05, 1]);
   const translateX = useTransform(scrollY, [0, 500, 1000], [600, 300, 0]);
-
-  // Create a new transform for the stars' scale. It will scale from 1x to 1.2x.
   const starsScale = useTransform(scrollY, [0, 1000], [1, 1.2]);
 
   const transform = useTransform(
@@ -69,7 +90,6 @@ export default function Home() {
     }
   );
 
-  // Updated the type to include 'projects'
   const handleNavMenuClick = (id: 'about' | 'contact' | 'projects') => {
     const menuElement = document.getElementById('menu');
     if (menuElement) {
@@ -82,10 +102,32 @@ export default function Home() {
 
   return (
     <>
-      {/* Black background layer */}
-      <div className="fixed inset-0 -z-20 bg-black"></div>
+      <AnimatePresence>
+        {loadingState !== 'finished' && (
+           <motion.div
+            key="loading-screen"
+            exit={{ opacity: 0, transition: { duration: 0.8, ease: 'easeInOut' } }}
+            className={`fixed inset-0 flex items-center justify-center z-50 transition-all duration-500 ${
+              loadingState === "completed" ? "bg-black/50 backdrop-blur-sm" : "bg-black"
+            }`}
+          >
+            {/* Simplified loading text animation */}
+            <motion.h1
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                key={loadingText} // Re-animates when the text changes
+                transition={{ duration: 0.5 }}
+                className="text-4xl md:text-4xl lg:text-6xl font-semibold text-neutral-200"
+              >
+                {loadingText}
+              </motion.h1>
+          </motion.div>
+        )}
+      </AnimatePresence>
       
-    
+      <div className="fixed inset-0 -z-20 bg-black"></div>
+
       <BackgroundGradientAnimation
         gradientBackgroundStart="rgb(12, 20, 69)"
         gradientBackgroundEnd="rgb(76, 29, 12)"
@@ -97,15 +139,13 @@ export default function Home() {
         containerClassName="fixed inset-0 -z-10 opacity-50"
         interactive={false}
       />
-      
-      {/* Set a transparent background on main and ensure it takes at least the full screen height */}
+  
       <main className="relative z-0 w-full min-h-screen bg-transparent">
         <NavbarComponent onMenuClick={handleNavMenuClick} />
 
         <div className="fixed top-0 left-0 w-full h-screen pointer-events-none">
           <div className="absolute inset-0 z-0">
             <ShootingStars />
-            {/* Pass the new `starsScale` prop to the StarsBackground component */}
             <StarsBackground scale={starsScale} />
           </div>
 
