@@ -71,7 +71,7 @@ export default function ProjectPage() {
             }`}
           >
             {loadingState === 'loading' ? (
-              <h1 className="text-4xl md:text-4xl lg:text-6xl font-semibold max-w-7xl mx-auto text-center relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b  from-neutral-800 :via-white to-white">
+              <h1 className={`text-4xl md:text-4xl lg:text-6xl font-semibold max-w-7xl mx-auto text-center relative z-20 py-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-800 via-white to-white font-orbitron`}>
                 <Cover active={true}>{loadingText}</Cover>
               </h1>
             ) : (
@@ -80,7 +80,7 @@ export default function ProjectPage() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className="text-4xl md:text-4xl lg:text-6xl font-semibold text-neutral-200"
+                className={`text-4xl md:text-4xl lg:text-6xl font-semibold text-neutral-200 font-orbitron`}
               >
                 {loadingText}
               </motion.h1>

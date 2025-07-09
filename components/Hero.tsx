@@ -10,21 +10,27 @@ import { AnimatedTooltip } from './ui/animated-tooltip';
 const skills = [
   { id: 1, name: "React Native", designation: "Cross-platform Apps", image: "https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg" },
   { id: 2, name: "Expo", designation: "Development Toolkit", image: "https://raw.githubusercontent.com/devicons/devicon/master/icons/expo/expo-original.svg" },
-  { id: 3, name: "JavaScript", designation: "Programming Language", image: "https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" },
-  { id: 4, name: "TypeScript", designation: "Typed Superset of JS", image: "https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" },
+  { id: 3, name: "Firebase", designation: "Backend as a Service", image: "https://raw.githubusercontent.com/devicons/devicon/master/icons/firebase/firebase-plain.svg" },
+  { id: 4, name: "Supabase", designation: "Open Source BaaS", image: "https://raw.githubusercontent.com/devicons/devicon/master/icons/supabase/supabase-original.svg" },
   { id: 5, name: "Node.js", designation: "Backend Runtime", image: "https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg" },
   { id: 6, name: "Next.js", designation: "React Framework", image: "https://raw.githubusercontent.com/devicons/devicon/master/icons/nextjs/nextjs-original.svg" },
 ];
 
-const Hero = ({ id }: { id?: string }) => {
+const Hero = ({
+  id,
+  onMenuClick,
+}: {
+  id?: string;
+  onMenuClick: (id: "contact") => void;
+}) => {
   const { scrollY } = useScroll();
   const opacity = useTransform(scrollY, [0, 800], [1, 0]);
   const scale = useTransform(scrollY, [0, 800], [1, 0.8]);
 
   return (
-    // This component's container ignores pointer events...
+   
     <div id={id} className="relative h-screen w-full sticky top-0 pointer-events-none">
-      {/* ...but we explicitly enable them for the hover effect container. */}
+      
       <motion.div
         style={{ opacity }}
         className="absolute inset-0 z-0 flex items-center justify-center pointer-events-auto"
@@ -32,20 +38,20 @@ const Hero = ({ id }: { id?: string }) => {
         <TextHoverEffect text="PORTFOLIO" />
       </motion.div>
 
-      {/* The foreground content container also ignores pointer events... */}
+     
       <motion.div
         style={{ opacity, scale }}
         className="relative z-10 flex h-full flex-col items-center justify-center pointer-events-none"
       >
         <div className="pointer-events-none mx-auto flex w-full max-w-7xl flex-col items-start px-6 lg:px-8">
-          {/* ...while its children correctly re-enable them. */}
+         
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="pointer-events-auto font-orbitron text-left text-4xl text-neutral-300 md:text-5xl"
           >
-            Hello!
+           <span className="text-green-600">// Hello, world!</span>
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -61,15 +67,23 @@ const Hero = ({ id }: { id?: string }) => {
             transition={{ duration: 0.5, delay: 0.6 }}
             className="pointer-events-auto mt-4 max-w-4xl text-left text-3xl font-semibold text-neutral-400 md:text-4xl"
           >
-            I bring ideas to life on web and mobile.
+           From project plans to{" "}
+            <span className="text-green-500">production code &lt;/&gt;</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.8 }}
-            className="pointer-events-auto relative mt-8 max-w-2xl text-left text-xl font-normal text-neutral-300 md:text-2xl"
+            className="pointer-events-auto relative mt-8 max-w-3xl text-left text-xl font-normal text-neutral-300 md:text-2xl"
           >
-            I have hands-on experience creating engaging landing pages with React and building full-featured mobile applications with Expo, delivering seamless user experiences across platforms.
+            My experience in both{" "}
+            <span className="text-blue-400">project management</span> and{" "}
+            <span className="text-blue-400">development</span> has allowed me to
+            deliver real-world solutions, including a{" "}
+            <span className="text-orange-400">production mobile app</span> and{" "}
+            <span className="text-orange-400">company website</span>. I'm a{" "}
+            <span className="text-teal-400">hands-on problem solver</span>, ready
+            to contribute my skills to a great team.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -88,17 +102,17 @@ const Hero = ({ id }: { id?: string }) => {
             <a
               href="/resume.pdf"
               download
-              className="flex w-auto transform items-center gap-2 rounded-lg bg-white px-6 py-3 text-lg font-medium text-black transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-white/20"
+              className=" font-orbitron flex w-auto transform items-center gap-2 rounded-lg bg-white px-6 py-3 text-lg font-bold text-black transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-white/20"
             >
               <Download className="h-5 w-5" />
               Resume
             </a>
-            <a
-              href="#contact"
-              className="w-auto transform rounded-lg border border-gray-700 bg-transparent px-8 py-3 text-lg font-medium text-white transition-all duration-300 hover:-translate-y-1 hover:border-white hover:bg-white/10"
+            <button
+              onClick={() => onMenuClick("contact")}
+              className="font-orbitron w-auto transform rounded-lg border-2 border-gray-700 bg-transparent px-8 py-3 text-lg font-medium text-white transition-all duration-300 hover:-translate-y-1 hover:border-white hover:bg-white/10"
             >
-              Get In Touch
-            </a>
+              Let's Connect
+            </button>
           </motion.div>
         </div>
       </motion.div>

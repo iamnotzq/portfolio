@@ -23,162 +23,142 @@ interface MenuProps {
     setActiveItem: (id: string | null) => void;
     id?: string;
 }
-const data = [
-    {
-      title: "2024",
-      content: (
-        <div>
-          <p className="mb-8 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
-            Built and launched Aceternity UI and Aceternity UI Pro from scratch
-          </p>
-          <div className="grid grid-cols-2 gap-4">
-            <img
-              src="https://assets.aceternity.com/templates/startup-1.webp"
-              alt="startup template"
-              width={500}
-              height={500}
-              className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-            />
-            <img
-              src="https://assets.aceternity.com/templates/startup-2.webp"
-              alt="startup template"
-              width={500}
-              height={500}
-              className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-            />
-            <img
-              src="https://assets.aceternity.com/templates/startup-3.webp"
-              alt="startup template"
-              width={500}
-              height={500}
-              className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-            />
-            <img
-              src="https://assets.aceternity.com/templates/startup-4.webp"
-              alt="startup template"
-              width={500}
-              height={500}
-              className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-            />
-          </div>
-        </div>
-      ),
-    },
-    {
-      title: "Early 2023",
-      content: (
-        <div>
-          <p className="mb-8 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
-            I usually run out of copy, but when I see content this big, I try to
-            integrate lorem ipsum.
-          </p>
-          <p className="mb-8 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
-            Lorem ipsum is for people who are too lazy to write copy. But we are
-            not. Here are some more example of beautiful designs I built.
-          </p>
-          <div className="grid grid-cols-2 gap-4">
-            <img
-              src="https://assets.aceternity.com/pro/hero-sections.png"
-              alt="hero template"
-              width={500}
-              height={500}
-              className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-            />
-            <img
-              src="https://assets.aceternity.com/features-section.png"
-              alt="feature template"
-              width={500}
-              height={500}
-              className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-            />
-            <img
-              src="https://assets.aceternity.com/pro/bento-grids.png"
-              alt="bento template"
-              width={500}
-              height={500}
-              className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-            />
-            <img
-              src="https://assets.aceternity.com/cards.png"
-              alt="cards template"
-              width={500}
-              height={500}
-              className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-            />
-          </div>
-        </div>
-      ),
-    },
-    {
-      title: "Changelog",
-      content: (
-        <div>
-          <p className="mb-4 text-xs font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
-            Deployed 5 new components on Aceternity today
-          </p>
-          <div className="mb-8">
-            <div className="flex items-center gap-2 text-xs text-neutral-700 md:text-sm dark:text-neutral-300">
-              ✅ Card grid component
-            </div>
-            <div className="flex items-center gap-2 text-xs text-neutral-700 md:text-sm dark:text-neutral-300">
-              ✅ Startup template Aceternity
-            </div>
-            <div className="flex items-center gap-2 text-xs text-neutral-700 md:text-sm dark:text-neutral-300">
-              ✅ Random file upload lol
-            </div>
-            <div className="flex items-center gap-2 text-xs text-neutral-700 md:text-sm dark:text-neutral-300">
-              ✅ Himesh Reshammiya Music CD
-            </div>
-            <div className="flex items-center gap-2 text-xs text-neutral-700 md:text-sm dark:text-neutral-300">
-              ✅ Salman Bhai Fan Club registrations open
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <img
-              src="https://assets.aceternity.com/pro/hero-sections.png"
-              alt="hero template"
-              width={500}
-              height={500}
-              className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-            />
-            <img
-              src="https://assets.aceternity.com/features-section.png"
-              alt="feature template"
-              width={500}
-              height={500}
-              className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-            />
-            <img
-              src="https://assets.aceternity.com/pro/bento-grids.png"
-              alt="bento template"
-              width={500}
-              height={500}
-              className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-            />
-            <img
-              src="https://assets.aceternity.com/cards.png"
-              alt="cards template"
-              width={500}
-              height={500}
-              className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
-            />
-          </div>
-        </div>
-      ),
-    },
-  ];
 
-// CHANGE: Pass down the scroll container ref to AboutContent
+const data = [
+  {
+    title: "2024 - 2025",
+    content: (
+      <div>
+        <h3 className="text-lg font-bold text-white mb-1">Props Factory</h3>
+        <h4 className="text-md font-semibold text-neutral-300 mb-4">Full Stack Developer & Assistant Project Manager</h4>
+        <ul className="list-disc list-inside text-xs md:text-sm text-neutral-200 space-y-2">
+          <li>Engineered and launched a comprehensive Expo React Native application from concept to deployment, now utilized company-wide for core operations.</li>
+          <li>Key features include worker check-in/out, expense claim tracking, payroll access, user data management, and real-time project monitoring.</li>
+          <li>Independently designed and developed the corporate website, incorporating a dynamic blog and a cloud-based image gallery to enhance online presence.</li>
+        </ul>
+      </div>
+    ),
+  },
+  {
+      title: "2021 - 2024",
+      content: (
+        <div>
+          <h3 className="text-lg font-bold text-white mb-1">University of Wollongong</h3>
+          <h4 className="text-md font-semibold text-neutral-300 mb-4">Bachelor in Computer Science (Big Data)</h4>
+          <ul className="list-disc list-inside text-xs md:text-sm text-neutral-200 space-y-2">
+            <li>Graduated with Distinction, demonstrating high academic achievement.</li>
+            <li>Awarded a competitive semester exchange to Wollongong, Australia, selected as one of fewer than 10 students from the entire Computer Science cohort.</li>
+          </ul>
+        </div>
+      ),
+    },
+  {
+    title: "2023",
+    content: (
+      <div>
+        <h3 className="text-lg font-bold text-white mb-1">Lagoon Laundry</h3>
+        <h4 className="text-md font-semibold text-neutral-300 mb-4">Part-time Customer Service & Assistant Developer</h4>
+        <p className="text-xs font-normal md:text-sm text-neutral-200">
+          Contributed to the development and design of a new Point-of-Sale (POS) system, enhancing operational efficiency and improving the customer experience.
+        </p>
+      </div>
+    ),
+  },
+  {
+    title: "2018",
+    content: (
+      <div>
+          <h3 className="text-lg font-bold text-white mb-1">Aural Aid</h3>
+          <h4 className="text-md font-semibold text-neutral-300 mb-4">Internship - Product Designer</h4>
+          <ul className="list-disc list-inside text-xs md:text-sm text-neutral-200 space-y-2">
+              <li>Spearheaded a new product design initiative, mastering 'Grasshopper' software to produce innovative design solutions.</li>
+              <li>Executed a complete overhaul of the company website, improving UI/UX and receiving commendation from senior leadership.</li>
+              <li>Authored detailed product manuals and developed custom product solutions, measurably increasing client satisfaction.</li>
+          </ul>
+      </div>
+    ),
+  },
+  {
+      title: "2015 - 2018",
+      content: (
+        <div>
+          <h3 className="text-lg font-bold text-white mb-1">Temasek Polytechnic</h3>
+          <h4 className="text-md font-semibold text-neutral-300 mb-4">Diploma in Product & Industrial Design</h4>
+          <p className="text-xs font-normal md:text-sm text-neutral-200">
+            Acquired a strong foundation in the end-to-end product design lifecycle, from ideation and prototyping to final production and market analysis.
+          </p>
+        </div>
+      ),
+    }, {
+    title: "Changelog",
+    content: (
+      <div>
+        <p className="mb-4 text-xs font-normal  md:text-sm text-neutral-200">
+          Deployed 5 new components on Aceternity today
+        </p>
+        <div className="mb-8">
+          <div className="flex items-center gap-2 text-xs  md:text-sm text-neutral-300">
+            ✅ Card grid component
+          </div>
+          <div className="flex items-center gap-2 text-xs  md:text-sm text-neutral-300">
+            ✅ Startup template Aceternity
+          </div>
+          <div className="flex items-center gap-2 text-xs  md:text-sm text-neutral-300">
+            ✅ Random file upload lol
+          </div>
+          <div className="flex items-center gap-2 text-xs  md:text-sm text-neutral-300">
+            ✅ Himesh Reshammiya Music CD
+          </div>
+          <div className="flex items-center gap-2 text-xs  md:text-sm text-neutral-300">
+            ✅ Salman Bhai Fan Club registrations open
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          <img
+            src="https://assets.aceternity.com/pro/hero-sections.png"
+            alt="hero template"
+            width={500}
+            height={500}
+            className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
+          />
+          <img
+            src="https://assets.aceternity.com/features-section.png"
+            alt="feature template"
+            width={500}
+            height={500}
+            className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
+          />
+          <img
+            src="https://assets.aceternity.com/pro/bento-grids.png"
+            alt="bento template"
+            width={500}
+            height={500}
+            className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
+          />
+          <img
+            src="https://assets.aceternity.com/cards.png"
+            alt="cards template"
+            width={500}
+            height={500}
+            className="h-20 w-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60"
+          />
+        </div>
+      </div>
+    ),
+  },
+];
+    
+ 
+
 const AboutContent = ({ scrollContainerRef }: { scrollContainerRef: React.RefObject<HTMLDivElement | null> }) => (
   <div className="flex flex-col p-4">
-      
       <Timeline data={data} scrollContainerRef={scrollContainerRef} />
   </div>
 );
 
 const ContactContent = () => (
     <div className="h-full flex flex-col justify-center p-4">
-        <h2 className="text-3xl font-bold text-white mb-4">Contact</h2>
+        <h2 className="text-3xl font-bold text-white mb-4 font-orbitron">Contact</h2>
         <p className="text-neutral-300 max-w-lg">
           Here's how to reach out. You can add your email, links to social profiles, or even a contact form component.
         </p>
@@ -186,7 +166,20 @@ const ContactContent = () => (
 );
 
 const ProjectsContent = () => (
-    <div className="h-full w-full flex flex-col justify-center items-center overflow-hidden">
+    <div className="h-full w-full flex flex-col justify-start items-center overflow-hidden p-4 md:p-8 ">
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="text-center"
+        >
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-2 font-orbitron">
+                My Work
+            </h2>
+            <p className="text-neutral-400 text-sm md:text-base mb-8">
+                A showcase of projects I've built.
+            </p>
+        </motion.div>
         <Carousel slides={slideData} />
     </div>
 );
@@ -194,7 +187,6 @@ const ProjectsContent = () => (
 
 const Menu = ({ activeItem, setActiveItem, id }: MenuProps) => {
     const ref = useRef(null);
-    // CHANGE: Create a ref for the scrollable container
     const scrollContainerRef = useRef<HTMLDivElement>(null);
 
     const { scrollYProgress } = useScroll({
@@ -205,13 +197,11 @@ const Menu = ({ activeItem, setActiveItem, id }: MenuProps) => {
     const opacity = useTransform(scrollYProgress, [0.7, 1], [0.9, 1]);
     const scale = useTransform(scrollYProgress, [0.7, 1], [0.9, 1]);
     
-    // CHANGE: We need to dynamically create the content based on the active item
-    // to pass the ref correctly.
     const menuItems = useMemo(() => [
         {
             id: "projects",
-            title: "Projects",
-            description: "Explore a collection of my work.",
+            title: <span className="font-orbitron"><span className="text-white">{'['}</span><span className="text-orange-400">"projects"</span><span className="text-white">{']'}</span></span>,
+            description: <span className="text-green-500 ">// Explore a collection of my work.</span>,
             header: <div />,
             className: "md:col-span-5 md:row-span-1",
             icon: <IconBriefcase className="h-4 w-4 text-neutral-400" />,
@@ -220,8 +210,8 @@ const Menu = ({ activeItem, setActiveItem, id }: MenuProps) => {
         },
         {
             id: "about",
-            title: "About",
-            description: "Learn more about my journey.",
+            title: <span className="font-orbitron"><span className="text-yellow-400">about</span><span className="text-white">.me</span></span>,
+            description: <span className="text-green-500">// Learn more about my journey.</span>,
             header: <div />,
             className: "md:col-span-3 md:row-span-1",
             icon: <IconUser className="h-4 w-4 text-neutral-400" />,
@@ -230,8 +220,8 @@ const Menu = ({ activeItem, setActiveItem, id }: MenuProps) => {
         },
         {
             id: "contact",
-            title: "Contact",
-            description: "Let's get in touch.",
+            title: <span className="font-orbitron"><span className="text-blue-400">contact</span><span className="text-white">()</span></span>,
+            description: <span className="text-green-500">// Let's get in touch.</span>,
             header: <div />,
             className: "md:col-span-2 md:row-span-1",
             icon: <IconMail className="h-4 w-4 text-neutral-400" />,
@@ -239,7 +229,6 @@ const Menu = ({ activeItem, setActiveItem, id }: MenuProps) => {
             content: <ContactContent />,
         },
     ], [scrollContainerRef]);
-
 
     const getClassName = (item: typeof menuItems[number]) => {
       if (!activeItem) return item.className;
@@ -288,7 +277,6 @@ const Menu = ({ activeItem, setActiveItem, id }: MenuProps) => {
 
     return (
         <div id={id} ref={ref} className="h-screen overflow-hidden">
-            {/* CHANGE: Add style tag to hide scrollbar */}
             <style>
                 {`
                     .no-scrollbar::-webkit-scrollbar {
@@ -309,7 +297,7 @@ const Menu = ({ activeItem, setActiveItem, id }: MenuProps) => {
                 className="relative z-10 h-full w-full"
             >
                 <div className="relative w-full h-full p-12 ">
-                <div className="relative w-full h-full rounded-2xl overflow-hidden">
+                <div className="relative w-full h-full rounded-2xl ">
                         <BentoGrid className="w-full h-full md:grid-rows-2">
                             {sortedItems.map((item) => (
                                 <motion.div
@@ -319,7 +307,10 @@ const Menu = ({ activeItem, setActiveItem, id }: MenuProps) => {
                                     className={cn(getClassName(item), "relative pointer-events-auto", item.id === activeItem ? "z-30" : "z-10")}
                                 >
                                     <BentoGridItem
-                                        className={"h-full w-full"}
+                                        className={cn(
+                                            "h-full w-full",
+                                            "border-2 border-green-800/50 shadow-[0_0_20px_rgba(34,197,94,0.5)]"
+                                        )}
                                         onClick={item.isExpandable ? () => setActiveItem(item.id) : undefined}
                                         title={item.title}
                                         description={item.description}
@@ -356,9 +347,8 @@ const Menu = ({ activeItem, setActiveItem, id }: MenuProps) => {
                             ))}
                         </BentoGrid>
                         
-                        {/* CHANGE: Moved WorldMap inside the new wrapper and adjusted positioning */}
                         <div
-                            className="absolute inset-0 z-20 pointer-events-none"
+                            className="absolute inset-0 z-20 pointer-events-none opacity-60"
                             style={{ mixBlendMode: 'screen' }}
                         >
                             <WorldMap dots={[]} />

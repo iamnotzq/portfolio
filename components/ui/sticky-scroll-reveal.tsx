@@ -147,7 +147,7 @@ export const StickyScroll = ({
       
       {/* Right Column for Sticky Visual Content */}
       <div className="w-full lg:w-1/2 hidden lg:block">
-        <div className="sticky top-0 flex h-screen items-center justify-center">
+        <div className="sticky top-10 flex h-screen items-center justify-center">
           <div
             className={cn(
               "h-[30rem] w-[35rem] overflow-hidden rounded-lg bg-slate-900",

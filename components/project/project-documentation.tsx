@@ -38,11 +38,11 @@ const ProjectDocumentation = ({ documentation }: ProjectDocumentationProps) => {
 
   return (
     // The main section container. We control padding here to integrate the sticky header.
-    <section className="w-full pb-20 sm:pb-28">
+    <section className="w-full">
         
-        <div className="sticky top-0 z-20 py-24 ">
+        <div className="sticky top-0 z-20 pt-24 ">
             <div className="text-center px-4">
-                <h2 className="text-3xl sm:text-4xl font-bold text-white">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white font-orbitron">
                     Project Documentation
                 </h2>
                 <p className="mt-4 text-neutral-400 text-lg max-w-2xl mx-auto">
@@ -52,7 +52,7 @@ const ProjectDocumentation = ({ documentation }: ProjectDocumentationProps) => {
         </div>
 
        
-        <div className="relative z-10 pt-[14rem] -mt-[14rem]">
+        <div className="relative z-10 ">
             <StickyScroll content={content} />
         </div>
     </section>

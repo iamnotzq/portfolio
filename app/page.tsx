@@ -6,7 +6,12 @@ import NavbarComponent from "@/components/Navbar";
 import { ShootingStars } from "@/components/ui/shooting-stars";
 import { StarsBackground } from "@/components/ui/stars-background";
 import dynamic from "next/dynamic";
-import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import Menu from "@/components/Menu";
 import { useState, useEffect } from "react";
 import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
@@ -48,7 +53,7 @@ const sampleArcs = [
     endLat: -0,
     endLng: -0,
     arcAlt: 0.1,
-    color: colors[Math.floor(Math.random() * (colors.length - 1))],
+    color: colors[Math.floor(Math.random() * colors.length)],
   }
 ];
 
@@ -78,6 +83,19 @@ export default function Home() {
     return () => clearTimeout(loadingTimer);
   }, []);
 
+  // This new useEffect handles the URL hash for deep linking
+  useEffect(() => {
+    // Only run this logic after the initial loading animation is finished
+    if (loadingState === 'finished') {
+      const hash = window.location.hash.substring(1); // Get hash value without the '#'
+      const validHashes = ['about', 'contact', 'projects'];
+      
+      if (validHashes.includes(hash)) {
+        handleNavMenuClick(hash as 'about' | 'contact' | 'projects');
+      }
+    }
+  }, [loadingState]); // Rerun this effect when the loading state changes
+
 
   const scale = useTransform(scrollY, [0, 1000], [0.05, 1]);
   const translateX = useTransform(scrollY, [0, 500, 1000], [600, 300, 0]);
@@ -100,32 +118,55 @@ export default function Home() {
     }, 300);
   };
 
+  const handleHomeClick = () => {
+    // Close any active menu panel
+    setActiveMenu(null);
+
+    // After a short delay to allow the menu to start collapsing, scroll to the home section.
+    // This prevents a conflict between the layout and scroll animations.
+    setTimeout(() => {
+      const homeSection = document.getElementById('home');
+      if (homeSection) {
+        // Explicitly scroll to the Hero component with id="home"
+        homeSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        // Fallback if the element is not found for any reason
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }, 150);
+  };
+
   return (
     <>
       <AnimatePresence>
-        {loadingState !== 'finished' && (
-           <motion.div
+        {loadingState !== "finished" && (
+          <motion.div
             key="loading-screen"
-            exit={{ opacity: 0, transition: { duration: 0.8, ease: 'easeInOut' } }}
+            exit={{
+              opacity: 0,
+              transition: { duration: 0.8, ease: "easeInOut" },
+            }}
             className={`fixed inset-0 flex items-center justify-center z-50 transition-all duration-500 ${
-              loadingState === "completed" ? "bg-black/50 backdrop-blur-sm" : "bg-black"
+              loadingState === "completed"
+                ? "bg-black/50 backdrop-blur-sm"
+                : "bg-black"
             }`}
           >
             {/* Simplified loading text animation */}
             <motion.h1
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                key={loadingText} // Re-animates when the text changes
-                transition={{ duration: 0.5 }}
-                className="text-4xl md:text-4xl lg:text-6xl font-semibold text-neutral-200"
-              >
-                {loadingText}
-              </motion.h1>
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              key={loadingText} // Re-animates when the text changes
+              transition={{ duration: 0.5 }}
+              className={`text-4xl md:text-4xl lg:text-6xl font-semibold text-neutral-200 font-orbitron`}
+            >
+              {loadingText}
+            </motion.h1>
           </motion.div>
         )}
       </AnimatePresence>
-      
+
       <div className="fixed inset-0 -z-20 bg-black"></div>
 
       <BackgroundGradientAnimation
@@ -141,7 +182,8 @@ export default function Home() {
       />
   
       <main className="relative z-0 w-full min-h-screen bg-transparent">
-        <NavbarComponent onMenuClick={handleNavMenuClick} />
+      <NavbarComponent onMenuClick={handleNavMenuClick} onHomeClick={handleHomeClick} />
+
 
         <div className="fixed top-0 left-0 w-full h-screen pointer-events-none">
           <div className="absolute inset-0 z-0">
@@ -164,7 +206,7 @@ export default function Home() {
         </div>
 
         <div className="relative z-20 pointer-events-none">
-          <Hero id="home" />
+          <Hero id="home" onMenuClick={handleNavMenuClick} />
           <Menu id="menu" activeItem={activeMenu} setActiveItem={setActiveMenu} />
         </div>
       </main>
