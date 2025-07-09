@@ -19,23 +19,46 @@ const skills = [
 const Hero = ({
   id,
   onMenuClick,
+  setPointerText,
+  setPointerVisible,
+  pointerText,
+  resumeButtonText,
+  connectButtonText,
+  pointerPosition, // New prop to receive cursor position
 }: {
   id?: string;
   onMenuClick: (id: "contact") => void;
+  setPointerText: (text: string) => void;
+  setPointerVisible: (visible: boolean) => void;
+  pointerText: string;
+  resumeButtonText: string;
+  connectButtonText: string;
+  pointerPosition: { x: number; y: number }; // Type for the new prop
 }) => {
   const { scrollY } = useScroll();
-  const opacity = useTransform(scrollY, [0, 800], [1, 0]);
-  const scale = useTransform(scrollY, [0, 800], [1, 0.8]);
+  const opacity = useTransform(scrollY, [0, 600], [1, 0]);
+  // Changed the scale to zoom in on scroll
+  const scale = useTransform(scrollY, [0, 800], [1, 1.5]);
 
   return (
-   
-    <div id={id} className="relative h-screen w-full sticky top-0 pointer-events-none">
+    <div 
+      id={id} 
+      className="relative h-screen w-full sticky top-0 pointer-events-auto"
+      onMouseEnter={() => {
+        setPointerText(pointerText);
+        setPointerVisible(true);
+      }}
+      onMouseLeave={() => {
+        setPointerVisible(false);
+      }}
+    >
       
       <motion.div
         style={{ opacity }}
         className="absolute inset-0 z-0 flex items-center justify-center pointer-events-auto"
       >
-        <TextHoverEffect text="PORTFOLIO" />
+        {/* Pass the cursor position down to the effect component */}
+        <TextHoverEffect text="PORTFOLIO" cursorPosition={pointerPosition} />
       </motion.div>
 
      
@@ -103,6 +126,8 @@ const Hero = ({
               href="/resume.pdf"
               download
               className=" font-orbitron flex w-auto transform items-center gap-2 rounded-lg bg-white px-6 py-3 text-lg font-bold text-black transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-white/20"
+              onMouseEnter={() => setPointerText(resumeButtonText)}
+              onMouseLeave={() => setPointerText(pointerText)}
             >
               <Download className="h-5 w-5" />
               Resume
@@ -110,6 +135,8 @@ const Hero = ({
             <button
               onClick={() => onMenuClick("contact")}
               className="font-orbitron w-auto transform rounded-lg border-2 border-gray-700 bg-transparent px-8 py-3 text-lg font-medium text-white transition-all duration-300 hover:-translate-y-1 hover:border-white hover:bg-white/10"
+              onMouseEnter={() => setPointerText(connectButtonText)}
+              onMouseLeave={() => setPointerText(pointerText)}
             >
               Let's Connect
             </button>

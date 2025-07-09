@@ -13,7 +13,6 @@ import { BentoGrid, BentoGridItem } from './ui/bento-grid';
 import { WorldMap } from './ui/world-map';
 import { Carousel } from './ui/carousel';
 import { cn } from "@/lib/utils";
-// Import the data from the new file
 import { slideData } from '@/lib/projects-data';
 import { Timeline } from './ui/timeline';
 
@@ -22,6 +21,12 @@ interface MenuProps {
     activeItem: string | null;
     setActiveItem: (id: string | null) => void;
     id?: string;
+    setPointerText: (text: string) => void;
+    setPointerVisible: (visible: boolean) => void;
+    menuPointerText: string;
+    projectsPointerText: string;
+    aboutPointerText: string;
+    contactPointerText: string;
 }
 
 const data = [
@@ -148,8 +153,6 @@ const data = [
   },
 ];
     
- 
-
 const AboutContent = ({ scrollContainerRef }: { scrollContainerRef: React.RefObject<HTMLDivElement | null> }) => (
   <div className="flex flex-col p-4">
       <Timeline data={data} scrollContainerRef={scrollContainerRef} />
@@ -166,7 +169,7 @@ const ContactContent = () => (
 );
 
 const ProjectsContent = () => (
-    <div className="h-full w-full flex flex-col justify-start items-center overflow-hidden p-4 md:p-8 ">
+    <div className="h-full w-full flex flex-col justify-start items-center overflow-hidden py-4 md:py-8 ">
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -185,7 +188,17 @@ const ProjectsContent = () => (
 );
 
 
-const Menu = ({ activeItem, setActiveItem, id }: MenuProps) => {
+const Menu = ({
+    activeItem,
+    setActiveItem,
+    id,
+    setPointerText,
+    setPointerVisible,
+    menuPointerText,
+    projectsPointerText,
+    aboutPointerText,
+    contactPointerText,
+}: MenuProps) => {
     const ref = useRef(null);
     const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -194,8 +207,9 @@ const Menu = ({ activeItem, setActiveItem, id }: MenuProps) => {
         offset: ["start end", "start start"]
     });
 
-    const opacity = useTransform(scrollYProgress, [0.7, 1], [0.9, 1]);
-    const scale = useTransform(scrollYProgress, [0.7, 1], [0.9, 1]);
+    const opacity = useTransform(scrollYProgress, [0.7, 1], [0, 1]);
+    const scale = useTransform(scrollYProgress, [0.7, 1], [0.5, 1]);
+    const pointerEvents = useTransform(scrollYProgress, (v) => (v > 0.7 ? "auto" : "none"));
     
     const menuItems = useMemo(() => [
         {
@@ -207,6 +221,7 @@ const Menu = ({ activeItem, setActiveItem, id }: MenuProps) => {
             icon: <IconBriefcase className="h-4 w-4 text-neutral-400" />,
             isExpandable: true,
             content: <ProjectsContent />,
+            pointerText: projectsPointerText,
         },
         {
             id: "about",
@@ -217,6 +232,7 @@ const Menu = ({ activeItem, setActiveItem, id }: MenuProps) => {
             icon: <IconUser className="h-4 w-4 text-neutral-400" />,
             isExpandable: true,
             content: <AboutContent scrollContainerRef={scrollContainerRef} />,
+            pointerText: aboutPointerText,
         },
         {
             id: "contact",
@@ -227,8 +243,9 @@ const Menu = ({ activeItem, setActiveItem, id }: MenuProps) => {
             icon: <IconMail className="h-4 w-4 text-neutral-400" />,
             isExpandable: true,
             content: <ContactContent />,
+            pointerText: contactPointerText,
         },
-    ], [scrollContainerRef]);
+    ], [scrollContainerRef, projectsPointerText, aboutPointerText, contactPointerText]);
 
     const getClassName = (item: typeof menuItems[number]) => {
       if (!activeItem) return item.className;
@@ -276,7 +293,21 @@ const Menu = ({ activeItem, setActiveItem, id }: MenuProps) => {
 
 
     return (
-        <div id={id} ref={ref} className="h-screen overflow-hidden">
+        <motion.div 
+            id={id} 
+            ref={ref} 
+            className="h-screen overflow-hidden"
+            style={{ pointerEvents }}
+            onMouseEnter={() => {
+                if (!activeItem) {
+                    setPointerText(menuPointerText);
+                    setPointerVisible(true);
+                }
+            }}
+            onMouseLeave={() => {
+                setPointerVisible(false);
+            }}
+        >
             <style>
                 {`
                     .no-scrollbar::-webkit-scrollbar {
@@ -304,14 +335,30 @@ const Menu = ({ activeItem, setActiveItem, id }: MenuProps) => {
                                     key={item.id}
                                     layout
                                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                                    className={cn(getClassName(item), "relative pointer-events-auto", item.id === activeItem ? "z-30" : "z-10")}
+                                    className={cn(getClassName(item), "relative", item.id === activeItem ? "z-30" : "z-10")}
+                                    onMouseEnter={() => {
+                                        if (item.id === activeItem) {
+                                            setPointerVisible(false);
+                                        } else {
+                                            setPointerText(item.pointerText);
+                                            setPointerVisible(true);
+                                        }
+                                    }}
+                                    onMouseLeave={() => {
+                                        if (item.id !== activeItem) {
+                                            setPointerText(menuPointerText);
+                                        }
+                                    }}
                                 >
                                     <BentoGridItem
                                         className={cn(
                                             "h-full w-full",
                                             "border-2 border-green-800/50 shadow-[0_0_20px_rgba(34,197,94,0.5)]"
                                         )}
-                                        onClick={item.isExpandable ? () => setActiveItem(item.id) : undefined}
+                                        onClick={item.isExpandable ? () => {
+                                            setActiveItem(item.id);
+                                            setPointerVisible(false);
+                                        } : undefined}
                                         title={item.title}
                                         description={item.description}
                                         header={item.header}
@@ -326,6 +373,8 @@ const Menu = ({ activeItem, setActiveItem, id }: MenuProps) => {
                                                     onClick={(e) => {
                                                         e.stopPropagation();
                                                         setActiveItem(null);
+                                                        setPointerText(menuPointerText);
+                                                        setPointerVisible(true);
                                                     }}
                                                     className="absolute top-2 right-2 text-neutral-400 hover:text-white transition-colors z-20"
                                                 >
@@ -356,7 +405,7 @@ const Menu = ({ activeItem, setActiveItem, id }: MenuProps) => {
                     </div>
                 </div>
             </motion.div>
-        </div>
+        </motion.div>
     );
 };
 

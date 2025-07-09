@@ -12,7 +12,7 @@ export const ProjectHero = ({ title, imageUrl, displayType }: ProjectHeroProps) 
   // The 'overflow-hidden' class has been removed from this div
   // to allow the sticky positioning in the child component to work correctly.
   return (
-    <div className="relative w-full rounded-2xl">
+    <div className="relative w-full rounded-2xl overflow-hidden">
       {displayType === 'macbook' ? (
         <MacbookScroll
           title={title}

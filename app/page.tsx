@@ -13,8 +13,48 @@ import {
   useTransform,
 } from "framer-motion";
 import Menu from "@/components/Menu";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react"; // Import useRef
 import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
+
+// --- Pointer Component ---
+interface PointerProps {
+  x: number;
+  y: number;
+  visible: boolean;
+  text: string;
+}
+
+const Pointer = ({ x, y, visible, text }: PointerProps) => {
+  const variants = {
+    hidden: { opacity: 0, scale: 0.8, transition: { duration: 0.1 } },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.2, ease: "easeOut" } },
+  };
+
+  return (
+    <motion.div
+      className="fixed top-0 left-0 z-[9999] pointer-events-none"
+      style={{ x, y }}
+      variants={variants}
+      initial="hidden"
+      animate={visible ? "visible" : "hidden"}
+    >
+      <div
+        className="relative font-orbitron text-cyan-300 text-sm"
+        style={{ transform: "translate(12px, -48px)" }} // Kept your styling change
+      >
+        <div className="relative bg-black/50 backdrop-blur-sm px-4 py-2 shadow-[0_0_15px_rgba(56,189,248,0.5)]">
+          <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-cyan-400/70"></div>
+          <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-cyan-400/70"></div>
+          <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-cyan-400/70"></div>
+          <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-cyan-400/70"></div>
+          {text}
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+// --- End of Pointer Component ---
+
 
 const World = dynamic(
   () => import("@/components/ui/globe").then((m) => m.World),
@@ -61,40 +101,65 @@ export default function Home() {
   const { scrollY } = useScroll();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
-  // State to manage the multi-step loading animation
-  const [loadingState, setLoadingState] = useState('loading'); // loading -> completed -> finished
+  const [loadingState, setLoadingState] = useState('loading');
   const [loadingText, setLoadingText] = useState("Approaching target...");
 
+  const [pointerText, setPointerText] = useState("");
+  const [pointerVisible, setPointerVisible] = useState(false);
+  const [pointerPosition, setPointerPosition] = useState({ x: 0, y: 0 });
+
+  // Use requestAnimationFrame to throttle mouse move updates and prevent crashes
+  const animationFrameId = useRef<number>();
+
   useEffect(() => {
-    // Phase 1: Initial "loading" text
+    const handleMouseMove = (e: MouseEvent) => {
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current);
+      }
+      animationFrameId.current = requestAnimationFrame(() => {
+        setPointerPosition({ x: e.clientX, y: e.clientY });
+      });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current);
+      }
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
+
+  useEffect(() => {
     const loadingTimer = setTimeout(() => {
-        // Phase 2: Switch to "completed" text
         setLoadingText("Welcome.");
         setLoadingState('completed');
 
-        // Phase 3: Wait a moment, then finish to trigger fade-out
         const completedTimer = setTimeout(() => {
           setLoadingState('finished');
-        }, 1500); // Show "completed" message for 1.5 seconds
+          // FIX: Show pointer with default text after loading animation completes
+          setPointerText("Scroll to discover.");
+          setPointerVisible(true);
+        }, 1500);
 
         return () => clearTimeout(completedTimer);
-    }, 5000); // Show "loading" message for 5 seconds
+    }, 5000);
 
     return () => clearTimeout(loadingTimer);
   }, []);
 
-  // This new useEffect handles the URL hash for deep linking
   useEffect(() => {
-    // Only run this logic after the initial loading animation is finished
     if (loadingState === 'finished') {
-      const hash = window.location.hash.substring(1); // Get hash value without the '#'
+      const hash = window.location.hash.substring(1);
       const validHashes = ['about', 'contact', 'projects'];
       
       if (validHashes.includes(hash)) {
         handleNavMenuClick(hash as 'about' | 'contact' | 'projects');
       }
     }
-  }, [loadingState]); // Rerun this effect when the loading state changes
+  }, [loadingState]);
 
 
   const scale = useTransform(scrollY, [0, 1000], [0.05, 1]);
@@ -119,18 +184,12 @@ export default function Home() {
   };
 
   const handleHomeClick = () => {
-    // Close any active menu panel
     setActiveMenu(null);
-
-    // After a short delay to allow the menu to start collapsing, scroll to the home section.
-    // This prevents a conflict between the layout and scroll animations.
     setTimeout(() => {
       const homeSection = document.getElementById('home');
       if (homeSection) {
-        // Explicitly scroll to the Hero component with id="home"
         homeSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else {
-        // Fallback if the element is not found for any reason
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     }, 150);
@@ -138,6 +197,13 @@ export default function Home() {
 
   return (
     <>
+      <Pointer
+        x={pointerPosition.x}
+        y={pointerPosition.y}
+        visible={pointerVisible}
+        text={pointerText}
+      />
+
       <AnimatePresence>
         {loadingState !== "finished" && (
           <motion.div
@@ -152,12 +218,11 @@ export default function Home() {
                 : "bg-black"
             }`}
           >
-            {/* Simplified loading text animation */}
             <motion.h1
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              key={loadingText} // Re-animates when the text changes
+              key={loadingText}
               transition={{ duration: 0.5 }}
               className={`text-4xl md:text-4xl lg:text-6xl font-semibold text-neutral-200 font-orbitron`}
             >
@@ -181,11 +246,11 @@ export default function Home() {
         interactive={false}
       />
   
-      <main className="relative z-0 w-full min-h-screen bg-transparent">
+      <main className="relative z-0 min-h-screen w-full overflow-x-clip bg-transparent">
       <NavbarComponent onMenuClick={handleNavMenuClick} onHomeClick={handleHomeClick} />
 
 
-        <div className="fixed top-0 left-0 w-full h-screen pointer-events-none">
+        <div className="fixed top-20 left-1/2 h-screen w-[200vw] -translate-x-1/2 pointer-events-none">
           <div className="absolute inset-0 z-0">
             <ShootingStars />
             <StarsBackground scale={starsScale} />
@@ -204,10 +269,29 @@ export default function Home() {
             </motion.div>
           </div>
         </div>
-
+        
         <div className="relative z-20 pointer-events-none">
-          <Hero id="home" onMenuClick={handleNavMenuClick} />
-          <Menu id="menu" activeItem={activeMenu} setActiveItem={setActiveMenu} />
+          <Hero
+            id="home"
+            onMenuClick={handleNavMenuClick}
+            setPointerText={setPointerText}
+            setPointerVisible={setPointerVisible}
+            pointerText="Scroll to discover."
+            resumeButtonText="Download my CV."
+            connectButtonText="Open contact options."
+            pointerPosition={pointerPosition}
+          />
+          <Menu
+            id="menu"
+            activeItem={activeMenu}
+            setActiveItem={setActiveMenu}
+            setPointerText={setPointerText}
+            setPointerVisible={setPointerVisible}
+            menuPointerText="Something extraordinary is on this planet."
+            projectsPointerText="View out of this world creations."
+            aboutPointerText="Learn more about this host."
+            contactPointerText="Contact the creator."
+          />
         </div>
       </main>
     </>
