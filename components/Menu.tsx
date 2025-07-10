@@ -261,7 +261,7 @@ const ContactContent = () => {
                       <span className="text-blue-400">contact</span><span className="text-white">()</span>
                   </h2>
                   <p className="text-neutral-300 max-w-md mb-8">
-                      I'm always open to new opportunities and collaborations. Feel free to send a message through one of the channels below, or fill in the form, and I'll get back to you as soon as possible.
+                      I'm always open to new opportunities and collaborations. Feel free to send a message through one of the channels, or fill in the form, and I'll get back to you as soon as possible.
                   </p>
                   <div className="flex flex-row items-center justify-center gap-8">
                       {socialLinks.map(link => (
@@ -342,11 +342,11 @@ const ProjectsContent = () => (
             transition={{ delay: 0.2, duration: 0.5 }}
             className="text-center"
         >
-            <h2 className="text-5xl font-bold text-white mb-2 font-orbitron">
+            <h2 className="text-5xl font-bold text-white mb-4 font-orbitron">
             <span className="text-white">{'['}</span><span className="text-orange-400">"projects"</span><span className="text-white">{']'}</span>
             </h2>
-            <p className="text-neutral-400 text-sm md:text-base">
-                A showcase of projects I've built.
+            <p className="text-neutral-300 text-sm md:text-base max-w-lg">
+                Selected works demonstrating my skills in full-stack development and end-to-end project delivery.
             </p>
         </motion.div>
         <Carousel slides={slideData} />
@@ -387,8 +387,8 @@ const Menu = ({
         target: ref,
         offset: ["start end", "start start"]
     });
-    const opacity = useTransform(scrollYProgress, [0.8, 1], [0, 1]);
-    const scale = useTransform(scrollYProgress, [0.8, 1], [0.8, 1]);
+    const opacity = useTransform(scrollYProgress, [0.8, 0.9, 1], [0, 0.9,1]);
+    const scale = useTransform(scrollYProgress, [0.8, 0.9, 1], [0, 0.9, 1]);
     const pointerEvents = useTransform(scrollYProgress, (v) => (v > 0.7 ? "auto" : "none"));
     
     // Memoized menu items configuration

@@ -133,7 +133,7 @@ export default function ProjectPage() {
             <ProjectDocumentation documentation={project.documentation} />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <ProjectLearnings learnings={project.learnings} />
-              <ProjectFooter />
+              
             </div>
           </main>
         </div>
