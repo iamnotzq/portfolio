@@ -91,12 +91,12 @@ const Hero = ({
           >
             My experience in both{" "}
             <span className="text-blue-400 font-semibold">project management</span> and{" "}
-            <span className="text-blue-400 font-semibold">development</span> has allowed me to
-            deliver real-world solutions, including a{" "}
-            <span className="text-orange-400 font-semibold">production mobile app</span> and{" "}
-            <span className="text-orange-400 font-semibold">company website</span>. I'm a{" "}
-            <span className="text-teal-400 font-semibold">hands-on problem solver</span>, ready
-            to contribute my skills to a great team.
+            <span className="text-blue-400 font-semibold">development</span> has enabled me to
+            deliver impactful solutions, including a{" "}
+            <span className="text-green-400 font-semibold">production mobile app</span> and{" "}
+            <span className="text-green-400 font-semibold">company website</span>. I'm a{" "}
+            <span className="text-yellow-400 font-semibold">hands-on problem solver</span>,
+            ready to contribute my skills to a great team.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
