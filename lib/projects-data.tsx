@@ -77,6 +77,8 @@ export interface ProjectData {
   src: string;
   liveUrl: string;
   githubUrl: string;
+  liveUrlPreview?: string; // Added for live site preview image
+  githubUrlPreview?: string; // Added for GitHub preview image
 
   // Detailed data for project page
   overview: string;
@@ -114,6 +116,8 @@ export const slideData: ProjectData[] = [
     src: "/props-factory-website-screenshot.png",
     liveUrl: "#",
     githubUrl: "#",
+    liveUrlPreview: "https://placehold.co/200x125/020617/FFFFFF?text=Live+Preview",
+    githubUrlPreview: "https://placehold.co/200x125/171717/FFFFFF?text=GitHub+Code",
     overview: "This project was an opportunity to explore modern web technologies and create a deeply engaging user experience. The goal was to build more than just a static page, but an interactive journey that showcases my skills in frontend development, animation, and 3D graphics. The entire site is designed to be fluid and responsive, providing a seamless experience on all devices.",
     features: [
       {
@@ -228,6 +232,8 @@ export const slideData: ProjectData[] = [
     src: "/mobile.jpg", // Make sure this image exists in your /public folder
     liveUrl: "#",
     githubUrl: "#",
+    liveUrlPreview: "https://placehold.co/200x125/020617/FFFFFF?text=App+Preview",
+    githubUrlPreview: "https://placehold.co/200x125/171717/FFFFFF?text=GitHub+Code",
     overview: "This project focused on creating a user-friendly mobile app to help users manage their finances. The main challenge was to present complex financial data in a simple and visually appealing way. I was responsible for the entire UI/UX design process, from wireframing to final implementation in React Native.",
     features: [
       {

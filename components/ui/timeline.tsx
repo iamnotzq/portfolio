@@ -11,13 +11,12 @@ interface TimelineEntry {
   content: React.ReactNode;
 }
 
-// CHANGE: Accept scrollContainerRef prop
+// This component renders the timeline UI.
 export const Timeline = ({ data, scrollContainerRef }: { data: TimelineEntry[], scrollContainerRef: React.RefObject<HTMLDivElement | null> }) => {
     const ref = useRef<HTMLDivElement>(null);
-  // We will use the passed-in ref for the scroll container
-  // const containerRef = useRef<HTMLDivElement>(null); 
   const [height, setHeight] = useState(0);
 
+  // Effect to calculate the height of the timeline for animations.
   useEffect(() => {
     if (ref.current) {
       const rect = ref.current.getBoundingClientRect();
@@ -25,35 +24,52 @@ export const Timeline = ({ data, scrollContainerRef }: { data: TimelineEntry[], 
     }
   }, [ref]);
 
+  // Framer Motion hook to track scroll progress within the container.
   const { scrollYProgress } = useScroll({
-    // CHANGE: Use the passed-in ref as the target for useScroll
     target: scrollContainerRef,
     offset: ["start start", "end end"],
   });
 
+  // Transformations for animations based on scroll progress.
   const heightTransform = useTransform(scrollYProgress, [0, 1], [50, height]);
   const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
 
   return (
-    // We remove the containerRef from here as it's no longer needed for useScroll
     <div
       className="w-full font-sans md:px-10"
     >
-      <div className="max-w-7xl mx-auto py-20 px-4 md:px-8 lg:px-10">
-        <h2 className="text-3xl font-bold text-white mb-4 font-orbitron">
-        About Me
-        </h2>
-        <p className="text-neutral-300 max-w-lg">
-        his is where you can share your story. Talk about your professional journey, the skills you've acquired, and what you're passionate about. Make it personal and engaging!
-     
-        </p>
-      </div>
+        {/* --- REVISED "ABOUT ME" SECTION --- */}
+        <div className="max-w-7xl mx-auto pt-20 px-4 md:px-8 lg:px-10">
+            <h2 className="text-5xl font-bold text-white mb-4 font-orbitron">
+            <span className="text-yellow-400">about</span><span className="text-white">.me</span>
+            </h2>
+            {/* --- ADDED TEXT DESCRIPTION --- */}
+            <p className="text-neutral-300 mb-6 leading-relaxed">
+              I am a versatile developer who thrives on <span className=" font-bold">contributing ideas</span> and <span className=" font-bold">architecting robust systems</span>. With a unique background in <span className=" font-bold">full-stack development, big data, and product design</span>, I enjoy visualizing how complex components fit together to solve real-world problems. My experience in <span className=" font-bold">project management</span>, liaising with stakeholders, managing timelines, and coordinating execution, has given me the hands-on ability to deliver <span className=" font-bold">end-to-end projects</span>, from mobile apps to websites.
+            </p>
+            <div className="text-neutral-300 p-4 rounded-lg bg-black/30 border border-green-800/50 ">
+                <p className="font-mono text-sm leading-relaxed">
+                    <span className="text-green-500">{"// ZhiQiang.tsx"}</span><br/>
+                    <span className="text-yellow-400">const</span> me = {'{'}<br/>
+                    &nbsp;&nbsp;<span className="text-purple-400">core</span>: [<span className="text-orange-400">"Full-Stack"</span>, <span className="text-orange-400">"Big Data"</span>],<br/>
+                    &nbsp;&nbsp;<span className="text-purple-400">plus</span>: [<span className="text-orange-400">"Project Management"</span>, <span className="text-orange-400">"Product Design"</span>],<br/>
+                    &nbsp;&nbsp;<span className="text-purple-400">method</span>: <span className="text-blue-400">planAndExecute</span>(),<br/>
+                    &nbsp;&nbsp;<span className="text-purple-400">comms</span>: <span className="text-blue-400">liaiseWith</span>([<span className="text-orange-400">"stakeholders"</span>, <span className="text-orange-400">"clients"</span>]),<br />
+                    &nbsp;&nbsp;<span className="text-purple-400">attributes</span>: [<span className="text-orange-400">"Driven"</span>, <span className="text-orange-400">"Hardworking"</span>, <span className="text-orange-400">"Fast Learner"</span>, <span className="text-orange-400">"Flexible"</span>],<br/>
+                    &nbsp;&nbsp;<span className="text-purple-400">skills</span>: 
+                    [<span className="text-orange-400">"JavaScript"</span>, <span className="text-orange-400">"TypeScript"</span>, <span className="text-orange-400">"React/Native"</span>, <span className="text-orange-400">"Node.js"</span>, <span className="text-orange-400">"Python"</span>, <span className="text-orange-400">"Expo"</span>, <span className="text-orange-400">"MySQL"</span>, <span className="text-orange-400">"Firebase"</span>, <span className="text-orange-400">"Google Cloud"</span>, <span className="text-orange-400">"GitHub"</span>, <span className="text-orange-400">"Figma"</span>],<br/>
+                    
+                    &nbsp;&nbsp;<span className="text-purple-400">goal</span>: <span className="text-orange-400">"Deliver impactful solutions."</span><br/>
+                    {'}'};
+                </p>
+            </div>
+        </div>
 
       <div ref={ref} className="relative max-w-7xl mx-auto pb-20">
         {data.map((item, index) => (
           <div
             key={index}
-            className="flex justify-start pt-10 md:pt-40 md:gap-10"
+            className="flex justify-start pt-10 md:pt-20 md:gap-10"
           >
             <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
               <div className="h-10 absolute left-3 md:left-3 w-10 rounded-full  bg-black flex items-center justify-center">
@@ -72,6 +88,7 @@ export const Timeline = ({ data, scrollContainerRef }: { data: TimelineEntry[], 
             </div>
           </div>
         ))}
+        {/* --- Timeline line and animation --- */}
         <div
           style={{
             height: height + "px",

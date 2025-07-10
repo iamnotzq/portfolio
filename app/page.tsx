@@ -11,26 +11,31 @@ import {
   motion,
   useScroll,
   useTransform,
+  Variants,
+  useMotionValue,
+  MotionValue,
 } from "framer-motion";
 import Menu from "@/components/Menu";
-import { useState, useEffect, useRef } from "react"; // Import useRef
+import { useState, useEffect, useRef, useCallback } from "react";
 import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
 
 // --- Pointer Component ---
+// MODIFIED: The Pointer component now accepts MotionValue types for x and y props.
 interface PointerProps {
-  x: number;
-  y: number;
+  x: MotionValue<number>;
+  y: MotionValue<number>;
   visible: boolean;
   text: string;
 }
 
 const Pointer = ({ x, y, visible, text }: PointerProps) => {
-  const variants = {
+  const variants: Variants = {
     hidden: { opacity: 0, scale: 0.8, transition: { duration: 0.1 } },
     visible: { opacity: 1, scale: 1, transition: { duration: 0.2, ease: "easeOut" } },
   };
 
   return (
+    // MODIFIED: The style prop can now directly use the motion values for smooth, non-rendering updates.
     <motion.div
       className="fixed top-0 left-0 z-[9999] pointer-events-none"
       style={{ x, y }}
@@ -40,7 +45,7 @@ const Pointer = ({ x, y, visible, text }: PointerProps) => {
     >
       <div
         className="relative font-orbitron text-cyan-300 text-sm"
-        style={{ transform: "translate(12px, -48px)" }} // Kept your styling change
+        style={{ transform: "translate(12px, -48px)" }}
       >
         <div className="relative bg-black/50 backdrop-blur-sm px-4 py-2 shadow-[0_0_15px_rgba(56,189,248,0.5)]">
           <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-cyan-400/70"></div>
@@ -84,19 +89,6 @@ const globeConfig = {
   autoRotateSpeed: 0.5,
 };
 
-const colors = ["#06b6d4", "#3b82f6", "#6366f1"];
-const sampleArcs = [
-  {
-    order: 1,
-    startLat: 0,
-    startLng: 0,
-    endLat: -0,
-    endLng: -0,
-    arcAlt: 0.1,
-    color: colors[Math.floor(Math.random() * colors.length)],
-  }
-];
-
 export default function Home() {
   const { scrollY } = useScroll();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
@@ -106,30 +98,58 @@ export default function Home() {
 
   const [pointerText, setPointerText] = useState("");
   const [pointerVisible, setPointerVisible] = useState(false);
-  const [pointerPosition, setPointerPosition] = useState({ x: 0, y: 0 });
+  
+  // FIXED: Replaced standard useState with useMotionValue for pointer tracking
+  // to prevent high-frequency re-renders.
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
 
-  // Use requestAnimationFrame to throttle mouse move updates and prevent crashes
-  const animationFrameId = useRef<number>();
+  // This state is for the Hero component, which will be updated less frequently.
+  const [heroPointerPosition, setHeroPointerPosition] = useState({ x: 0, y: 0 });
 
+  const handleNavMenuClick = useCallback((id: 'about' | 'contact' | 'projects') => {
+    const menuElement = document.getElementById('menu');
+    if (menuElement) {
+      menuElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    setTimeout(() => {
+        setActiveMenu(id);
+    }, 300);
+  }, []);
+
+  const handleHomeClick = () => {
+    setActiveMenu(null);
+    setTimeout(() => {
+      const homeSection = document.getElementById('home');
+      if (homeSection) {
+        homeSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }, 150);
+  };
+
+  // FIXED: This effect now updates motion values directly, which does not trigger re-renders.
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      if (animationFrameId.current) {
-        cancelAnimationFrame(animationFrameId.current);
-      }
-      animationFrameId.current = requestAnimationFrame(() => {
-        setPointerPosition({ x: e.clientX, y: e.clientY });
-      });
+        pointerX.set(e.clientX);
+        pointerY.set(e.clientY);
     };
-
     window.addEventListener("mousemove", handleMouseMove);
-
     return () => {
-      if (animationFrameId.current) {
-        cancelAnimationFrame(animationFrameId.current);
-      }
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, []);
+  }, [pointerX, pointerY]);
+
+  // FIXED: This new effect updates the state for the Hero component on a throttled interval,
+  // preventing the render loop.
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+        setHeroPointerPosition({ x: pointerX.get(), y: pointerY.get() });
+    }, 100); // Update Hero's prop every 100ms
+
+    return () => clearInterval(intervalId);
+  }, [pointerX, pointerY]);
 
 
   useEffect(() => {
@@ -139,7 +159,6 @@ export default function Home() {
 
         const completedTimer = setTimeout(() => {
           setLoadingState('finished');
-          // FIX: Show pointer with default text after loading animation completes
           setPointerText("Scroll to discover.");
           setPointerVisible(true);
         }, 1500);
@@ -159,7 +178,7 @@ export default function Home() {
         handleNavMenuClick(hash as 'about' | 'contact' | 'projects');
       }
     }
-  }, [loadingState]);
+  }, [loadingState, handleNavMenuClick]);
 
 
   const scale = useTransform(scrollY, [0, 1000], [0.05, 1]);
@@ -173,33 +192,11 @@ export default function Home() {
     }
   );
 
-  const handleNavMenuClick = (id: 'about' | 'contact' | 'projects') => {
-    const menuElement = document.getElementById('menu');
-    if (menuElement) {
-      menuElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-    setTimeout(() => {
-        setActiveMenu(id);
-    }, 300);
-  };
-
-  const handleHomeClick = () => {
-    setActiveMenu(null);
-    setTimeout(() => {
-      const homeSection = document.getElementById('home');
-      if (homeSection) {
-        homeSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    }, 150);
-  };
-
   return (
     <>
       <Pointer
-        x={pointerPosition.x}
-        y={pointerPosition.y}
+        x={pointerX}
+        y={pointerY}
         visible={pointerVisible}
         text={pointerText}
       />
@@ -265,7 +262,7 @@ export default function Home() {
               }}
               className="pointer-events-auto"
             >
-              <World data={sampleArcs} globeConfig={globeConfig} />
+              <World globeConfig={globeConfig} />
             </motion.div>
           </div>
         </div>
@@ -279,7 +276,7 @@ export default function Home() {
             pointerText="Scroll to discover."
             resumeButtonText="Download my CV."
             connectButtonText="Open contact options."
-            pointerPosition={pointerPosition}
+            pointerPosition={heroPointerPosition}
           />
           <Menu
             id="menu"

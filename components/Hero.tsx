@@ -6,15 +6,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Download } from "lucide-react";
 import { TextHoverEffect } from './ui/text-hover-effect';
 import { AnimatedTooltip } from './ui/animated-tooltip';
-
-const skills = [
-  { id: 1, name: "React Native", designation: "Cross-platform Apps", image: "https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg" },
-  { id: 2, name: "Expo", designation: "Development Toolkit", image: "https://raw.githubusercontent.com/devicons/devicon/master/icons/expo/expo-original.svg" },
-  { id: 3, name: "Firebase", designation: "Backend as a Service", image: "https://raw.githubusercontent.com/devicons/devicon/master/icons/firebase/firebase-plain.svg" },
-  { id: 4, name: "Supabase", designation: "Open Source BaaS", image: "https://raw.githubusercontent.com/devicons/devicon/master/icons/supabase/supabase-original.svg" },
-  { id: 5, name: "Node.js", designation: "Backend Runtime", image: "https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg" },
-  { id: 6, name: "Next.js", designation: "React Framework", image: "https://raw.githubusercontent.com/devicons/devicon/master/icons/nextjs/nextjs-original.svg" },
-];
+import { SKILLS } from '@/lib/constants';
 
 const Hero = ({
   id,
@@ -24,7 +16,7 @@ const Hero = ({
   pointerText,
   resumeButtonText,
   connectButtonText,
-  pointerPosition, // New prop to receive cursor position
+  pointerPosition,
 }: {
   id?: string;
   onMenuClick: (id: "contact") => void;
@@ -33,12 +25,11 @@ const Hero = ({
   pointerText: string;
   resumeButtonText: string;
   connectButtonText: string;
-  pointerPosition: { x: number; y: number }; // Type for the new prop
+  pointerPosition: { x: number; y: number };
 }) => {
   const { scrollY } = useScroll();
-  const opacity = useTransform(scrollY, [0, 600], [1, 0]);
-  // Changed the scale to zoom in on scroll
-  const scale = useTransform(scrollY, [0, 800], [1, 1.5]);
+  const opacity = useTransform(scrollY, [0, 400], [1, 0]);
+  const scale = useTransform(scrollY, [0, 400], [1, 1.5]);
 
   return (
     <div 
@@ -57,7 +48,6 @@ const Hero = ({
         style={{ opacity }}
         className="absolute inset-0 z-0 flex items-center justify-center pointer-events-auto"
       >
-        {/* Pass the cursor position down to the effect component */}
         <TextHoverEffect text="PORTFOLIO" cursorPosition={pointerPosition} />
       </motion.div>
 
@@ -100,12 +90,12 @@ const Hero = ({
             className="pointer-events-auto relative mt-8 max-w-3xl text-left text-xl font-normal text-neutral-300 md:text-2xl"
           >
             My experience in both{" "}
-            <span className="text-blue-400">project management</span> and{" "}
-            <span className="text-blue-400">development</span> has allowed me to
+            <span className="text-blue-400 font-semibold">project management</span> and{" "}
+            <span className="text-blue-400 font-semibold">development</span> has allowed me to
             deliver real-world solutions, including a{" "}
-            <span className="text-orange-400">production mobile app</span> and{" "}
-            <span className="text-orange-400">company website</span>. I'm a{" "}
-            <span className="text-teal-400">hands-on problem solver</span>, ready
+            <span className="text-orange-400 font-semibold">production mobile app</span> and{" "}
+            <span className="text-orange-400 font-semibold">company website</span>. I'm a{" "}
+            <span className="text-teal-400 font-semibold">hands-on problem solver</span>, ready
             to contribute my skills to a great team.
           </motion.p>
           <motion.div
@@ -113,8 +103,10 @@ const Hero = ({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 1.0 }}
             className="pointer-events-auto mt-10 flex w-full justify-start"
+            onMouseEnter={() => setPointerVisible(false)}
+            onMouseLeave={() => setPointerVisible(true)}
           >
-            <AnimatedTooltip items={skills} />
+            <AnimatedTooltip items={SKILLS} />
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
