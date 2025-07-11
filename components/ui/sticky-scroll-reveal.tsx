@@ -38,7 +38,7 @@ type CustomContentProps = {
 // We export this type so it can be used in other files for type safety.
 export type ContentItem = {
   title: string;
-  description: string;
+  description: string | React.ReactNode;
   content:
     | ImageContentProps
     | CompareContentProps
@@ -121,21 +121,21 @@ export const StickyScroll = ({
           {content.map((item, index) => (
             <div
               key={item.title + index}
-              className="flex h-screen flex-col justify-center py-20"
+              className="flex h-screen flex-col justify-center p-20 "
             >
               <motion.h2
                 initial={{ opacity: 0 }}
                 animate={{ opacity: activeCard === index ? 1 : 0.15 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-                className="text-4xl font-bold text-slate-100"
+                transition={{ duration: 1, ease: "easeInOut" }}
+                className="text-5xl font-bold text-slate-100"
               >
                 {item.title}
               </motion.h2>
               <motion.p
-                initial={{ opacity: 0 }}
+                initial={{ opacity: 0.5 }}
                 animate={{ opacity: activeCard === index ? 1 : 0.15 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-                className="text-xl mt-10 max-w-sm text-slate-300"
+                transition={{ duration: 1, ease: "easeInOut" }}
+                className="text-xl mt-5 w-[35rem] text-slate-300"
               >
                 {item.description}
               </motion.p>

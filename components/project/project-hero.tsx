@@ -1,6 +1,7 @@
 // components/project/project-hero.tsx
 import { MacbookScroll } from "../ui/macbook-scroll";
 import { MobileScroll } from "../ui/mobile-scroll";
+import { cn } from "@/lib/utils";
 
 interface ProjectHeroProps {
   title: string;
@@ -9,10 +10,14 @@ interface ProjectHeroProps {
 }
 
 export const ProjectHero = ({ title, imageUrl, displayType }: ProjectHeroProps) => {
-  // The 'overflow-hidden' class has been removed from this div
-  // to allow the sticky positioning in the child component to work correctly.
+  
   return (
-    <div className="relative w-full rounded-2xl overflow-hidden">
+    <div
+      className={cn(
+        "relative w-full rounded-2xl",
+        { "overflow-hidden": displayType === 'macbook' }
+      )}
+    >
       {displayType === 'macbook' ? (
         <MacbookScroll
           title={title}

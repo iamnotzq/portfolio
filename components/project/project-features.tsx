@@ -20,16 +20,29 @@ export const ProjectFeatures = ({ features }: ProjectFeaturesProps) => {
 
         <div className="flex-grow w-full max-w-7xl mx-auto p-4 flex items-center">
             <BentoGrid className="w-full">
-                {features.map((item, i) => (
-                <BentoGridItem
-                    key={i}
-                    title={item.title}
-                    description={item.description}
-                    header={<Skeleton />}
-                    icon={ICONS[item.icon] || <></>}
-                    className={item.className}
-                />
-                ))}
+                {features.map((item, i) => {
+                    // Conditionally render an image or the skeleton loader
+                    const headerContent = item.imageUrl ? (
+                        <img 
+                            src={item.imageUrl} 
+                            alt={item.title} 
+                            className="flex-1 w-full h-full min-h-[6rem] rounded-xl object-cover"
+                        />
+                    ) : (
+                        <Skeleton />
+                    );
+
+                    return (
+                        <BentoGridItem
+                            key={i}
+                            title={item.title}
+                            description={item.description}
+                            header={headerContent} // Pass the dynamic header content
+                            icon={ICONS[item.icon] || <></>}
+                            className={item.className}
+                        />
+                    );
+                })}
             </BentoGrid>
         </div>
     </section>

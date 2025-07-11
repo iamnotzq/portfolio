@@ -39,17 +39,10 @@ export const MobileScroll = ({
   return (
     // This container defines the scrollable area for the animation.
     <div ref={containerRef} className="min-h-[180vh] relative pb-20 md:pb-40">
-      {/* The sticky container uses flexbox to center its content. This is more
-        robust than absolute positioning.
-      */}
+      
       <div className="sticky top-0 h-screen flex items-center justify-center">
         
-        {/* This inner container holds our content. We add padding-top to it.
-          The flexbox parent centers this whole block, and the padding pushes the
-          content down, so the title (the first element) aligns perfectly
-          with the screen's vertical center. The padding amount is roughly half
-          the height of the phone component below the title.
-        */}
+       
         <div className="flex flex-col items-center pt-[13rem]">
           <motion.h2
             style={{
