@@ -4,9 +4,12 @@ import { DraggableCardContainer, DraggableCardBody } from "../ui/draggable-card"
 
 interface ProjectDemoProps {
   screenshots: DemoScreenshot[];
+  displayType: 'macbook' | 'mobile';
+
 }
 
-export const ProjectDemo = ({ screenshots }: ProjectDemoProps) => {
+export const ProjectDemo = ({ screenshots, displayType }: ProjectDemoProps) => {
+
   return (
     <section className="min-h-screen w-full py-20 sm:py-28 flex flex-col justify-center items-center">
       <div className="text-center px-4">
@@ -20,7 +23,8 @@ export const ProjectDemo = ({ screenshots }: ProjectDemoProps) => {
 
       <DraggableCardContainer className="relative flex h-[70vh] w-full items-center justify-center overflow-clip">
         {screenshots.map((item, i) => (
-          <DraggableCardBody key={i} className={item.className}>
+          <DraggableCardBody key={i} className={item.className} displayType={displayType}>
+         
             <img
               src={item.image}
               alt={item.title}

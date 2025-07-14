@@ -14,9 +14,12 @@ import {
 export const DraggableCardBody = ({
   className,
   children,
+  displayType,
 }: {
   className?: string;
-  children?: React.ReactNode;
+    children?: React.ReactNode;
+    displayType: "macbook" | "mobile";
+
 }) => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -163,8 +166,12 @@ export const DraggableCardBody = ({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "relative min-h-96 w-45 overflow-hidden rounded-xl  p-2 shadow-2xl transform-3d bg-neutral-900",
-        className,
+       "relative overflow-hidden rounded-xl p-2 shadow-2xl transform-3d bg-neutral-900",
+        {
+          "min-h-45 w-108": displayType === "macbook",
+          "min-h-96 w-45 ": displayType === "mobile",
+        },
+        className
       )}
     >
       {children}

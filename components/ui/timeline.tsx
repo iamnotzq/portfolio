@@ -56,9 +56,12 @@ export const Timeline = ({ data, scrollContainerRef }: { data: TimelineEntry[], 
                     &nbsp;&nbsp;<span className="text-purple-400">method</span>: <span className="text-blue-400">planAndExecute</span>(),<br/>
                     &nbsp;&nbsp;<span className="text-purple-400">comms</span>: <span className="text-blue-400">liaiseWith</span>([<span className="text-orange-400">"stakeholders"</span>, <span className="text-orange-400">"clients"</span>]),<br />
                     &nbsp;&nbsp;<span className="text-purple-400">attributes</span>: [<span className="text-orange-400">"Driven"</span>, <span className="text-orange-400">"Hardworking"</span>, <span className="text-orange-400">"Fast Learner"</span>, <span className="text-orange-400">"Flexible"</span>],<br/>
-                    &nbsp;&nbsp;<span className="text-purple-400">skills</span>: 
-                    [<span className="text-orange-400">"JavaScript"</span>, <span className="text-orange-400">"TypeScript"</span>, <span className="text-orange-400">"React/Native"</span>, <span className="text-orange-400">"Node.js"</span>, <span className="text-orange-400">"Python"</span>, <span className="text-orange-400">"Expo"</span>, <span className="text-orange-400">"MySQL"</span>, <span className="text-orange-400">"Firebase"</span>, <span className="text-orange-400">"Google Cloud"</span>, <span className="text-orange-400">"GitHub"</span>, <span className="text-orange-400">"Figma"</span>],<br/>
-                    
+                    &nbsp;&nbsp;<span className="text-purple-400">skills</span>: {'{'}<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-green-400">languages</span>: [<span className="text-orange-400">"JavaScript"</span>, <span className="text-orange-400">"TypeScript"</span>, <span className="text-orange-400">"Python"</span>],<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-green-400">frontend</span>: [<span className="text-orange-400">"React/Native"</span>, <span className="text-orange-400">"Expo"</span>],<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-green-400">backend</span>: [<span className="text-orange-400">"Node.js"</span>, <span className="text-orange-400">"MySQL"</span>, <span className="text-orange-400">"Firebase"</span>, <span className="text-orange-400">"Google Cloud"</span>],<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-green-400">tools</span>: [<span className="text-orange-400">"GitHub"</span>, <span className="text-orange-400">"Figma"</span>],<br/>
+                    &nbsp;&nbsp;{'}'},<br/>
                     &nbsp;&nbsp;<span className="text-purple-400">goal</span>: <span className="text-orange-400">"Deliver impactful solutions."</span><br/>
                     {'}'};
                 </p>

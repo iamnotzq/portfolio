@@ -58,7 +58,7 @@ export const StickyScroll = ({
   contentClassName?: string;
 }) => {
   const [activeCard, setActiveCard] = React.useState(0);
-  const ref = useRef<any>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end end"],
@@ -67,7 +67,13 @@ export const StickyScroll = ({
 
   // This hook updates the active card based on the scroll progress.
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    const cardsBreakpoints = content.map((_, index) => index / cardLength);
+    // With 1 or 0 cards, no need to check for breakpoints
+    if (cardLength < 2) {
+      return;
+    }
+    const cardsBreakpoints = content.map(
+      (_, index) => index / (cardLength - 1)
+    );
     const closestBreakpointIndex = cardsBreakpoints.reduce(
       (acc, breakpoint, index) => {
         const distance = Math.abs(latest - breakpoint);
@@ -116,12 +122,12 @@ export const StickyScroll = ({
       ref={ref}
     >
       {/* Left Column for Text Descriptions */}
-      <div className="w-full lg:w-1/2 flex justify-center">
-        <div>
+      <div className="w-full lg:w-1/2 flex justify-center items-center">
+        <div className="w-full max-w-xl">
           {content.map((item, index) => (
             <div
               key={item.title + index}
-              className="flex h-screen flex-col justify-center p-20 "
+              className="flex h-screen flex-col justify-center"
             >
               <motion.h2
                 initial={{ opacity: 0 }}
@@ -135,7 +141,7 @@ export const StickyScroll = ({
                 initial={{ opacity: 0.5 }}
                 animate={{ opacity: activeCard === index ? 1 : 0.15 }}
                 transition={{ duration: 1, ease: "easeInOut" }}
-                className="text-xl mt-5 w-[35rem] text-slate-300"
+                className="text-xl mt-5 w-full text-slate-300"
               >
                 {item.description}
               </motion.p>
@@ -150,7 +156,7 @@ export const StickyScroll = ({
         <div className="sticky top-10 flex h-screen items-center justify-center">
           <div
             className={cn(
-              "h-[30rem] w-[35rem] overflow-hidden rounded-lg bg-slate-900",
+              "h-[20rem] w-[40rem] overflow-hidden rounded-lg bg-slate-900",
               contentClassName
             )}
           >

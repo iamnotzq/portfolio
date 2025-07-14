@@ -100,19 +100,79 @@ export interface ProjectData {
   documentation: DocumentationSection[];
 }
 
-// Example code snippet for the 'code' documentation type
 const codeExample = `import React from "react";
 
-const MyComponent = () => {
-return (
-  <div className="p-4 bg-gray-800 rounded-lg">
-    <h1 className="text-2xl font-bold text-white">Hello, World!</h1>
-    <p className="text-gray-300">This is a sample component.</p>
-  </div>
-);
+const ProjectDocumentation = ({ documentation }: ProjectDocumentationProps) => {
+  
+  const content: ContentItem[] = documentation.map(docItem => ({
+    title: docItem.title,
+    description: docItem.description,
+    content: renderContent(docItem)
+  }));
+
+  return (
+    <section className="w-full">
+        <div className="sticky top-0 z-20 pt-24 ">
+            <div className="text-center px-4">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white font-orbitron">
+                    Project Documentation
+                </h2>
+                <p className="mt-4 text-neutral-400 text-lg max-w-2xl mx-auto">
+                    Dive deeper into the technical aspects, from setup to deployment. Scroll to explore the details.
+                </p>
+            </div>
+        </div>
+
+        <div className="relative z-10 ">
+            <StickyScroll content={content} />
+        </div>
+    </section>
+  );
 };
 
-export default MyComponent;`;
+export default ProjectDocumentation;
+`;
+const projectPageCode = `"use client";
+
+import React from "react";
+
+export default function ProjectPage() {
+  const params = useParams<{ slug: string }>();
+  const router = useRouter();
+  const [project, setProject] = useState<ProjectData | null>(null);
+  
+  const [loadingState, setLoadingState] = useState('loading'); // loading -> completed -> finished
+  const [loadingText, setLoadingText] = useState("Entering the data stream...");
+
+  useEffect(() => {
+    // Phase 1: Initial "loading" text
+    const loadingTimer = setTimeout(() => {
+      const currentProject = slideData.find((p) => p.slug === params.slug);
+      if (currentProject) {
+        setProject(currentProject); // Set the project data
+        
+        // Phase 2: Switch to "completed" text
+        setLoadingText("Connection established.");
+        setLoadingState('completed');
+
+        // Phase 3: Wait a moment, then finish to trigger fade-out
+        const completedTimer = setTimeout(() => {
+          setLoadingState('finished');
+        }, 1500); // Show "completed" message for 1.5 seconds
+
+        return () => clearTimeout(completedTimer);
+      } else {
+        notFound();
+      }
+    }, 3000); // Show "loading" message for 3 seconds
+
+    return () => clearTimeout(loadingTimer);
+  }, [params.slug]);
+
+  const handleNavMenuClick = (id: 'about' | 'contact' | 'projects') => {
+    router.push('id');
+  };
+`;
 
 
 export const slideData: ProjectData[] = [
@@ -120,127 +180,237 @@ export const slideData: ProjectData[] = [
     slug: "interactive-portfolio",
     title: "Interactive Portfolio",
     description: "A personal portfolio featuring a 3D interactive globe and scroll-based animations.",
-    year: 2024,
+    year: 2025,
     role: "Lead Developer",
-    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Three.js"],
-    imageUrl: "/props-factory-website-screenshot.png",
+    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Figma"],
+    imageUrl: "/projects/portfolioWebsite/homePage.png",
     displayType: "macbook", // Set this to 'macbook' or 'mobile' for each project
-    src: "/props-factory-website-screenshot.png",
+    src: "/projects/portfolioWebsite/homePage.png",
     liveUrl: "#",
     githubUrl: "#",
 
-    overview: "This project was an opportunity to explore modern web technologies and create a deeply engaging user experience. The goal was to build more than just a static page, but an interactive journey that showcases my skills in frontend development, animation, and 3D graphics. The entire site is designed to be fluid and responsive, providing a seamless experience on all devices.",
+    overview: "I believe a portfolio should be more than a static list of accomplishments; it should tell a story. With this project, I set out to create a narrative-driven journey that departs from traditional portfolio websites. The goal was to build an immersive experience that captivates visitors through interactive 3D elements and fluid animations, guiding them through my professional story. While the presentation is designed to be engaging, the core content—my projects, skills, and experiences—remains easily accessible, allowing you to dive into the details that matter most.",
     features: [
       {
           title: "Interactive 3D Globe",
-          description: "A fully interactive 3D globe built with Three.js and React Three Fiber.",
-          icon: "IconClipboardCopy",
-          className: "lg:col-span-2",
-          imageUrl: "https://images.unsplash.com/photo-1614726365902-1413815a5a68?q=80&w=800&auto=format&fit=crop",
+          description: "A fully interactive 3D globe built with Three.js and React Three Fiber, inviting user exploration.",
+          icon: "IconAnalyze",
+          imageUrl: "/projects/portfolioWebsite/globe.png",
       },
       {
           title: "Scroll-Based Animations",
-          description: "Leveraging Framer Motion to create smooth, scroll-triggered animations.",
-          icon: "IconFileBroken",
-          imageUrl: "https://images.unsplash.com/photo-1554189097-c48cf332c449?q=80&w=800&auto=format&fit=crop",
+          description: "Leveraging Framer Motion to create smooth, scroll-triggered animations that guide the user.",
+          icon: "IconChartLine",
+          imageUrl: "/projects/portfolioWebsite/laptop.png",
       },
       {
           title: "Component-Based Architecture",
-          description: "Built with a modular and reusable component structure in Next.js.",
+          description: "Built with a modular and reusable component structure in Next.js for maintainability and scalability.",
+          icon: "IconTableColumn",
+          imageUrl: "/projects/portfolioWebsite/laptop.png",
+      },
+      {
+        title: "Live Code Previews",
+        description: "An integrated code viewer with syntax highlighting to showcase the underlying implementation.",
+        icon: "IconClipboardText",
+        imageUrl: "/projects/portfolioWebsite/documentation.png",
+      },
+      {
+          title: "Engaging UI Components",
+          description: "A collection of custom-built, interactive components designed to enhance user engagement.",
+          icon: "IconUsers",
+          imageUrl: "/projects/portfolioWebsite/laptop.png",
+      },
+      {
+          title: "Fully Responsive Design",
+          description: "Meticulously crafted for a seamless and visually consistent experience across all devices.",
           icon: "IconSignature",
-          // No imageUrl here, so it will fall back to the skeleton
+          imageUrl: "/projects/portfolioWebsite/laptop.png",
       },
     ],
     demoScreenshots: [
       {
-          title: "Main Globe View",
-          image: "https://images.unsplash.com/photo-1614726365902-1413815a5a68?q=80&w=800&auto=format&fit=crop",
-          className: "absolute top-10 left-[20%] rotate-[-5deg]",
+          title: "Home Page",
+          image: "/projects/portfolioWebsite/homePage.png",
+          className: "absolute top-10 right-[27%] ",
       },
       {
           title: "Project Section",
-          image: "https://images.unsplash.com/photo-1554189097-c48cf332c449?q=80&w=800&auto=format&fit=crop",
-          className: "absolute top-40 left-[25%] rotate-[-7deg]",
+          image: "/projects/portfolioWebsite/projects.png",
+          className: "absolute top-80 left-[27%] rotate-[2deg]",
       },
+      {
+          title: "About Section",
+          image: "/projects/portfolioWebsite/about.png",
+          className: "absolute top-10 right-[5%] rotate-[3deg]",
+      },
+      {
+          title: "Contact Section",
+          image: "/projects/portfolioWebsite/contact.png",
+          className: "absolute top-80 right-[27%] rotate-[-5deg]",
+      },
+      {
+        title: "Main Globe View",
+        image: "/projects/portfolioWebsite/globe.png",
+        className: "absolute top-10 left-[27%] rotate-[-5deg]",
+    },
+    {
+        title: "Project Page",
+        image: "/projects/portfolioWebsite/laptop.png",
+        className: "absolute top-80 right-[5%] rotate-[2deg]",
+      },
+      
+      
+      {
+        title: "Documentation Section",
+        image: "/projects/portfolioWebsite/documentation.png",
+        className: "absolute top-10 left-[5%] rotate-[3deg]",
+      },
+      {
+        title: "Learnings Section",
+        image: "/projects/portfolioWebsite/learning.png",
+        className: "absolute top-80 left-[5%] rotate-[-4deg]",
+    },
     ],
     learnings: [
       {
-          quote: "Deepened my understanding of state management in complex React applications.",
-          name: "Key Takeaway 1",
-          designation: "State Management",
-          src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          quote: "A key challenge was managing the performance of numerous animations and complex user interactions, including scroll-based triggers and pointer events. To address this, I implemented themed loading screens that not only prevent content flashing but also enhance the narrative experience.",
+          name: "Optimizing Performance & User Experience",
+          designation: "Performance & UX",
+          src: "/projects/portfolioWebsite/loading.png",
       },
       {
-          quote: "Gained proficiency in 3D rendering and animation with Three.js and React Three Fiber.",
-          name: "Key Takeaway 2",
-          designation: "3D Graphics",
-          src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          quote: "For the documentation, the goal was to present technical information without overwhelming the user. I developed a sectioned layout using custom components to showcase code snippets and visual comparisons, effectively breaking down complex topics into digestible parts.",
+          name: "Crafting Clear Technical Documentation",
+          designation: "Component-Driven Documentation",
+          src: "/projects/portfolioWebsite/documentation.png",
       },
     ],
     documentation: [
       {
-          title: "Version Control with Code View",
-          description: "Never stress about version control again. View your code in clear, highlighted blocks.",
-          content: {
-              type: 'code',
-              props: {
-                language: "tsx",
-                filename: "MyComponent.tsx",
-                code: codeExample,
-                highlightLines: [4, 5, 6],
-              }
+        title: "Early Conceptualization",
+        description: (
+          <>
+            The primary goal was to create a portfolio that transcended a static
+            layout, offering an{" "}
+            <strong>interactive, narrative-driven experience</strong>. I aimed to
+            showcase my skills in web and mobile application design through a{" "}
+            <strong>captivating user journey</strong>. The initial phase involved
+            conceptualizing the <strong>user flow and page structure</strong>,
+            which served as the <strong>foundational blueprint</strong> for the
+            site's architecture.
+          </>
+        ),
+        content: {
+          type: 'image',
+          props: {
+            src: "/projects/portfolioWebsite/homeFlow.png",
+            className: "h-full w-full object-fit object-left-top"
           }
+      }
+      },{
+        title: "Design & Prototyping",
+        description: (
+          <>
+            Using Figma, I designed the{" "}
+            <strong>complete user interface and experience</strong>, mapping out
+            the <strong>visual flow and component interactions</strong>. The
+            design process was grounded in the{" "}
+            <strong>technical foundation of Next.js and React</strong>,
+            leveraging my prior experience from building the Props Factory
+            corporate website to ensure a{" "}
+            <strong>practical and performant implementation</strong>.
+          </>
+        ),
+        content: {
+          type: 'compare',
+          props: {
+            firstImage: "/projects/portfolioWebsite/homeWireframe.png",
+            secondImage: "/projects/portfolioWebsite/homePage.png",
+            firstImageClassName: "object-cover object-center-top",
+            secondImageClassName: "object-cover object-center-top",
+            className: "h-full w-full rounded-lg",
+            slideMode: "hover"
+          }
+      }
+    },{
+      title: "Technical Architecture",
+      description: (
+        <>
+          The site is built on a <strong>component-based architecture</strong>{" "}
+          using Next.js and React, ensuring{" "}
+          <strong>modularity and future scalability</strong>. To optimize
+          performance, I leveraged Next.js's capabilities for both{" "}
+          <strong>client-side and server-side rendering</strong>. The codebase
+          is organized into <strong>distinct sections for improved
+          maintainability</strong> and cleaner code.
+        </>
+        ),
+      
+      content: {
+        type: 'code',
+        props: {
+          language: "tsx",
+          filename: "project/[slug]/page.tsx",
+          code: projectPageCode,
+          highlightLines: [1, 10, 11],
+        }
+    }
       },
       {
-          title: "Visually Compare Changes",
-          description: "Track every modification in real time. Use the visual compare tool to see differences between versions instantly.",
-          content: {
-              type: 'compare',
-              props: {
-                firstImage: "https://assets.aceternity.com/code-problem.png",
-                secondImage: "https://assets.aceternity.com/code-solution.png",
-                firstImageClassName: "object-cover object-left-top",
-                secondImageClassName: "object-cover object-left-top",
-                className: "h-full w-full rounded-lg",
-                slideMode: "hover"
-              }
+        title: "Core Features & UX",
+        description: (
+          <>
+            To avoid endless scrolling, the homepage features a unique{" "}
+            <strong>panel-based navigation system</strong> below the hero
+            section. This design choice aligns with the site's narrative: as the
+            user scrolls, they 'descend' towards the planet, revealing an{" "}
+            <strong>interactive world map</strong>. From here, users can select
+            a project, triggering a <strong>'data stream' transition</strong>{" "}
+            into the project page. This thematic approach ensures a{" "}
+            <strong>clear and engaging path</strong> to the core content, with
+            each project page providing a <strong>detailed technical breakdown</strong>.
+          </>
+        ),
+        content: {
+          type: 'image',
+          props: {
+            src: "/projects/portfolioWebsite/map.png",
+            className: "h-full w-full object-fit"
           }
-      },
+      }
+    },
+      
       {
-          title: "Display Any Content",
-          description: "Our platform is flexible. You can display images, custom components, or anything you need to get your point across.",
+          title: "Deployment",
+          description: (
+            <>
+              The portfolio is <strong>deployed and hosted on Vercel</strong>,
+              chosen for its <strong>seamless integration with Next.js</strong>,{" "}
+              <strong>robust CI/CD pipeline</strong>, and analytics tools. For{" "}
+              <strong>proactive error monitoring and debugging</strong>, I
+              integrated <strong>Sentry to track and analyze bugs</strong> and
+              crashes in real-time.
+            </>
+          ),
           content: {
-              type: 'image',
-              props: {
-                src: "https://placehold.co/800x600/1F2937/FFFFFF?text=Any+Image",
-                alt: "Placeholder Image",
-                className: "h-full w-full object-cover"
-              }
-          }
+            type: 'image',
+            props: {
+              src: "/projects/portfolioWebsite/about.png",
+              className: "h-full w-full object-fit object-left-top"
+            }
+        }
       },
-      {
-          title: "Collaborative Editing",
-          description: "Work together in real time with your team. Our platform streamlines your workflow and increases productivity.",
-          content: {
-              type: 'custom',
-              props: {
-                content: (
-                    <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white text-2xl font-bold">
-                    Collaborative Editing
-                    </div>
-                )
-              }
-          }
-      },
+      
     ]
   },
   {
     slug: "diabetes-management-app",
     title: "Nutriwise",
-    description: "A mobile application for diabetics to manage their condition.",
+    description: "A mobile application for diabetics to manage their condition done for FYP.",
     year: 2024,
     role: "Project Leader, UI/UX Designer & Frontend Dev",
-    techStack: ["React Native", "TypeScript", "JavaScript", "MongoDB", "Expo"],
+    techStack: ["React Native", "TypeScript", "JavaScript", "MongoDB", "Expo", "Figma"],
     imageUrl: "/projects/nutriwise/nutri1.png", 
     displayType: "mobile",
     src: "/projects/nutriwise/nutri1.png", 
@@ -330,13 +500,13 @@ export const slideData: ProjectData[] = [
     learnings: [
       {
           quote: "Mastered state management in React Native using Zustand for a performant experience.",
-          name: "Key Takeaway 1",
+          name: "Efficient State Management",
           designation: "State Management",
           src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       },
       {
           quote: "Learned to build complex, gesture-based interactions for mobile interfaces.",
-          name: "Key Takeaway 2",
+          name: "Advanced Mobile Interactions",
           designation: "Mobile UX",
           src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       },
@@ -453,7 +623,8 @@ export const slideData: ProjectData[] = [
         title: "Database Schema Overview",
         description: (
           <>
-            The database design includes <strong>five core collections</strong>: Users, Food Entries, Glucose Logs, Medication, and Analytics. This structure supports all primary app functions—tracking meals, logging health data, and generating insights.
+            The database design includes <strong>five core collections</strong>: Users, Food Entries, Glucose Logs, Medication, and Analytics. This structure supports all primary app functions—tracking meals, logging health data, and generating insights. <br/><br/>  Collections are <strong>linked via references</strong> (e.g., <code>userId</code>), enabling efficient <strong>aggregation and filtering</strong>. This setup supports <strong>fast lookups</strong> of historical logs and powers <strong>personalized feedback</strong> like glucose trends and diet impact, all while ensuring <strong>scalability</strong> as data grows.
+     
           </>
         ),
         content: {
@@ -466,23 +637,7 @@ export const slideData: ProjectData[] = [
           }
         }
       },
-      {
-        title: "Schema Relationships & Performance",
-        description: (
-          <>
-            Collections are <strong>linked via references</strong> (e.g., <code>userId</code>), enabling efficient <strong>aggregation and filtering</strong>. This setup supports <strong>fast lookups</strong> of historical logs and powers <strong>personalized feedback</strong> like glucose trends and diet impact, all while ensuring <strong>scalability</strong> as data grows.
-          </>
-        ),
-        content: {
-          type: 'code',
-          props: {
-            language: "graphql",
-            filename: "query.graphql",
-            code: "query GetUserData($userId: ID!) {\n  user(id: $userId) {\n    name\n    email\n    accounts {\n      balance\n    }\n  }\n}",
-            highlightLines: [2, 3, 4],
-          }
-        }
-      }
+      
     ]
   },
 ];

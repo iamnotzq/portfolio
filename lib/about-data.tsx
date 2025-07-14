@@ -33,6 +33,8 @@ export const timelineData = [
           <h4 className="text-2xl font-semibold text-neutral-300 mb-4">Bachelor of Computer Science (<span className="text-yellow-400 font-bold">Big Data</span>) - <span className="text-green-400 font-bold">With Distinction</span></h4>
           <ul className="list-disc list-outside text-md text-neutral-200 space-y-3 mb-4">
             <li>Graduated with Distinction, demonstrating a <span className="text-green-400 font-bold">solid foundation</span> across the full stack, from front-end and back-end development to machine learning.</li>
+            <li>Led the Final Year Project team and played a pivotal role in numerous group projects, showcasing strong <span className="text-blue-400 font-bold">leadership and collaborative skills</span>.</li>
+            <li>Acquired a diverse technical toolkit, including proficiency in <span className="text-orange-400 font-bold">Python, Java, C++, and PHP</span>, and hands-on experience with Big Data frameworks like <span className="text-orange-400 font-bold">TensorFlow, Keras, Spark, and R</span>.</li>
             <li>Selected for a competitive semester exchange to Wollongong, Australia—an honor awarded to <span className="text-yellow-400 font-bold">fewer than 10 students.</span> </li>
           </ul>
           <div className="grid grid-cols-2 gap-4">
@@ -45,6 +47,16 @@ export const timelineData = [
               src="/about/azoom1.png"
               alt="University project 2"
               className="w-full h-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
+            />
+            <img
+              src="/about/bugger1.png"
+              alt="University project 2"
+              className="w-full h-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
+            />
+            <img
+              src="/about/nutri1.png"
+              alt="University project 2"
+              className="w-full h-35 rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
             />
           </div>
           <h5 className="text-xl font-bold text-white mt-6 mb-3">Key Skills & Technologies</h5>
@@ -72,6 +84,7 @@ export const timelineData = [
               className="w-full h-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
             />
         </div>
+        
       </div>
     ),
   },
@@ -81,11 +94,23 @@ export const timelineData = [
       <div>
           <h3 className="text-5xl font-bold text-white mb-2">Aural Aid</h3>
           <h4 className="text-2xl font-semibold text-neutral-300 mb-4">Product Design Intern</h4>
-          <ul className="list-disc list-outside text-md text-neutral-200 space-y-3">
-              <li><span className="text-blue-400 font-bold">Entrusted as the workshop in-charge</span> to manage the <span className="text-green-400 font-bold">end-to-end crafting of bespoke client products</span>, and produced innovative parametric designs by mastering <span className="text-orange-400 font-bold">Grasshopper</span> from scratch.</li>
+          <ul className="list-disc list-outside text-md text-neutral-200 space-y-3 mb-4">
+              <li><span className="text-blue-400 font-bold">Entrusted as the workshop in-charge</span> to manage the <span className="text-green-400 font-bold">end-to-end crafting of bespoke client products</span>, and produced innovative parametric designs by mastering <span className="text-orange-400 font-bold">Grasshopper</span> and <span className="text-orange-400 font-bold">3ds Max</span> from scratch.</li>
               <li>Contributed to a major website overhaul by designing, modeling, and rendering 3D product visuals, which <span className="text-green-400 font-bold">enhanced the site's UI/UX</span>.</li>
               <li>Authored detailed product manuals as a self-initiated project, which <span className="text-blue-400 font-bold">streamlined internal work processes</span> and was commended by management.</li>
-          </ul>
+        </ul>
+        <div className="grid grid-cols-2 gap-4">
+            <img
+              src="/about/auralManual.png"
+              alt="Lagoon Laundry POS system"
+              className="w-full h-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
+          />
+          <img
+              src="/about/auralPanel.png"
+              alt="Lagoon Laundry POS system"
+              className="w-full h-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
+            />
+        </div>
         <h5 className="text-xl font-bold text-white mt-6 mb-3">Key Skills & Technologies</h5>
            <div className="flex flex-row flex-wrap items-center justify-start">
               <AnimatedTooltip items={auralAidSkills} />
