@@ -1,10 +1,11 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useMotionValueEvent, useScroll } from "framer-motion";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { CodeBlock } from "./code-block";
 import { Compare } from "./compare";
+import { Lens } from "./lens";
 
 // Define the prop types for our dynamic components.
 // This makes the component's API clear and type-safe.
@@ -39,6 +40,8 @@ type CustomContentProps = {
 export type ContentItem = {
   title: string;
   description: string | React.ReactNode;
+  width?: string; // Optional: custom width for the content
+  height?: string; // Optional: custom height for the content
   content:
     | ImageContentProps
     | CompareContentProps
@@ -63,6 +66,12 @@ export const StickyScroll = ({
     target: ref,
     offset: ["start start", "end end"],
   });
+
+  // If there is no content, we avoid rendering the component to prevent errors.
+  if (!content || content.length === 0) {
+    return null;
+  }
+
   const cardLength = content.length;
 
   // This hook updates the active card based on the scroll progress.
@@ -94,16 +103,19 @@ export const StickyScroll = ({
    * @returns A React component.
    */
   const renderContent = (item: ContentItem) => {
+    const [hovering, setHovering] = useState(false);
     switch (item.content.type) {
       case "image":
         return (
+          <Lens hovering={hovering} setHovering={setHovering}>
           <img
             {...item.content.props}
             className={cn("h-full w-full object-cover", item.content.props.className)}
             onError={(e) => {
               e.currentTarget.src = `https://placehold.co/800x600/000000/FFFFFF?text=Image+Not+Found`;
             }}
-          />
+            />
+            </Lens>
         );
       case "compare":
         return <Compare {...item.content.props} />;
@@ -115,6 +127,10 @@ export const StickyScroll = ({
         return null;
     }
   };
+
+  // Default dimensions if not provided in the content data
+  const DEFAULT_WIDTH = "40rem";
+  const DEFAULT_HEIGHT = "30rem";
 
   return (
     <motion.div
@@ -154,9 +170,15 @@ export const StickyScroll = ({
       {/* Right Column for Sticky Visual Content */}
       <div className="w-full lg:w-1/2 hidden lg:block">
         <div className="sticky top-10 flex h-screen items-center justify-center">
-          <div
+          <motion.div
+            key={`content-container-${activeCard}`} // Use a unique key to ensure re-render and animation
+            animate={{
+              width: content[activeCard]?.width || DEFAULT_WIDTH,
+              height: content[activeCard]?.height || DEFAULT_HEIGHT,
+            }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }} // A smoother spring-like transition
             className={cn(
-              "h-[20rem] w-[40rem] overflow-hidden rounded-lg bg-slate-900",
+              "overflow-hidden rounded-lg bg-slate-900",
               contentClassName
             )}
           >
@@ -173,7 +195,7 @@ export const StickyScroll = ({
                 {renderContent(content[activeCard])}
               </motion.div>
             </AnimatePresence>
-          </div>
+          </motion.div>
         </div>
       </div>
     </motion.div>

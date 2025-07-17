@@ -155,7 +155,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: { slide: CarouselSli
   
   return (
     <li
-      className="w-[80vmin] max-w-lg h-auto flex-shrink-0 px-4"
+      className="w-[90vw] max-w-lg h-auto flex-shrink-0 px-4"
       onClick={() => handleSlideClick(index)}
       style={{
         transform: current === index ? "scale(1)" : "scale(0.85)",
@@ -165,25 +165,25 @@ const Slide = ({ slide, index, current, handleSlideClick }: { slide: CarouselSli
     >
       {/* The Link wrapper has been removed from here to prevent nested <a> tags */}
       <CardContainer containerClassName="w-full h-full">
-        <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full h-full rounded-xl p-6 border flex flex-col">
+        <CardBody className="relative group/card hover:shadow-2xl hover:shadow-emerald-500/[0.1] bg-black border-black/[0.1] w-full h-full rounded-xl p-6 border flex flex-col">
           {/* Top content section */}
           <div className="flex-shrink-0">
             <CardItem translateZ="50" className="w-full flex justify-between items-start">
-              <h3 className="text-xl font-bold text-neutral-600 dark:text-white">
+              <h3 className="text-xl font-bold text-white">
                 {title}
               </h3>
-              <span className="text-sm font-semibold text-neutral-500 dark:text-neutral-400 px-2 py-1 bg-neutral-200 dark:bg-neutral-800 rounded-full">
+              <span className="text-sm font-semibold text-neutral-400 px-2 py-1 bg-neutral-800 rounded-full">
                 {year}
               </span>
             </CardItem>
-            <CardItem as="p" translateZ="55" className="text-sm font-bold text-neutral-600 dark:text-neutral-300 mt-2">{role}</CardItem>
-            <CardItem as="p" translateZ="60" className="text-neutral-500 text-sm w-full mt-2 dark:text-neutral-300">
+            <CardItem as="p" translateZ="55" className="text-sm font-bold text-neutral-300 mt-2">{role}</CardItem>
+            <CardItem as="p" translateZ="60" className="text-sm w-full mt-2 text-neutral-300">
               {description}
             </CardItem>
             <CardItem translateZ="70" className="w-full mt-4">
               <div className="flex flex-wrap gap-2">
                 {techStack.map((tech) => (
-                  <span key={tech} className="text-xs font-medium text-sky-900 dark:text-sky-200 bg-sky-100 dark:bg-sky-900/50 px-2 py-1 rounded-full">
+                  <span key={tech} className="text-xs font-medium text-sky-200 bg-sky-900/50 px-2 py-1 rounded-full">
                     {tech}
                   </span>
                 ))}
@@ -249,13 +249,13 @@ const Slide = ({ slide, index, current, handleSlideClick }: { slide: CarouselSli
 const CarouselControl = ({ type, title, handleClick }: { type: string, title: string, handleClick: () => void }) => {
   return (
     <button
-      className={`w-10 h-10 flex items-center mx-2 justify-center bg-neutral-200 dark:bg-neutral-800 border-3 border-transparent rounded-full focus:border-[#6D64F7] focus:outline-none hover:-translate-y-0.5 active:translate-y-0.5 transition duration-200 ${
+      className={`w-10 h-10 flex items-center mx-2 justify-center bg-neutral-800 border-3 border-transparent rounded-full focus:border-[#6D64F7] focus:outline-none hover:-translate-y-0.5 active:translate-y-0.5 transition duration-200 ${
         type === "previous" ? "rotate-180" : ""
       }`}
       title={title}
       onClick={handleClick}
     >
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-neutral-600 dark:text-neutral-200" fill="none" viewBox="0 24 24" stroke="currentColor" strokeWidth={2}>
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-neutral-200" fill="none" viewBox="0 24 24" stroke="currentColor" strokeWidth={2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
       </svg>
     </button>
@@ -290,8 +290,8 @@ export function Carousel({ slides }: { slides: CarouselSlideData[] }) {
   }, [current, slides]);
 
   return (
-    <div className="w-full flex flex-col items-center gap-8">
-      <div className="w-full relative overflow-hidden py-5">
+    <div className="w-full flex flex-col items-center">
+      <div className="w-full relative overflow-hidden ">
         <ul
           ref={carouselRef}
           className="flex items-center h-auto transition-transform duration-500 ease-in-out"

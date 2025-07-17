@@ -285,9 +285,9 @@ export default function Home() {
             setPointerText={setPointerText}
             setPointerVisible={setPointerVisible}
             menuPointerText="Something extraordinary is on this planet."
-            projectsPointerText="View out of this world creations."
-            aboutPointerText="Learn more about this host."
-            contactPointerText="Contact the creator."
+            projectsPointerText="Click to view out of this world creations."
+            aboutPointerText="Click to learn more about this host."
+            contactPointerText="Click to contact the creator."
           />
         </div>
       </main>

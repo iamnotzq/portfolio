@@ -66,8 +66,8 @@ export const MobileScroll = ({
               style={{ opacity: phoneFrameOpacity }}
               className="absolute inset-0"
             >
-              <div className="relative h-full w-full rounded-[2rem] bg-[#171717] p-1.5 shadow-2xl">
-                <div className="h-full w-full rounded-[1.8rem] bg-black"></div>
+              <div className="relative h-full w-full rounded-[1rem] bg-[#171717] p-1.5 shadow-2xl">
+                <div className="h-full w-full rounded-[1rem] bg-black"></div>
               </div>
             </motion.div>
 
@@ -79,7 +79,7 @@ export const MobileScroll = ({
               <img
                 src={src as string}
                 alt="Project Screenshot"
-                className="h-full w-full object-cover rounded-[1.8rem]"
+                className="h-full w-full object-cover rounded-[1rem]"
                 onError={(e) => {
                   e.currentTarget.src = `https://placehold.co/384x576/1F2937/FFFFFF?text=Image+Not+Found`;
                 }}

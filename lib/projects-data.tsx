@@ -71,11 +71,14 @@ export interface Learning {
 export interface DocumentationSection {
   title: string;
   description: string | React.ReactNode;
+  width?: string; // Optional: custom width for the content (e.g., '40rem')
+  height?: string; // Optional: custom height for the content (e.g., '30rem')
   content: {
       type: 'image' | 'code' | 'compare' | 'custom';
       props: any;
   };
 }
+
 
 // The main data structure for projects
 export interface ProjectData {
@@ -405,6 +408,634 @@ export const slideData: ProjectData[] = [
     ]
   },
   {
+    slug: "workforce-management-app",
+  title: "Workforce Management App",
+  description: "A custom-built mobile application for Props Factory to streamline workforce operations such as attendance tracking, payslip management, and project coordination.",
+  year: 2025,
+  role: "Full-Stack Developer & Product Designer",
+  techStack: [
+    "React Native (Expo)",
+    "EmailJS",
+    "Figma",
+    
+    
+    "Supabase (PostgreSQL)",
+    "Firebase Authentication",
+    
+    "Google Cloud Functions",
+    
+    "JavaScript",
+  ],
+  imageUrl: "/projects/workforceApp/homePage.jpg",
+  displayType: "mobile",
+  src: "/projects/workforceApp/features/thumbnail.jpg",
+  liveUrl: "#",
+  githubUrl: "#",
+  
+  overview: "I independently designed, developed, and deployed this mobile app to support day-to-day workforce operations at Props Factory. The app empowers staff to securely check in and out of work, view and download their payslips, submit claims and overtime, access their personal profiles and certifications, receive mobile notifications, and stay informed on ongoing project assignments. The system is fully integrated with a Supabase database and serverless functions via Google Cloud.",
+  
+  features: [
+    {
+      title: "Check-In & Check-Out System",
+      description: "Enables employees to log their attendance via a location-aware and timestamped interface, ensuring accurate tracking of work hours.",
+      icon: "IconClipboardText",
+      imageUrl: "/projects/workforceApp/features/checkIn.jpg",
+    },
+    {
+      title: "Payslip & Overtime Calculations",
+      description: "Automated payroll calculations including overtime, allowances, and deductions, with secure access to digital payslips.",
+      icon: "IconChartLine",
+      imageUrl: "/projects/workforceApp/features/payslip.jpg",
+    },
+    {
+      title: "Facial Recognition Integration",
+      description: "Integrated face recognition during check-in for added verification and improved accountability.",
+      icon: "IconAnalyze",
+      imageUrl: "/projects/workforceApp/homePage.jpg",
+    },
+    {
+      title: "Employee Profile Management",
+      description: "Staff can view and update their personal data, certifications, employment history, and role details through an intuitive interface.",
+      icon: "IconVaccine",
+      imageUrl: "/projects/workforceApp/features/profile.jpg",
+    },
+    {
+      title: "Real-Time Push Notifications",
+      description: "Utilized Firebase to send targeted alerts and reminders to employees for updates, check-in deadlines, or administrative actions.",
+      icon: "IconPill",
+      imageUrl: "/projects/workforceApp/features/notification.jpg",
+    },
+    {
+      title: "Project & Team Assignment View",
+      description: "Provides visibility into ongoing projects, assigned team members, and project timelines to keep staff informed and aligned.",
+      icon: "IconUsers",
+      imageUrl: "/projects/workforceApp/features/project.jpg",
+      }
+    ],
+    demoScreenshots: [
+      {
+          title: "Dashboard",
+          image: "/projects/workforceApp/dashboard.jpg",
+          className: "absolute top-10 left-[17%] rotate-[10deg]",
+      },
+      {
+          title: "Calendar",
+          image: "/projects/workforceApp/calendar.jpg",
+          className: "absolute top-24 left-[8%] rotate-[3deg]",
+      },{
+        title: "Certificates",
+        image: "/projects/workforceApp/certificates.jpg",
+        className: "absolute top-8 left-[42%] ",
+    },{
+      title: "History",
+      image: "/projects/workforceApp/history.jpg",
+      className: "absolute top-20 left-[33%] rotate-[-7deg]",
+  },{
+    title: "Home Page",
+    image: "/projects/workforceApp/homePage.jpg",
+    className: "absolute top-10 right-[16%] rotate-[4deg]",
+},{
+  title: "Payslip",
+  image: "/projects/workforceApp/payslip.jpg",
+  className: "absolute top-36 right-[8%] rotate-[-4deg]",
+},{
+  title: "Requests",
+  image: "/projects/workforceApp/requests.jpg",
+  className: "absolute top-12 right-[25%] rotate-[-3deg]",
+},{
+  title: "Projects",
+  image: "/projects/workforceApp/projects.jpg",
+  className: "absolute top-18 right-[32%] rotate-[3deg]",
+},{
+  title: "Timeline",
+  image: "/projects/workforceApp/timeline.jpg",
+  className: "absolute top-32 right-[40%] rotate-[-4deg]",
+},{
+  title: "Notification",
+  image: "/projects/workforceApp/notification.jpg",
+  className: "absolute top-28 left-[24%] rotate-[-1deg]",
+},
+    ],
+    learnings: [
+      {
+        quote:
+          "Despite designing with clear logic and conducting my own QA, I learned first-hand how crucial real-world user testing is—especially for non-technical users. Some actions I thought were intuitive turned out to be confusing for workers with less digital experience. Observing users helped me simplify flows, clarify layouts, and build in guardrails for easier navigation.",
+        name: "The Importance of Real-World Testing",
+        designation: "User Research & Feedback",
+        src: "/projects/workforceApp/homePage.jpg"
+      },
+      {
+        quote:
+          "This project pushed me to deeply explore cloud functions, scheduled tasks, and how to move heavy logic server-side to reduce app load. From calculating payslip summaries to auto-updating request statuses, I built scalable backend logic that interacted seamlessly with our UI and notification system.",
+        name: "Backend-First Thinking",
+        designation: "Cloud Functions & Server Logic",
+        src: "/projects/workforceApp/notification.jpg"
+      },
+      {
+        quote:
+          "Wearing two hats—developer and assistant project manager—gave me a rare opportunity to gather feedback directly from both ground workers and admins. This helped me make better decisions, from defining user roles and permissions to designing workflows that reflected real-world needs and minimized friction.",
+        name: "Bridging Tech and Operations",
+        designation: "Cross-Disciplinary Insight",
+        src: "/projects/workforceApp/projects.jpg"
+      }
+    ],
+    documentation: [
+      {
+        title: "Early Conceptualization & Research",
+        description: (
+          <>
+            I was tasked with designing a mobile application to completely replace manual processes for staff check-in/out and streamline payroll workflows, including base pay, overtime, allowances, and deductions. As development progressed, I expanded the app to support auxiliary features such as leave, off-day, and claim submissions. Recognizing the need for operational oversight, I later built an admin version of the app for supervisors to review and manage staff requests. Additionally, I introduced a project management module to help coordinate manpower assignments for events — providing visibility into ongoing projects and task allocations.
+          </>
+        ),
+        content: {
+          type: 'image',
+          props: {
+            src: "/projects/workforceApp/documentation/flow.png",
+            alt: "Initial Planning",
+            className: "h-full w-full object-contain"
+          }
+        },
+        width: "46rem",
+        height: "18rem"
+      },
+      {
+        title: "User-Centered Design & UX Planning",
+        description: (
+          <>
+            Many of our workers were older and from overseas, so I prioritized accessibility and simplicity. I designed a clean and intuitive layout, ensuring key tasks like check-in, claims, and payslip access were just one or two taps away. Given our event-based nature, I also factored in irregular work hours and built a flexible, configurable pay calculation system. All wireframes and logic diagrams were presented to stakeholders via Figma for early feedback.
+          </>
+        ),
+        content: {
+          type: 'compare',
+          props: {
+            firstImage: "/projects/workforceApp/documentation/wireframe.png",
+            secondImage: "/projects/workforceApp/documentation/homepage.jpg",
+            firstImageClassName: "object-cover ",
+            secondImageClassName: "object-cover ",
+            className: "h-full w-full rounded-lg",
+            slideMode: "hover"
+          },
+          
+        },
+        width: "15rem",
+        height: "35rem"
+      },
+      {
+        title: "Tech Architecture & Backend Setup",
+        description: (
+          <>
+            Based on the company's preference to leverage Google's ecosystem, I used Firebase for authentication, cloud functions, and storage. For more complex relational data needs, I integrated Supabase (PostgreSQL) — enabling structured schemas and triggers. I made heavy use of Supabase RPC (Remote Procedure Calls) and edge functions to shift complex calculations and business logic (e.g., payroll, request validation) to the backend. This approach kept the mobile app lightweight and performant, while ensuring centralized, secure processing of core operations.
+          </>
+        ),
+        content: {
+          type: 'code',
+          props: {
+            language: "sql",
+            filename: "get_checkin_data.sql",
+            code: `BEGIN
+  RETURN QUERY
+  SELECT
+    v.unique_id,
+    v."userId",
+    v.username,
+    v.checkin_location,
+    v."checkInTimestamp",
+    v."checkOutTimestamp",
+    v."locationName",
+    v."hasLunch",
+    v."hasDinner",
+    v.date,
+    v.month,
+    v.year,
+    v.day_of_week,
+    v.is_public_holiday,
+    v."verificationPhotoUrl",
+    v."canUpdate",
+    v.duration,
+    v.ot_hours,
+    v.unfulfilled_work_minutes,
+    v.scheduled_start
+  FROM public.checkinout_calculated v
+  WHERE
+    -- Filter by user ID only if p_user_id is provided (not NULL)
+    (p_user_id IS NULL OR v."userId" = p_user_id)
+    -- Always filter by month and year
+    AND v.month = p_month
+    AND v.year = p_year
+    -- Filter by date only if p_date is provided (not NULL)
+    AND (p_date IS NULL OR v.date = p_date)
+    -- Ensure both check-in and check-out timestamps exist
+    AND v."checkInTimestamp" IS NOT NULL
+  
+  ORDER BY
+    -- Adjust ordering based on whether user_id is provided
+    CASE WHEN p_user_id IS NOT NULL THEN v.date END DESC, -- Order by date if specific user
+    v."userId" ASC, -- Then by user ID if fetching for all users
+    v."checkInTimestamp" DESC; -- Finally by check-in time
+END;`,
+          }
+        }
+      },
+      {
+        title: "Core Features & Logic",
+        description: (
+          <>
+            The central feature is a GPS-based check-in/out system paired with facial recognition. To prevent abuse, the app enforces a location radius and verifies face presence — though we kept rules slightly lenient to avoid worker discomfort. I also designed a three-tier request system (Pending → Approved/Rejected) for claims, leave, and off-days. For payroll, I implemented logic to dynamically calculate monthly OT pay based on working days, weekends, and public holidays.
+          </>
+        ),
+        content: {
+          type: 'image',
+          props: {
+            src: "/projects/workforceApp/documentation/payslip.jpg",
+            alt: "Admin Tools",
+            className: "h-full w-full object-cover"
+          }
+        },
+        width: "16rem",
+        height: "34rem"
+      },
+      {
+        title: "Admin Dashboard & Project Tools",
+        description: (
+          <>
+            I developed a robust admin-facing app alongside the worker version. It includes a clean dashboard showing worker logs, a management system to approve or reject submissions, and tools to manage project timelines and expenses. The calendar view shows all project overlaps, while a drill-down list shows task progression and upcoming milestones. Admins can also create and assign tasks, attach documents like floorplans, and record project-specific expenses. All data was centralized in Google Cloud Storage for easy access.
+          </>
+        ),
+        content: {
+          type: 'image',
+          props: {
+            src: "/projects/workforceApp/documentation/dashboard.jpg",
+            alt: "Admin Tools",
+            className: "h-full w-full object-cover"
+          }
+        },
+        width: "16rem",
+        height: "34rem"
+      },
+      {
+        title: "Facial Detection & Role Access",
+        description: (
+          <>
+            Facial validation was implemented using <code>react-native-vision-camera</code> with a face detector plugin to ensure a real face was present during check-in. Photos were stored daily on Google Cloud for admin verification. Users were segmented via role-based logic using an <code>isAdmin</code> flag and project-user relationship tables. Row-Level Security (RLS) in Supabase ensured appropriate data filtering without custom policy bloat.
+          </>
+        ),
+        content: {
+          type: 'code',
+          props: {
+            language: "tsx",
+            filename: "CameraVerificationModal.tsx",
+            code: `// CameraVerificationModal.jsx
+import React, { useState, useRef, useCallback, useEffect, useMemo } from 'react'
+import { View, StyleSheet, Alert, Text, Platform } from 'react-native'
+import {
+  Modal,
+  Portal,
+  useTheme,
+  IconButton,
+  ActivityIndicator,
+  Icon,
+  Button as PaperButton,
+} from 'react-native-paper'
+
+// --- Vision Camera Imports ---
+import {
+  Camera,
+  useCameraDevice,
+  useFrameProcessor,
+} from 'react-native-vision-camera'
+import { useFaceDetector } from 'react-native-vision-camera-face-detector'
+import { Worklets } from 'react-native-worklets-core'
+
+// --- Constants for Auto-Capture ---
+const COUNTDOWN_SECONDS = 1 // A longer countdown for user readiness
+const YAW_ANGLE_THRESHOLD = 25 // Relaxed: Allows for more head turn
+const PITCH_ROLL_ANGLE_THRESHOLD = 25 // Relaxed: Allows for more head tilt
+const MIN_FACE_SIZE = 0.3 // Relaxed: Face can be further from the camera
+const EYE_OPEN_PROBABILITY_THRESHOLD = 0.4 // Relaxed: Less strict on eye-opening
+const STABILITY_COUNTER_MAX = 15 // The max value for our stability counter
+const STABILITY_LOCK_THRESHOLD = 5 // Lower threshold for a faster lock
+const STABILITY_UNLOCK_THRESHOLD = 2 // Lower threshold to prevent losing lock easily
+const DETECTION_TIMEOUT_SECONDS = 30 // A longer timeout for the verification process`
+     }
+        }
+      },
+      {
+        title: "Notifications, Request Tracking & Feedback Loop",
+        description: (
+          <>
+            I used Firebase Cloud Messaging (FCM) for real-time push notifications regarding request approvals or rejections. Workers could easily track their request history and see full state transitions, including who approved it, any notes, and attached files like receipts or payment proofs. I ran multiple field feedback sessions to test navigation, and small UI refinements were made for accessibility and ease of use — especially across different age groups and font settings.
+          </>
+        ),
+        content: {
+          type: 'code',
+          props: {
+            language: "js",
+            filename: "index.js",
+            code: `// functions/index.js
+async function sendPushNotifications(pushTokens, title, body, data = {}) {
+    const messages = [];
+    const validTokens = [];
+    // Filter out invalid tokens
+    for (const pushToken of pushTokens) {
+        if (!Expo.isExpoPushToken(pushToken)) {
+            logger.warn('Push token \${pushToken} is not a valid Expo push token');
+        } else {
+            validTokens.push(pushToken);
+        }
+    }
+    // Create messages for valid tokens
+    for (const pushToken of validTokens) {
+        messages.push({
+            to: pushToken,
+            sound: 'default',
+            title: title,
+            body: body,
+            data: data, // Pass additional data if needed
+            channelId: 'default', // Ensure channel exists on Android 8.0+
+        });
+    }
+    // Chunk and send notifications
+    const chunks = expo.chunkPushNotifications(messages);
+    logger.info('Sending \${messages.length} notifications in \${chunks.length} chunks.');
+    for (const chunk of chunks) {
+        try {
+            const tickets = await expo.sendPushNotificationsAsync(chunk);
+            logger.log("Sent chunk, tickets received:", tickets);
+            tickets.forEach((ticket, index) => {
+                if (ticket.status === 'error') {
+                    logger.error('Error sending notification to token \${chunk[index].to}: \${ticket.message}', ticket.details);
+                }
+            });
+        } catch (error) {
+            logger.error('Error sending push notification chunk:', error);
+        }
+    }
+}`
+     }
+        }
+      },
+      {
+        title: "UX Challenges & Iterative Improvements",
+        description: (
+          <>
+            One key challenge was presenting time-based data (e.g., shift start/end) compactly. I eventually drew inspiration from flight-tracking apps to visually represent time intervals. Another real-world case revealed a worker checking in without showing their face — prompting me to integrate facial detection, ensuring images had valid human faces before submission. These real-world test cases shaped app policies and improved overall system reliability.
+          </>
+        ),
+        content: {
+          type: 'image',
+          props: {
+            src: "/projects/workforceApp/documentation/history.jpg",
+            alt: "Admin Tools",
+            className: "h-full w-full object-cover"
+          }
+        },
+        width: "16rem",
+        height: "34rem"
+      },
+      {
+        title: "Testing & Real-World Optimization",
+        description: (
+          <>
+            I conducted usability testing with actual workers to ensure the app was intuitive across all age groups. One issue discovered was oversized text on certain devices due to user font settings — breaking layouts. I updated my styles to dynamically respond to font scaling and screen dimensions. These hands-on tests helped surface and solve practical edge cases before launch.
+          </>
+        ),
+        content: {
+          type: 'image',
+          props: {
+            src: "/projects/workforceApp/documentation/homePage.jpg",
+            alt: "Admin Tools",
+            className: "h-full w-full object-cover"
+          }
+        },
+        width: "16rem",
+        height: "34rem"
+      },
+      {
+        title: "Deployment & Auto Updates",
+        description: (
+          <>
+            I used Expo for development and managed separate builds for Android and iOS. For Android, I distributed APKs directly, while iOS testing was done via development builds. I implemented an auto-update mechanism using version files stored on Google Cloud. The app checks these files on launch and prompts users to download a new version when needed. For iOS, I researched and implemented internal enterprise distribution using provisioning certificates — allowing the app to be installed without publishing to the App Store.
+          </>
+        ),
+        content: {
+          type: 'code',
+          props: {
+            language: "jsx",
+            filename: "UpdateChecker.jsx",
+            code: `import React, { useState, useEffect } from 'react';
+import {
+  View,
+  Text,
+  Button,
+  Modal,
+  StyleSheet,
+  Linking,
+  Platform,
+  ActivityIndicator,
+  Alert,
+} from 'react-native';
+import * as Application from 'expo-application';
+import Constants from 'expo-constants'; // To get project version if needed
+
+// --- URL for the version.json file hosted on Firebase Cloud Storage ---
+const VERSION_INFO_URL =
+  'https://firebasestorage.googleapis.com/v0/b/propsfactoryapp.firebasestorage.app/o/app%2Fversions%2Fversion.json?alt=media&token=1f6886eb-cdd7-4670-8517-5f47fbaa87d5';
+
+// Function to compare versions 
+// Returns true if remoteVersion is newer than currentVersion
+const isUpdateAvailable = (currentVersion, remoteVersion) => {
+  if (!currentVersion || !remoteVersion) return false;
+  const currentParts = currentVersion.split('.').map(Number);
+  const remoteParts = remoteVersion.split('.').map(Number);
+  for (let i = 0; i < Math.max(currentParts.length, remoteParts.length); i++) {
+    const current = currentParts[i] || 0;
+    const remote = remoteParts[i] || 0;
+    if (remote > current) return true;
+    if (remote < current) return false;
+  }
+  return false;
+};
+
+
+const UpdateChecker = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [updateModalInfo, setUpdateModalInfo] = useState(null); // { version, downloadUrl, notes }
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  useEffect(() => {
+    const checkForUpdates = async () => {
+      setIsLoading(true);
+      console.log('Fetching version info from: \${VERSION_INFO_URL}');
+
+      try {
+        const currentVersion = Application.nativeApplicationVersion;
+        if (!currentVersion) {
+          console.warn('Could not get current application version.');
+          setIsLoading(false);
+          return;
+        }
+        console.log(
+          'Current app version: \${currentVersion} on Platform: \${Platform.OS}'
+        );
+
+        const response = await fetch(VERSION_INFO_URL, {
+          headers: {
+            'Cache-Control': 'no-cache',
+            Pragma: 'no-cache',
+            Expires: '0',
+          },
+        });
+
+        console.log('Fetch response status: \${response.status}');
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error(
+            'Fetch failed. Status: \${response.status}, Body: \${errorText}'
+          );
+          if (response.status === 403) {
+            Alert.alert(
+              'Update Check Failed',
+              'Permission denied fetching update information. Please check server configuration.'
+            );
+          } else {
+            Alert.alert("Update Check Failed", 'Could not check for updates (Status: \${response.status}).');
+          }
+          throw new Error('HTTP error! status: \${response.status}');
+        }
+
+        const allVersionInfo = await response.json();
+        console.log('All version info fetched:', allVersionInfo);
+
+        let platformSpecificInfo = null;
+        let downloadUrl = null;
+        let releaseNotes = allVersionInfo.commonReleaseNotes || ''; // Default to common notes
+
+        if (Platform.OS === 'android' && allVersionInfo.android) {
+          platformSpecificInfo = allVersionInfo.android;
+          downloadUrl = platformSpecificInfo.apkUrl;
+          if (platformSpecificInfo.releaseNotes)
+            releaseNotes = platformSpecificInfo.releaseNotes;
+        } else if (Platform.OS === 'ios' && allVersionInfo.ios) {
+          platformSpecificInfo = allVersionInfo.ios;
+          downloadUrl = platformSpecificInfo.manifestUrl; // For Ad Hoc, this is the itms-services link
+          if (platformSpecificInfo.releaseNotes)
+            releaseNotes = platformSpecificInfo.releaseNotes;
+        }
+
+        if (!platformSpecificInfo) {
+          console.log(
+            'No update information found for platform: \${Platform.OS}'
+          );
+          setIsLoading(false);
+          return;
+        }
+
+        console.log(
+          'Platform specific info for \${Platform.OS}:',
+          platformSpecificInfo
+        );
+
+        if (!platformSpecificInfo.latestVersion || !downloadUrl) {
+          console.error(
+            'Invalid version info format for \${Platform.OS}:',
+            platformSpecificInfo
+          );
+          setIsLoading(false);
+          return;
+        }
+
+        if (
+          isUpdateAvailable(currentVersion, platformSpecificInfo.latestVersion)
+        ) {
+          console.log(
+            'Update available for \${Platform.OS}: \${currentVersion} -> \${platformSpecificInfo.latestVersion}'
+          );
+          setUpdateModalInfo({
+            version: platformSpecificInfo.latestVersion,
+            downloadUrl: downloadUrl,
+            notes: releaseNotes,
+          });
+          setIsModalVisible(true);
+        } else {
+          console.log('App on \${Platform.OS} is up to date.');
+        }
+      } catch (error) {
+        console.error(
+          'Error checking for \${Platform.OS} updates:',
+          error.message,
+          error
+        );
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    // Delay the check slightly
+    const timerId = setTimeout(checkForUpdates, 2000);
+    return () => clearTimeout(timerId);
+  }, []);
+
+  const handleDownloadPress = () => {
+    if (updateModalInfo?.downloadUrl) {
+      console.log('Attempting to open URL: \${updateModalInfo.downloadUrl}');
+      Linking.openURL(updateModalInfo.downloadUrl).catch((err) => {
+        console.error('Failed to open URL:', err);
+        Alert.alert('Error', 'Could not open the update link.');
+      });
+      setIsModalVisible(false);
+    }
+  };
+
+  const handleLaterPress = () => {
+    setIsModalVisible(false);
+  };
+
+  if (!isModalVisible || !updateModalInfo) {
+    return null;
+  }
+
+  return (
+    <Modal
+      animationType="slide"
+      transparent={true}
+      visible={isModalVisible}
+      onRequestClose={handleLaterPress}
+    >
+      <View style={styles.centeredView}>
+        <View style={styles.modalView}>
+          <Text style={styles.modalTitle}>Update Available</Text>
+          <Text style={styles.modalText}>
+            A new version ({updateModalInfo.version}) is available.
+          </Text>
+          {updateModalInfo.notes && (
+            <>
+              <Text style={styles.releaseNotesTitle}>What's New:</Text>
+              <Text style={styles.releaseNotes}>{updateModalInfo.notes}</Text>
+            </>
+          )}
+          <Text style={styles.modalInfo}>
+            Press 'Download' to get the latest version.
+            {Platform.OS === 'android' &&
+              " You'll need to install it manually after downloading."}
+          </Text>
+          <View style={styles.buttonContainer}>
+            <Button title="Later" onPress={handleLaterPress} color="#777" />
+            <View style={{ width: 15 }} />
+            <Button title="Download" onPress={handleDownloadPress} />
+          </View>
+        </View>
+      </View>
+    </Modal>
+  );
+}
+
+export default UpdateChecker`,
+            highlightLines: [2, 3, 4],
+          }
+        }
+      },
+    ]
+  },{
     slug: "diabetes-management-app",
     title: "Nutriwise",
     description: "A mobile application for diabetics to manage their condition done for FYP.",
@@ -502,7 +1133,7 @@ export const slideData: ProjectData[] = [
           quote: "Mastered state management in React Native using Zustand for a performant experience.",
           name: "Efficient State Management",
           designation: "State Management",
-          src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          src: "",
       },
       {
           quote: "Learned to build complex, gesture-based interactions for mobile interfaces.",

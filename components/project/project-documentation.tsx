@@ -5,34 +5,43 @@ import { DocumentationSection } from "@/lib/projects-data";
 
 interface ProjectDocumentationProps {
     documentation: DocumentationSection[];
+    // The 'displayType' prop is no longer needed as dimensions are data-driven.
 }
 
 // Helper function to render content based on type
-const renderContent = (item: DocumentationSection) => {
+const renderContent = (item: DocumentationSection): ContentItem['content'] => {
     const { type, props } = item.content;
 
-    // This is a special case to handle the 'text' type.
-    // It renders a simple styled div for plain text content.
-    if (type === 'text' && props.text) {
-        return (
-            <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white text-2xl font-bold p-4 rounded-lg">
-                {props.text}
-            </div>
-        );
+    // This is a special case to handle a simple 'text' prop.
+    // It formats it into a 'custom' content type for StickyScroll.
+    if (props.text) {
+        return {
+            type: 'custom',
+            props: {
+                content: (
+                    <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white text-2xl font-bold p-4 rounded-lg">
+                        {props.text}
+                    </div>
+                )
+            }
+        };
     }
 
-    // For other types, we assume the StickyScroll component's internal logic
-    // can handle them based on the 'type' and 'props'.
-    return { type, props };
+    // For other types, we pass them through directly.
+    // We assert the type to match what StickyScroll expects.
+    return { type, props } as ContentItem['content'];
 };
 
 
 const ProjectDocumentation = ({ documentation }: ProjectDocumentationProps) => {
   
-  // We map the documentation data to the format expected by StickyScroll's ContentItem
+  // We map the documentation data to the format expected by StickyScroll's ContentItem,
+  // now including the optional width and height properties.
   const content: ContentItem[] = documentation.map(docItem => ({
     title: docItem.title,
     description: docItem.description,
+    width: docItem.width,
+    height: docItem.height,
     content: renderContent(docItem)
   }));
 
@@ -53,6 +62,7 @@ const ProjectDocumentation = ({ documentation }: ProjectDocumentationProps) => {
 
        
         <div className="relative z-10 ">
+            {/* The displayType prop has been removed from StickyScroll */}
             <StickyScroll content={content} />
         </div>
     </section>

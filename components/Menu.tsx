@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useMemo, useState } from 'react';
+import React, { useRef, useMemo, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useMotionTemplate, useMotionValue } from 'framer-motion';
 import {
     IconBriefcase,
@@ -335,7 +335,7 @@ const ContactContent = () => {
 
 
 const ProjectsContent = () => (
-    <div className="h-full w-full flex flex-col justify-start items-center overflow-hidden py-4 md:py-8 ">
+    <div className="h-full w-full flex flex-col justify-start items-center py-4 md:py-8">
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -387,10 +387,28 @@ const Menu = ({
         target: ref,
         offset: ["start end", "start start"]
     });
-    const opacity = useTransform(scrollYProgress, [0.8, 0.9, 1], [0, 0.9,1]);
-    const scale = useTransform(scrollYProgress, [0.8, 0.9, 1], [0, 0.9, 1]);
-    const pointerEvents = useTransform(scrollYProgress, (v) => (v > 0.7 ? "auto" : "none"));
+    const opacity = useTransform(scrollYProgress, [0.7,0.8, 0.9, 1], [0,0.9, 1,1]);
+    const scale = useTransform(scrollYProgress, [0.7, 0.8, 0.9, 1], [0,0.9, 1, 1]);
+    const pointerEvents = useTransform(scrollYProgress, (v) => (v > 0.5 ? "auto" : "none"));
     
+    // --- SCROLL LOCK LOGIC ---
+    // This effect handles the body scroll lock when the 'about' panel is open.
+    useEffect(() => {
+        // When the 'about' section is expanded, prevent the body from scrolling.
+        if (activeItem === 'about') {
+            document.body.style.overflow = 'hidden';
+        } else {
+            // Re-enable body scrolling when the 'about' section is closed or another item is active.
+            document.body.style.overflow = 'auto';
+        }
+
+        // Cleanup function to ensure body scrolling is restored when the component unmounts.
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [activeItem]); // This effect runs whenever activeItem changes.
+
+
     // Memoized menu items configuration
     const menuItems = useMemo(() => [
         {
