@@ -84,8 +84,8 @@ export const BackgroundBeams = React.memo(
               key={`path-${index}`}
               d={path}
               stroke={`url(#gradient-${index})`}
-              strokeWidth="1"
-              strokeOpacity="0.3" 
+              strokeWidth="5"
+              strokeOpacity="0.05" 
             />
           ))}
           <defs>

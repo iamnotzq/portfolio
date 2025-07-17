@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { SparklesCore } from "@/components/ui/sparkles";
 import { AnimatePresence, motion } from "motion/react";
 import { cn } from "@/lib/utils";
-import { IconDotsVertical } from "@tabler/icons-react";
 
 interface CompareProps {
   firstImage?: string;
@@ -18,8 +17,8 @@ interface CompareProps {
   autoplayDuration?: number;
 }
 export const Compare = ({
-  firstImage = "",
-  secondImage = "",
+  firstImage = "https://placehold.co/400x400/000000/FFFFFF?text=Before",
+  secondImage = "https://placehold.co/400x400/FFFFFF/000000?text=After",
   className,
   firstImageClassName,
   secondImageClassName,
@@ -150,10 +149,10 @@ export const Compare = ({
   return (
     <div
       ref={sliderRef}
-      className={cn("w-[400px] h-[400px] overflow-hidden", className)}
+      className={cn("w-[400px] h-[400px] overflow-hidden rounded-2xl", className)}
       style={{
         position: "relative",
-        cursor: slideMode === "drag" ? "grab" : "col-resize",
+        cursor: slideMode === "drag" ? (isDragging ? "grabbing" : "grab") : "col-resize",
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={mouseLeaveHandler}
@@ -166,7 +165,7 @@ export const Compare = ({
     >
       <AnimatePresence initial={false}>
         <motion.div
-          className="h-full w-px absolute top-0 m-auto z-30 bg-gradient-to-b from-transparent from-[5%] to-[95%] via-indigo-500 to-transparent"
+          className="h-full w-px absolute top-0 m-auto z-30 bg-gradient-to-b from-transparent from-[5%] to-[95%] via-red-500 to-transparent"
           style={{
             left: `${sliderXPercent}%`,
             top: "0",
@@ -174,8 +173,8 @@ export const Compare = ({
           }}
           transition={{ duration: 0 }}
         >
-          <div className="w-36 h-full [mask-image:radial-gradient(100px_at_left,white,transparent)] absolute top-1/2 -translate-y-1/2 left-0 bg-gradient-to-r from-indigo-400 via-transparent to-transparent z-20 opacity-50" />
-          <div className="w-10 h-1/2 [mask-image:radial-gradient(50px_at_left,white,transparent)] absolute top-1/2 -translate-y-1/2 left-0 bg-gradient-to-r from-cyan-400 via-transparent to-transparent z-10 opacity-100" />
+          <div className="w-36 h-full [mask-image:radial-gradient(100px_at_left,white,transparent)] absolute top-1/2 -translate-y-1/2 left-0 bg-gradient-to-r from-red-200 via-transparent to-transparent z-20 opacity-50" />
+          <div className="w-10 h-1/2 [mask-image:radial-gradient(50px_at_left,white,transparent)] absolute top-1/2 -translate-y-1/2 left-0 bg-gradient-to-r from-red-800 via-transparent to-transparent z-10 opacity-100" />
           <div className="w-10 h-3/4 top-1/2 -translate-y-1/2 absolute -right-10 [mask-image:radial-gradient(100px_at_left,white,transparent)]">
             <MemoizedSparklesCore
               background="transparent"
@@ -187,8 +186,16 @@ export const Compare = ({
             />
           </div>
           {showHandlebar && (
-            <div className="h-5 w-5 rounded-md top-1/2 -translate-y-1/2 bg-white z-30 -right-2.5 absolute   flex items-center justify-center shadow-[0px_-1px_0px_0px_#FFFFFF40]">
-              <IconDotsVertical className="h-4 w-4 text-black" />
+            <div className="h-32 w-8 rounded-lg top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-sm z-30 -right-4 absolute flex items-center justify-center shadow-lg cursor-pointer border border-red-600">
+              <div
+                className="text-red-600 text-xs font-bold tracking-wider uppercase"
+                style={{
+                  writingMode: "vertical-rl",
+                  transform: "rotate(180deg)",
+                }}
+              >
+                Hover to slide
+              </div>
             </div>
           )}
         </motion.div>
@@ -210,7 +217,7 @@ export const Compare = ({
                 alt="first image"
                 src={firstImage}
                 className={cn(
-                  "absolute inset-0  z-20 rounded-2xl shrink-0 w-full h-full select-none",
+                  "absolute inset-0 z-20 rounded-2xl shrink-0 w-full h-full select-none object-cover",
                   firstImageClassName
                 )}
                 draggable={false}
@@ -224,7 +231,7 @@ export const Compare = ({
         {secondImage ? (
           <motion.img
             className={cn(
-              "absolute top-0 left-0 z-[19]  rounded-2xl w-full h-full select-none",
+              "absolute top-0 left-0 z-[19] rounded-2xl w-full h-full select-none object-cover",
               secondImageClassName
             )}
             alt="second image"
@@ -237,4 +244,20 @@ export const Compare = ({
   );
 };
 
+// NOTE: The following are placeholder/mock implementations for dependencies
+// to make this component runnable. You should use your actual project's
+// implementations.
+
 const MemoizedSparklesCore = React.memo(SparklesCore);
+
+function SparklesCore({
+  background,
+  minSize,
+  maxSize,
+  particleDensity,
+  className,
+  particleColor,
+}: any) {
+  // This is a mock component. In your project, you'd use the real SparklesCore.
+  return <div className={cn("w-full h-full", className)} />;
+}
