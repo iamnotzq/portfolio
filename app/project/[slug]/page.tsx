@@ -92,7 +92,7 @@ export default function ProjectPage() {
       {/* Render the main content only when the project data is loaded */}
       {project && (
         <div className="bg-transparent text-white w-full min-h-screen">
-          <div className="fixed inset-0 -z-30 bg-black"></div>
+          <div className="fixed inset-0 -z-30 bg-green-950 opacity-30"></div>
 
           <BackgroundGradientAnimation
             gradientBackgroundStart="rgb(0, 10, 5)"
@@ -102,7 +102,7 @@ export default function ProjectPage() {
             thirdColor="5, 100, 120"
             fourthColor="50, 255, 150"
             fifthColor="0, 150, 80"
-            containerClassName="fixed inset-0 -z-20 opacity-20"
+            containerClassName="fixed inset-0 -z-20 opacity-10"
             interactive={false}
           />
           

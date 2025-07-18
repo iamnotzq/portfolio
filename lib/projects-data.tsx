@@ -13,10 +13,7 @@ import {
 } from "@tabler/icons-react";
 import React from "react";
 
-/**
-* You can add or remove icons here and reference them by name in the project data.
-* This makes it easy to manage icons without touching the component code.
-*/
+
 export const ICONS: { [key: string]: React.ReactNode } = {
   IconClipboardCopy: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
   IconFileBroken: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
@@ -60,14 +57,7 @@ export interface Learning {
   src: string;
 }
 
-/**
-* Defines the structure for a documentation section in the StickyScroll component.
-* The `content` property can be one of four types:
-* - 'image': Displays a single image.
-* - 'code': Displays a formatted code block with syntax highlighting.
-* - 'compare': Displays a before-and-after image comparison slider.
-* - 'custom': Renders any custom JSX content.
-*/
+
 export interface DocumentationSection {
   title: string;
   description: string | React.ReactNode;
@@ -192,45 +182,52 @@ export const slideData: ProjectData[] = [
     liveUrl: "#",
     githubUrl: "#",
 
-    overview: "I believe a portfolio should be more than a static list of accomplishments; it should tell a story. With this project, I set out to create a narrative-driven journey that departs from traditional portfolio websites. The goal was to build an immersive experience that captivates visitors through interactive 3D elements and fluid animations, guiding them through my professional story. While the presentation is designed to be engaging, the core content—my projects, skills, and experiences—remains easily accessible, allowing you to dive into the details that matter most.",
+    overview: "I believe a portfolio should be more than a static list of accomplishments, it should tell a story. With this project, I set out to build a narrative-driven experience that departs from traditional portfolio sites. The goal was to create an immersive journey through interactive 3D visuals, scroll-triggered animations, and a layout that evolves as the user explores. These elements are brought to life using Next.js, React, TypeScript , Tailwind CSS, and a customized animation system powered by Framer Motion. The entire site is fully responsive, modularly architected, and deployed via Vercel with integrated performance analytics and error tracking through Sentry. Despite the rich visual experience, the site maintains clarity and accessibility, ensuring that visitors can easily explore my projects, skills, and technical capabilities.",
     features: [
       {
-          title: "Interactive 3D Globe",
-          description: "A fully interactive 3D globe built with Three.js and React Three Fiber, inviting user exploration.",
-          icon: "IconAnalyze",
-          imageUrl: "/projects/portfolioWebsite/globe.png",
+        title: "3D Interactive Globe",
+        description:
+          "An interactive 3D globe built using Three.js and React Three Fiber. Designed for smooth camera transitions and minimal GPU load.",
+        icon: "IconGlobe",
+        imageUrl: "/projects/portfolioWebsite/globe.png",
       },
       {
-          title: "Scroll-Based Animations",
-          description: "Leveraging Framer Motion to create smooth, scroll-triggered animations that guide the user.",
-          icon: "IconChartLine",
-          imageUrl: "/projects/portfolioWebsite/laptop.png",
+        title: "Framer Motion + Scroll UX",
+        description:
+          "Customized scroll-based animations and transitions powered by Framer Motion. Enhances engagement while maintaining performance across devices.",
+        icon: "IconScrollText",
+        imageUrl: "/projects/portfolioWebsite/laptop.png",
       },
       {
-          title: "Component-Based Architecture",
-          description: "Built with a modular and reusable component structure in Next.js for maintainability and scalability.",
-          icon: "IconTableColumn",
-          imageUrl: "/projects/portfolioWebsite/laptop.png",
+        title: "Modular Component Architecture",
+        description:
+          "Built entirely in React and Next.js using a modular, reusable component architecture. Enables clean separation and scalable feature development.",
+        icon: "IconLayers",
+        imageUrl: "/projects/portfolioWebsite/timeline.png",
       },
       {
-        title: "Live Code Previews",
-        description: "An integrated code viewer with syntax highlighting to showcase the underlying implementation.",
-        icon: "IconClipboardText",
+        title: "Live Code Showcases",
+        description:
+          "Embedded live previews with syntax-highlighted code blocks to present how key components are built and styled, showcasing technical clarity and transparency.",
+        icon: "IconCode",
         imageUrl: "/projects/portfolioWebsite/documentation.png",
       },
       {
-          title: "Engaging UI Components",
-          description: "A collection of custom-built, interactive components designed to enhance user engagement.",
-          icon: "IconUsers",
-          imageUrl: "/projects/portfolioWebsite/laptop.png",
+        title: "Responsive, Tailored UI",
+        description:
+          "Fully responsive design crafted with Tailwind CSS, custom breakpoints, and layout adjustments. Optimized for touch interactions and accessibility.",
+        icon: "IconDeviceMobile",
+        imageUrl: "/projects/portfolioWebsite/laptop.png",
       },
       {
-          title: "Fully Responsive Design",
-          description: "Meticulously crafted for a seamless and visually consistent experience across all devices.",
-          icon: "IconSignature",
-          imageUrl: "/projects/portfolioWebsite/laptop.png",
+        title: "Optimized Performance & Monitoring",
+        description:
+          "Deployed on Vercel with built-in analytics and real-time error tracking via Sentry. Features optimized asset loading, lazy imports, and animation throttling.",
+        icon: "IconGauge",
+        imageUrl: "/projects/portfolioWebsite/loading.png",
       },
     ],
+    
     demoScreenshots: [
       {
           title: "Home Page",
@@ -277,31 +274,27 @@ export const slideData: ProjectData[] = [
     ],
     learnings: [
       {
-          quote: "A key challenge was managing the performance of numerous animations and complex user interactions, including scroll-based triggers and pointer events. To address this, I implemented themed loading screens that not only prevent content flashing but also enhance the narrative experience.",
-          name: "Optimizing Performance & User Experience",
-          designation: "Performance & UX",
-          src: "/projects/portfolioWebsite/loading.png",
+        quote: "A key challenge was balancing scroll-based and pointer-driven animations without degrading performance. I customized Framer Motion and implemented a themed loader to prevent layout shifts and improve perceived speed, all validated via Vercel's performance insights.",
+        name: "Optimizing Performance & User Experience",
+        designation: "Framer Motion & Loading Strategy",
+        src: "/projects/portfolioWebsite/loading.png"
       },
       {
-          quote: "For the documentation, the goal was to present technical information without overwhelming the user. I developed a sectioned layout using custom components to showcase code snippets and visual comparisons, effectively breaking down complex topics into digestible parts.",
-          name: "Crafting Clear Technical Documentation",
-          designation: "Component-Driven Documentation",
-          src: "/projects/portfolioWebsite/documentation.png",
-      },
+        quote: "I wanted the documentation to be technical yet approachable. By designing custom components for code snippets, comparisons, and interactive media, I created a structure that makes in-depth content easier to navigate and absorb.",
+        name: "Crafting Clear Technical Documentation",
+        designation: "Component-Driven Documentation",
+        src: "/projects/portfolioWebsite/documentation.png"
+      }
     ],
     documentation: [
+      
       {
         title: "Early Conceptualization",
         description: (
           <>
-            The primary goal was to create a portfolio that transcended a static
-            layout, offering an{" "}
-            <strong>interactive, narrative-driven experience</strong>. I aimed to
-            showcase my skills in web and mobile application design through a{" "}
-            <strong>captivating user journey</strong>. The initial phase involved
-            conceptualizing the <strong>user flow and page structure</strong>,
-            which served as the <strong>foundational blueprint</strong> for the
-            site's architecture.
+            The primary goal was to create a portfolio that transcended a static layout, offering an{" "}
+            <strong>interactive, narrative-driven experience</strong>. I began by outlining the{" "}
+            <strong>user journey and information architecture</strong>, which informed both design and technical planning. This step ensured a coherent and intuitive flow from the landing page to project detail pages.
           </>
         ),
         content: {
@@ -310,19 +303,16 @@ export const slideData: ProjectData[] = [
             src: "/projects/portfolioWebsite/homeFlow.png",
             className: "h-full w-full object-fit object-left-top"
           }
-      }
-      },{
+        },
+        width: "45rem",
+        height: "20rem"
+      },
+      {
         title: "Design & Prototyping",
         description: (
           <>
-            Using Figma, I designed the{" "}
-            <strong>complete user interface and experience</strong>, mapping out
-            the <strong>visual flow and component interactions</strong>. The
-            design process was grounded in the{" "}
-            <strong>technical foundation of Next.js and React</strong>,
-            leveraging my prior experience from building the Props Factory
-            corporate website to ensure a{" "}
-            <strong>practical and performant implementation</strong>.
+            Designed entirely in Figma, the portfolio UI emphasizes clarity, flow, and engagement. I mapped out <strong>component-level interactions</strong> and planned for responsiveness across breakpoints. The visual design was guided by a strong understanding of{" "}
+            <strong>React componentization</strong>, ensuring design fidelity during development.
           </>
         ),
         content: {
@@ -335,44 +325,58 @@ export const slideData: ProjectData[] = [
             className: "h-full w-full rounded-lg",
             slideMode: "hover"
           }
-      }
-    },{
-      title: "Technical Architecture",
-      description: (
-        <>
-          The site is built on a <strong>component-based architecture</strong>{" "}
-          using Next.js and React, ensuring{" "}
-          <strong>modularity and future scalability</strong>. To optimize
-          performance, I leveraged Next.js's capabilities for both{" "}
-          <strong>client-side and server-side rendering</strong>. The codebase
-          is organized into <strong>distinct sections for improved
-          maintainability</strong> and cleaner code.
-        </>
+        },
+        width: "45rem",
+        height: "25rem"
+      },
+      {
+        title: "Technical Architecture",
+        description: (
+          <>
+            Built with Next.js and React, the site follows a component-driven architecture with a strong focus on maintainability and reusability. Both the homepage and project pages are rendered entirely on the client side to support rich interactivity, including scroll-based animations, pointer events, and context-driven transitions. This architecture allows for a highly dynamic user experience while keeping the code modular and easy to scale. The application is structured by feature, enabling clean separation of concerns and faster development cycles.          </>
         ),
-      
-      content: {
-        type: 'code',
-        props: {
-          language: "tsx",
-          filename: "project/[slug]/page.tsx",
-          code: projectPageCode,
-          highlightLines: [1, 10, 11],
+        content: {
+          type: 'code',
+          props: {
+            language: "tsx",
+            filename: "project/[slug]/page.tsx",
+            code: projectPageCode,
+            highlightLines: [1, 10, 11]
+          }
         }
-    }
+      },
+      {
+        title: "Custom Animation System",
+        description: (
+          <>
+            I integrated and customized <strong>Framer Motion</strong> to deliver a{" "}
+            <strong>narrative-driven experience</strong>. Animations are orchestrated using{" "}
+            <strong>scroll triggers, pointer-based events, and viewport transitions</strong>, all tuned
+            for responsiveness and performance.
+            <br /><br />
+            To enhance perceived performance and prevent layout shifts, I built a{" "}
+            <strong>custom-themed loading screen</strong> aligned with the site’s visual language.
+            This solution was informed by runtime performance metrics from <strong>Vercel's analytics dashboard</strong>,
+            helping ensure the smoothest UX possible across devices.
+          </>
+        ),
+        content: {
+          type: 'image',
+          props: {
+            src: "/projects/portfolioWebsite/loading.png",
+            className: "h-full w-full object-fit object-left-top"
+          }
+        },
+        width: "42rem",
+        height: "20rem"
       },
       {
         title: "Core Features & UX",
         description: (
           <>
-            To avoid endless scrolling, the homepage features a unique{" "}
-            <strong>panel-based navigation system</strong> below the hero
-            section. This design choice aligns with the site's narrative: as the
-            user scrolls, they 'descend' towards the planet, revealing an{" "}
-            <strong>interactive world map</strong>. From here, users can select
-            a project, triggering a <strong>'data stream' transition</strong>{" "}
-            into the project page. This thematic approach ensures a{" "}
-            <strong>clear and engaging path</strong> to the core content, with
-            each project page providing a <strong>detailed technical breakdown</strong>.
+            A unique <strong>panel-based navigation system</strong> guides the user through the experience without traditional scrolling fatigue. After the hero section, the interface simulates a descent into a digital "world map" from which users can explore projects.
+            <br /><br />
+            Selecting a project triggers a <strong>contextual 'data stream' animation</strong>, providing visual continuity and reinforcing the site's sci-fi narrative. Each project page then reveals a <strong>layered technical breakdown</strong>.
           </>
         ),
         content: {
@@ -381,31 +385,50 @@ export const slideData: ProjectData[] = [
             src: "/projects/portfolioWebsite/map.png",
             className: "h-full w-full object-fit"
           }
-      }
-    },
-      
-      {
-          title: "Deployment",
-          description: (
-            <>
-              The portfolio is <strong>deployed and hosted on Vercel</strong>,
-              chosen for its <strong>seamless integration with Next.js</strong>,{" "}
-              <strong>robust CI/CD pipeline</strong>, and analytics tools. For{" "}
-              <strong>proactive error monitoring and debugging</strong>, I
-              integrated <strong>Sentry to track and analyze bugs</strong> and
-              crashes in real-time.
-            </>
-          ),
-          content: {
-            type: 'image',
-            props: {
-              src: "/projects/portfolioWebsite/about.png",
-              className: "h-full w-full object-fit object-left-top"
-            }
-        }
+        },
+        width: "42rem",
+        height: "20rem"
       },
-      
-    ]
+      {
+        title: "Responsive Design Strategy",
+        description: (
+          <>
+            I used <strong>Tailwind CSS</strong> to build a mobile-responsive layout tailored for
+            <strong> touch-based interactions and scroll-based animations</strong>. Components were
+            designed with utility-first classes and conditionally styled based on screen size breakpoints.
+            <br /><br />
+            Special care was taken to optimize tap targets, viewport animations, and content legibility
+            on small screens, ensuring a <strong>frictionless experience across devices</strong>.
+          </>
+        ),
+        content: {
+          type: 'image',
+          props: {
+            src: "/projects/portfolioWebsite/map.png",
+            className: "h-full w-full object-fit"
+          }
+        },
+        width: "42rem",
+        height: "20rem"
+      },
+      {
+        title: "Deployment & Monitoring",
+        description: (
+          <>
+            The site is <strong>deployed on Vercel</strong>, enabling zero-config CI/CD with instant rollbacks. For observability, I integrated <strong>Sentry</strong> to monitor errors in real-time, as well as <strong>Vercel Analytics</strong> to track page load times and user interaction hotspots.
+          </>
+        ),
+        content: {
+          type: 'image',
+          props: {
+            src: "/projects/portfolioWebsite/about.png",
+            className: "h-full w-full object-fit object-left-top"
+          }
+        },
+        width: "42rem",
+        height: "20rem"
+      },
+    ],
   },
   {
     slug: "workforce-management-app",
@@ -432,44 +455,44 @@ export const slideData: ProjectData[] = [
   liveUrl: "#",
   githubUrl: "#",
   
-  overview: "I independently designed, developed, and deployed this mobile app to support day-to-day workforce operations at Props Factory. The app empowers staff to securely check in and out of work, view and download their payslips, submit claims and overtime, access their personal profiles and certifications, receive mobile notifications, and stay informed on ongoing project assignments. The system is fully integrated with a Supabase database and serverless functions via Google Cloud.",
+  overview: "I independently designed, built, and deployed this mobile-first workforce management app for Props Factory to modernize daily operations and eliminate paper-based workflows. Tailored for a diverse and largely non-technical workforce, the app allows employees to check in/out securely using GPS and facial recognition, view payslips, submit claims and overtime, access project assignments, and manage their profiles. Real-time notifications, streamlined approvals, and role-based access controls help align workers and supervisors on key tasks. The system is powered by Supabase (PostgreSQL) for structured data and Google Cloud for serverless backend logic, media storage, and auto-deploy infrastructure. Firebase Cloud Messaging enables instant alerts, while cloud functions and RPCs handle critical logic like payroll calculations and request status updates. The result is a highly optimized, maintainable app aligned with real-world workflows and tested directly with field staff.",
   
   features: [
     {
-      title: "Check-In & Check-Out System",
-      description: "Enables employees to log their attendance via a location-aware and timestamped interface, ensuring accurate tracking of work hours.",
+      title: "GPS & Facial Recognition Check-In",
+      description: "Employees check in and out via a location-verified interface and facial recognition, with a degree of flexibility to ensure usability.",
       icon: "IconClipboardText",
       imageUrl: "/projects/workforceApp/features/checkIn.jpg",
     },
     {
-      title: "Payslip & Overtime Calculations",
-      description: "Automated payroll calculations including overtime, allowances, and deductions, with secure access to digital payslips.",
+      title: "Payslip, Overtime & Claim Automation",
+      description: "The app dynamically calculates their monthly pay. Workers can securely view payslips and submit claims, while backend logic ensures accuracy and auditability.",
       icon: "IconChartLine",
       imageUrl: "/projects/workforceApp/features/payslip.jpg",
     },
     {
-      title: "Facial Recognition Integration",
-      description: "Integrated face recognition during check-in for added verification and improved accountability.",
+      title: "Profile & Certification Management",
+      description: "Employees can manage personal details, view roles and history. Changes are reflected instantly across dashboards, scoped by permission logic.",
       icon: "IconAnalyze",
-      imageUrl: "/projects/workforceApp/homePage.jpg",
-    },
-    {
-      title: "Employee Profile Management",
-      description: "Staff can view and update their personal data, certifications, employment history, and role details through an intuitive interface.",
-      icon: "IconVaccine",
       imageUrl: "/projects/workforceApp/features/profile.jpg",
     },
     {
+      title: "Project & Assignment Dashboard",
+      description: "Admins use a powerful dashboard to assign tasks, upload plans, and track expense logs, reducing miscommunication and manual coordination.",
+      icon: "IconVaccine",
+      imageUrl: "/projects/workforceApp/features/project.jpg",
+    },
+    {
       title: "Real-Time Push Notifications",
-      description: "Utilized Firebase to send targeted alerts and reminders to employees for updates, check-in deadlines, or administrative actions.",
+      description: "Integrated with Firebase Cloud Messaging, the system sends targeted push alerts for approvals, shift reminders, or urgent updates.",
       icon: "IconPill",
       imageUrl: "/projects/workforceApp/features/notification.jpg",
     },
     {
-      title: "Project & Team Assignment View",
-      description: "Provides visibility into ongoing projects, assigned team members, and project timelines to keep staff informed and aligned.",
+      title: " Submission Workflow & Approval Tracking",
+      description: "A tiered approval system for edits, claims, leave, and off-days includes full traceability: status history, approver identity, remarks, and attachments.",
       icon: "IconUsers",
-      imageUrl: "/projects/workforceApp/features/project.jpg",
+      imageUrl: "/projects/workforceApp/features/requests.jpg",
       }
     ],
     demoScreenshots: [
@@ -1048,122 +1071,149 @@ export default UpdateChecker`,
     liveUrl: "#",
     githubUrl: "#",
  
-    overview: "Nutriwise addresses the critical need for active diabetes management by providing an intuitive mobile app. Since there is no cure, empowering users with the right tools is the only viable solution. As Project Lead, I spearheaded the UI/UX design, guided the development team, architected the database, and led research and documentation to ensure the app was both effective and user-friendly.",
+    overview: "Nutriwise is a mobile app developed as part of my Final Year Project (FYP), aimed at tackling the critical need for active diabetes self-management. With no known cure for the condition, empowering users with the right tools is essential. The app enables users to log meals, monitor glucose levels, manage insulin intake, and stay connected with a supportive community. As Project Lead, I oversaw the UI/UX design, guided the development process, architected the backend database, and conducted in-depth user and market research to ensure the app was both effective and user-friendly."
+,
     features: [
       {
-          title: "Effortless Food Logging",
-          description: "Quickly log meals by searching our comprehensive food database or adding custom entries to track nutritional intake.",
-          icon: "IconClipboardText",
-          imageUrl: "/projects/nutriwise/features/foodRecording.jpg",
+        title: "Effortless Food Logging",
+        description: "Log meals with ease using our built-in food database or by adding custom entries—track your nutritional intake accurately and quickly.",
+        icon: "IconClipboardText",
+        imageUrl: "/projects/nutriwise/features/foodRecording.jpg",
       },
       {
-          title: "Blood Glucose Tracking",
-          description: "Seamlessly record and monitor blood glucose levels to identify patterns and stay in control.",
-          icon: "IconChartLine",
-          imageUrl: "/projects/nutriwise/features/glucoseTracking.jpg",
+        title: "Blood Glucose Tracking",
+        description: "Easily record blood glucose levels and monitor trends over time to maintain better control of your condition.",
+        icon: "IconChartLine",
+        imageUrl: "/projects/nutriwise/features/glucoseTracking.jpg",
       },
       {
-          title: "Data-Driven Analysis",
-          description: "Gain valuable insights through clear, visual summaries of your blood glucose and food intake trends.",
-          icon: "IconAnalyze",
-          imageUrl: "/projects/nutriwise/features/dataAnalysis.jpg",
-      },{
+        title: "Data-Driven Analysis",
+        description: "Understand your progress through clear, visual summaries of your food and glucose data, helping you make informed health decisions.",
+        icon: "IconAnalyze",
+        imageUrl: "/projects/nutriwise/features/dataAnalysis.jpg",
+      },
+      {
         title: "Smart Insulin Dosing",
-        description: "Receive intelligent insulin dosage recommendations based on your blood glucose readings and food intake.",
+        description: "Get insulin dosage suggestions based on your latest glucose readings and meal data, helping reduce guesswork in your daily routine.",
         icon: "IconVaccine",
         imageUrl: "/projects/nutriwise/features/insulinDosing.jpg",
-      },{
+      },
+      {
         title: "Medication Management",
-        description: "Log your insulin intake and manage your medication schedule with timely reminders.",
+        description: "Track insulin injections and manage your medication schedule with helpful logging tools and timely reminders.",
         icon: "IconPill",
         imageUrl: "/projects/nutriwise/features/medicationManagement.png",
-      },{
+      },
+      {
         title: "Community & Events",
-        description: "Connect with others, share experiences, and find local events and support groups to stay motivated on your health journey.",
+        description: "Stay connected by joining events and support groups. Share experiences and find motivation alongside others managing diabetes.",
         icon: "IconUsers",
         imageUrl: "/projects/nutriwise/features/communityEvents.jpg",
       }
     ],
+    
     demoScreenshots: [
       {
           title: "Dashboard",
           image: "/projects/nutriwise/nutri2.jpg",
-          className: "absolute top-10 left-[14%] rotate-[-8deg]",
+          className: "absolute top-10 left-[15%] rotate-[-4deg]",
       },
       {
           title: "Food Logging",
           image: "/projects/nutriwise/nutri3.jpg",
-          className: "absolute top-24 left-[8%] rotate-[5deg]",
+          className: "absolute top-28 left-[8%] rotate-[5deg]",
       },{
         title: "Glucose Logging",
         image: "/projects/nutriwise/nutri4.jpg",
-        className: "absolute top-5 left-[41%] rotate-[-3deg]",
+        className: "absolute top-12 left-[41%] rotate-[-3deg]",
     },{
       title: "Food Intake Summary",
       image: "/projects/nutriwise/nutri5.jpg",
-      className: "absolute top-32 left-[33%] rotate-[10deg]",
+      className: "absolute top-24 left-[32%] rotate-[2deg]",
   },{
     title: "Glucose Summary",
     image: "/projects/nutriwise/nutri6.jpg",
-    className: "absolute top-8 right-[16%] rotate-[4deg]",
+    className: "absolute top-18 right-[15%] rotate-[4deg]",
 },{
   title: "Medication Management",
   image: "/projects/nutriwise/nutri7.png",
-  className: "absolute top-36 right-[8%] rotate-[-9deg]",
+  className: "absolute top-28 right-[8%] rotate-[-7deg]",
 },{
   title: "Community Events",
   image: "/projects/nutriwise/nutri8.jpg",
-  className: "absolute top-12 right-[25%]",
+  className: "absolute top-22 right-[24%]",
 },{
   title: "User Profile",
   image: "/projects/nutriwise/nutri10.png",
-  className: "absolute top-20 right-[33%] rotate-[-5deg]",
+  className: "absolute top-12 right-[32%] rotate-[-5deg]",
 },{
   title: "Onboarding Flow",
   image: "/projects/nutriwise/nutri12.png",
-  className: "absolute top-40 right-[40%] rotate-[4deg]",
+  className: "absolute top-22 right-[39%] rotate-[4deg]",
 },{
   title: "App Menu",
   image: "/projects/nutriwise/nutri16.png",
-  className: "absolute top-28 left-[24%] rotate-[-2deg]",
+  className: "absolute top-28 left-[24%]",
 },
     ],
     learnings: [
       {
-          quote: "Mastered state management in React Native using Zustand for a performant experience.",
-          name: "Efficient State Management",
-          designation: "State Management",
-          src: "",
+        quote: "I learned how challenging it can be to lead a team with different technical skill levels. Disagreements are inevitable, but focusing on shared goals helped us align and move forward effectively.",
+        name: "Leadership Through Alignment",
+        designation: "Team Collaboration & Conflict Resolution",
+        src: "/projects/nutriwise/documentation/teamwork.png", // replace with actual image if you have one
       },
       {
-          quote: "Learned to build complex, gesture-based interactions for mobile interfaces.",
-          name: "Advanced Mobile Interactions",
-          designation: "Mobile UX",
-          src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        quote: "During real-world testing, I realized that food tracking accuracy is difficult for users. This insight led to creating a blog section to educate users about portioning and healthy choices.",
+        name: "From Testing to Teaching",
+        designation: "User Education Through Content",
+        src: "/projects/nutriwise/nutri2.png", // replace with screenshot if available
       },
+      {
+        quote: "I learned how to deploy a production-ready mobile app using Expo, understanding the build process, OTA updates, and store distribution.",
+        name: "Deploying with Expo",
+        designation: "Mobile App Deployment",
+        src: "/projects/nutriwise/nutri3.png",
+      },
+      {
+        quote: "Working on the backend taught me how to structure and manage user data effectively, especially in health apps where logs and privacy matter.",
+        name: "Backend Structure & Data Management",
+        designation: "Data Modeling for Health Apps",
+        src: "/projects/nutriwise/nutri1.png",
+      },
+      {
+        quote: "Using Figma alongside architecture and sequence diagrams helped our team stay aligned. These visual tools were essential in turning ideas into concrete flows.",
+        name: "Design as Communication",
+        designation: "Figma & System Diagrams",
+        src: "/projects/nutriwise/documentation/figma.png",
+      }
     ],
     documentation: [
       {
-        title: "Early Design & Planning",
+        title: "Foundational Research & Problem Framing",
         description: (
           <>
-            We began with <strong>in-depth research</strong> into diabetes, understanding that <strong>active self-management</strong> is the only viable solution. This insight shaped the app&apos;s <strong>core goals and feature set</strong>, focusing on nutritional tracking, blood glucose monitoring, and insulin management.
+            As team lead, I conducted <strong>extensive user research</strong> to understand the lived experience of diabetics—especially <strong>older adults</strong>, who represent over 90% of cases. I studied their <strong>daily management habits</strong>, technology comfort levels, and health literacy. I also reviewed <strong>existing diabetes apps</strong> to identify gaps and opportunities.
+            <br /><br />
+            This research shaped the project’s direction and ensured our solution was grounded in real-world needs.
           </>
         ),
         content: {
           type: 'image',
           props: {
             src: "/projects/nutriwise/documentation/distributionAge.png",
-            alt: "Component Library",
-            className: "h-full w-full object-cover"
+            alt: "Age Distribution of Diabetic Users",
+            className: "h-full w-full object-cover rounded-lg"
           }
         }
       },
       {
-        title: "User-Centric Design",
+        title: "Designing for the User",
         description: (
           <>
-            Following a <strong>competitor analysis</strong>, we designed the app in Figma with a focus on creating a <strong>user-friendly experience</strong> for all, especially <strong>older adults</strong> who make up over 90% of diabetics. Our design prioritizes <strong>clarity, simplicity, and accessibility</strong> to ensure the app is intuitive for everyone.
+            I translated our research insights into <strong>low- and high-fidelity designs</strong> in Figma, focusing on <strong>clarity, accessibility, and ease of use</strong>. I led discussions with my team to align on <strong>user flows</strong> that minimized complexity for older adults.
+            <br /><br />
+            Our UI emphasizes <strong>large tap areas</strong>, <strong>high-contrast visuals</strong>, and <strong>linear navigation</strong> to reduce confusion and improve onboarding.
           </>
         ),
         content: {
@@ -1176,99 +1226,165 @@ export default UpdateChecker`,
             className: "h-full w-full rounded-lg",
             slideMode: "hover"
           }
-        }
+        },
+        width: "16rem",
+        height: "34rem"
       },
       {
-        title: "Frontend Overview",
+        title: "Frontend Architecture & Stack",
         description: (
           <>
-            We built the app with <strong>React Native</strong> to enable a <strong>single, cross-platform codebase</strong> for both iOS and Android. This decision improved development efficiency while delivering a native-like experience.
+            We used <strong>React Native</strong> for a shared codebase across both iOS and Android, allowing for faster development and consistent user experiences across platforms. I led the front-end setup using <strong>modular components</strong> designed specifically for accessibility, making the app intuitive for all users, particularly older adults.
+          </>
+        ),
+        content: {
+          type: 'image',
+          props: {
+            src: "/projects/nutriwise/documentation/nutri16.png",
+            alt: "Frontend Architecture",
+            className: "h-full w-full object-cover rounded-lg"
+          }
+        },
+        width: "16rem",
+        height: "34rem"
+      },
+      {
+        title: "Backend Architecture & Scalability",
+        description: (
+          <>
+            The backend was powered by a <strong>Node.js server</strong> with a <strong>MongoDB database</strong> to manage and store user data. We offloaded key services, such as <strong>nutrition analysis</strong> and <strong>insulin suggestions</strong>, to <strong>Firebase Cloud Functions</strong>, improving scalability and enabling the app to handle complex computations efficiently.
+          </>
+        ),
+        content: {
+          type: 'image',
+          props: {
+            src: "/projects/nutriwise/documentation/nutri3.jpg",
+            alt: "Backend Architecture",
+            className: "h-full w-full object-cover rounded-lg"
+          }
+        },
+        width: "16rem",
+        height: "34rem"
+      },
+      {
+        title: "Core Features Built with Purpose",
+        description: (
+          <>
+            Our app is designed to support key areas of diabetes self-management, with features tailored to meet the unique needs of our users. It enables effortless food logging, where users can search or add custom meals to easily track their nutritional intake. Blood glucose tracking is seamlessly integrated, allowing users to record and monitor their glucose levels to better understand their patterns.
+          </>
+        ),
+        content: {
+          type: 'image',
+          props: {
+            src: "/projects/nutriwise/documentation/nutri4.jpg",
+            alt: "Backend Architecture",
+            className: "h-full w-full object-cover rounded-lg"
+          }
+        },
+        width: "16rem",
+        height: "34rem"
+      },
+      {
+        title: "Advanced Features for Comprehensive Management",
+        description: (
+          <>
+            In addition to basic tracking, our app provides data-driven analysis that visualizes trends from both food and glucose logs, empowering users to make informed health decisions. Smart insulin dosing recommendations are offered based on meal data and glucose readings, helping users manage their condition effectively. Medication management is streamlined, allowing users to log insulin intake and receive timely medication reminders. Lastly, the app encourages community engagement, enabling users to connect with peers, share experiences, and discover local support groups and events to stay motivated.
+          </>
+        ),
+        content: {
+          type: 'image',
+          props: {
+            src: "/projects/nutriwise/documentation/nutri5.jpg",
+            alt: "Effortless Food Logging",
+            className: "h-full w-full object-cover rounded-lg"
+          }
+        },
+        width: "16rem",
+        height: "34rem"
+      },
+      {
+        title: "Challenges & Iteration",
+        description: (
+          <>
+            Despite internal testing, we discovered several <strong>unexpected UX issues</strong> when older adults began using the app. These included confusion with icons, difficulty reading small text, and misclicks due to small buttons.
             <br /><br />
-            The UI uses <strong>modular components</strong> optimized for <strong>older adults</strong>, incorporating <strong>high-contrast visuals</strong>, <strong>large tap targets</strong>, and <strong>readable typography</strong>. Navigation follows a <strong>linear structure</strong>, making key features like food logging and glucose tracking easily accessible without deep menus.
+            We responded with <strong>multiple design iterations</strong>: simplified flows, larger UI elements, and improved feedback messages. I led the feedback cycles and coordinated fixes with the team.
           </>
         ),
         content: {
-          type: 'code',
+          type: 'image',
           props: {
-            language: "graphql",
-            filename: "query.graphql",
-            code: "query GetUserData($userId: ID!) {\n  user(id: $userId) {\n    name\n    email\n    accounts {\n      balance\n    }\n  }\n}",
-            highlightLines: [2, 3, 4],
+            src: "/projects/nutriwise/documentation/nutri16.jpg",
+            alt: "Effortless Food Logging",
+            className: "h-full w-full object-cover rounded-lg"
           }
-        }
+        },
+        width: "16rem",
+        height: "34rem"
       },
       {
-        title: "Backend Architecture & Logic",
+        title: "Real-World Testing & Optimization",
         description: (
           <>
-            The backend is powered by a <strong>Node.js server</strong> connected to a <strong>MongoDB database</strong>. It manages essential functions including <strong>data storage</strong>, <strong>user authentication</strong>, and <strong>analytics processing</strong>. Key operations such as food entry submissions or glucose logs are handled by clear API endpoints with proper access controls.
+            We conducted <strong>usability testing</strong> with diabetic users and iteratively improved the app based on findings. I focused on optimizing:
+            <ul>
+              <li><strong>Performance:</strong> Reduced initial load time by lazy-loading components</li>
+              <li><strong>Accessibility:</strong> Increased color contrast, added readable labels</li>
+              <li><strong>Resilience:</strong> Improved error handling for poor network conditions</li>
+            </ul>
           </>
         ),
         content: {
-          type: 'code',
+          type: 'image',
           props: {
-            language: "graphql",
-            filename: "query.graphql",
-            code: "query GetUserData($userId: ID!) {\n  user(id: $userId) {\n    name\n    email\n    accounts {\n      balance\n    }\n  }\n}",
-            highlightLines: [2, 3, 4],
+            src: "/projects/nutriwise/documentation/nutri15.jpg",
+            alt: "Effortless Food Logging",
+            className: "h-full w-full object-cover rounded-lg"
           }
-        }
+        },
+        width: "16rem",
+        height: "34rem"
       },
       {
-        title: "Scalability & Documentation",
+        title: "Deployment & Hosting",
         description: (
           <>
-            To ensure scalability, we used <strong>cloud functions</strong> (e.g., Firebase Functions) to offload heavy computation like <strong>nutrition analysis</strong> and <strong>insulin recommendations</strong>. Each function acts as a <strong>microservice</strong>, triggered on demand. We supported this architecture with <strong>sequence diagrams</strong> and <strong>use case flows</strong> to map user actions to system behavior.
-          </>
-        ),
-        content: {
-          type: 'code',
-          props: {
-            language: "graphql",
-            filename: "query.graphql",
-            code: "query GetUserData($userId: ID!) {\n  user(id: $userId) {\n    name\n    email\n    accounts {\n      balance\n    }\n  }\n}",
-            highlightLines: [2, 3, 4],
-          }
-        }
-      },
-      {
-        title: "Authentication & Data Security",
-        description: (
-          <>
-            To protect sensitive health data, we implemented <strong>JWT-based authentication</strong> with secure <strong>email/password login</strong>, supported by <strong>email verification</strong> and <strong>password recovery</strong> flows.
+            The app was deployed using <strong>Expo</strong> for simplified distribution to both app stores. Backend services were hosted via <strong>Firebase</strong> and <strong>Render</strong>, enabling scalable and secure operations.
             <br /><br />
-            All APIs enforce <strong>token validation</strong> and <strong>role-based access control (RBAC)</strong>. User data is <strong>encrypted at rest and in transit</strong>, and communication is secured using <strong>HTTPS</strong>. Future updates may support <strong>biometric logins</strong> or <strong>OAuth</strong> for added security and ease of use.
+            We used <strong>GitHub Actions</strong> for continuous integration and automatic builds during feature rollouts.
           </>
         ),
         content: {
           type: 'code',
           props: {
-            language: "graphql",
-            filename: "query.graphql",
-            code: "query GetUserData($userId: ID!) {\n  user(id: $userId) {\n    name\n    email\n    accounts {\n      balance\n    }\n  }\n}",
-            highlightLines: [2, 3, 4],
+            language: "yaml",
+            filename: "ci.yml",
+            code: "name: CI\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n    - uses: actions/checkout@v2\n    - name: Install and build\n      run: npm install && npm run build",
+            highlightLines: [3, 7]
           }
         }
       },
       {
-        title: "Database Schema Overview",
+        title: "Marketing Materials & Website Mockup",
         description: (
           <>
-            The database design includes <strong>five core collections</strong>: Users, Food Entries, Glucose Logs, Medication, and Analytics. This structure supports all primary app functions—tracking meals, logging health data, and generating insights. <br/><br/>  Collections are <strong>linked via references</strong> (e.g., <code>userId</code>), enabling efficient <strong>aggregation and filtering</strong>. This setup supports <strong>fast lookups</strong> of historical logs and powers <strong>personalized feedback</strong> like glucose trends and diet impact, all while ensuring <strong>scalability</strong> as data grows.
-     
+            To promote the app and expand its reach, I designed targeted advertisements with the vision of them being displayed on billboards and posters. These ads are intended to capture the attention of potential users while showcasing the app's core features. Additionally, I created a mockup for the app's website to provide a digital platform where users can learn more about the app, sign up, and access support resources.
           </>
         ),
         content: {
-          type: 'code',
+          type: 'compare',
           props: {
-            language: "graphql",
-            filename: "query.graphql",
-            code: "query GetUserData($userId: ID!) {\n  user(id: $userId) {\n    name\n    email\n    accounts {\n      balance\n    }\n  }\n}",
-            highlightLines: [2, 3, 4],
+            firstImage: "/projects/nutriwise/documentation/adMockup.jpg", // Replace with your ad image
+            secondImage: "/projects/nutriwise/documentation/websiteMockup.jpg", // Replace with your website mockup
+            firstImageClassName: "object-cover object-left-top",
+            secondImageClassName: "object-cover object-left-top",
+            className: "h-full w-full rounded-lg",
+            slideMode: "hover"
           }
-        }
-      },
-      
+        },
+        width: "16rem",
+        height: "34rem"
+      }
     ]
   },
 ];

@@ -129,7 +129,7 @@ export const StickyScroll = ({
   };
 
   // Default dimensions if not provided in the content data
-  const DEFAULT_WIDTH = "40rem";
+  const DEFAULT_WIDTH = "45rem";
   const DEFAULT_HEIGHT = "30rem";
 
   return (

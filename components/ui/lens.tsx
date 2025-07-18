@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface LensProps {
   children: React.ReactNode;
@@ -15,6 +15,7 @@ interface LensProps {
   isFocusing?: () => void;
   hovering?: boolean;
   setHovering?: (hovering: boolean) => void;
+  className?: string;
 }
 
 export const Lens: React.FC<LensProps> = ({
@@ -25,6 +26,7 @@ export const Lens: React.FC<LensProps> = ({
   position = { x: 200, y: 150 },
   hovering,
   setHovering,
+  className,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -33,7 +35,6 @@ export const Lens: React.FC<LensProps> = ({
   const isHovering = hovering !== undefined ? hovering : localIsHovering;
   const setIsHovering = setHovering || setLocalIsHovering;
 
-  // const [isHovering, setIsHovering] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 100, y: 100 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -46,7 +47,9 @@ export const Lens: React.FC<LensProps> = ({
   return (
     <div
       ref={containerRef}
-      className="relative overflow-hidden rounded-lg z-20"
+      // I've added h-full and w-full here to ensure the Lens container
+      // fills the space allocated by its parent (the BentoGridItem header).
+      className={`relative h-full w-full overflow-hidden rounded-lg z-20 ${className}`}
       onMouseEnter={() => {
         setIsHovering(true);
       }}
@@ -108,7 +111,7 @@ export const Lens: React.FC<LensProps> = ({
                 }}
               >
                 <div
-                  className="absolute inset-0"
+                  className="absolute inset-0 "
                   style={{
                     transform: `scale(${zoomFactor})`,
                     transformOrigin: `${mousePosition.x}px ${mousePosition.y}px`,
