@@ -554,7 +554,7 @@ const Menu = ({
                                     <BentoGridItem
                                         className={cn(
                                             "h-full w-full",
-                                            "border-2 border-green-800/50 shadow-[0_0_20px_rgba(34,197,94,0.5)]"
+                                            "border-2 border-green-800/80 shadow-[0_0_20px_rgba(34,197,94,0.5)]"
                                         )}
                                         onClick={item.isExpandable ? () => {
                                             setActiveItem(item.id);
