@@ -177,14 +177,14 @@ export const slideData: ProjectData[] = [
   role: "Full-Stack Developer & Product Designer",
   techStack: [
     "React Native (Expo)",
-    "EmailJS",
+    
     "Figma",
     
     
-    "Supabase (PostgreSQL)",
-    "Firebase Authentication",
+    "Supabase",
+    "Firebase",
     
-    "Google Cloud Functions",
+    "Google Cloud",
     
     "JavaScript",
   ],

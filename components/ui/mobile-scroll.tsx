@@ -49,7 +49,7 @@ export const MobileScroll = ({
               opacity: titleOpacity,
               translateY: titleTranslateY,
             }}
-            className="mb-20 text-center text-7xl font-bold text-white font-orbitron"
+            className="mb-20 text-center text-4xl lg:text-7xl font-bold text-white font-orbitron"
           >
             {title}
           </motion.h2>

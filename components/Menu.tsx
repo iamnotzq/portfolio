@@ -23,7 +23,6 @@ import { Input } from './ui/input';
 import { Label } from './ui/label';
 
 // --- TEXTAREA COMPONENT ---
-// This could be moved to its own file in components/ui/textarea.tsx
 export interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
@@ -71,7 +70,6 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 Textarea.displayName = "Textarea";
 
 // --- COMPACT FILE UPLOAD COMPONENT ---
-// This could be moved to its own file in components/ui/compact-file-upload.tsx
 const mainVariant = {
   initial: { x: 0, y: 0, },
   animate: { x: 10, y: -10, opacity: 0.9, },
@@ -189,8 +187,6 @@ interface MenuProps {
 }
 
 // --- CONTENT COMPONENTS FOR BENTO ITEMS ---
-// These could also be moved to their own files in a `components` directory.
-
 const AboutContent = ({ scrollContainerRef }: { scrollContainerRef: React.RefObject<HTMLDivElement | null> }) => (
     <div className="flex flex-col">
         <Timeline data={timelineData} scrollContainerRef={scrollContainerRef} />
@@ -253,81 +249,91 @@ const ContactContent = () => {
   };
 
   return (
-      <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 items-center justify-center p-8 gap-10">
-          {/* Left Column: Info & Links */}
-          <div className="flex flex-col justify-center h-full text-center items-center">
-              <div>
-                  <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 font-orbitron">
-                      <span className="text-blue-400">contact</span><span className="text-white">()</span>
-                  </h2>
-                  <p className="text-neutral-300 max-w-md mb-8">
-                      I'm always open to new opportunities and collaborations. Feel free to send a message through one of the channels, or fill in the form, and I'll get back to you as soon as possible.
-                  </p>
-                  <div className="flex flex-row items-center justify-center gap-8">
-                      {socialLinks.map(link => (
-                          <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" title={link.title} className="text-neutral-400 hover:text-white transition-colors">
-                              {link.icon}
-                          </a>
-                      ))}
+      // The outermost container is now a flex container.
+      <div className="w-full h-full flex flex-col p-4 lg:p-8">
+          {/* This wrapper uses my-auto for vertical centering and contains the grid. */}
+          <div className="my-auto w-full">
+              <div className="w-full grid grid-cols-1 xl:grid-cols-2 gap-4 lg:gap-10 items-center">
+                  {/* Left Column: Info & Links */}
+                  <div className="flex flex-col justify-center text-center items-center">
+                      <div>
+                          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-2 sm:mb-4 font-orbitron">
+                              <span className="text-blue-400">contact</span><span className="text-white">()</span>
+                          </h2>
+                          <p className="text-neutral-300 max-w-md mb-4 sm:mb-8 md:text-sm lg:text-base text-xs mx-auto">
+                              I'm always open to new opportunities and collaborations. Feel free to send a message through one of the channels, or fill in the form, and I'll get back to you as soon as possible.
+                          </p>
+                          <div className="flex flex-row items-center justify-center gap-8 ">
+                              {socialLinks.map(link => (
+                                  <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" title={link.title} className="text-neutral-400 hover:text-white transition-colors ">
+                                      {link.icon}
+                                  </a>
+                              ))}
+                          </div>
+                      </div>
+                  </div>
+
+                  {/* Right Column: Contact Form */}
+                  <div className="w-full flex items-center justify-center">
+                    <div className="w-full max-w-m">
+                      <form onSubmit={handleSubmit} className="space-y-4 w-full">
+                          <div className="grid grid-cols-2 md:grid-cols-1 gap-4">
+                            <LabelInputContainer>
+                                <Label htmlFor="name">Name</Label>
+                                <Input id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" type="text" required />
+                            </LabelInputContainer>
+                            <LabelInputContainer>
+                                <Label htmlFor="company">Company (Optional)</Label>
+                                <Input id="company" value={company} onChange={(e) => setCompany(e.target.value)} placeholder="Company" type="text" />
+                            </LabelInputContainer>
+                          </div>
+                          <LabelInputContainer>
+                              <Label htmlFor="email">Email Address</Label>
+                              <Input id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email.address@example.com" type="email" required />
+                          </LabelInputContainer>
+                          <LabelInputContainer>
+                              <Label htmlFor="description">Message</Label>
+                              <Textarea
+                                  id="description"
+                                  value={description}
+                                  onChange={(e) => setDescription(e.target.value)}
+                                  placeholder="Feel free to connect with me through this message."
+                                  className="min-h-[60px] lg:min-h-[120px]"
+                                  required
+                              />
+                          </LabelInputContainer>
+                          <LabelInputContainer>
+                              <Label htmlFor="file-upload">Attachment</Label>
+                              <div className="bg-neutral-900/50 border border-dashed border-neutral-700 rounded-lg hover:border-blue-400 transition-colors duration-300">
+                                  <CompactFileUpload onChange={handleFileChange} />
+                              </div>
+                          </LabelInputContainer>
+
+                          <div className="flex flex-col items-center pt-1 sm:pt-2">
+                              <button
+                                  className="group/btn relative flex items-center justify-center h-12 w-full rounded-md text-white text-sm sm:text-base font-medium bg-zinc-800 from-zinc-900 to-zinc-900 shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset] hover:bg-zinc-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                                  type="submit"
+                                  disabled={status === 'submitting'}
+                              >
+                                  {status === 'submitting' ? 'Sending...' : 'Send Message'}
+                              </button>
+                              {status === 'success' && (
+                                  <div className="mt-3 flex items-center text-sm text-green-400">
+                                      <IconCheck className="w-5 h-5 mr-2" />
+                                      <span>{message}</span>
+                                  </div>
+                              )}
+                              {status === 'error' && (
+                                  <div className="mt-3 flex items-center text-sm text-red-400">
+                                      <IconAlertCircle className="w-5 h-5 mr-2" />
+                                      <span>{message}</span>
+                                  </div>
+                              )}
+                          </div>
+                      </form>
+                    </div>
                   </div>
               </div>
-          </div>
-
-          {/* Right Column: Contact Form */}
-          <div className="w-full max-w-md">
-              <form onSubmit={handleSubmit} className="space-y-4 w-full">
-                  <LabelInputContainer>
-                      <Label htmlFor="name">Name</Label>
-                      <Input id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" type="text" required />
-                  </LabelInputContainer>
-                  <LabelInputContainer>
-                      <Label htmlFor="email">Email Address</Label>
-                      <Input id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email.address@example.com" type="email" required />
-                  </LabelInputContainer>
-                  <LabelInputContainer>
-                      <Label htmlFor="company">Company (Optional)</Label>
-                      <Input id="company" value={company} onChange={(e) => setCompany(e.target.value)} placeholder="Company" type="text" />
-                  </LabelInputContainer>
-                  <LabelInputContainer>
-                      <Label htmlFor="description">Message</Label>
-                      <Textarea
-                          id="description"
-                          value={description}
-                          onChange={(e) => setDescription(e.target.value)}
-                          placeholder="Feel free to connect with me through this message."
-                          className="min-h-[120px]"
-                          required
-                      />
-                  </LabelInputContainer>
-                  <LabelInputContainer>
-                      <Label htmlFor="file-upload">Attachment</Label>
-                      <div className="bg-neutral-900/50 border border-dashed border-neutral-700 rounded-lg hover:border-blue-400 transition-colors duration-300">
-                          <CompactFileUpload onChange={handleFileChange} />
-                      </div>
-                  </LabelInputContainer>
-
-                  <div className="flex flex-col items-center pt-2">
-                      <button
-                          className="group/btn relative flex items-center justify-center h-12 w-full rounded-md bg-zinc-800 text-white font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset] hover:bg-zinc-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                          type="submit"
-                          disabled={status === 'submitting'}
-                      >
-                          {status === 'submitting' ? 'Sending...' : 'Send Message'}
-                      </button>
-                      {status === 'success' && (
-                          <div className="mt-3 flex items-center text-sm text-green-400">
-                              <IconCheck className="w-5 h-5 mr-2" />
-                              <span>{message}</span>
-                          </div>
-                      )}
-                      {status === 'error' && (
-                          <div className="mt-3 flex items-center text-sm text-red-400">
-                              <IconAlertCircle className="w-5 h-5 mr-2" />
-                              <span>{message}</span>
-                          </div>
-                      )}
-                  </div>
-              </form>
           </div>
       </div>
   );
@@ -335,21 +341,23 @@ const ContactContent = () => {
 
 
 const ProjectsContent = () => (
-    <div className="h-full w-full flex flex-col justify-start items-center py-4 md:py-8">
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="text-center"
-        >
-            <h2 className="text-5xl font-bold text-white mb-4 font-orbitron">
-            <span className="text-white">{'['}</span><span className="text-orange-400">"projects"</span><span className="text-white">{']'}</span>
-            </h2>
-            <p className="text-neutral-300 text-sm md:text-base max-w-lg">
-                Selected works demonstrating my skills in full-stack development and end-to-end project delivery.
-            </p>
-        </motion.div>
-        <Carousel slides={slideData} />
+    <div className="h-full w-full flex flex-col items-center py-2 lg:py-8">
+        <div className="my-auto">
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+                className="text-center"
+            >
+                <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-orbitron">
+                    <span className="text-white">{'['}</span><span className="text-orange-400">"projects"</span><span className="text-white">{']'}</span>
+                </h2>
+                <p className="text-neutral-300 md:text-sm lg:text-base text-xs max-w-lg pb-2 mx-auto">
+                    Selected works demonstrating my skills in full-stack development and end-to-end project delivery.
+                </p>
+            </motion.div>
+            <Carousel slides={slideData} />
+        </div>
     </div>
 );
 
@@ -392,13 +400,13 @@ const Menu = ({
     const pointerEvents = useTransform(scrollYProgress, (v) => (v > 0.5 ? "auto" : "none"));
     
     // --- SCROLL LOCK LOGIC ---
-    // This effect handles the body scroll lock when the 'about' panel is open.
+    // This effect handles the body scroll lock when an item is expanded.
     useEffect(() => {
-        // When the 'about' section is expanded, prevent the body from scrolling.
-        if (activeItem === 'about') {
+        // When the 'about' or 'contact' section is expanded, prevent the body from scrolling.
+        if (activeItem === 'about' || activeItem === 'contact') {
             document.body.style.overflow = 'hidden';
         } else {
-            // Re-enable body scrolling when the 'about' section is closed or another item is active.
+            // Re-enable body scrolling when the section is closed or another item is active.
             document.body.style.overflow = 'auto';
         }
 
@@ -416,7 +424,7 @@ const Menu = ({
             title: <span className="font-orbitron"><span className="text-white">{'['}</span><span className="text-orange-400">"projects"</span><span className="text-white">{']'}</span></span>,
             description: <span className="text-green-500 ">// Explore a collection of my work.</span>,
             header: <div />,
-            className: "md:col-span-5 md:row-span-1",
+            className: "col-span-2 row-span-5 xl:col-span-5 xl:row-span-1",
             icon: <IconBriefcase className="h-4 w-4 text-neutral-400" />,
             isExpandable: true,
             content: <ProjectsContent />,
@@ -427,7 +435,7 @@ const Menu = ({
             title: <span className="font-orbitron"><span className="text-yellow-400">about</span><span className="text-white">.me</span></span>,
             description: <span className="text-green-500">// Learn more about my journey.</span>,
             header: <div />,
-            className: "md:col-span-3 md:row-span-1",
+            className: "col-span-2 row-span-5 xl:col-span-3 xl:row-span-1",
             icon: <IconUser className="h-4 w-4 text-neutral-400" />,
             isExpandable: true,
             content: <AboutContent scrollContainerRef={scrollContainerRef} />,
@@ -436,9 +444,9 @@ const Menu = ({
         {
             id: "contact",
             title: <span className="font-orbitron"><span className="text-blue-400">contact</span><span className="text-white">()</span></span>,
-            description: <span className="text-green-500">// Let's get in touch.</span>,
+            description: <span className="text-green-500">// Let's get in touch now!</span>,
             header: <div />,
-            className: "md:col-span-2 md:row-span-1",
+            className: "col-span-2 row-span-5 xl:col-span-2 xl:row-span-1",
             icon: <IconMail className="h-4 w-4 text-neutral-400" />,
             isExpandable: true,
             content: <ContactContent />,
@@ -448,27 +456,28 @@ const Menu = ({
 
     // Dynamically calculate class names for grid layout
     const getClassName = (item: typeof menuItems[number]) => {
-      if (!activeItem) return item.className;
-
-      if (activeItem === 'projects') {
-        if (item.id === 'about') return 'md:col-span-1 md:row-span-2';
-        if (item.id === 'projects') return 'md:col-span-3 md:row-span-2';
-        if (item.id === 'contact') return 'md:col-span-1 md:row-span-2';
-      }
-
-      if (activeItem === 'about') {
-        if (item.id === 'about') return 'md:col-span-3 md:row-span-2 md:row-start-1';
-        if (item.id === 'projects') return 'md:col-span-2 md:row-span-1 md:row-start-1';
-        if (item.id === 'contact') return 'md:col-span-2 md:row-span-1 md:row-start-2';
-      }
-
-      if (activeItem === 'contact') {
-        if (item.id === 'projects') return 'md:col-span-2 md:row-span-1 md:row-start-1 md:col-start-1';
-        if (item.id === 'about') return 'md:col-span-2 md:row-span-1 md:row-start-2 md:col-start-1';
-        if (item.id === 'contact') return 'md:col-span-3 md:row-span-2 md:row-start-1 md:col-start-3';
-      }
-
-      return item.className;
+        if (!activeItem) return item.className;
+    
+   
+        if (activeItem === 'projects') {
+            if (item.id === 'projects') return 'col-span-2 row-span-12 xl:col-span-3 xl:row-span-2';
+            if (item.id === 'about')    return 'row-start-1 row-span-3 xl:col-span-1 xl:row-span-2';
+            if (item.id === 'contact')  return 'row-start-1 row-span-3 xl:col-span-1 xl:row-span-2';
+        }
+    
+        if (activeItem === 'about') {
+            if (item.id === 'about')    return 'col-span-2 row-span-12 xl:col-span-3 xl:row-span-2';
+            if (item.id === 'projects') return 'row-start-1 row-span-3 xl:col-span-2 xl:row-span-1';
+            if (item.id === 'contact')  return 'row-start-1 row-span-3 xl:col-span-2 xl:row-span-1';
+        }
+    
+        if (activeItem === 'contact') {
+            if (item.id === 'contact')  return 'col-span-2 row-span-12 xl:col-span-3 xl:row-span-2 xl:col-start-3';
+            if (item.id === 'projects') return 'row-span-3 xl:col-span-2 xl:row-span-1 xl:col-start-1';
+            if (item.id === 'about')    return 'row-span-3 xl:col-span-2 xl:row-span-1 xl:row-start-2 xl:col-start-1';
+        }
+    
+        return item.className;
     };
 
     // Sort items for layout based on the active item
@@ -528,9 +537,9 @@ const Menu = ({
                 style={{ opacity, scale }}
                 className="relative z-10 h-full w-full"
             >
-                <div className="relative w-full h-full p-12 ">
+                <div className="relative w-full h-full p-6 md:p-8 lg:p-10 xl:p-12 ">
                 <div className="relative w-full h-full rounded-2xl ">
-                        <BentoGrid className="w-full h-full md:grid-rows-2">
+                        <BentoGrid className="w-full h-full grid-rows-15 xl:grid-rows-2">
                             {sortedItems.map((item) => (
                                 <motion.div
                                     key={item.id}

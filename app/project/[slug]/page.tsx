@@ -91,7 +91,11 @@ export default function ProjectPage() {
 
       {/* Render the main content only when the project data is loaded */}
       {project && (
-        <div className="bg-transparent text-white w-full min-h-screen">
+        
+        // Added `overflow-x-hidden` to prevent horizontal scrolling, which fixes the navbar width issue.
+        // Removed non-standard `max-w-screen` class.
+        <div className="bg-transparent text-white w-full min-h-screen overflow-x-hidden">
+     
           <div className="fixed inset-0 -z-30 bg-green-950 opacity-30"></div>
 
           <BackgroundGradientAnimation

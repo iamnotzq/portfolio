@@ -1,6 +1,7 @@
+// globe.tsx
+
 "use client";
 import React, { useEffect, useMemo, useRef, useState } from "react";
-// FIXED: Imported Group to use as a type for the ref.
 import { Color, Scene, Fog, PerspectiveCamera, Vector3, Group } from "three";
 import ThreeGlobe from "three-globe";
 import { useThree, Canvas, extend } from "@react-three/fiber";
@@ -18,10 +19,8 @@ declare module "@react-three/fiber" {
 extend({ ThreeGlobe: ThreeGlobe });
 
 const RING_PROPAGATION_SPEED = 3;
-const aspect = 1.2;
+// FIXED: Removed the hardcoded 'aspect' constant. The camera will now be responsive.
 const cameraZ = 300;
-
-// Note: The 'Position' type is no longer needed as we've removed the arcs.
 
 export type GlobeConfig = {
   pointSize?: number;
@@ -49,14 +48,23 @@ export type GlobeConfig = {
   autoRotateSpeed?: number;
 };
 
-// Note: The 'data' prop has been removed as it was only for the arcs.
 interface WorldProps {
   globeConfig: GlobeConfig;
 }
 
+// MODIFIED: This new component sets up the scene fog and background color.
+// It runs inside the Canvas and has access to the scene via useThree.
+function SceneSetup() {
+  const { scene, gl } = useThree();
+  useEffect(() => {
+    scene.fog = new Fog(0xffffff, 400, 2000);
+    gl.setClearColor(0xffaaff, 0); // Transparent background
+  }, [scene, gl]);
+  return null;
+}
+
 export const Globe = React.memo(function Globe({ globeConfig }: WorldProps) {
   const globeRef = useRef<ThreeGlobe | null>(null);
-  // FIXED: Initialized useRef with null and provided a specific type.
   const groupRef = useRef<Group | null>(null);
   const [isInitialized, setIsInitialized] = useState(false);
 
@@ -113,16 +121,12 @@ export const Globe = React.memo(function Globe({ globeConfig }: WorldProps) {
       .atmosphereAltitude(defaultProps.atmosphereAltitude)
       .hexPolygonColor(() => defaultProps.polygonColor);
 
-    // REMOVED: The entire .arcsData() chain has been removed to disable arcs.
-    
-    // REMOVED: The .pointsData() now uses an empty array as the arc points are gone.
     globeRef.current
       .pointsData([])
       .pointsMerge(true)
       .pointAltitude(0.0)
       .pointRadius(0);
 
-    // REMOVED: The rings are related to arcs, so we pass an empty array here.
     globeRef.current
       .ringsData([])
       .ringColor(() => defaultProps.polygonColor)
@@ -133,33 +137,19 @@ export const Globe = React.memo(function Globe({ globeConfig }: WorldProps) {
       );
   }, [isInitialized, defaultProps]);
 
-  // REMOVED: The useEffect with setInterval for generating rings is no longer needed.
-
   return <group ref={groupRef} />;
 });
 
-export function WebGLRendererConfig() {
-  const { gl } = useThree();
-
-  useEffect(() => {
-    gl.setClearColor(0xffaaff, 0);
-  }, [gl]);
-
-  return null;
-}
+// REMOVED: WebGLRendererConfig is merged into the new SceneSetup component.
 
 export const World = React.memo(function World(props: WorldProps) {
   const { globeConfig } = props;
 
-  const scene = useMemo(() => {
-    const scene = new Scene();
-    scene.fog = new Fog(0xffffff, 400, 2000);
-    return scene;
-  }, []);
-
+  // MODIFIED: Canvas props are simplified. We no longer pass a custom scene or camera.
+  // We set the camera's initial properties directly on the Canvas component.
   return (
-    <Canvas dpr={[1, 1.5]} scene={scene} camera={new PerspectiveCamera(50, aspect, 180, 1800)}>
-      <WebGLRendererConfig />
+    <Canvas dpr={[1, 1.5]} camera={{ fov: 50, position: [0, 0, cameraZ] }}>
+      <SceneSetup />
       <ambientLight color={globeConfig.ambientLight} intensity={0.1} />
       <directionalLight
         color={globeConfig.directionalLeftLight}

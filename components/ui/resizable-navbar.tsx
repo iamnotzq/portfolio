@@ -6,9 +6,9 @@ import {
   AnimatePresence,
   useScroll,
   useMotionValueEvent,
-} from "motion/react";
+} from "framer-motion";
 
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 
 
 interface NavbarProps {
@@ -20,6 +20,7 @@ interface NavBodyProps {
   children: React.ReactNode;
   className?: string;
   visible?: boolean;
+  hidden?: boolean; // Added for prop consistency
 }
 
 interface NavItemsProps {
@@ -35,6 +36,7 @@ interface MobileNavProps {
   children: React.ReactNode;
   className?: string;
   visible?: boolean;
+  hidden?: boolean; // Added to control visibility on scroll
 }
 
 interface MobileNavHeaderProps {
@@ -50,36 +52,47 @@ interface MobileNavMenuProps {
 }
 
 export const Navbar = ({ children, className }: NavbarProps) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollY } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-  const [visible, setVisible] = useState<boolean>(false);
+  const { scrollY } = useScroll();
+
+  // State for the "scrolled" appearance (blur, shrink)
+  const [scrolled, setScrolled] = useState(false);
+  // State for showing/hiding the navbar based on scroll direction
+  const [hidden, setHidden] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    if (latest > 100) {
-      setVisible(true);
+    const previous = scrollY.getPrevious();
+
+    // Logic to hide navbar on scroll down and show on scroll up
+    if (previous !== undefined && latest > previous && latest > 150) {
+      setHidden(true);
     } else {
-      setVisible(false);
+      setHidden(false);
+    }
+
+    // Logic for the "scrolled" appearance
+    if (latest > 100) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
     }
   });
 
   return (
-    <motion.div
-      ref={ref}
-      // IMPORTANT: Change this to class of `fixed` if you want the navbar to be fixed
-      className={cn("sticky inset-x-0 top-20 z-40 w-full", className)}
-    >
+    // This div is a logical wrapper that passes state to its children.
+    // Positioning is handled by the parent in `Navbar.tsx` and the children below.
+    <div className={cn("w-full", className)}>
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
           ? React.cloneElement(
-              child as React.ReactElement<{ visible?: boolean }>,
-              { visible },
+              child as React.ReactElement<{
+                visible?: boolean;
+                hidden?: boolean;
+              }>,
+              { visible: scrolled, hidden },
             )
           : child,
       )}
-    </motion.div>
+    </div>
   );
 };
 
@@ -145,10 +158,14 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
   );
 };
 
-export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
+export const MobileNav = ({ children, className, visible, hidden }: MobileNavProps) => {
   return (
     <motion.div
       animate={{
+        // This is the new animation logic.
+        // If `hidden` is true, move the navbar up and out of view.
+        // Otherwise, apply the original "scrolled" animation.
+        y: hidden ? "-120%" : visible ? 20 : 0,
         backdropFilter: visible ? "blur(10px)" : "none",
         boxShadow: visible
           ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
@@ -157,7 +174,6 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
         paddingRight: visible ? "12px" : "0px",
         paddingLeft: visible ? "12px" : "0px",
         borderRadius: visible ? "4px" : "2rem",
-        y: visible ? 20 : 0,
       }}
       transition={{
         type: "spring",

@@ -50,10 +50,10 @@ export function WorldMap({
 
 
   return (
-    <div className="w-full aspect-[2/1] bg-transparent rounded-lg relative font-sans">
+    <div className="w-full h-full bg-transparent rounded-lg relative font-sans">
       <img
         src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
-        className="h-full w-full [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none"
+        className="h-full w-full object-cover [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none"
         alt="world map"
         height="495"
         width="1056"
@@ -62,6 +62,7 @@ export function WorldMap({
       <svg
         ref={svgRef}
         viewBox="0 0 800 400"
+        preserveAspectRatio="xMidYMid slice"
         className="w-full h-full absolute inset-0 pointer-events-none select-none"
       >
         {dots.map((dot, i) => {

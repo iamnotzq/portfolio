@@ -165,25 +165,25 @@ const Slide = ({ slide, index, current, handleSlideClick }: { slide: CarouselSli
     >
       {/* The Link wrapper has been removed from here to prevent nested <a> tags */}
       <CardContainer containerClassName="w-full h-full">
-        <CardBody className="relative group/card hover:shadow-2xl hover:shadow-emerald-500/[0.1] bg-black border-black/[0.1] w-full h-full rounded-xl p-6 border flex flex-col">
+        <CardBody className="relative group/card hover:shadow-2xl hover:shadow-emerald-500/[0.1] bg-black border-black/[0.1] w-full h-full rounded-xl p-4 lg:p-6 border flex flex-col">
           {/* Top content section */}
           <div className="flex-shrink-0">
             <CardItem translateZ="50" className="w-full flex justify-between items-start">
-              <h3 className="text-xl font-bold text-white">
+              <h3 className="text-sm md:text-xl font-bold text-white">
                 {title}
               </h3>
-              <span className="text-sm font-semibold text-neutral-400 px-2 py-1 bg-neutral-800 rounded-full">
+              <span className="text-xs sm:text-sm md:text-base font-semibold text-neutral-400 px-2 py-1 bg-neutral-800 rounded-full">
                 {year}
               </span>
             </CardItem>
-            <CardItem as="p" translateZ="55" className="text-sm font-bold text-neutral-300 mt-2">{role}</CardItem>
-            <CardItem as="p" translateZ="60" className="text-sm w-full mt-2 text-neutral-300">
+            <CardItem as="p" translateZ="55" className="text-xs sm:text-sm md:text-base font-bold text-neutral-300 mt-2">{role}</CardItem>
+            <CardItem as="p" translateZ="60" className="text-xs sm:text-sm md:text-base w-full mt-2 text-neutral-300">
               {description}
             </CardItem>
             <CardItem translateZ="70" className="w-full mt-4">
               <div className="flex flex-wrap gap-2">
                 {techStack.map((tech) => (
-                  <span key={tech} className="text-xs font-medium text-sky-200 bg-sky-900/50 px-2 py-1 rounded-full">
+                  <span key={tech} className="text-xs md:text-sm font-medium text-sky-200 bg-sky-900/50 px-2 py-1 rounded-full">
                     {tech}
                   </span>
                 ))}
@@ -204,7 +204,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: { slide: CarouselSli
           <div className="flex justify-between items-center mt-6 flex-shrink-0">
             <CardItem
               translateZ={20}
-              className="text-sm font-semibold text-sky-400 hover:text-sky-200 transition-colors"
+              className="text-xs md:text-sm font-semibold text-sky-400 hover:text-sky-200 transition-colors"
             >
               <Link href={`/project/${slug}`} className="inline-flex items-center gap-1">
                 View Details <ArrowRight className="h-4 w-4" />
@@ -221,7 +221,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: { slide: CarouselSli
                         className="text-neutral-400 hover:text-white transition-colors"
                         title="Live Demo"
                     >
-                        <ExternalLink className="h-5 w-5" />
+                        <ExternalLink className="md:h-5 md:w-5 h-4 w-4" />
                     </a>
                  </CardItem>
                  <CardItem
@@ -234,7 +234,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: { slide: CarouselSli
                         className="text-neutral-400 hover:text-white transition-colors"
                         title="View Code"
                     >
-                        <Github className="h-5 w-5" />
+                        <Github className="md:h-5 md:w-5 h-4 w-4" />
                     </a>
                  </CardItem>
             </div>
@@ -307,7 +307,7 @@ export function Carousel({ slides }: { slides: CarouselSlideData[] }) {
           ))}
         </ul>
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center pt-2">
         <CarouselControl
           type="previous"
           title="Go to previous slide"

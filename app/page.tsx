@@ -20,7 +20,6 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
 
 // --- Pointer Component ---
-// MODIFIED: The Pointer component now accepts MotionValue types for x and y props.
 interface PointerProps {
   x: MotionValue<number>;
   y: MotionValue<number>;
@@ -35,7 +34,6 @@ const Pointer = ({ x, y, visible, text }: PointerProps) => {
   };
 
   return (
-    // MODIFIED: The style prop can now directly use the motion values for smooth, non-rendering updates.
     <motion.div
       className="fixed top-0 left-0 z-[9999] pointer-events-none"
       style={{ x, y }}
@@ -99,13 +97,44 @@ export default function Home() {
   const [pointerText, setPointerText] = useState("");
   const [pointerVisible, setPointerVisible] = useState(false);
   
-  // FIXED: Replaced standard useState with useMotionValue for pointer tracking
-  // to prevent high-frequency re-renders.
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
 
-  // This state is for the Hero component, which will be updated less frequently.
   const [heroPointerPosition, setHeroPointerPosition] = useState({ x: 0, y: 0 });
+
+  // --- RESPONSIVE FIX START ---
+  // State to track the current screen size breakpoint (sm, md, lg)
+  const [screenSize, setScreenSize] = useState('lg');
+
+  useEffect(() => {
+    const queries = {
+      sm: window.matchMedia('(max-width: 767px)'),
+      md: window.matchMedia('(min-width: 768px) and (max-width: 1023px)'),
+      lg: window.matchMedia('(min-width: 1024px)'),
+    };
+
+    const updateScreenSize = () => {
+      if (queries.sm.matches) {
+        setScreenSize('sm');
+      } else if (queries.md.matches) {
+        setScreenSize('md');
+      } else if (queries.lg.matches) {
+        setScreenSize('lg');
+      }
+    };
+
+    // Initial check
+    updateScreenSize();
+
+    // Add listeners for each media query
+    Object.values(queries).forEach(query => query.addEventListener('change', updateScreenSize));
+
+    // Cleanup listeners on component unmount
+    return () => {
+      Object.values(queries).forEach(query => query.removeEventListener('change', updateScreenSize));
+    };
+  }, []);
+  // --- RESPONSIVE FIX END ---
 
   const handleNavMenuClick = useCallback((id: 'about' | 'contact' | 'projects') => {
     const menuElement = document.getElementById('menu');
@@ -129,7 +158,6 @@ export default function Home() {
     }, 150);
   };
 
-  // FIXED: This effect now updates motion values directly, which does not trigger re-renders.
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
         pointerX.set(e.clientX);
@@ -141,12 +169,10 @@ export default function Home() {
     };
   }, [pointerX, pointerY]);
 
-  // FIXED: This new effect updates the state for the Hero component on a throttled interval,
-  // preventing the render loop.
   useEffect(() => {
     const intervalId = setInterval(() => {
         setHeroPointerPosition({ x: pointerX.get(), y: pointerY.get() });
-    }, 100); // Update Hero's prop every 100ms
+    }, 100);
 
     return () => clearInterval(intervalId);
   }, [pointerX, pointerY]);
@@ -182,7 +208,29 @@ export default function Home() {
 
 
   const scale = useTransform(scrollY, [0, 1000], [0.05, 1]);
-  const translateX = useTransform(scrollY, [0, 500, 1000], [600, 300, 0]);
+  
+  // --- RESPONSIVE FIX ---
+  // Define configurations for different screen sizes
+  const globeSizeConfig: { [key: string]: string } = {
+    sm: "900px",
+    md: "1600px",
+    lg: "2048px",
+  };
+
+  const translateXConfig: { [key: string]: number[] } = {
+    sm: [300, 120, 0],
+    md: [500, 250, 0],
+    lg: [600, 300, 0],
+  };
+
+  // Use different translation values based on the current screen size
+  const translateX = useTransform(
+    scrollY,
+    [0, 500, 1000],
+    translateXConfig[screenSize] || translateXConfig['lg']
+  );
+  // --- END RESPONSIVE FIX ---
+
   const starsScale = useTransform(scrollY, [0, 1000], [1, 1.2]);
 
   const transform = useTransform(
@@ -254,16 +302,19 @@ export default function Home() {
           </div>
 
           <div className="absolute inset-0 z-10 flex items-center justify-center">
+            {/* --- RESPONSIVE FIX START --- */}
+            {/* The width and height of the globe container are now responsive, based on screen size. */}
             <motion.div
               style={{
-                width: '2048px',
-                height: '2048px',
+                width: globeSizeConfig[screenSize] || globeSizeConfig['lg'],
+                height: globeSizeConfig[screenSize] || globeSizeConfig['lg'],
                 transform: transform,
               }}
               className="pointer-events-auto"
             >
               <World globeConfig={globeConfig} />
             </motion.div>
+            {/* --- RESPONSIVE FIX END --- */}
           </div>
         </div>
         
