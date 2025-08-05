@@ -11,8 +11,8 @@ interface ProjectFeaturesProps {
 export const ProjectFeatures = ({ features }: ProjectFeaturesProps) => {
     
   return (
-    <section className="min-h-screen w-full py-20 sm:py-28 flex flex-col justify-center items-center">
-        <div className="text-center px-4">
+    <section className="min-h-screen w-full flex flex-col justify-center items-center">
+        <div className="text-center px-4 pt-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-white font-orbitron">
                 Key Features
             </h2>

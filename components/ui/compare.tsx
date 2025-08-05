@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { SparklesCore } from "@/components/ui/sparkles";
 import { AnimatePresence, motion } from "motion/react";
+import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 
 interface CompareProps {
@@ -186,16 +187,9 @@ export const Compare = ({
             />
           </div>
           {showHandlebar && (
-            <div className="h-32 w-8 rounded-lg top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-sm z-30 -right-4 absolute flex items-center justify-center shadow-lg cursor-pointer border border-red-600">
-              <div
-                className="text-red-600 text-xs font-bold tracking-wider uppercase"
-                style={{
-                  writingMode: "vertical-rl",
-                  transform: "rotate(180deg)",
-                }}
-              >
-                Hover to slide
-              </div>
+            <div className="h-12 w-12 rounded-full top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-sm z-30 -right-6 absolute flex items-center justify-center shadow-lg cursor-pointer border border-red-600">
+              <IconChevronLeft className="w-5 h-5 text-red-600" />
+              <IconChevronRight className="w-5 h-5 text-red-600" />
             </div>
           )}
         </motion.div>
@@ -250,14 +244,4 @@ export const Compare = ({
 
 const MemoizedSparklesCore = React.memo(SparklesCore);
 
-function SparklesCore({
-  background,
-  minSize,
-  maxSize,
-  particleDensity,
-  className,
-  particleColor,
-}: any) {
-  // This is a mock component. In your project, you'd use the real SparklesCore.
-  return <div className={cn("w-full h-full", className)} />;
-}
+

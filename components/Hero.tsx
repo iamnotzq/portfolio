@@ -56,13 +56,13 @@ const Hero = ({
         style={{ opacity, scale }}
         className="relative z-10 flex h-full flex-col items-center justify-center pointer-events-none"
       >
-        <div className="pointer-events-none mx-auto flex w-full max-w-7xl flex-col items-start px-6 lg:px-8">
+        <div className="pointer-events-none mx-auto flex w-full max-w-7xl flex-col items-start px-6 md:px-8">
          
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="pointer-events-auto font-orbitron text-left text-4xl text-neutral-300 md:text-5xl"
+            className="pointer-events-auto font-orbitron text-left text-lg sm:text-xl md:text-4xl text-neutral-300 lg:text-5xl"
           >
            <span className="text-green-600">// Hello, world!</span>
           </motion.p>
@@ -70,7 +70,7 @@ const Hero = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="pointer-events-auto font-orbitron mt-2 text-left text-6xl font-bold tracking-tight text-white sm:text-7xl md:text-8xl"
+            className="pointer-events-auto font-orbitron mt-1 lg:mt-2 text-left text-3xl sm:text-4xl md:text-7xl font-bold tracking-tight text-white lg:text-8xl"
           >
             I'm Zhi Qiang.
           </motion.h1>
@@ -78,7 +78,7 @@ const Hero = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="pointer-events-auto mt-4 max-w-4xl text-left text-3xl font-semibold text-neutral-400 md:text-4xl"
+            className="pointer-events-auto mt-2 lg:mt-2 max-w-4xl text-left text-base sm:text-lg md:text-3xl font-semibold text-neutral-400 lg:text-4xl"
           >
            From project plans to{" "}
             <span className="text-green-500">production code &lt;/&gt;</span>
@@ -87,7 +87,7 @@ const Hero = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.8 }}
-            className="pointer-events-auto relative mt-8 max-w-3xl text-left text-xl font-normal text-neutral-300 md:text-2xl"
+            className="pointer-events-auto relative mt-3 lg:mt-4 max-w-3xl text-left text-xs sm:text-sm md:text-xl font-normal text-neutral-300 lg:text-2xl"
           >
             My experience in both{" "}
             <span className="text-blue-400 font-semibold">project management</span> and{" "}
@@ -102,7 +102,7 @@ const Hero = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 1.0 }}
-            className="pointer-events-auto mt-10 flex w-full justify-start"
+            className="pointer-events-auto mt-4 lg:mt-4 flex w-full justify-start"
             onMouseEnter={() => setPointerVisible(false)}
             onMouseLeave={() => setPointerVisible(true)}
           >
@@ -112,12 +112,12 @@ const Hero = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 1.2 }}
-            className="pointer-events-auto relative z-10 mt-8 flex flex-wrap items-center justify-start gap-4"
+            className="pointer-events-auto relative z-10 mt-4 lg:mt-6 flex flex-wrap items-center justify-start gap-4"
           >
             <a
               href="/resume.pdf"
               download
-              className=" font-orbitron flex w-auto transform items-center gap-2 rounded-lg bg-white px-6 py-3 text-lg font-bold text-black transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-white/20"
+              className=" font-orbitron flex w-auto transform items-center gap-2 rounded-lg bg-white px-3 py-2 md:px-6 md:py-3 text-sm sm:text-base md:text-lg lg:text-2xl font-bold text-black transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-white/20"
               onMouseEnter={() => setPointerText(resumeButtonText)}
               onMouseLeave={() => setPointerText(pointerText)}
             >
@@ -126,7 +126,7 @@ const Hero = ({
             </a>
             <button
               onClick={() => onMenuClick("contact")}
-              className="font-orbitron w-auto transform rounded-lg border-2 border-gray-700 bg-transparent px-8 py-3 text-lg font-medium text-white transition-all duration-300 hover:-translate-y-1 hover:border-white hover:bg-white/10"
+              className="font-orbitron w-auto transform rounded-lg border-2 border-gray-700 bg-transparent px-3 py-2 md:px-8 md:py-3 text-sm sm:text-base md:text-lg lg:text-2xl font-medium text-white transition-all duration-300 hover:-translate-y-1 hover:border-white hover:bg-white/10"
               onMouseEnter={() => setPointerText(connectButtonText)}
               onMouseLeave={() => setPointerText(pointerText)}
             >

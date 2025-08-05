@@ -170,267 +170,6 @@ export default function ProjectPage() {
 
 export const slideData: ProjectData[] = [
   {
-    slug: "interactive-portfolio",
-    title: "Interactive Portfolio",
-    description: "A personal portfolio featuring a 3D interactive globe and scroll-based animations.",
-    year: 2025,
-    role: "Lead Developer",
-    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Figma"],
-    imageUrl: "/projects/portfolioWebsite/homePage.png",
-    displayType: "macbook", // Set this to 'macbook' or 'mobile' for each project
-    src: "/projects/portfolioWebsite/homePage.png",
-    liveUrl: "#",
-    githubUrl: "#",
-
-    overview: "I believe a portfolio should be more than a static list of accomplishments, it should tell a story. With this project, I set out to build a narrative-driven experience that departs from traditional portfolio sites. The goal was to create an immersive journey through interactive 3D visuals, scroll-triggered animations, and a layout that evolves as the user explores. These elements are brought to life using Next.js, React, TypeScript , Tailwind CSS, and a customized animation system powered by Framer Motion. The entire site is fully responsive, modularly architected, and deployed via Vercel with integrated performance analytics and error tracking through Sentry. Despite the rich visual experience, the site maintains clarity and accessibility, ensuring that visitors can easily explore my projects, skills, and technical capabilities.",
-    features: [
-      {
-        title: "3D Interactive Globe",
-        description:
-          "An interactive 3D globe built using Three.js and React Three Fiber. Designed for smooth camera transitions and minimal GPU load.",
-        icon: "IconGlobe",
-        imageUrl: "/projects/portfolioWebsite/globe.png",
-      },
-      {
-        title: "Framer Motion + Scroll UX",
-        description:
-          "Customized scroll-based animations and transitions powered by Framer Motion. Enhances engagement while maintaining performance across devices.",
-        icon: "IconScrollText",
-        imageUrl: "/projects/portfolioWebsite/laptop.png",
-      },
-      {
-        title: "Modular Component Architecture",
-        description:
-          "Built entirely in React and Next.js using a modular, reusable component architecture. Enables clean separation and scalable feature development.",
-        icon: "IconLayers",
-        imageUrl: "/projects/portfolioWebsite/timeline.png",
-      },
-      {
-        title: "Live Code Showcases",
-        description:
-          "Embedded live previews with syntax-highlighted code blocks to present how key components are built and styled, showcasing technical clarity and transparency.",
-        icon: "IconCode",
-        imageUrl: "/projects/portfolioWebsite/documentation.png",
-      },
-      {
-        title: "Responsive, Tailored UI",
-        description:
-          "Fully responsive design crafted with Tailwind CSS, custom breakpoints, and layout adjustments. Optimized for touch interactions and accessibility.",
-        icon: "IconDeviceMobile",
-        imageUrl: "/projects/portfolioWebsite/laptop.png",
-      },
-      {
-        title: "Optimized Performance & Monitoring",
-        description:
-          "Deployed on Vercel with built-in analytics and real-time error tracking via Sentry. Features optimized asset loading, lazy imports, and animation throttling.",
-        icon: "IconGauge",
-        imageUrl: "/projects/portfolioWebsite/loading.png",
-      },
-    ],
-    
-    demoScreenshots: [
-      {
-          title: "Home Page",
-          image: "/projects/portfolioWebsite/homePage.png",
-          className: "absolute top-10 right-[27%] ",
-      },
-      {
-          title: "Project Section",
-          image: "/projects/portfolioWebsite/projects.png",
-          className: "absolute top-80 left-[27%] rotate-[2deg]",
-      },
-      {
-          title: "About Section",
-          image: "/projects/portfolioWebsite/about.png",
-          className: "absolute top-10 right-[5%] rotate-[3deg]",
-      },
-      {
-          title: "Contact Section",
-          image: "/projects/portfolioWebsite/contact.png",
-          className: "absolute top-80 right-[27%] rotate-[-5deg]",
-      },
-      {
-        title: "Main Globe View",
-        image: "/projects/portfolioWebsite/globe.png",
-        className: "absolute top-10 left-[27%] rotate-[-5deg]",
-    },
-    {
-        title: "Project Page",
-        image: "/projects/portfolioWebsite/laptop.png",
-        className: "absolute top-80 right-[5%] rotate-[2deg]",
-      },
-      
-      
-      {
-        title: "Documentation Section",
-        image: "/projects/portfolioWebsite/documentation.png",
-        className: "absolute top-10 left-[5%] rotate-[3deg]",
-      },
-      {
-        title: "Learnings Section",
-        image: "/projects/portfolioWebsite/learning.png",
-        className: "absolute top-80 left-[5%] rotate-[-4deg]",
-    },
-    ],
-    learnings: [
-      {
-        quote: "A key challenge was balancing scroll-based and pointer-driven animations without degrading performance. I customized Framer Motion and implemented a themed loader to prevent layout shifts and improve perceived speed, all validated via Vercel's performance insights.",
-        name: "Optimizing Performance & User Experience",
-        designation: "Framer Motion & Loading Strategy",
-        src: "/projects/portfolioWebsite/loading.png"
-      },
-      {
-        quote: "I wanted the documentation to be technical yet approachable. By designing custom components for code snippets, comparisons, and interactive media, I created a structure that makes in-depth content easier to navigate and absorb.",
-        name: "Crafting Clear Technical Documentation",
-        designation: "Component-Driven Documentation",
-        src: "/projects/portfolioWebsite/documentation.png"
-      }
-    ],
-    documentation: [
-      
-      {
-        title: "Early Conceptualization",
-        description: (
-          <>
-            The primary goal was to create a portfolio that transcended a static layout, offering an{" "}
-            <strong>interactive, narrative-driven experience</strong>. I began by outlining the{" "}
-            <strong>user journey and information architecture</strong>, which informed both design and technical planning. This step ensured a coherent and intuitive flow from the landing page to project detail pages.
-          </>
-        ),
-        content: {
-          type: 'image',
-          props: {
-            src: "/projects/portfolioWebsite/homeFlow.png",
-            className: "h-full w-full object-fit object-left-top"
-          }
-        },
-        width: "45rem",
-        height: "20rem"
-      },
-      {
-        title: "Design & Prototyping",
-        description: (
-          <>
-            Designed entirely in Figma, the portfolio UI emphasizes clarity, flow, and engagement. I mapped out <strong>component-level interactions</strong> and planned for responsiveness across breakpoints. The visual design was guided by a strong understanding of{" "}
-            <strong>React componentization</strong>, ensuring design fidelity during development.
-          </>
-        ),
-        content: {
-          type: 'compare',
-          props: {
-            firstImage: "/projects/portfolioWebsite/homeWireframe.png",
-            secondImage: "/projects/portfolioWebsite/homePage.png",
-            firstImageClassName: "object-cover object-center-top",
-            secondImageClassName: "object-cover object-center-top",
-            className: "h-full w-full rounded-lg",
-            slideMode: "hover"
-          }
-        },
-        width: "45rem",
-        height: "25rem"
-      },
-      {
-        title: "Technical Architecture",
-        description: (
-          <>
-            Built with Next.js and React, the site follows a component-driven architecture with a strong focus on maintainability and reusability. Both the homepage and project pages are rendered entirely on the client side to support rich interactivity, including scroll-based animations, pointer events, and context-driven transitions. This architecture allows for a highly dynamic user experience while keeping the code modular and easy to scale. The application is structured by feature, enabling clean separation of concerns and faster development cycles.          </>
-        ),
-        content: {
-          type: 'code',
-          props: {
-            language: "tsx",
-            filename: "project/[slug]/page.tsx",
-            code: projectPageCode,
-            highlightLines: [1, 10, 11]
-          }
-        }
-      },
-      {
-        title: "Custom Animation System",
-        description: (
-          <>
-            I integrated and customized <strong>Framer Motion</strong> to deliver a{" "}
-            <strong>narrative-driven experience</strong>. Animations are orchestrated using{" "}
-            <strong>scroll triggers, pointer-based events, and viewport transitions</strong>, all tuned
-            for responsiveness and performance.
-            <br /><br />
-            To enhance perceived performance and prevent layout shifts, I built a{" "}
-            <strong>custom-themed loading screen</strong> aligned with the site’s visual language.
-            This solution was informed by runtime performance metrics from <strong>Vercel's analytics dashboard</strong>,
-            helping ensure the smoothest UX possible across devices.
-          </>
-        ),
-        content: {
-          type: 'image',
-          props: {
-            src: "/projects/portfolioWebsite/loading.png",
-            className: "h-full w-full object-fit object-left-top"
-          }
-        },
-        width: "42rem",
-        height: "20rem"
-      },
-      {
-        title: "Core Features & UX",
-        description: (
-          <>
-            A unique <strong>panel-based navigation system</strong> guides the user through the experience without traditional scrolling fatigue. After the hero section, the interface simulates a descent into a digital "world map" from which users can explore projects.
-            <br /><br />
-            Selecting a project triggers a <strong>contextual 'data stream' animation</strong>, providing visual continuity and reinforcing the site's sci-fi narrative. Each project page then reveals a <strong>layered technical breakdown</strong>.
-          </>
-        ),
-        content: {
-          type: 'image',
-          props: {
-            src: "/projects/portfolioWebsite/map.png",
-            className: "h-full w-full object-fit"
-          }
-        },
-        width: "42rem",
-        height: "20rem"
-      },
-      {
-        title: "Responsive Design Strategy",
-        description: (
-          <>
-            I used <strong>Tailwind CSS</strong> to build a mobile-responsive layout tailored for
-            <strong> touch-based interactions and scroll-based animations</strong>. Components were
-            designed with utility-first classes and conditionally styled based on screen size breakpoints.
-            <br /><br />
-            Special care was taken to optimize tap targets, viewport animations, and content legibility
-            on small screens, ensuring a <strong>frictionless experience across devices</strong>.
-          </>
-        ),
-        content: {
-          type: 'image',
-          props: {
-            src: "/projects/portfolioWebsite/map.png",
-            className: "h-full w-full object-fit"
-          }
-        },
-        width: "42rem",
-        height: "20rem"
-      },
-      {
-        title: "Deployment & Monitoring",
-        description: (
-          <>
-            The site is <strong>deployed on Vercel</strong>, enabling zero-config CI/CD with instant rollbacks. For observability, I integrated <strong>Sentry</strong> to monitor errors in real-time, as well as <strong>Vercel Analytics</strong> to track page load times and user interaction hotspots.
-          </>
-        ),
-        content: {
-          type: 'image',
-          props: {
-            src: "/projects/portfolioWebsite/about.png",
-            className: "h-full w-full object-fit object-left-top"
-          }
-        },
-        width: "42rem",
-        height: "20rem"
-      },
-    ],
-  },
-  {
     slug: "workforce-management-app",
   title: "Workforce Management App",
   description: "A custom-built mobile application for Props Factory to streamline workforce operations such as attendance tracking, payslip management, and project coordination.",
@@ -1058,6 +797,682 @@ export default UpdateChecker`,
         }
       },
     ]
+  },
+  {
+    slug: "corporate-website",
+    title: "Corporate Website",
+    description: "A custom-built corporate website for Props Factory, redesigned with modern UI and SEO best practices.",
+    year: 2024,
+    role: "Full-Stack Developer & Designer",
+    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Figma", "Expo"],
+    imageUrl: "/projects/pfWebsite/hero.png",
+    displayType: "macbook", // Set this to 'macbook' or 'mobile' for each project
+    src: "/projects/pfWebsite/hero.png",
+    liveUrl: "#",
+    githubUrl: "#",
+
+    overview: "I spearheaded the end-to-end redesign and development of the Props Factory corporate website, transforming a static, outdated platform into a modern, dynamic, and user-centric digital presence. The primary goal was to empower non-technical staff with full content control. To achieve this, I architected a headless solution using Next.js, TypeScript, and Tailwind CSS, integrating Contentful for the blog and Cloudinary for the project gallery. This allows the team to publish updates instantly without developer intervention. The site features a fully responsive design, an automated contact form, and engaging animations with Framer Motion. I also implemented a comprehensive technical SEO strategy from the ground up, resulting in measurable traffic growth, and managed the full deployment pipeline on Vercel.",
+    features: [
+      {
+        title: "Animated Hero Section",
+        description:
+          "A captivating hero section with a background image slideshow and animated flip-words in the title to immediately engage visitors.",
+        icon: "IconSlideshow",
+        imageUrl: "/projects/pfWebsite/hero2.png",
+      },
+      {
+        title: "Dynamic Blog Management",
+        description:
+          "An integrated blog system that allows the company to easily add, edit, and publish articles, keeping content fresh and engaging.",
+        icon: "IconArticle",
+        imageUrl: "/projects/pfWebsite/blog.png",
+      },
+      {
+        title: "Automated Contact & Enquiry Form",
+        description:
+          "A user-friendly contact form that sends enquiries directly to the company and provides an automated, custom email acknowledgement to the sender.",
+        icon: "IconMailForward",
+        imageUrl: "/projects/pfWebsite/quote.png",
+      },
+      {
+        title: "Dynamic Project Gallery",
+        description:
+          "A flexible gallery that allows the company to effortlessly upload and showcase new projects, ensuring the portfolio is always current.",
+        icon: "IconLayoutGrid",
+        imageUrl: "/projects/pfWebsite/gallery.png",
+      },
+      {
+        title: "Masonry Gallery View",
+        description:
+          "When a project is selected, images are displayed in a beautiful and responsive masonry layout, providing an immersive viewing experience.",
+        icon: "IconLayoutDashboard",
+        imageUrl: "/projects/pfWebsite/galleryMasonry.png",
+      },
+      {
+        title: "Responsive Mobile Experience",
+        description:
+          "A fully customized and responsive design ensures a seamless and intuitive user experience across all devices, from desktop to mobile.",
+        icon: "IconDeviceMobile",
+        imageUrl: "/projects/pfWebsite/mobile.png",
+      },
+    ],
+    
+    demoScreenshots: [
+      {
+          title: "Home Page",
+          image: "/projects/pfWebsite/hero3.png",
+          className: "absolute top-14 right-[27%] 3xl:top-10",
+      },
+      {
+          title: "About Section",
+          image: "/projects/pfWebsite/about.png",
+          className: "absolute top-76 left-[27%] rotate-[3deg] 3xl:top-80",
+      },
+      {
+          title: "Works Section",
+          image: "/projects/pfWebsite/works.png",
+          className: "absolute top-14 right-[5%] rotate-[-1deg] 3xl:top-10",
+      },
+    {
+        title: "Gallery Page",
+        image: "/projects/pfWebsite/gallery.png",
+        className: "absolute top-76 right-[5%] rotate-[3deg] 3xl:top-80",
+      },
+      
+      
+      {
+        title: "Mansonry View",
+        image: "/projects/pfWebsite/galleryMasonry.png",
+        className: "absolute top-14 left-[5%] rotate-[-5deg] 3xl:top-10",
+      },
+      {
+        title: "Blog Page",
+        image: "/projects/pfWebsite/blogPage.png",
+        className: "absolute top-76 right-[27%] rotate-[-3deg] 3xl:top-80",
+      },
+      {
+        title: "Blog Content",
+        image: "/projects/pfWebsite/blogSidebar.png",
+        className: "absolute top-76 left-[5%] rotate-[-2deg] 3xl:top-80",
+      },
+      {
+        title: "Footer",
+        image: "/projects/pfWebsite/footer.png",
+        className: "absolute top-14 left-[27%] rotate-[2deg] 3xl:top-10",
+      },
+
+     
+    ],
+    learnings: [
+      {
+        quote: "A key takeaway was balancing advanced technical implementation with real-world usability. I chose headless CMS solutions like Contentful and Cloudinary to empower non-technical staff to manage content independently, streamlining their workflow and reducing reliance on developers for updates.",
+        name: "Empowering Users Through Technology",
+        designation: "CMS Integration & Usability",
+        src: "/projects/pfWebsite/blogPage.png"
+      },
+      {
+        quote: "Using Framer Motion for UI elements taught me how to create engaging animations that don't sacrifice performance. The key was applying them selectively to guide attention and enhance the brand's story, rather than adding motion for its own sake.",
+        name: "Balancing Animation and Performance",
+        designation: "UI/UX with Framer Motion",
+        src: "/projects/pfWebsite/works.png"
+      },
+      {
+        quote: "Implementing technical SEO from the ground up was a valuable experience. By generating a sitemap, configuring robots.txt, and using structured metadata with Next.js, I helped improve the site's discoverability, with traffic growth validated by Google Analytics.",
+        name: "Driving Growth with Technical SEO",
+        designation: "SEO & Performance Optimization",
+        src: "/projects/pfWebsite/hero.png"
+      },
+      
+    ],
+    documentation: [
+      
+      {
+        title: "Project Overview",
+        description: (
+          <>
+            I redesigned my company’s website to modernize its look, improve usability, and support dynamic content updates. The old site was static and visually outdated, which limited its ability to reflect the brand and showcase our work. I aimed to create a flexible system that non-technical staff could maintain and expand. The redesign focused on content clarity, SEO optimization, and a clean, branded visual identity. My role covered everything from initial planning and wireframing to final deployment and SEO setup.        </>
+        ),
+        content: {
+          type: 'compare',
+          props: {
+            firstImage: "/projects/pfWebsite/documentation/wireframe.png",
+            secondImage: "/projects/pfWebsite/documentation/wireframe2.png",
+            firstImageClassName: "object-cover object-center-top",
+            secondImageClassName: "object-cover object-center-top",
+            className: "h-full w-full rounded-lg",
+            slideMode: "hover"
+          }
+        },
+        width: "45rem",
+        height: "25rem"
+      },
+      {
+        title: "Early Conceptualization",
+        description: (
+          <>
+            The project started with a discussion around what message the site should convey. We mapped out essential pages and decided on the tone and visual theme of the new site. I then created rough wireframes to visualize the structure, which went through multiple revisions. Our main goal was to present information clearly while highlighting the company’s projects. This phase set the foundation for both design and content decisions moving forward.          </>
+        ),
+        content: {
+          type: 'image',
+          props: {
+            src: "/projects/pfWebsite/documentation/wireframeOverview.png",
+            className: "h-full w-full object-fit"
+          }
+        },
+        width: "45rem",
+        height: "25rem"
+      },
+      {
+        title: "Design & Wireframing",
+        description: (
+          <>
+            I used Figma to create page-by-page mockups and explore layout ideas. We filled in real content early to see how different sections would come together visually. These mockups helped align the team on both structure and messaging. Each iteration aimed to improve user flow and visual clarity. The process ensured we were designing for function, not just aesthetics.
+          </>
+        ),
+       
+       content: {
+          type: 'compare',
+          props: {
+            firstImage: "/projects/pfWebsite/documentation/wireframe3.png",
+            secondImage: "/projects/pfWebsite/documentation/hero4.png",
+            firstImageClassName: "object-cover object-center-top",
+            secondImageClassName: "object-cover object-center-top",
+            className: "h-full w-full rounded-lg",
+            slideMode: "hover"
+          }
+        },
+        width: "45rem",
+        height: "25rem"
+      },
+      {
+        title: "Tech Stack & Planning",
+        description: (
+          <>
+            The tech stack was carefully chosen to balance performance with flexibility. I used Next.js, TypeScript, and Tailwind CSS for front-end development, along with Framer Motion for custom animations. For content management, I selected Cloudinary for the gallery and Contentful for the blog. These tools allowed dynamic updates without needing to redeploy the site. Everything was planned to minimize future maintenance for the company.
+          </>
+        ),
+        content: {
+          type: 'image',
+          props: {
+            src: "/projects/pfWebsite/gallery.png",
+            className: "h-full w-full object-fit object-left-top"
+          }
+        },
+        width: "42rem",
+        height: "20rem"
+      },
+      {
+        title: "Dynamic Gallery with Cloudinary",
+        description: (
+          <>
+            The gallery needed to support frequent updates without technical help. I integrated Cloudinary, letting the team upload project folders directly and have them appear instantly on the site. The gallery uses a modal-based layout with a masonry grid for smooth navigation. Folder views are shareable via unique URLs that open directly to the project. This setup keeps everything on a single page, avoiding unnecessary routing.   </>
+        ),
+        content: {
+          type: 'image',
+          props: {
+           src: "/projects/pfWebsite/galleryMasonry.png",
+            className: "h-full w-full object-fit"
+          }
+        },
+        width: "42rem",
+        height: "20rem"
+      },
+      {
+        title: "CMS Blog with Contentful",
+        description: (
+          <>
+           The blog was added post-launch as a new feature to keep the site updated. I needed a system the team could use easily, so I integrated Contentful as a CMS. Blog posts are automatically styled and rendered based on flexible content types. The layout includes a sidebar and footer to make it feel like a professional blog. This allowed the company to publish instantly without touching the codebase.
+          </>
+        ),
+        content: {
+          type: 'image',
+          props: {
+            src: "/projects/pfWebsite/blog.png",
+            className: "h-full w-full object-top"
+          }
+        },
+        width: "42rem",
+        height: "20rem"
+      },
+      {
+        title: "Contact Form & Email Handling",
+        description: (
+          <>
+            I built a contact form that lets users reach out directly to the company via email. Upon submission, users receive a confirmation email to confirm their message was received. I used EmailJS for this integration, which kept things lightweight and serverless. This small feature adds a layer of professionalism and trust to the site. It also streamlined communication between users and the company.     </>
+        ),
+        content: {
+          type: 'image',
+          props: {
+            src: "/projects/pfWebsite/quote.png",
+            className: "h-full w-full object-fit object-left-top"
+          }
+        },
+        width: "42rem",
+        height: "20rem"
+      },
+      {
+        title: "Visual & UI Challenges",
+        description: (
+          <>
+            The client wanted a concrete texture background to match the company’s branding. This introduced challenges in readability and visual contrast between sections. To address this, I used layered elements, strategic spacing, and motion to help users differentiate sections. Custom animations helped keep the homepage dynamic without overwhelming users. The result was a unique yet clean design that respected both aesthetics and usability.
+          </>
+            ),
+        content: {
+          type: 'image',
+          props: {
+           src: "/projects/pfWebsite/works.png",
+            className: "h-full w-full object-fit object-left-top"
+          }
+        },
+        width: "42rem",
+        height: "20rem"
+      },
+      {
+        title: "Challenges & Iteration Decisions",
+        description: (
+          <>
+            One major challenge was deciding how to implement the blog in a way that didn’t overcomplicate the system. I initially considered JSON files or a custom backend, but these required too much technical effort for the team. Contentful provided a user-friendly solution that saved time and scaled well. Design-wise, I went through many iterations to balance brand identity with modern design principles. Each decision was influenced by how maintainable and intuitive the site needed to be.
+
+          </>
+            ),
+        content: {
+          type: 'code',
+          props: {
+            language: "tsx",
+            filename: "project/[slug]/page.tsx",
+            code: `const BlogDetails: React.FC<BlogDetailsProps> = ({ blog }) => {
+  const renderOptions: Options = {
+    renderNode: {
+      [BLOCKS.EMBEDDED_ASSET]: (node) => {
+        const { title, description, file } = node.data.target.fields; 
+        const { url } = file;
+        const { width, height } = file.details.image;
+
+        return (
+          <div className="relative mb-5 sm:my-5">
+            <Image
+              src={'https:\${url}'}
+              alt={title || "Embedded image"}
+              width={width}
+              height={height}
+              className="rounded-md object-cover w-full" 
+            />
+            <div className="rounded-md absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black to-transparent text-white text-xs sm:text-sm font-light">
+              {/* Display title or description */}
+              <p>{description || title || "No description available"}</p>
+            </div>
+          </div>
+        );
+      },
+      [BLOCKS.PARAGRAPH]: (node) => (
+        <p className="my-5 text-black text-base sm:text-2xl mb-10 font-medium">
+          {node.content.map((childNode, index) => {
+            if (childNode.nodeType === "text") {
+              return childNode.value;
+            }
+            return null;
+          })}
+        </p>
+      ),
+      [BLOCKS.HEADING_4]: (node) => (
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold my-5 text-black">
+          {node.content.map((childNode) =>
+            childNode.nodeType === "text" ? childNode.value : ""
+          )}
+        </h1>
+      ),
+      [BLOCKS.HEADING_5]: (node) => (
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold my-5 text-black">
+          {node.content.map((childNode) =>
+            childNode.nodeType === "text" ? childNode.value : ""
+          )}
+        </h2>
+      ),
+      [BLOCKS.HEADING_6]: (node) => (
+        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold my-5 text-black">
+          {node.content.map((childNode) =>
+            childNode.nodeType === "text" ? childNode.value : ""
+          )}
+        </h3>
+      ),
+      [INLINES.HYPERLINK]: (node) => (
+        <a
+          href={node.data.uri}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-500 underline"
+        >
+          {node.content.map((childNode) =>
+            childNode.nodeType === "text" ? childNode.value : ""
+          )}
+        </a>
+      ),
+    },
+  };`,
+            highlightLines: [1, 10, 11]
+          }
+        }
+      },
+      {
+        title: "Testing & Optimization",
+        description: (
+          <>
+           I manually tested the site across devices and browsers to ensure consistent performance. For error tracking and debugging, I used Sentry, which helped catch unexpected issues in production. I optimized image loading and API calls to improve performance. SEO best practices were implemented using structured metadata and sitemap generation. I also set up Google Analytics to monitor traffic and user behavior.
+
+
+          </>
+            ),
+        content: {
+          type: 'image',
+          props: {
+            src: "/projects/pfWebsite/mobile.png",
+            className: "h-full w-full object-fit object-left-top"
+          }
+        },
+        width: "42rem",
+        height: "20rem"
+      },
+      {
+        title: "Deployment & SEO Setup",
+        description: (
+          <>
+           The site was deployed on Vercel, allowing for seamless CI/CD integration. I used .env.local to manage environment variables securely. To improve SEO, I configured robots.txt, added meta tags, and monitored search performance through Google Analytics. Routing logic was handled via next.config.js to ensure clean URLs. These efforts improved the site’s discoverability and made tracking results easier.
+          </>
+            ),
+        content: {
+          type: 'code',
+          props: {
+            language: "tsx",
+            filename: "project/[slug]/page.tsx",
+            code: `export const metadata: Metadata = {
+  title: "Props Fabrication & Event Solutions | Props Factory Singapore",
+  description:
+    "Props Factory Singapore specializes in props fabrication, event fabrication, and 3D props for exhibitions, events, and installations. As a trusted prop building company, we deliver bespoke designs for event planners, contractors, and creative professionals in Singapore.",
+  metadataBase: new URL("https://propsfactory.com.sg"), // Replace with your live domain
+  openGraph: {
+    title: "Props Fabrication & Event Solutions | Props Factory Singapore",
+    description:
+      "Looking for prop building companies in Singapore? Props Factory Singapore leads in custom props fabrication, event fabrication, and 3D props for exhibitions, events, and installations. Transform your spaces with our bespoke designs.",
+    images: [
+      "https://propsfactory.com.sg/projectThumbnail/DIYU.jpg", // Replace with your image path
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Props Fabrication & Event Solutions | Props Factory Singapore",
+    description:
+      "Props Factory Singapore specializes in props fabrication, event fabrication, and 3D props for exhibitions, events, and installations. Transform events with our high-quality, custom-built props.",
+    images: ["https://propsfactory.com.sg/projectThumbnail/DIYU.jpg"], // Replace with your image path
+  },
+};`,
+            highlightLines: [1, 10, 11]
+          }
+        }
+        
+      },
+      
+    ],
+  },
+  {
+    slug: "interactive-portfolio",
+    title: "Interactive Portfolio",
+    description: "A personal portfolio featuring a 3D interactive globe and scroll-based animations.",
+    year: 2025,
+    role: "Full-Stack Developer",
+    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Figma"],
+    imageUrl: "/projects/portfolioWebsite/homePage.png",
+    displayType: "macbook", // Set this to 'macbook' or 'mobile' for each project
+    src: "/projects/portfolioWebsite/homePage.png",
+    liveUrl: "#",
+    githubUrl: "#",
+
+    overview: "I believe a portfolio should be more than a static list of accomplishments, it should tell a story. With this project, I set out to build a narrative-driven experience that departs from traditional portfolio sites. The goal was to create an immersive journey through interactive 3D visuals, scroll-triggered animations, and a layout that evolves as the user explores. These elements are brought to life using Next.js, React, TypeScript , Tailwind CSS, and a customized animation system powered by Framer Motion. The entire site is fully responsive, modularly architected, and deployed via Vercel with integrated performance analytics and error tracking through Sentry. Despite the rich visual experience, the site maintains clarity and accessibility, ensuring that visitors can easily explore my projects, skills, and technical capabilities.",
+    features: [
+      {
+        title: "3D Interactive Globe",
+        description:
+          "An interactive 3D globe built using Three.js and React Three Fiber. Designed for smooth camera transitions and minimal GPU load.",
+        icon: "IconGlobe",
+        imageUrl: "/projects/portfolioWebsite/globe.png",
+      },
+      {
+        title: "Framer Motion + Scroll UX",
+        description:
+          "Customized scroll-based animations and transitions powered by Framer Motion. Enhances engagement while maintaining performance across devices.",
+        icon: "IconScrollText",
+        imageUrl: "/projects/portfolioWebsite/laptop.png",
+      },
+      {
+        title: "Modular Component Architecture",
+        description:
+          "Built entirely in React and Next.js using a modular, reusable component architecture. Enables clean separation and scalable feature development.",
+        icon: "IconLayers",
+        imageUrl: "/projects/portfolioWebsite/timeline.png",
+      },
+      {
+        title: "Live Code Showcases",
+        description:
+          "Embedded live previews with syntax-highlighted code blocks to present how key components are built and styled, showcasing technical clarity and transparency.",
+        icon: "IconCode",
+        imageUrl: "/projects/portfolioWebsite/documentation.png",
+      },
+      {
+        title: "Responsive, Tailored UI",
+        description:
+          "Fully responsive design crafted with Tailwind CSS, custom breakpoints, and layout adjustments. Optimized for touch interactions and accessibility.",
+        icon: "IconDeviceMobile",
+        imageUrl: "/projects/portfolioWebsite/laptop.png",
+      },
+      {
+        title: "Optimized Performance & Monitoring",
+        description:
+          "Deployed on Vercel with built-in analytics and real-time error tracking via Sentry. Features optimized asset loading, lazy imports, and animation throttling.",
+        icon: "IconGauge",
+        imageUrl: "/projects/portfolioWebsite/loading.png",
+      },
+    ],
+    
+    demoScreenshots: [
+      {
+          title: "Home Page",
+          image: "/projects/portfolioWebsite/homePage.png",
+          className: "absolute top-10 right-[27%] ",
+      },
+      {
+          title: "Project Section",
+          image: "/projects/portfolioWebsite/projects.png",
+          className: "absolute top-80 left-[27%] rotate-[2deg]",
+      },
+      {
+          title: "About Section",
+          image: "/projects/portfolioWebsite/about.png",
+          className: "absolute top-10 right-[5%] rotate-[3deg]",
+      },
+      {
+          title: "Contact Section",
+          image: "/projects/portfolioWebsite/contact.png",
+          className: "absolute top-80 right-[27%] rotate-[-5deg]",
+      },
+      {
+        title: "Main Globe View",
+        image: "/projects/portfolioWebsite/globe.png",
+        className: "absolute top-10 left-[27%] rotate-[-5deg]",
+    },
+    {
+        title: "Project Page",
+        image: "/projects/portfolioWebsite/laptop.png",
+        className: "absolute top-80 right-[5%] rotate-[2deg]",
+      },
+      
+      
+      {
+        title: "Documentation Section",
+        image: "/projects/portfolioWebsite/documentation.png",
+        className: "absolute top-10 left-[5%] rotate-[3deg]",
+      },
+      {
+        title: "Learnings Section",
+        image: "/projects/portfolioWebsite/learning.png",
+        className: "absolute top-80 left-[5%] rotate-[-4deg]",
+    },
+    ],
+    learnings: [
+      {
+        quote: "A key challenge was balancing scroll-based and pointer-driven animations without degrading performance. I customized Framer Motion and implemented a themed loader to prevent layout shifts and improve perceived speed, all validated via Vercel's performance insights.",
+        name: "Optimizing Performance & User Experience",
+        designation: "Framer Motion & Loading Strategy",
+        src: "/projects/portfolioWebsite/loading.png"
+      },
+      {
+        quote: "I wanted the documentation to be technical yet approachable. By designing custom components for code snippets, comparisons, and interactive media, I created a structure that makes in-depth content easier to navigate and absorb.",
+        name: "Crafting Clear Technical Documentation",
+        designation: "Component-Driven Documentation",
+        src: "/projects/portfolioWebsite/documentation.png"
+      }
+    ],
+    documentation: [
+      
+      {
+        title: "Early Conceptualization",
+        description: (
+          <>
+            The primary goal was to create a portfolio that transcended a static layout, offering an{" "}
+            <strong>interactive, narrative-driven experience</strong>. I began by outlining the{" "}
+            <strong>user journey and information architecture</strong>, which informed both design and technical planning. This step ensured a coherent and intuitive flow from the landing page to project detail pages.
+          </>
+        ),
+        content: {
+          type: 'image',
+          props: {
+            src: "/projects/portfolioWebsite/homeFlow.png",
+            className: "h-full w-full object-fit object-left-top"
+          }
+        },
+        width: "45rem",
+        height: "20rem"
+      },
+      {
+        title: "Design & Prototyping",
+        description: (
+          <>
+            Designed entirely in Figma, the portfolio UI emphasizes clarity, flow, and engagement. I mapped out <strong>component-level interactions</strong> and planned for responsiveness across breakpoints. The visual design was guided by a strong understanding of{" "}
+            <strong>React componentization</strong>, ensuring design fidelity during development.
+          </>
+        ),
+        content: {
+          type: 'compare',
+          props: {
+            firstImage: "/projects/portfolioWebsite/homeWireframe.png",
+            secondImage: "/projects/portfolioWebsite/homePage.png",
+            firstImageClassName: "object-cover object-center-top",
+            secondImageClassName: "object-cover object-center-top",
+            className: "h-full w-full rounded-lg",
+            slideMode: "hover"
+          }
+        },
+        width: "45rem",
+        height: "25rem"
+      },
+      {
+        title: "Technical Architecture",
+        description: (
+          <>
+            Built with Next.js and React, the site follows a component-driven architecture with a strong focus on maintainability and reusability. Both the homepage and project pages are rendered entirely on the client side to support rich interactivity, including scroll-based animations, pointer events, and context-driven transitions. This architecture allows for a highly dynamic user experience while keeping the code modular and easy to scale. The application is structured by feature, enabling clean separation of concerns and faster development cycles.          </>
+        ),
+        content: {
+          type: 'code',
+          props: {
+            language: "tsx",
+            filename: "project/[slug]/page.tsx",
+            code: projectPageCode,
+            highlightLines: [1, 10, 11]
+          }
+        }
+      },
+      {
+        title: "Custom Animation System",
+        description: (
+          <>
+            I integrated and customized <strong>Framer Motion</strong> to deliver a{" "}
+            <strong>narrative-driven experience</strong>. Animations are orchestrated using{" "}
+            <strong>scroll triggers, pointer-based events, and viewport transitions</strong>, all tuned
+            for responsiveness and performance.
+            <br /><br />
+            To enhance perceived performance and prevent layout shifts, I built a{" "}
+            <strong>custom-themed loading screen</strong> aligned with the site’s visual language.
+            This solution was informed by runtime performance metrics from <strong>Vercel's analytics dashboard</strong>,
+            helping ensure the smoothest UX possible across devices.
+          </>
+        ),
+        content: {
+          type: 'image',
+          props: {
+            src: "/projects/portfolioWebsite/loading.png",
+            className: "h-full w-full object-fit object-left-top"
+          }
+        },
+        width: "42rem",
+        height: "20rem"
+      },
+      {
+        title: "Core Features & UX",
+        description: (
+          <>
+            A unique <strong>panel-based navigation system</strong> guides the user through the experience without traditional scrolling fatigue. After the hero section, the interface simulates a descent into a digital "world map" from which users can explore projects.
+            <br /><br />
+            Selecting a project triggers a <strong>contextual 'data stream' animation</strong>, providing visual continuity and reinforcing the site's sci-fi narrative. Each project page then reveals a <strong>layered technical breakdown</strong>.
+          </>
+        ),
+        content: {
+          type: 'image',
+          props: {
+            src: "/projects/portfolioWebsite/map.png",
+            className: "h-full w-full object-fit"
+          }
+        },
+        width: "42rem",
+        height: "20rem"
+      },
+      {
+        title: "Responsive Design Strategy",
+        description: (
+          <>
+            I used <strong>Tailwind CSS</strong> to build a mobile-responsive layout tailored for
+            <strong> touch-based interactions and scroll-based animations</strong>. Components were
+            designed with utility-first classes and conditionally styled based on screen size breakpoints.
+            <br /><br />
+            Special care was taken to optimize tap targets, viewport animations, and content legibility
+            on small screens, ensuring a <strong>frictionless experience across devices</strong>.
+          </>
+        ),
+        content: {
+          type: 'image',
+          props: {
+            src: "/projects/portfolioWebsite/map.png",
+            className: "h-full w-full object-fit"
+          }
+        },
+        width: "42rem",
+        height: "20rem"
+      },
+      {
+        title: "Deployment & Monitoring",
+        description: (
+          <>
+            The site is <strong>deployed on Vercel</strong>, enabling zero-config CI/CD with instant rollbacks. For observability, I integrated <strong>Sentry</strong> to monitor errors in real-time, as well as <strong>Vercel Analytics</strong> to track page load times and user interaction hotspots.
+          </>
+        ),
+        content: {
+          type: 'image',
+          props: {
+            src: "/projects/portfolioWebsite/about.png",
+            className: "h-full w-full object-fit object-left-top"
+          }
+        },
+        width: "42rem",
+        height: "20rem"
+      },
+    ],
   },{
     slug: "diabetes-management-app",
     title: "Nutriwise",

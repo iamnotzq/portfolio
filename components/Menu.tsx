@@ -192,7 +192,7 @@ interface MenuProps {
 // These could also be moved to their own files in a `components` directory.
 
 const AboutContent = ({ scrollContainerRef }: { scrollContainerRef: React.RefObject<HTMLDivElement | null> }) => (
-    <div className="flex flex-col p-4">
+    <div className="flex flex-col">
         <Timeline data={timelineData} scrollContainerRef={scrollContainerRef} />
     </div>
 );

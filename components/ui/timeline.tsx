@@ -36,10 +36,10 @@ export const Timeline = ({ data, scrollContainerRef }: { data: TimelineEntry[], 
 
   return (
     <div
-      className="w-full font-sans md:px-10"
+      className="w-full font-sans "
     >
         {/* --- REVISED "ABOUT ME" SECTION --- */}
-        <div className="max-w-7xl mx-auto pt-20 px-4 md:px-8 lg:px-10">
+        <div className="max-w-7xl mx-auto pt-12 px-4 md:px-12 ">
             <h2 className="text-5xl font-bold text-white mb-4 font-orbitron">
             <span className="text-yellow-400">about</span><span className="text-white">.me</span>
             </h2>
@@ -78,7 +78,7 @@ export const Timeline = ({ data, scrollContainerRef }: { data: TimelineEntry[], 
               <div className="h-10 absolute left-3 md:left-3 w-10 rounded-full  bg-black flex items-center justify-center">
                 <div className="h-4 w-4 rounded-full bg-neutral-800 border border-neutral-700 p-2" />
               </div>
-              <h3 className="hidden md:block text-xl md:pl-20 md:text-5xl font-bold text-neutral-500 ">
+              <h3 className="hidden md:block text-xl md:pl-20 md:text-6xl font-bold text-neutral-500 ">
                 {item.title}
               </h3>
             </div>
