@@ -13,15 +13,15 @@ export const ProjectDemo = ({ screenshots, displayType }: ProjectDemoProps) => {
   return (
     <section className="min-h-screen w-full flex flex-col justify-center items-center">
       <div className="text-center px-4 pt-12">
-        <h2 className="text-3xl sm:text-4xl font-bold text-white font-orbitron">
+        <h2 className="text-2xl sm:text-4xl font-bold text-white font-orbitron">
           Project in Action
         </h2>
-        <p className="my-4 text-neutral-400 text-lg max-w-2xl mx-auto">
+        <p className="my-4 text-neutral-400 text-base max-w-2xl mx-auto">
           Here are some screenshots showcasing the project's interface. Drag the cards around to get a better view.
         </p>
       </div>
 
-      <DraggableCardContainer className="relative flex h-[70vh] w-full items-center justify-center overflow-clip">
+      <DraggableCardContainer className="relative flex h-full w-full items-center justify-center overflow-clip">
         {screenshots.map((item, i) => (
           <DraggableCardBody key={i} className={item.className} displayType={displayType}>
          

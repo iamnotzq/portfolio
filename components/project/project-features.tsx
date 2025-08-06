@@ -13,10 +13,10 @@ export const ProjectFeatures = ({ features }: ProjectFeaturesProps) => {
   return (
     <section className="min-h-screen w-full flex flex-col justify-center items-center">
         <div className="text-center px-4 pt-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white font-orbitron">
+            <h2 className="text-2xl sm:text-4xl font-bold text-white font-orbitron">
                 Key Features
             </h2>
-            <p className="mt-4 text-neutral-400 text-lg max-w-2xl mx-auto">
+            <p className="mt-4 text-neutral-400 text-base max-w-2xl mx-auto">
                 Explore the core functionalities and technical highlights that make this project stand out.
             </p>
         </div>
