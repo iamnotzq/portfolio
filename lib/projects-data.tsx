@@ -191,8 +191,8 @@ export const slideData: ProjectData[] = [
   imageUrl: "/projects/workforceApp/homePage.jpg",
   displayType: "mobile",
   src: "/projects/workforceApp/features/thumbnail.jpg",
-  liveUrl: "#",
-  githubUrl: "#",
+  liveUrl: "",
+  githubUrl: "",
   
   overview: "I independently designed, built, and deployed this mobile-first workforce management app for Props Factory to modernize daily operations and eliminate paper-based workflows. Tailored for a diverse and largely non-technical workforce, the app allows employees to check in/out securely using GPS and facial recognition, view payslips, submit claims and overtime, access project assignments, and manage their profiles. Real-time notifications, streamlined approvals, and role-based access controls help align workers and supervisors on key tasks. The system is powered by Supabase (PostgreSQL) for structured data and Google Cloud for serverless backend logic, media storage, and auto-deploy infrastructure. Firebase Cloud Messaging enables instant alerts, while cloud functions and RPCs handle critical logic like payroll calculations and request status updates. The result is a highly optimized, maintainable app aligned with real-world workflows and tested directly with field staff.",
   
@@ -804,12 +804,12 @@ export default UpdateChecker`,
     description: "A custom-built corporate website for Props Factory, redesigned with modern UI and SEO best practices.",
     year: 2024,
     role: "Full-Stack Developer & Designer",
-    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Figma", "Expo"],
+    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Figma"],
     imageUrl: "/projects/pfWebsite/hero.png",
     displayType: "macbook", // Set this to 'macbook' or 'mobile' for each project
     src: "/projects/pfWebsite/hero.png",
-    liveUrl: "#",
-    githubUrl: "#",
+    liveUrl: "https://propsfactory.com.sg",
+    githubUrl: "",
 
     overview: "I spearheaded the end-to-end redesign and development of the Props Factory corporate website, transforming a static, outdated platform into a modern, dynamic, and user-centric digital presence. The primary goal was to empower non-technical staff with full content control. To achieve this, I architected a headless solution using Next.js, TypeScript, and Tailwind CSS, integrating Contentful for the blog and Cloudinary for the project gallery. This allows the team to publish updates instantly without developer intervention. The site features a fully responsive design, an automated contact form, and engaging animations with Framer Motion. I also implemented a comprehensive technical SEO strategy from the ground up, resulting in measurable traffic growth, and managed the full deployment pipeline on Vercel.",
     features: [
@@ -1261,7 +1261,7 @@ export default UpdateChecker`,
         description:
           "Fully responsive design crafted with Tailwind CSS, custom breakpoints, and layout adjustments. Optimized for touch interactions and accessibility.",
         icon: "IconDeviceMobile",
-        imageUrl: "/projects/portfolioWebsite/laptop.png",
+        imageUrl: "/projects/portfolioWebsite/mobile.png",
       },
       {
         title: "Optimized Performance & Monitoring",
@@ -1483,8 +1483,8 @@ export default UpdateChecker`,
     imageUrl: "/projects/nutriwise/nutri1.png", 
     displayType: "mobile",
     src: "/projects/nutriwise/nutri1.png", 
-    liveUrl: "#",
-    githubUrl: "#",
+    liveUrl: "",
+    githubUrl: "",
  
     overview: "Nutriwise is a mobile app developed as part of my Final Year Project (FYP), aimed at tackling the critical need for active diabetes self-management. With no known cure for the condition, empowering users with the right tools is essential. The app enables users to log meals, monitor glucose levels, manage insulin intake, and stay connected with a supportive community. As Project Lead, I oversaw the UI/UX design, guided the development process, architected the backend database, and conducted in-depth user and market research to ensure the app was both effective and user-friendly."
 ,
@@ -1576,31 +1576,21 @@ export default UpdateChecker`,
         quote: "I learned how challenging it can be to lead a team with different technical skill levels. Disagreements are inevitable, but focusing on shared goals helped us align and move forward effectively.",
         name: "Leadership Through Alignment",
         designation: "Team Collaboration & Conflict Resolution",
-        src: "/projects/nutriwise/documentation/teamwork.png", // replace with actual image if you have one
+        src: "/projects/nutriwise/nutri1.png", 
       },
       {
         quote: "During real-world testing, I realized that food tracking accuracy is difficult for users. This insight led to creating a blog section to educate users about portioning and healthy choices.",
         name: "From Testing to Teaching",
         designation: "User Education Through Content",
-        src: "/projects/nutriwise/nutri2.png", // replace with screenshot if available
+        src: "/projects/nutriwise/nutri14.jpg", 
       },
-      {
-        quote: "I learned how to deploy a production-ready mobile app using Expo, understanding the build process, OTA updates, and store distribution.",
-        name: "Deploying with Expo",
-        designation: "Mobile App Deployment",
-        src: "/projects/nutriwise/nutri3.png",
-      },
-      {
-        quote: "Working on the backend taught me how to structure and manage user data effectively, especially in health apps where logs and privacy matter.",
-        name: "Backend Structure & Data Management",
-        designation: "Data Modeling for Health Apps",
-        src: "/projects/nutriwise/nutri1.png",
-      },
+      
+      
       {
         quote: "Using Figma alongside architecture and sequence diagrams helped our team stay aligned. These visual tools were essential in turning ideas into concrete flows.",
         name: "Design as Communication",
         designation: "Figma & System Diagrams",
-        src: "/projects/nutriwise/documentation/figma.png",
+        src: "/projects/nutriwise/figma.png",
       }
     ],
     documentation: [
@@ -1655,7 +1645,7 @@ export default UpdateChecker`,
         content: {
           type: 'image',
           props: {
-            src: "/projects/nutriwise/documentation/nutri16.png",
+            src: "/projects/nutriwise/documentation/nutri1.png",
             alt: "Frontend Architecture",
             className: "h-full w-full object-cover rounded-lg"
           }
@@ -1729,7 +1719,7 @@ export default UpdateChecker`,
         content: {
           type: 'image',
           props: {
-            src: "/projects/nutriwise/documentation/nutri16.jpg",
+            src: "/projects/nutriwise/documentation/nutri16.png",
             alt: "Effortless Food Logging",
             className: "h-full w-full object-cover rounded-lg"
           }
@@ -1769,15 +1759,16 @@ export default UpdateChecker`,
             We used <strong>GitHub Actions</strong> for continuous integration and automatic builds during feature rollouts.
           </>
         ),
-        content: {
-          type: 'code',
+         content: {
+          type: 'image',
           props: {
-            language: "yaml",
-            filename: "ci.yml",
-            code: "name: CI\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n    - uses: actions/checkout@v2\n    - name: Install and build\n      run: npm install && npm run build",
-            highlightLines: [3, 7]
+            src: "/projects/nutriwise/documentation/nutri10.png",
+            alt: "Effortless Food Logging",
+            className: "h-full w-full object-cover rounded-lg"
           }
-        }
+        },
+        width: "16rem",
+        height: "34rem"
       },
       {
         title: "Marketing Materials & Website Mockup",
@@ -1787,17 +1778,14 @@ export default UpdateChecker`,
           </>
         ),
         content: {
-          type: 'compare',
+          type: 'image',
           props: {
-            firstImage: "/projects/nutriwise/documentation/adMockup.jpg", // Replace with your ad image
-            secondImage: "/projects/nutriwise/documentation/websiteMockup.jpg", // Replace with your website mockup
-            firstImageClassName: "object-cover object-left-top",
-            secondImageClassName: "object-cover object-left-top",
-            className: "h-full w-full rounded-lg",
-            slideMode: "hover"
+            src: "/projects/nutriwise/documentation/image106.png",
+            alt: "Effortless Food Logging",
+            className: "h-full w-full object-fit rounded-lg"
           }
         },
-        width: "16rem",
+        width: "24rem",
         height: "34rem"
       }
     ]

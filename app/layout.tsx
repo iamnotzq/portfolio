@@ -20,7 +20,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Zhi Qiang's Portfolio",
-  description: "Portfolio created using Next JS",
+  description: "This Portfolio is made entirely out of code.",
+  icons: {
+    icon: "/logo.png", 
+  },
 };
 
 export default function RootLayout({

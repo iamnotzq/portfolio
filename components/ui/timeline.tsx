@@ -15,7 +15,7 @@ interface TimelineContent {
   listItems: React.ReactNode[];
   skillsTitle?: string;
   skills?: Skill[];
-  images?: { src: string; alt: string }[];
+  images?: { src: string; alt: string; className?: string }[];
 }
 
 // --- Define the structure for a single timeline entry ---
@@ -33,7 +33,7 @@ const TimelineContentComponent = ({ content }: { content: TimelineContent }) => 
     list: "list-disc list-outside text-xs md:text-sm lg:text-base text-neutral-200 space-y-3",
     listItem: "mb-4", // Added margin bottom to list items for better spacing if needed
     skillsTitle: "text-base md:text-lg lg:text-xl xl:text-2xl font-bold text-white mt-6 mb-3",
-    imageGrid: "grid grid-cols-2 gap-4 mt-4",
+    imageGrid: "grid grid-cols-2 md:grid-flow-dense gap-4 mt-4",
     image: "w-full h-full rounded-lg object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]",
     skillsContainer: "flex flex-row flex-wrap items-center justify-start mb-6",
   };
@@ -52,7 +52,12 @@ const TimelineContentComponent = ({ content }: { content: TimelineContent }) => 
       {content.images && content.images.length > 0 && (
         <div className={styles.imageGrid}>
           {content.images.map((image, index) => (
-            <img key={index} src={image.src} alt={image.alt} className={styles.image} />
+            <img
+              key={index}
+              src={image.src}
+              alt={image.alt}
+              className={`${styles.image} ${image.className || ''}`}
+            />
           ))}
         </div>
       )}

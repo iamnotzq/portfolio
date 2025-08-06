@@ -17,6 +17,14 @@ export const timelineData = [
         <>Designed and developed the corporate website, implementing SEO best practices that <span className="text-green-400 font-bold">doubled site traffic within 6 months</span> and enhanced online presence.</>,
         <>As Assistant Project Manager, managed event projects from planning to execution, receiving commendations for <span className="text-blue-400 font-bold">excellent communication and project management</span>, which resulted in significant repeat business.</>,
       ],
+      images: [
+      { src: "/about/hero.png", alt: "University project 3", className: "col-span-2" },
+        { src: "/about/gallery.png", alt: "University project 4", className: "col-span-2" },
+           { src: "/about/homePage.jpg", alt: "University project 2", className: "col-span-1 " },
+        { src: "/about/history.jpg", alt: "University project 1", className: "col-span-1" },
+     
+        
+      ],
       skills: propsFactorySkill,
     },
   },
@@ -32,10 +40,11 @@ export const timelineData = [
         <>Selected for a competitive semester exchange to Wollongong, Australia—an honor awarded to <span className="text-yellow-400 font-bold">fewer than 10 students.</span></>,
       ],
       images: [
-        { src: "/about/pet1.png", alt: "University project 1" },
-        { src: "/about/azoom1.png", alt: "University project 2" },
-        { src: "/about/bugger1.png", alt: "University project 3" },
-        { src: "/about/nutri1.png", alt: "University project 4" },
+        { src: "/about/pet1.png", alt: "University project 1", className: "col-span-2" },
+        { src: "/about/azoom1.png", alt: "University project 2", className: "col-span-2" },
+                { src: "/about/nutri1.png", alt: "University project 4", className: "col-span-1 " },
+        { src: "/about/nutri2.jpg", alt: "University project 3", className: "col-span-1 " },
+
       ],
       skills: universitySkills,
     },
@@ -51,7 +60,7 @@ export const timelineData = [
         <>Leveraged insights on user behavior to assist in designing and developing the <span className="text-blue-400 font-bold">front-end of the POS system</span>, ensuring it met both staff and customer requirements.</>,
       ],
       images: [
-        { src: "/about/lagoon1.jpg", alt: "Lagoon Laundry POS system" },
+        { src: "/about/lagoon1.jpg", alt: "Lagoon Laundry POS system", className: "col-span-2" },
       ],
       skills: [], // No skills section in original content
     },
@@ -69,8 +78,8 @@ export const timelineData = [
         <>Authored detailed product manuals as a self-initiated project, which <span className="text-blue-400 font-bold">streamlined internal work processes</span> and was commended by management.</>,
       ],
       images: [
-        { src: "/about/auralManual.png", alt: "Aural Aid Manual" },
-        { src: "/about/auralPanel.png", alt: "Aural Aid Panel" },
+        { src: "/about/auralManual.png", alt: "Aural Aid Manual", className: "col-span-2" },
+        { src: "/about/auralPanel.png", alt: "Aural Aid Panel", className: "col-span-2" },
       ],
       skills: auralAidSkills,
     },

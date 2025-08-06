@@ -10,7 +10,7 @@ import React, {
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { CarouselSlideData } from "@/lib/projects-data";
-import { ExternalLink, Github, ArrowRight } from "lucide-react"; // Import icons
+import { ExternalLink, GitBranch, ArrowRight } from "lucide-react"; // Import icons
 
 // --- 3D Card Components (remains the same) ---
 const MouseEnterContext = createContext<
@@ -211,32 +211,34 @@ const Slide = ({ slide, index, current, handleSlideClick }: { slide: CarouselSli
               </Link>
             </CardItem>
             <div className="flex items-center gap-4">
-                 <CardItem
-                    translateZ={20}
-                 >
-                    <a
-                        href={liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-neutral-400 hover:text-white transition-colors"
-                        title="Live Demo"
-                    >
-                        <ExternalLink className="md:h-5 md:w-5 h-4 w-4" />
-                    </a>
-                 </CardItem>
-                 <CardItem
-                    translateZ={20}
-                 >
-                    <a
-                        href={githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-neutral-400 hover:text-white transition-colors"
-                        title="View Code"
-                    >
-                        <Github className="md:h-5 md:w-5 h-4 w-4" />
-                    </a>
-                 </CardItem>
+                 {liveUrl && (
+                    <CardItem translateZ={20}>
+                        <a
+                            href={liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-neutral-400 hover:text-white transition-colors inline-flex items-center gap-2"
+                            title="Live Demo"
+                        >
+                    <ExternalLink className="md:h-5 md:w-5 h-4 w-4" />
+                     <span className="text-xs md:text-sm">Live Demo</span>
+                        </a>
+                    </CardItem>
+                 )}
+                 {githubUrl && (
+                    <CardItem translateZ={20}>
+                        <a
+                            href={githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-neutral-400 hover:text-white transition-colors inline-flex items-center gap-2"
+                            title="View Code"
+                        >
+                    <GitBranch className="md:h-5 md:w-5 h-4 w-4" />
+                     <span className="text-xs md:text-sm">Source Code</span>
+                        </a>
+                    </CardItem>
+                 )}
             </div>
           </div>
         </CardBody>

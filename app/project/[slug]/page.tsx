@@ -43,13 +43,13 @@ export default function ProjectPage() {
         // Phase 3: Wait a moment, then finish to trigger fade-out
         const completedTimer = setTimeout(() => {
           setLoadingState('finished');
-        }, 1500); // Show "completed" message for 1.5 seconds
+        }, 500); // Show "completed" message for 1.5 seconds
 
         return () => clearTimeout(completedTimer);
       } else {
         notFound();
       }
-    }, 3000); // Show "loading" message for 3 seconds
+    }, 1500); // Show "loading" message for 1.5 seconds
 
     return () => clearTimeout(loadingTimer);
   }, [params.slug]);
@@ -80,7 +80,7 @@ export default function ProjectPage() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className={`text-4xl md:text-4xl lg:text-6xl font-semibold text-neutral-200 font-orbitron`}
+                className={`text-4xl md:text-4xl lg:text-6xl font-semibold text-neutral-200 font-orbitron text-center px-4`}
               >
                 {loadingText}
               </motion.h1>

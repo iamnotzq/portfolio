@@ -91,8 +91,9 @@ export default function Home() {
   const { scrollY } = useScroll();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
-  const [loadingState, setLoadingState] = useState('loading');
-  const [loadingText, setLoadingText] = useState("Approaching target...");
+  // --- SIMPLIFIED LOADING STATE ---
+  // We now only track if the page is loading or not.
+  const [isLoading, setIsLoading] = useState(true);
 
   const [pointerText, setPointerText] = useState("");
   const [pointerVisible, setPointerVisible] = useState(false);
@@ -178,25 +179,30 @@ export default function Home() {
   }, [pointerX, pointerY]);
 
 
+  // --- DYNAMIC LOADING EFFECT ---
+  // This effect now waits for the window's 'load' event, ensuring all initial
+  // page resources (including the dynamic globe component) are ready before hiding the loading screen.
   useEffect(() => {
-    const loadingTimer = setTimeout(() => {
-        setLoadingText("Welcome.");
-        setLoadingState('completed');
+    const handlePageLoad = () => {
+      setIsLoading(false);
+      setPointerText("Scroll to discover.");
+      setPointerVisible(true);
+    };
 
-        const completedTimer = setTimeout(() => {
-          setLoadingState('finished');
-          setPointerText("Scroll to discover.");
-          setPointerVisible(true);
-        }, 1500);
-
-        return () => clearTimeout(completedTimer);
-    }, 5000);
-
-    return () => clearTimeout(loadingTimer);
+    // If the page is already loaded when this component mounts, hide the loader immediately.
+    if (document.readyState === 'complete') {
+      handlePageLoad();
+    } else {
+      // Otherwise, wait for the 'load' event.
+      window.addEventListener('load', handlePageLoad);
+      // Clean up the event listener when the component unmounts.
+      return () => window.removeEventListener('load', handlePageLoad);
+    }
   }, []);
 
+  // This effect runs after loading is finished to check for URL hashes
   useEffect(() => {
-    if (loadingState === 'finished') {
+    if (!isLoading) {
       const hash = window.location.hash.substring(1);
       const validHashes = ['about', 'contact', 'projects'];
       
@@ -204,7 +210,7 @@ export default function Home() {
         handleNavMenuClick(hash as 'about' | 'contact' | 'projects');
       }
     }
-  }, [loadingState, handleNavMenuClick]);
+  }, [isLoading, handleNavMenuClick]);
 
 
   const scale = useTransform(scrollY, [0, 1000], [0.05, 1]);
@@ -249,29 +255,25 @@ export default function Home() {
         text={pointerText}
       />
 
+      {/* --- SIMPLIFIED LOADING SCREEN --- */}
       <AnimatePresence>
-        {loadingState !== "finished" && (
+        {isLoading && (
           <motion.div
             key="loading-screen"
             exit={{
               opacity: 0,
               transition: { duration: 0.8, ease: "easeInOut" },
             }}
-            className={`fixed inset-0 flex items-center justify-center z-50 transition-all duration-500 ${
-              loadingState === "completed"
-                ? "bg-black/50 backdrop-blur-sm"
-                : "bg-black"
-            }`}
+            className="fixed inset-0 flex items-center justify-center z-50 bg-black"
           >
             <motion.h1
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              key={loadingText}
               transition={{ duration: 0.5 }}
-              className={`text-4xl md:text-4xl lg:text-6xl font-semibold text-neutral-200 font-orbitron`}
+              className="text-4xl md:text-4xl lg:text-6xl font-semibold text-neutral-200 font-orbitron"
             >
-              {loadingText}
+              Welcome
             </motion.h1>
           </motion.div>
         )}

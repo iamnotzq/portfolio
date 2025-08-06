@@ -1,13 +1,14 @@
 // components/project/project-overview.tsx
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, GitBranch } from "lucide-react";
+import { LinkPreview } from "../ui/link-preview";
 
 interface ProjectOverviewProps {
   overview: string;
   year: number;
   role: string;
   techStack: string[];
-  liveUrl: string;
-  githubUrl: string;
+  liveUrl?: string;
+  githubUrl?: string;
 }
 
 export const ProjectOverview = ({ overview, year, role, techStack, liveUrl, githubUrl }: ProjectOverviewProps) => {
@@ -37,19 +38,42 @@ export const ProjectOverview = ({ overview, year, role, techStack, liveUrl, gith
             ))}
           </div>
         </div>
-        <div>
-          <h3 className="text-xl md:text-xl lg:text-2xl font-semibold text-white mb-3 font-orbitron">Links</h3>
-          <div className="flex flex-col space-y-3">
-            <a href={liveUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-neutral-300 hover:text-sky-400 transition-colors">
-              <ExternalLink className="h-5 w-5" />
-              <span>Live Demo</span>
-            </a>
-            <a href={githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-neutral-300 hover:text-sky-400 transition-colors">
-              <Github className="h-5 w-5" />
-              <span>Source Code</span>
-            </a>
+        {(liveUrl || githubUrl) && (
+          <div>
+            <h3 className="text-xl md:text-xl lg:text-2xl font-semibold text-white mb-3 font-orbitron">Links</h3>
+            <div className="flex flex-col space-y-3">
+              {liveUrl && (
+                // Changed <a> to <div> to avoid nesting anchor tags, which is invalid HTML.
+                // The LinkPreview component itself renders the necessary <a> tag.
+                <div className="inline-flex items-center gap-2 text-neutral-300 hover:text-sky-400 transition-colors">
+                  <ExternalLink className="h-5 w-5" />
+                  <LinkPreview 
+                    url={liveUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="font-bold bg-clip-text text-transparent bg-gradient-to-br from-purple-500 to-pink-500"
+                  >
+                    Live Demo
+                  </LinkPreview>
+                </div>
+              )}
+              {githubUrl && (
+                // Changed <a> to <div> to avoid nesting anchor tags.
+                <div className="inline-flex items-center gap-2 text-neutral-300 hover:text-sky-400 transition-colors">
+                  <GitBranch className="h-5 w-5" />
+                  <LinkPreview 
+                    url={githubUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="font-bold bg-clip-text text-transparent bg-gradient-to-br from-purple-500 to-pink-500"
+                  >
+                    Source Code
+                  </LinkPreview>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
+        )}
       </aside>
     </section>
   );
