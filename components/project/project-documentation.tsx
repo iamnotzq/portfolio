@@ -49,12 +49,12 @@ const ProjectDocumentation = ({ documentation }: ProjectDocumentationProps) => {
     // The main section container. We control padding here to integrate the sticky header.
     <section className="w-full">
         
-        <div className="sticky top-0 z-20 pt-24 ">
+        <div className="lg:sticky top-0 z-20 pt-24 ">
             <div className="text-center px-4">
-                <h2 className="text-3xl sm:text-4xl font-bold text-white font-orbitron">
+                <h2 className="text-2xl sm:text-4xl font-bold text-white font-orbitron">
                     Project Documentation
                 </h2>
-                <p className="mt-4 text-neutral-400 text-lg max-w-2xl mx-auto">
+                <p className="mt-4 text-neutral-400 md:text-xl text-base max-w-2xl mx-auto">
                     Dive deeper into the technical aspects, from setup to deployment. Scroll to explore the details.
                 </p>
             </div>

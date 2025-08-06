@@ -94,7 +94,7 @@ export default function ProjectPage() {
         
         // Added `overflow-x-hidden` to prevent horizontal scrolling, which fixes the navbar width issue.
         // Removed non-standard `max-w-screen` class.
-        <div className="bg-transparent text-white w-full min-h-screen overflow-x-hidden">
+        <div className="bg-transparent text-white w-full min-h-screen">
      
           <div className="fixed inset-0 -z-30 bg-green-950 opacity-30"></div>
 

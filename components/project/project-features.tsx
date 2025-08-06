@@ -16,7 +16,7 @@ export const ProjectFeatures = ({ features }: ProjectFeaturesProps) => {
             <h2 className="text-2xl sm:text-4xl font-bold text-white font-orbitron">
                 Key Features
             </h2>
-            <p className="mt-4 text-neutral-400 text-base max-w-2xl mx-auto">
+            <p className="mt-4 text-neutral-400 text-base md:text-xl max-w-2xl mx-auto">
                 Explore the core functionalities and technical highlights that make this project stand out.
             </p>
         </div>

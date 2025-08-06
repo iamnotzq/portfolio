@@ -275,7 +275,7 @@ export const slideData: ProjectData[] = [
 },{
   title: "Notification",
   image: "/projects/workforceApp/notification.jpg",
-  className: "absolute top-28 left-[24%] rotate-[-1deg]",
+  className: "absolute top-24 left-[24%] rotate-[-1deg]",
 },
     ],
     learnings: [
@@ -995,7 +995,7 @@ export default UpdateChecker`,
           type: 'image',
           props: {
             src: "/projects/pfWebsite/gallery.png",
-            className: "h-full w-full object-fit object-left-top"
+            className: "h-full w-full object-fit"
           }
         },
         width: "42rem",
@@ -1044,7 +1044,7 @@ export default UpdateChecker`,
           type: 'image',
           props: {
             src: "/projects/pfWebsite/quote.png",
-            className: "h-full w-full object-fit object-left-top"
+            className: "h-full w-full object-fit"
           }
         },
         width: "42rem",
@@ -1061,7 +1061,7 @@ export default UpdateChecker`,
           type: 'image',
           props: {
            src: "/projects/pfWebsite/works.png",
-            className: "h-full w-full object-fit object-left-top"
+            className: "h-full w-full object-fit"
           }
         },
         width: "42rem",
@@ -1166,7 +1166,7 @@ export default UpdateChecker`,
           type: 'image',
           props: {
             src: "/projects/pfWebsite/mobile.png",
-            className: "h-full w-full object-fit object-left-top"
+            className: "h-full w-full object-fit"
           }
         },
         width: "42rem",

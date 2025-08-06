@@ -15,7 +15,7 @@ export const ProjectHero = ({ title, imageUrl, displayType }: ProjectHeroProps) 
     <div
       className={cn(
         "relative w-full rounded-2xl",
-        { "overflow-hidden": displayType === 'macbook' }
+        { "overflow-hidden ": displayType === 'macbook' }
       )}
     >
       {displayType === 'macbook' ? (

@@ -38,7 +38,7 @@ export const MobileScroll = ({
 
   return (
     // This container defines the scrollable area for the animation.
-    <div ref={containerRef} className="min-h-[180vh] relative pb-20 md:pb-40">
+    <div ref={containerRef} className="min-h-[180vw] relative pb-40 md:pb-40">
       
       <div className="sticky top-0 h-screen flex items-center justify-center">
         

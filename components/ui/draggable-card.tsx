@@ -168,8 +168,8 @@ export const DraggableCardBody = ({
       className={cn(
        "relative overflow-hidden rounded-xl p-2 shadow-2xl transform-3d bg-neutral-900",
         {
-          "3xl:min-h-45 3xl:w-108 min-h-45 xl:w-96": displayType === "macbook",
-          "xl:min-h-96 xl:w-45 ": displayType === "mobile",
+          "3xl:min-h-45 3xl:w-108 w-88 md:w-108 xl:w-96": displayType === "macbook",
+          "xl:min-h-96 xl:w-45 w-50": displayType === "mobile",
         },
         className
       )}
