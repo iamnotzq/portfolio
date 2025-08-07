@@ -107,11 +107,6 @@ export const Compare = ({
     [slideMode, isDragging]
   );
 
-  const handleMouseDown = useCallback(
-    (e: React.MouseEvent) => handleStart(),
-    [handleStart]
-  );
-  const handleMouseUp = useCallback(() => handleEnd(), [handleEnd]);
   const handleMouseMove = useCallback(
     (e: React.MouseEvent) => handleMove(e.clientX),
     [handleMove]
@@ -153,8 +148,8 @@ export const Compare = ({
       onMouseMove={handleMouseMove}
       onMouseLeave={mouseLeaveHandler}
       onMouseEnter={mouseEnterHandler}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
+      onMouseDown={handleStart}
+      onMouseUp={handleEnd}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       onTouchMove={handleTouchMove}
