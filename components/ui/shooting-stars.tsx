@@ -55,7 +55,9 @@ export const ShootingStars: React.FC<ShootingStarsProps> = ({
   className,
 }) => {
   const [star, setStar] = useState<ShootingStar | null>(null);
-  const animationFrameRef = useRef<number>();
+  // FIX: Initialize useRef with a value, in this case null.
+  // The type is updated to allow for null.
+  const animationFrameRef = useRef<number | null>(null);
 
   // This effect is responsible for the animation loop.
   // It runs continuously but only acts when there is a star to animate.

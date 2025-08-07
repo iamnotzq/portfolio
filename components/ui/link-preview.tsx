@@ -12,14 +12,13 @@ import {
 
 import { cn } from "@/lib/utils";
 
+// The `quality` and `layout` props have been removed from the type definition
 type LinkPreviewProps = {
   children: React.ReactNode;
   url: string;
   className?: string;
   width?: number;
   height?: number;
-  quality?: number;
-  layout?: string;
 } & (
   | { isStatic: true; imageSrc: string }
   | { isStatic?: false; imageSrc?: never }
@@ -31,8 +30,7 @@ export const LinkPreview = ({
   className,
   width = 200,
   height = 125,
-  quality = 50,
-  layout = "fixed",
+  // The `quality` and `layout` props have been removed from the destructuring
   isStatic = false,
   imageSrc = "",
   ...rest
@@ -83,8 +81,6 @@ export const LinkPreview = ({
             src={src}
             width={width}
             height={height}
-            quality={quality}
-            layout={layout}
             alt="hidden image"
           />
         </div>
@@ -147,8 +143,6 @@ export const LinkPreview = ({
                     src={isStatic ? imageSrc : src}
                     width={width}
                     height={height}
-                    quality={quality}
-                    layout={layout}
                     className="rounded-lg"
                     alt="preview image"
                   />

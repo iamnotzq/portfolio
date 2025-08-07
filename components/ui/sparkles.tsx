@@ -2,6 +2,7 @@
 import React, { useId } from "react";
 import { useEffect, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
+// The unused 'IResizeEvent' has been removed from this import.
 import type { Container, SingleOrMultiple } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim";
 import { cn } from "@/lib/utils";
@@ -80,7 +81,9 @@ export const SparklesCore = (props: ParticlesProps) => {
                   enable: false,
                   mode: "repulse",
                 },
-                resize: true,
+                resize: {
+                  enable: true,
+                },
               },
               modes: {
                 push: {

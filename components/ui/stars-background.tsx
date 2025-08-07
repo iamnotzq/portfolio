@@ -4,7 +4,7 @@ import React, {
   useState,
   useEffect,
   useRef,
-  RefObject,
+  // RefObject has been removed as it was not used.
   useCallback,
 } from "react";
 import { MotionValue } from "framer-motion";
@@ -40,8 +40,7 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
   scale,
 }) => {
   const [stars, setStars] = useState<StarProps[]>([]);
-  const canvasRef: RefObject<HTMLCanvasElement> =
-    useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const generateStars = useCallback(
     (width: number, height: number): StarProps[] => {
@@ -93,15 +92,17 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
     };
 
     updateStars();
-
+    
+    // Store the current ref value in a variable to use in the cleanup function.
+    const canvasElement = canvasRef.current;
     const resizeObserver = new ResizeObserver(updateStars);
-    if (canvasRef.current) {
-      resizeObserver.observe(canvasRef.current);
+    if (canvasElement) {
+      resizeObserver.observe(canvasElement);
     }
 
     return () => {
-      if (canvasRef.current) {
-        resizeObserver.unobserve(canvasRef.current);
+      if (canvasElement) {
+        resizeObserver.unobserve(canvasElement);
       }
     };
   }, [generateStars]);
