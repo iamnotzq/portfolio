@@ -112,7 +112,6 @@ const NavbarComponent = ({ onMenuClick, onHomeClick }: NavbarComponentProps) => 
      
               <MobileNavMenu
                 isOpen={isMobileMenuOpen}
-                onClose={() => setIsMobileMenuOpen(false)}
               >
                 {navItems.map((item) => (
                   <button
