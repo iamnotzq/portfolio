@@ -50,62 +50,13 @@ export type ContentItem = {
 };
 
 /**
- * The main StickyScroll component. It now renders two different layouts:
- * 1. A non-sticky, stacked layout for mobile devices.
- * 2. The original sticky-scroll layout for desktop devices.
+ * A new component to render the content for each card.
+ * By making this a proper React component, it can have its own state (like 'hovering')
+ * without violating the rules of hooks.
+ * @param item The ContentItem to render.
+ * @returns A React component.
  */
-export const StickyScroll = ({
-  content,
-  contentClassName,
-}: {
-  content: ContentItem[];
-  contentClassName?: string;
-}) => {
-  const [activeCard, setActiveCard] = React.useState(0);
-  // The ref is now attached to the desktop-only container.
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    // The scroll hook is targeted to the desktop container.
-    // On mobile, ref.current will be null, and the hook will not have an effect.
-    target: ref,
-    offset: ["start start", "end end"],
-  });
-
-  // If there is no content, we avoid rendering the component to prevent errors.
-  if (!content || content.length === 0) {
-    return null;
-  }
-
-  const cardLength = content.length;
-
-  // This hook updates the active card based on the scroll progress for the desktop view.
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    if (cardLength < 2) {
-      return;
-    }
-    const cardsBreakpoints = content.map(
-      (_, index) => index / (cardLength - 1)
-    );
-    const closestBreakpointIndex = cardsBreakpoints.reduce(
-      (acc, breakpoint, index) => {
-        const distance = Math.abs(latest - breakpoint);
-        if (distance < Math.abs(latest - cardsBreakpoints[acc])) {
-          return index;
-        }
-        return acc;
-      },
-      0
-    );
-    setActiveCard(closestBreakpointIndex);
-  });
-
-  /**
-   * Renders the correct component based on the content type specified
-   * in the active card's data.
-   * @param item The active ContentItem.
-   * @returns A React component.
-   */
-  const renderContent = (item: ContentItem) => {
+const ContentRenderer = ({ item }: { item: ContentItem }) => {
     const [hovering, setHovering] = useState(false);
     switch (item.content.type) {
       case "image":
@@ -131,6 +82,58 @@ export const StickyScroll = ({
     }
   };
 
+
+/**
+ * The main StickyScroll component. It now renders two different layouts:
+ * 1. A non-sticky, stacked layout for mobile devices.
+ * 2. The original sticky-scroll layout for desktop devices.
+ */
+export const StickyScroll = ({
+  content,
+  contentClassName,
+}: {
+  content: ContentItem[];
+  contentClassName?: string;
+}) => {
+  const [activeCard, setActiveCard] = React.useState(0);
+  // The ref is now attached to the desktop-only container.
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    // The scroll hook is targeted to the desktop container.
+    // On mobile, ref.current will be null, and the hook will not have an effect.
+    target: ref,
+    offset: ["start start", "end end"],
+  });
+  const cardLength = content.length;
+
+  // This hook updates the active card based on the scroll progress for the desktop view.
+  // It is now called unconditionally at the top level of the component.
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    if (cardLength < 2) {
+      return;
+    }
+    const cardsBreakpoints = content.map(
+      (_, index) => index / (cardLength - 1)
+    );
+    const closestBreakpointIndex = cardsBreakpoints.reduce(
+      (acc, breakpoint, index) => {
+        const distance = Math.abs(latest - breakpoint);
+        if (distance < Math.abs(latest - cardsBreakpoints[acc])) {
+          return index;
+        }
+        return acc;
+      },
+      0
+    );
+    setActiveCard(closestBreakpointIndex);
+  });
+
+  // If there is no content, we avoid rendering the component to prevent errors.
+  // This early return is now placed after all hook calls.
+  if (!content || content.length === 0) {
+    return null;
+  }
+
   // Default dimensions if not provided in the content data
   const DEFAULT_WIDTH = "45rem";
   const DEFAULT_HEIGHT = "30rem";
@@ -155,7 +158,7 @@ export const StickyScroll = ({
                 contentClassName
               )}
             >
-              {renderContent(item)}
+              <ContentRenderer item={item} />
             </div>
             {/* Text Content (Left side on desktop) */}
             <div className="mt-4">
@@ -164,8 +167,6 @@ export const StickyScroll = ({
                 {item.description}
               </p>
             </div>
-            
-            
           </div>
         ))}
       </div>
@@ -230,7 +231,7 @@ export const StickyScroll = ({
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                   className="h-full w-full"
                 >
-                  {renderContent(content[activeCard])}
+                  <ContentRenderer item={content[activeCard]} />
                 </motion.div>
               </AnimatePresence>
             </motion.div>

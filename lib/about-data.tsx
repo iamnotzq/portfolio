@@ -55,8 +55,8 @@ export const timelineData = [
       heading: "Lagoon Laundry",
       subheading: "Part-time Customer Service & Front End Developer",
       listItems: [
-        <>Contributed to the development of a new POS system by analyzing staff and customer workflows, which <span className="text-red-500 font-bold">eliminated 100% of manual bookkeeping</span> and boosted operational efficiency.</>,
-        <>Honed customer service and communication skills, becoming a familiar face to regulars and contributing to a <span className="text-green-400 font-bold">high rate of repeat customers</span>.</>,
+        <>Contributed to a major website overhaul by designing, modeling, and rendering 3D product visuals, which <span className="text-green-400 font-bold">enhanced the site&apos;s UI/UX</span>.</>,
+         <>Honed customer service and communication skills, becoming a familiar face to regulars and contributing to a <span className="text-green-400 font-bold">high rate of repeat customers</span>.</>,
         <>Leveraged insights on user behavior to assist in designing and developing the <span className="text-blue-400 font-bold">front-end of the POS system</span>, ensuring it met both staff and customer requirements.</>,
       ],
       images: [
@@ -74,7 +74,7 @@ export const timelineData = [
         <>
             <span className="text-blue-400 font-bold">Entrusted as the workshop in-charge</span> to manage the <span className="text-green-400 font-bold">end-to-end crafting of bespoke client products</span>, and produced innovative parametric designs by mastering <span className="text-orange-400 font-bold">Grasshopper</span> and <span className="text-orange-400 font-bold">3ds Max</span> from scratch.
         </>,
-        <>Contributed to a major website overhaul by designing, modeling, and rendering 3D product visuals, which <span className="text-green-400 font-bold">enhanced the site's UI/UX</span>.</>,
+        <>Contributed to a major website overhaul by designing, modeling, and rendering 3D product visuals, which <span className="text-green-400 font-bold">enhanced the site&apos;s UI/UX</span>.</>,
         <>Authored detailed product manuals as a self-initiated project, which <span className="text-blue-400 font-bold">streamlined internal work processes</span> and was commended by management.</>,
       ],
       images: [

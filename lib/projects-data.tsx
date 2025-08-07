@@ -57,16 +57,42 @@ export interface Learning {
   src: string;
 }
 
+// Specific prop types for documentation content
+interface ImageProps {
+  src: string;
+  alt: string;
+  className?: string;
+}
+
+interface CodeProps {
+  language: string;
+  filename: string;
+  code: string;
+  highlightLines?: number[];
+}
+
+interface CompareProps {
+  firstImage: string;
+  secondImage: string;
+  firstImageClassName?: string;
+  secondImageClassName?: string;
+  className?: string;
+  slideMode?: 'hover' | 'click';
+}
+
+// Discriminated union for content types
+type DocumentationContent =
+  | { type: 'image'; props: ImageProps }
+  | { type: 'code'; props: CodeProps }
+  | { type: 'compare'; props: CompareProps }
+  | { type: 'custom'; props: Record<string, unknown> }; // Fallback for custom components
 
 export interface DocumentationSection {
   title: string;
   description: string | React.ReactNode;
   width?: string; // Optional: custom width for the content (e.g., '40rem')
   height?: string; // Optional: custom height for the content (e.g., '30rem')
-  content: {
-      type: 'image' | 'code' | 'compare' | 'custom';
-      props: any;
-  };
+  content: DocumentationContent;
 }
 
 
@@ -93,38 +119,6 @@ export interface ProjectData {
   documentation: DocumentationSection[];
 }
 
-const codeExample = `import React from "react";
-
-const ProjectDocumentation = ({ documentation }: ProjectDocumentationProps) => {
-  
-  const content: ContentItem[] = documentation.map(docItem => ({
-    title: docItem.title,
-    description: docItem.description,
-    content: renderContent(docItem)
-  }));
-
-  return (
-    <section className="w-full">
-        <div className="sticky top-0 z-20 pt-24 ">
-            <div className="text-center px-4">
-                <h2 className="text-3xl sm:text-4xl font-bold text-white font-orbitron">
-                    Project Documentation
-                </h2>
-                <p className="mt-4 text-neutral-400 text-lg max-w-2xl mx-auto">
-                    Dive deeper into the technical aspects, from setup to deployment. Scroll to explore the details.
-                </p>
-            </div>
-        </div>
-
-        <div className="relative z-10 ">
-            <StickyScroll content={content} />
-        </div>
-    </section>
-  );
-};
-
-export default ProjectDocumentation;
-`;
 const projectPageCode = `"use client";
 
 import React from "react";
@@ -346,7 +340,7 @@ export const slideData: ProjectData[] = [
         title: "Tech Architecture & Backend Setup",
         description: (
           <>
-            Based on the company's preference to leverage Google's ecosystem, I used Firebase for authentication, cloud functions, and storage. For more complex relational data needs, I integrated Supabase (PostgreSQL) — enabling structured schemas and triggers. I made heavy use of Supabase RPC (Remote Procedure Calls) and edge functions to shift complex calculations and business logic (e.g., payroll, request validation) to the backend. This approach kept the mobile app lightweight and performant, while ensuring centralized, secure processing of core operations.
+            Based on the company&apos;s preference to leverage Google&apos;s ecosystem, I used Firebase for authentication, cloud functions, and storage. For more complex relational data needs, I integrated Supabase (PostgreSQL) — enabling structured schemas and triggers. I made heavy use of Supabase RPC (Remote Procedure Calls) and edge functions to shift complex calculations and business logic (e.g., payroll, request validation) to the backend. This approach kept the mobile app lightweight and performant, while ensuring centralized, secure processing of core operations.
           </>
         ),
         content: {
@@ -771,14 +765,14 @@ const UpdateChecker = () => {
           </Text>
           {updateModalInfo.notes && (
             <>
-              <Text style={styles.releaseNotesTitle}>What's New:</Text>
+              <Text style={styles.releaseNotesTitle}>What&apos;s New:</Text>
               <Text style={styles.releaseNotes}>{updateModalInfo.notes}</Text>
             </>
           )}
           <Text style={styles.modalInfo}>
-            Press 'Download' to get the latest version.
+            Press &apos;Download&apos; to get the latest version.
             {Platform.OS === 'android' &&
-              " You'll need to install it manually after downloading."}
+              " You&apos;ll need to install it manually after downloading."}
           </Text>
           <View style={styles.buttonContainer}>
             <Button title="Later" onPress={handleLaterPress} color="#777" />
@@ -956,6 +950,7 @@ export default UpdateChecker`,
           type: 'image',
           props: {
             src: "/projects/pfWebsite/documentation/wireframeOverview.png",
+            alt: "Wireframe Overview",
             className: "h-full w-full object-fit"
           }
         },
@@ -995,6 +990,7 @@ export default UpdateChecker`,
           type: 'image',
           props: {
             src: "/projects/pfWebsite/gallery.png",
+            alt: "Gallery View",
             className: "h-full w-full object-fit"
           }
         },
@@ -1011,6 +1007,7 @@ export default UpdateChecker`,
           type: 'image',
           props: {
            src: "/projects/pfWebsite/galleryMasonry.png",
+           alt: "Masonry Gallery",
             className: "h-full w-full object-fit"
           }
         },
@@ -1028,6 +1025,7 @@ export default UpdateChecker`,
           type: 'image',
           props: {
             src: "/projects/pfWebsite/blog.png",
+            alt: "Blog Page",
             className: "h-full w-full object-top"
           }
         },
@@ -1044,6 +1042,7 @@ export default UpdateChecker`,
           type: 'image',
           props: {
             src: "/projects/pfWebsite/quote.png",
+            alt: "Contact Form",
             className: "h-full w-full object-fit"
           }
         },
@@ -1061,6 +1060,7 @@ export default UpdateChecker`,
           type: 'image',
           props: {
            src: "/projects/pfWebsite/works.png",
+           alt: "Works Section",
             className: "h-full w-full object-fit"
           }
         },
@@ -1166,6 +1166,7 @@ export default UpdateChecker`,
           type: 'image',
           props: {
             src: "/projects/pfWebsite/mobile.png",
+            alt: "Mobile View",
             className: "h-full w-full object-fit"
           }
         },
@@ -1345,6 +1346,7 @@ export default UpdateChecker`,
           type: 'image',
           props: {
             src: "/projects/portfolioWebsite/homeFlow.png",
+            alt: "Portfolio Flow",
             className: "h-full w-full object-fit object-left-top"
           }
         },
@@ -1400,7 +1402,7 @@ export default UpdateChecker`,
             <br /><br />
             To enhance perceived performance and prevent layout shifts, I built a{" "}
             <strong>custom-themed loading screen</strong> aligned with the site’s visual language.
-            This solution was informed by runtime performance metrics from <strong>Vercel's analytics dashboard</strong>,
+            This solution was informed by runtime performance metrics from <strong>Vercel&apos;s analytics dashboard</strong>,
             helping ensure the smoothest UX possible across devices.
           </>
         ),
@@ -1408,6 +1410,7 @@ export default UpdateChecker`,
           type: 'image',
           props: {
             src: "/projects/portfolioWebsite/loading.png",
+            alt: "Loading Screen",
             className: "h-full w-full object-fit object-left-top"
           }
         },
@@ -1418,15 +1421,16 @@ export default UpdateChecker`,
         title: "Core Features & UX",
         description: (
           <>
-            A unique <strong>panel-based navigation system</strong> guides the user through the experience without traditional scrolling fatigue. After the hero section, the interface simulates a descent into a digital "world map" from which users can explore projects.
+            A unique <strong>panel-based navigation system</strong> guides the user through the experience without traditional scrolling fatigue. After the hero section, the interface simulates a descent into a digital &quot;world map&quot; from which users can explore projects.
             <br /><br />
-            Selecting a project triggers a <strong>contextual 'data stream' animation</strong>, providing visual continuity and reinforcing the site's sci-fi narrative. Each project page then reveals a <strong>layered technical breakdown</strong>.
+            Selecting a project triggers a <strong>contextual &apos;data stream&apos; animation</strong>, providing visual continuity and reinforcing the site&apos;s sci-fi narrative. Each project page then reveals a <strong>layered technical breakdown</strong>.
           </>
         ),
         content: {
           type: 'image',
           props: {
             src: "/projects/portfolioWebsite/map.png",
+            alt: "World Map",
             className: "h-full w-full object-fit"
           }
         },
@@ -1449,6 +1453,7 @@ export default UpdateChecker`,
           type: 'image',
           props: {
             src: "/projects/portfolioWebsite/map.png",
+            alt: "World Map Responsive",
             className: "h-full w-full object-fit"
           }
         },
@@ -1466,6 +1471,7 @@ export default UpdateChecker`,
           type: 'image',
           props: {
             src: "/projects/portfolioWebsite/about.png",
+            alt: "About Section",
             className: "h-full w-full object-fit object-left-top"
           }
         },
@@ -1682,7 +1688,7 @@ export default UpdateChecker`,
           type: 'image',
           props: {
             src: "/projects/nutriwise/documentation/nutri4.jpg",
-            alt: "Backend Architecture",
+            alt: "Core Features",
             className: "h-full w-full object-cover rounded-lg"
           }
         },
@@ -1720,7 +1726,7 @@ export default UpdateChecker`,
           type: 'image',
           props: {
             src: "/projects/nutriwise/documentation/nutri16.png",
-            alt: "Effortless Food Logging",
+            alt: "Iteration",
             className: "h-full w-full object-cover rounded-lg"
           }
         },
@@ -1743,7 +1749,7 @@ export default UpdateChecker`,
           type: 'image',
           props: {
             src: "/projects/nutriwise/documentation/nutri15.jpg",
-            alt: "Effortless Food Logging",
+            alt: "Testing",
             className: "h-full w-full object-cover rounded-lg"
           }
         },
@@ -1763,7 +1769,7 @@ export default UpdateChecker`,
           type: 'image',
           props: {
             src: "/projects/nutriwise/documentation/nutri10.png",
-            alt: "Effortless Food Logging",
+            alt: "Deployment",
             className: "h-full w-full object-cover rounded-lg"
           }
         },
@@ -1774,14 +1780,14 @@ export default UpdateChecker`,
         title: "Marketing Materials & Website Mockup",
         description: (
           <>
-            To promote the app and expand its reach, I designed targeted advertisements with the vision of them being displayed on billboards and posters. These ads are intended to capture the attention of potential users while showcasing the app's core features. Additionally, I created a mockup for the app's website to provide a digital platform where users can learn more about the app, sign up, and access support resources.
+            To promote the app and expand its reach, I designed targeted advertisements with the vision of them being displayed on billboards and posters. These ads are intended to capture the attention of potential users while showcasing the app&apos;s core features. Additionally, I created a mockup for the app&apos;s website to provide a digital platform where users can learn more about the app, sign up, and access support resources.
           </>
         ),
         content: {
           type: 'image',
           props: {
             src: "/projects/nutriwise/documentation/image106.png",
-            alt: "Effortless Food Logging",
+            alt: "Marketing",
             className: "h-full w-full object-fit rounded-lg"
           }
         },

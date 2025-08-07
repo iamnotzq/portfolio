@@ -114,18 +114,18 @@ export const Timeline = ({ data, scrollContainerRef }: { data: TimelineEntry[], 
                 <p className="font-mono text-xs lg:text-sm leading-relaxed">
                     <span className="text-green-500">{"// ZhiQiang.tsx"}</span><br/>
                     <span className="text-yellow-400">const</span> me = {'{'}<br/>
-                    &nbsp;&nbsp;<span className="text-purple-400">core</span>: [<span className="text-orange-400">"Full-Stack"</span>, <span className="text-orange-400">"Big Data"</span>],<br/>
-                    &nbsp;&nbsp;<span className="text-purple-400">plus</span>: [<span className="text-orange-400">"Project Management"</span>, <span className="text-orange-400">"Product Design"</span>],<br/>
+                    &nbsp;&nbsp;<span className="text-purple-400">core</span>: [<span className="text-orange-400">&quot;Full-Stack&quot;</span>, <span className="text-orange-400">&quot;Big Data&quot;</span>],<br/>
+                    &nbsp;&nbsp;<span className="text-purple-400">plus</span>: [<span className="text-orange-400">&quot;Project Management&quot;</span>, <span className="text-orange-400">&quot;Product Design&quot;</span>],<br/>
                     &nbsp;&nbsp;<span className="text-purple-400">method</span>: <span className="text-blue-400">planAndExecute</span>(),<br/>
-                    &nbsp;&nbsp;<span className="text-purple-400">comms</span>: <span className="text-blue-400">liaiseWith</span>([<span className="text-orange-400">"stakeholders"</span>, <span className="text-orange-400">"clients"</span>]),<br />
-                    &nbsp;&nbsp;<span className="text-purple-400">attributes</span>: [<span className="text-orange-400">"Driven"</span>, <span className="text-orange-400">"Hardworking"</span>, <span className="text-orange-400">"Fast Learner"</span>, <span className="text-orange-400">"Flexible"</span>],<br/>
+                    &nbsp;&nbsp;<span className="text-purple-400">comms</span>: <span className="text-blue-400">liaiseWith</span>([<span className="text-orange-400">&quot;stakeholders&quot;</span>, <span className="text-orange-400">&quot;clients&quot;</span>]),<br />
+                    &nbsp;&nbsp;<span className="text-purple-400">attributes</span>: [<span className="text-orange-400">&quot;Driven&quot;</span>, <span className="text-orange-400">&quot;Hardworking&quot;</span>, <span className="text-orange-400">&quot;Fast Learner&quot;</span>, <span className="text-orange-400">&quot;Flexible&quot;</span>],<br/>
                     &nbsp;&nbsp;<span className="text-purple-400">skills</span>: {'{'}<br/>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-green-400">languages</span>: [<span className="text-orange-400">"JavaScript"</span>, <span className="text-orange-400">"TypeScript"</span>, <span className="text-orange-400">"Python"</span>],<br/>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-green-400">frontend</span>: [<span className="text-orange-400">"React/Native"</span>, <span className="text-orange-400">"Expo"</span>],<br/>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-green-400">backend</span>: [<span className="text-orange-400">"Node.js"</span>, <span className="text-orange-400">"MySQL"</span>, <span className="text-orange-400">"Firebase"</span>, <span className="text-orange-400">"Google Cloud"</span>],<br/>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-green-400">tools</span>: [<span className="text-orange-400">"GitHub"</span>, <span className="text-orange-400">"Figma"</span>],<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-green-400">languages</span>: [<span className="text-orange-400">&quot;JavaScript&quot;</span>, <span className="text-orange-400">&quot;TypeScript&quot;</span>, <span className="text-orange-400">&quot;Python&quot;</span>],<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-green-400">frontend</span>: [<span className="text-orange-400">&quot;React/Native&quot;</span>, <span className="text-orange-400">&quot;Expo&quot;</span>],<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-green-400">backend</span>: [<span className="text-orange-400">&quot;Node.js&quot;</span>, <span className="text-orange-400">&quot;MySQL&quot;</span>, <span className="text-orange-400">&quot;Firebase&quot;</span>, <span className="text-orange-400">&quot;Google Cloud&quot;</span>],<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-green-400">tools</span>: [<span className="text-orange-400">&quot;GitHub&quot;</span>, <span className="text-orange-400">&quot;Figma&quot;</span>],<br/>
                     &nbsp;&nbsp;{'}'},<br/>
-                    &nbsp;&nbsp;<span className="text-purple-400">goal</span>: <span className="text-orange-400">"Deliver impactful solutions."</span><br/>
+                    &nbsp;&nbsp;<span className="text-purple-400">goal</span>: <span className="text-orange-400">&quot;Deliver impactful solutions.&quot;</span><br/>
                     {'}'};
                 </p>
             </div>
@@ -133,30 +133,30 @@ export const Timeline = ({ data, scrollContainerRef }: { data: TimelineEntry[], 
 
       <div ref={ref} className="relative max-w-7xl mx-auto pb-20">
         {data.map((item, index) => (
-  <div
-    key={index}
-    className="flex justify-start pt-10 lg:pt-20"
-  >
-    {/* --- Title Column (1/3 width on large screens) --- */}
-    <div className="sticky top-40 self-start z-40 flex flex-col items-center lg:flex-row lg:w-1/3">
-      <div className="absolute left-3 lg:left-3 h-5 w-5 lg:h-10 lg:w-10 rounded-full bg-black flex items-center justify-center">
-        <div className="h-2 w-2 lg:h-4 lg:w-4 rounded-full bg-neutral-800 border border-neutral-700 p-2" />
-      </div>
-      <h3 className="hidden lg:block lg:pl-20 text-xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-neutral-500">
-        {item.title}
-      </h3>
-    </div>
+          <div
+            key={index}
+            className="flex justify-start pt-10 lg:pt-20"
+          >
+            {/* --- Title Column (1/3 width on large screens) --- */}
+            <div className="sticky top-40 self-start z-40 flex flex-col items-center lg:flex-row lg:w-1/3">
+              <div className="absolute left-3 lg:left-3 h-5 w-5 lg:h-10 lg:w-10 rounded-full bg-black flex items-center justify-center">
+                <div className="h-2 w-2 lg:h-4 lg:w-4 rounded-full bg-neutral-800 border border-neutral-700 p-2" />
+              </div>
+              <h3 className="hidden lg:block lg:pl-20 text-xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-neutral-500">
+                {item.title}
+              </h3>
+            </div>
 
-    {/* --- Content Column (2/3 width on large screens) --- */}
-    <div className="relative w-full pl-20 pr-4 lg:w-2/3 lg:pl-4">
-      {/* Title for mobile view */}
-      <h3 className="lg:hidden block text-2xl md:text-4xl mb-4 text-left font-bold text-neutral-500">
-        {item.title}
-      </h3>
-      <TimelineContentComponent content={item.content} />
-    </div>
-  </div>
-))}
+            {/* --- Content Column (2/3 width on large screens) --- */}
+            <div className="relative w-full pl-20 pr-4 lg:w-2/3 lg:pl-4">
+              {/* Title for mobile view */}
+              <h3 className="lg:hidden block text-2xl md:text-4xl mb-4 text-left font-bold text-neutral-500">
+                {item.title}
+              </h3>
+              <TimelineContentComponent content={item.content} />
+            </div>
+          </div>
+        ))}
         {/* --- Timeline line and animation --- */}
         <div
           style={{
