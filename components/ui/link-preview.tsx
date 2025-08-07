@@ -80,6 +80,7 @@ export const LinkPreview = ({
             width={width}
             height={height}
             alt="hidden image"
+            quality={100}
           />
         </div>
       ) : null}
@@ -141,6 +142,7 @@ export const LinkPreview = ({
                     height={height}
                     className="rounded-lg"
                     alt="preview image"
+                    quality={100}
                   />
                 </a>
               </motion.div>

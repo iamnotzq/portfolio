@@ -5,7 +5,6 @@ import {
   motion,
 } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { AnimatedTooltip } from './animated-tooltip';
 import { Skill } from "@/lib/constants";
 
@@ -32,11 +31,9 @@ const TimelineContentComponent = ({ content }: { content: TimelineContent }) => 
     heading: "text-xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-2",
     subheading: "text-base md:text-lg lg:text-xl xl:text-2xl font-semibold text-neutral-300 mb-2 md:mb-4",
     list: "list-disc list-outside text-xs md:text-sm lg:text-base text-neutral-200 space-y-3",
-    listItem: "mb-4", // Added margin bottom to list items for better spacing if needed
+    listItem: "mb-4",
     skillsTitle: "text-base md:text-lg lg:text-xl xl:text-2xl font-bold text-white mt-6 mb-3",
     imageGrid: "grid grid-cols-2 md:grid-flow-dense gap-4 mt-4",
-    imageContainer: "relative w-full h-full rounded-lg overflow-hidden shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]",
-    image: "object-cover",
     skillsContainer: "flex flex-row flex-wrap items-center justify-start mb-6",
   };
 
@@ -54,12 +51,15 @@ const TimelineContentComponent = ({ content }: { content: TimelineContent }) => 
       {content.images && content.images.length > 0 && (
         <div className={styles.imageGrid}>
           {content.images.map((image, index) => (
-            <div key={index} className={styles.imageContainer} style={{aspectRatio: '1/1'}}>
-              <Image
+            // FIX: The outer div now only handles the grid column span.
+            <div key={index} className={image.className || ''}>
+              {/* FIX: Switched to a standard <img> tag to allow natural aspect ratio. */}
+              {/* The image will be 100% width of its container, and height will be auto. */}
+              <img
                 src={image.src}
                 alt={image.alt}
-                fill
-                className={`${styles.image} ${image.className || ''}`}
+                className="w-full h-auto rounded-lg shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
+                loading="lazy" // Added lazy loading for performance
               />
             </div>
           ))}

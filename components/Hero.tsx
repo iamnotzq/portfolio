@@ -115,7 +115,7 @@ const Hero = ({
             className="pointer-events-auto relative z-10 mt-4 lg:mt-6 flex flex-wrap items-center justify-start gap-4"
           >
             <a
-              href="/resume.pdf"
+              href="/Lam-Zhi-Qiang-Resume.pdf"
               download
               className=" font-orbitron flex w-auto transform items-center gap-2 rounded-lg bg-white px-3 py-2 md:px-6 md:py-3 text-sm sm:text-base md:text-lg lg:text-2xl font-bold text-black transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-white/20"
               onMouseEnter={() => setPointerText(resumeButtonText)}

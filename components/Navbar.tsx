@@ -124,7 +124,7 @@ const NavbarComponent = ({ onMenuClick, onHomeClick }: NavbarComponentProps) => 
                 ))}
                 <div className="flex w-full flex-col gap-4">
                   <NavbarButton
-                    href="/resume.pdf"
+                    href="/Lam-Zhi-Qiang-Resume.pdf"
                     download
                     variant="primary"
                     className="w-full flex items-center justify-center gap-2 font-orbitron"

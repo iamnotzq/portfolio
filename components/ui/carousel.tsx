@@ -168,12 +168,12 @@ export const CardItem = ({
 // --- Main Carousel Component ---
 
 // Slide Component: Renders a single 3D card
-const Slide = ({ slide, index, current, handleSlideClick }: { slide: CarouselSlideData, index: number, current: number, handleSlideClick: (index: number) => void }) => {
+const Slide = ({ slide, index, current, handleSlideClick, handlePreviousClick, handleNextClick }: { slide: CarouselSlideData, index: number, current: number, handleSlideClick: (index: number) => void, handlePreviousClick: () => void, handleNextClick: () => void }) => {
   const { slug, src, title, description, year, techStack, role, liveUrl, githubUrl } = slide;
   
   return (
     <li
-      className="w-[90vw] max-w-lg h-auto flex-shrink-0 px-4"
+      className="w-[90vw] max-w-lg h-auto flex-shrink-0 px-4 relative"
       onClick={() => handleSlideClick(index)}
       style={{
         transform: current === index ? "scale(1)" : "scale(0.85)",
@@ -217,6 +217,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: { slide: CarouselSli
               style={{ objectFit: 'cover' }}
               className="rounded-xl group-hover/card:shadow-xl"
               alt={title}
+              quality={100}
             />
           </CardItem>
 
@@ -263,6 +264,26 @@ const Slide = ({ slide, index, current, handleSlideClick }: { slide: CarouselSli
           </div>
         </CardBody>
       </CardContainer>
+
+      {/* Controls for larger screens (sm and up) */}
+      {index === current && (
+        <>
+          <div className="hidden sm:block absolute top-1/2 -translate-y-1/2 left-0 -translate-x-[80%] z-10">
+            <CarouselControl
+              type="previous"
+              title="Go to previous slide"
+              handleClick={handlePreviousClick}
+            />
+          </div>
+          <div className="hidden sm:block absolute top-1/2 -translate-y-1/2 right-0 translate-x-[80%] z-10">
+            <CarouselControl
+              type="next"
+              title="Go to next slide"
+              handleClick={handleNextClick}
+            />
+          </div>
+        </>
+      )}
     </li>
   );
 };
@@ -271,15 +292,14 @@ const Slide = ({ slide, index, current, handleSlideClick }: { slide: CarouselSli
 const CarouselControl = ({ type, title, handleClick }: { type: string, title: string, handleClick: () => void }) => {
   return (
     <button
-      className={`w-10 h-10 flex items-center mx-2 justify-center bg-neutral-800 border-3 border-transparent rounded-full focus:border-[#6D64F7] focus:outline-none hover:-translate-y-0.5 active:translate-y-0.5 transition duration-200 ${
-        type === "previous" ? "rotate-180" : ""
-      }`}
+      className={`pointer-events-auto w-12 h-12 flex items-center justify-center text-2xl font-bold text-neutral-200 bg-neutral-800/50 hover:bg-neutral-800 border-3 border-transparent rounded-full focus:border-[#6D64F7] focus:outline-none hover:-translate-y-0.5 active:translate-y-0.5 transition-all duration-200 mx-2`}
       title={title}
-      onClick={handleClick}
+      onClick={(e) => {
+        e.stopPropagation(); // Prevent the slide's onClick from firing
+        handleClick();
+      }}
     >
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-neutral-200" fill="none" viewBox="0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-      </svg>
+      {type === "previous" ? "<" : ">"}
     </button>
   );
 };
@@ -312,8 +332,8 @@ export function Carousel({ slides }: { slides: CarouselSlideData[] }) {
   }, [current, slides]);
 
   return (
-    <div className="w-full flex flex-col items-center">
-      <div className="w-full relative overflow-hidden ">
+    <div className="w-full relative">
+      <div className="w-full relative overflow-hidden">
         <ul
           ref={carouselRef}
           className="flex items-center h-auto transition-transform duration-500 ease-in-out"
@@ -325,11 +345,15 @@ export function Carousel({ slides }: { slides: CarouselSlideData[] }) {
               index={index}
               current={current}
               handleSlideClick={handleSlideClick}
+              handlePreviousClick={handlePreviousClick}
+              handleNextClick={handleNextClick}
             />
           ))}
         </ul>
       </div>
-      <div className="flex justify-center pt-2">
+
+      {/* Controls for smaller screens (hidden on sm and up) */}
+      <div className="sm:hidden flex justify-center pt-4">
         <CarouselControl
           type="previous"
           title="Go to previous slide"

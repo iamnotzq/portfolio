@@ -9,7 +9,7 @@ import {
   animate,
   useVelocity,
   useAnimationControls,
-} from "motion/react";
+} from "framer-motion";
 
 export const DraggableCardBody = ({
   className,
@@ -166,10 +166,12 @@ export const DraggableCardBody = ({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={cn(
-       "relative overflow-hidden rounded-xl p-2 shadow-2xl transform-3d bg-neutral-900",
+       // FIX: Added flex and flex-col to allow children to be sized correctly
+       "relative overflow-hidden rounded-xl p-2 shadow-2xl transform-3d bg-neutral-900 flex flex-col",
         {
-          "3xl:min-h-45 3xl:w-108 w-88 md:w-108 xl:w-96": displayType === "macbook",
-          "xl:min-h-96 xl:w-45 w-50": displayType === "mobile",
+          // FIX: Replaced invalid Tailwind classes with correct JIT syntax (e.g., w-[22rem])
+          "w-[22rem] min-h-[11.25rem] md:w-[27rem] xl:w-[24rem] 3xl:w-[27rem]": displayType === "macbook",
+          "w-[12.5rem] min-h-[24rem] xl:w-[11.25rem]": displayType === "mobile",
         },
         className
       )}

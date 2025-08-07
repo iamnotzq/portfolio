@@ -82,6 +82,7 @@ const ImageRenderer = ({
       alt={alt}
       fill
       className={cn("object-cover", className)}
+      quality={100}
       onError={() => {
         setImgSrc(placeholderSrc);
       }}
@@ -197,9 +198,10 @@ export const StickyScroll = ({
             {/* Text Content (Left side on desktop) */}
             <div className="mt-4">
               <h2 className="text-xl md:text-2xl font-bold text-slate-100">{item.title}</h2>
-              <p className="text-base mt-2 text-slate-300">
+              {/* FIX: Changed <p> to <div> to allow for nested block elements */}
+              <div className="text-base mt-2 text-slate-300">
                 {item.description}
-              </p>
+              </div>
             </div>
           </div>
         ))}
@@ -227,14 +229,15 @@ export const StickyScroll = ({
                 >
                   {item.title}
                 </motion.h2>
-                <motion.p
+                {/* FIX: Changed <p> to <div> in the desktop view as well for consistency */}
+                <motion.div
                   initial={{ opacity: 0.5 }}
                   animate={{ opacity: activeCard === index ? 1 : 0.15 }}
                   transition={{ duration: 1, ease: "easeInOut" }}
                   className="text-base lg:text-xl mt-5 w-full text-slate-300"
                 >
                   {item.description}
-                </motion.p>
+                </motion.div>
               </div>
             ))}
             <div className="h-40" />

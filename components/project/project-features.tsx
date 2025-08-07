@@ -21,6 +21,7 @@ const FeatureItem = ({ item }: { item: Feature }) => {
         alt={item.title}
         fill
         className="flex-1 w-full h-full min-h-[10rem] rounded-xl object-cover"
+        quality={100}
       />
     </Lens>
   ) : (

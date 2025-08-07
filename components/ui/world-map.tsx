@@ -62,6 +62,7 @@ export function WorldMap({
         className="h-full w-full object-cover [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none"
         alt="world map"
         fill
+        quality={100}
         draggable={false}
       />
       <svg

@@ -342,7 +342,7 @@ const ContactContent = () => {
 
 
 const ProjectsContent = () => (
-    <div className="h-full w-full flex flex-col items-center py-2 lg:py-8">
+    <div className="h-full w-full flex flex-col items-center py-2 lg:pt-4">
         <div className="my-auto">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -423,7 +423,7 @@ const Menu = ({
         {
             id: "projects",
             title: <span className="font-orbitron"><span className="text-white">{'['}</span><span className="text-orange-400">{`"projects"`}</span><span className="text-white">{']'}</span></span>,
-            description: <span className="text-green-500 ">{/* // Explore a collection of my work. */}</span>,
+            description: <span className="text-green-500">{'// Explore a collection of my work.'}</span>,
             header: <div />,
             className: "col-span-2 row-span-5 xl:col-span-5 xl:row-span-1",
             icon: <IconBriefcase className="h-4 w-4 text-neutral-400" />,
@@ -434,7 +434,7 @@ const Menu = ({
         {
             id: "about",
             title: <span className="font-orbitron"><span className="text-yellow-400">about</span><span className="text-white">.me</span></span>,
-            description: <span className="text-green-500">{/* // Learn more about my journey. */}</span>,
+            description: <span className="text-green-500">{'// Learn more about my journey.'}</span>,
             header: <div />,
             className: "col-span-2 row-span-5 xl:col-span-3 xl:row-span-1",
             icon: <IconUser className="h-4 w-4 text-neutral-400" />,
@@ -445,7 +445,7 @@ const Menu = ({
         {
             id: "contact",
             title: <span className="font-orbitron"><span className="text-blue-400">contact</span><span className="text-white">()</span></span>,
-            description: <span className="text-green-500">{/* // Let&apos;s get in touch now! */}</span>,
+            description: <span className="text-green-500">{"// Let's get in touch now!"}</span>,
             header: <div />,
             className: "col-span-2 row-span-5 xl:col-span-2 xl:row-span-1",
             icon: <IconMail className="h-4 w-4 text-neutral-400" />,

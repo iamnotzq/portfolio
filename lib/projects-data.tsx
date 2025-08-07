@@ -165,7 +165,7 @@ export default function ProjectPage() {
 export const slideData: ProjectData[] = [
   {
     slug: "workforce-management-app",
-  title: "Workforce Management App",
+  title: "Mobile Workforce Management System",
   description: "A custom-built mobile application for Props Factory to streamline workforce operations such as attendance tracking, payslip management, and project coordination.",
   year: 2025,
   role: "Full-Stack Developer & Product Designer",
@@ -300,7 +300,7 @@ export const slideData: ProjectData[] = [
         title: "Early Conceptualization & Research",
         description: (
           <>
-            I was tasked with designing a mobile application to completely replace manual processes for staff check-in/out and streamline payroll workflows, including base pay, overtime, allowances, and deductions. As development progressed, I expanded the app to support auxiliary features such as leave, off-day, and claim submissions. Recognizing the need for operational oversight, I later built an admin version of the app for supervisors to review and manage staff requests. Additionally, I introduced a project management module to help coordinate manpower assignments for events — providing visibility into ongoing projects and task allocations.
+            I was tasked with designing a mobile application to completely replace manual processes for staff check-in/out and streamline payroll workflows, including base pay, overtime, allowances, and deductions. As development progressed, I expanded the app to support auxiliary features such as leave, off-day, and claim submissions. Recognizing the need for operational oversight, I later built an admin version of the app for supervisors to review and manage staff requests. Additionally, I introduced a project management module to help coordinate manpower assignments for events, providing visibility into ongoing projects and task allocations.
           </>
         ),
         content: {
@@ -340,7 +340,7 @@ export const slideData: ProjectData[] = [
         title: "Tech Architecture & Backend Setup",
         description: (
           <>
-            Based on the company&apos;s preference to leverage Google&apos;s ecosystem, I used Firebase for authentication, cloud functions, and storage. For more complex relational data needs, I integrated Supabase (PostgreSQL) — enabling structured schemas and triggers. I made heavy use of Supabase RPC (Remote Procedure Calls) and edge functions to shift complex calculations and business logic (e.g., payroll, request validation) to the backend. This approach kept the mobile app lightweight and performant, while ensuring centralized, secure processing of core operations.
+            Based on the company&apos;s preference to leverage Google&apos;s ecosystem, I used Firebase for authentication, cloud functions, and storage. For more complex relational data needs, I integrated Supabase (PostgreSQL), enabling structured schemas and triggers. I made heavy use of Supabase RPC (Remote Procedure Calls) and edge functions to shift complex calculations and business logic (e.g., payroll, request validation) to the backend. This approach kept the mobile app lightweight and performant, while ensuring centralized, secure processing of core operations.
           </>
         ),
         content: {
@@ -396,7 +396,7 @@ END;`,
         title: "Core Features & Logic",
         description: (
           <>
-            The central feature is a GPS-based check-in/out system paired with facial recognition. To prevent abuse, the app enforces a location radius and verifies face presence — though we kept rules slightly lenient to avoid worker discomfort. I also designed a three-tier request system (Pending → Approved/Rejected) for claims, leave, and off-days. For payroll, I implemented logic to dynamically calculate monthly OT pay based on working days, weekends, and public holidays.
+            The central feature is a GPS-based check-in/out system paired with facial recognition. To prevent abuse, the app enforces a location radius and verifies face presence, though we kept rules slightly lenient to avoid worker discomfort. I also designed a three-tier request system (Pending → Approved/Rejected) for claims, leave, and off-days. For payroll, I implemented logic to dynamically calculate monthly OT pay based on working days, weekends, and public holidays.
           </>
         ),
         content: {
@@ -479,7 +479,7 @@ const DETECTION_TIMEOUT_SECONDS = 30 // A longer timeout for the verification pr
         title: "Notifications, Request Tracking & Feedback Loop",
         description: (
           <>
-            I used Firebase Cloud Messaging (FCM) for real-time push notifications regarding request approvals or rejections. Workers could easily track their request history and see full state transitions, including who approved it, any notes, and attached files like receipts or payment proofs. I ran multiple field feedback sessions to test navigation, and small UI refinements were made for accessibility and ease of use — especially across different age groups and font settings.
+            I used Firebase Cloud Messaging (FCM) for real-time push notifications regarding request approvals or rejections. Workers could easily track their request history and see full state transitions, including who approved it, any notes, and attached files like receipts or payment proofs. I ran multiple field feedback sessions to test navigation, and small UI refinements were made for accessibility and ease of use, especially across different age groups and font settings.
           </>
         ),
         content: {
@@ -534,7 +534,7 @@ async function sendPushNotifications(pushTokens, title, body, data = {}) {
         title: "UX Challenges & Iterative Improvements",
         description: (
           <>
-            One key challenge was presenting time-based data (e.g., shift start/end) compactly. I eventually drew inspiration from flight-tracking apps to visually represent time intervals. Another real-world case revealed a worker checking in without showing their face — prompting me to integrate facial detection, ensuring images had valid human faces before submission. These real-world test cases shaped app policies and improved overall system reliability.
+            One key challenge was presenting time-based data (e.g., shift start/end) compactly. I eventually drew inspiration from flight-tracking apps to visually represent time intervals. Another real-world case revealed a worker checking in without showing their face, prompting me to integrate facial detection, ensuring images had valid human faces before submission. These real-world test cases shaped app policies and improved overall system reliability.
           </>
         ),
         content: {
@@ -552,7 +552,7 @@ async function sendPushNotifications(pushTokens, title, body, data = {}) {
         title: "Testing & Real-World Optimization",
         description: (
           <>
-            I conducted usability testing with actual workers to ensure the app was intuitive across all age groups. One issue discovered was oversized text on certain devices due to user font settings — breaking layouts. I updated my styles to dynamically respond to font scaling and screen dimensions. These hands-on tests helped surface and solve practical edge cases before launch.
+            I conducted usability testing with actual workers to ensure the app was intuitive across all age groups. One issue discovered was oversized text on certain devices due to user font settings, breaking layouts. I updated my styles to dynamically respond to font scaling and screen dimensions. These hands-on tests helped surface and solve practical edge cases before launch.
           </>
         ),
         content: {
@@ -570,7 +570,7 @@ async function sendPushNotifications(pushTokens, title, body, data = {}) {
         title: "Deployment & Auto Updates",
         description: (
           <>
-            I used Expo for development and managed separate builds for Android and iOS. For Android, I distributed APKs directly, while iOS testing was done via development builds. I implemented an auto-update mechanism using version files stored on Google Cloud. The app checks these files on launch and prompts users to download a new version when needed. For iOS, I researched and implemented internal enterprise distribution using provisioning certificates — allowing the app to be installed without publishing to the App Store.
+            I used Expo for development and managed separate builds for Android and iOS. For Android, I distributed APKs directly, while iOS testing was done via development builds. I implemented an auto-update mechanism using version files stored on Google Cloud. The app checks these files on launch and prompts users to download a new version when needed. For iOS, I researched and implemented internal enterprise distribution using provisioning certificates, allowing the app to be installed without publishing to the App Store.
           </>
         ),
         content: {
@@ -794,7 +794,7 @@ export default UpdateChecker`,
   },
   {
     slug: "corporate-website",
-    title: "Corporate Website",
+    title: "Corporate Website Revitalization",
     description: "A custom-built corporate website for Props Factory, redesigned with modern UI and SEO best practices.",
     year: 2024,
     role: "Full-Stack Developer & Designer",
@@ -852,21 +852,13 @@ export default UpdateChecker`,
     ],
     
     demoScreenshots: [
-      {
-          title: "Home Page",
-          image: "/projects/pfWebsite/hero3.png",
-          className: "absolute top-14 right-[27%] 3xl:top-10",
-      },
+      
       {
           title: "About Section",
           image: "/projects/pfWebsite/about.png",
           className: "absolute top-76 left-[27%] rotate-[3deg] 3xl:top-80",
       },
-      {
-          title: "Works Section",
-          image: "/projects/pfWebsite/works.png",
-          className: "absolute top-14 right-[5%] rotate-[-1deg] 3xl:top-10",
-      },
+      
     {
         title: "Gallery Page",
         image: "/projects/pfWebsite/gallery.png",
@@ -874,11 +866,7 @@ export default UpdateChecker`,
       },
       
       
-      {
-        title: "Mansonry View",
-        image: "/projects/pfWebsite/galleryMasonry.png",
-        className: "absolute top-14 left-[5%] rotate-[-5deg] 3xl:top-10",
-      },
+      
       {
         title: "Blog Page",
         image: "/projects/pfWebsite/blogPage.png",
@@ -888,6 +876,21 @@ export default UpdateChecker`,
         title: "Blog Content",
         image: "/projects/pfWebsite/blogSidebar.png",
         className: "absolute top-76 left-[5%] rotate-[-2deg] 3xl:top-80",
+      },
+      {
+          title: "Home Page",
+          image: "/projects/pfWebsite/hero3.png",
+          className: "absolute top-14 right-[27%] 3xl:top-10",
+      },
+      {
+          title: "Works Section",
+          image: "/projects/pfWebsite/works.png",
+          className: "absolute top-14 right-[5%] rotate-[-1deg] 3xl:top-10",
+      },
+      {
+        title: "Mansonry View",
+        image: "/projects/pfWebsite/galleryMasonry.png",
+        className: "absolute top-14 left-[5%] rotate-[-5deg] 3xl:top-10",
       },
       {
         title: "Footer",
@@ -994,8 +997,8 @@ export default UpdateChecker`,
             className: "h-full w-full object-fit"
           }
         },
-        width: "42rem",
-        height: "20rem"
+         width: "45rem",
+        height: "25rem"
       },
       {
         title: "Dynamic Gallery with Cloudinary",
@@ -1011,8 +1014,8 @@ export default UpdateChecker`,
             className: "h-full w-full object-fit"
           }
         },
-        width: "42rem",
-        height: "20rem"
+         width: "45rem",
+        height: "25rem"
       },
       {
         title: "CMS Blog with Contentful",
@@ -1029,8 +1032,8 @@ export default UpdateChecker`,
             className: "h-full w-full object-top"
           }
         },
-        width: "42rem",
-        height: "20rem"
+         width: "45rem",
+        height: "25rem"
       },
       {
         title: "Contact Form & Email Handling",
@@ -1046,8 +1049,8 @@ export default UpdateChecker`,
             className: "h-full w-full object-fit"
           }
         },
-        width: "42rem",
-        height: "20rem"
+         width: "45rem",
+        height: "25rem"
       },
       {
         title: "Visual & UI Challenges",
@@ -1064,8 +1067,8 @@ export default UpdateChecker`,
             className: "h-full w-full object-fit"
           }
         },
-        width: "42rem",
-        height: "20rem"
+         width: "45rem",
+        height: "25rem"
       },
       {
         title: "Challenges & Iteration Decisions",
@@ -1170,8 +1173,8 @@ export default UpdateChecker`,
             className: "h-full w-full object-fit"
           }
         },
-        width: "42rem",
-        height: "20rem"
+         width: "45rem",
+        height: "25rem"
       },
       {
         title: "Deployment & SEO Setup",
@@ -1224,8 +1227,8 @@ export default UpdateChecker`,
     imageUrl: "/projects/portfolioWebsite/homePage.png",
     displayType: "macbook", // Set this to 'macbook' or 'mobile' for each project
     src: "/projects/portfolioWebsite/homePage.png",
-    liveUrl: "#",
-    githubUrl: "#",
+    liveUrl: "https://portfolio-pe937htx8-iamnotzqs-projects.vercel.app",
+    githubUrl: "https://github.com/iamnotzq/portfolio",
 
     overview: "I believe a portfolio should be more than a static list of accomplishments, it should tell a story. With this project, I set out to build a narrative-driven experience that departs from traditional portfolio sites. The goal was to create an immersive journey through interactive 3D visuals, scroll-triggered animations, and a layout that evolves as the user explores. These elements are brought to life using Next.js, React, TypeScript , Tailwind CSS, and a customized animation system powered by Framer Motion. The entire site is fully responsive, modularly architected, and deployed via Vercel with integrated performance analytics and error tracking through Sentry. Despite the rich visual experience, the site maintains clarity and accessibility, ensuring that visitors can easily explore my projects, skills, and technical capabilities.",
     features: [
@@ -1452,13 +1455,13 @@ export default UpdateChecker`,
         content: {
           type: 'image',
           props: {
-            src: "/projects/portfolioWebsite/map.png",
+            src: "/projects/portfolioWebsite/mobile.png",
             alt: "World Map Responsive",
             className: "h-full w-full object-fit"
           }
         },
-        width: "42rem",
-        height: "20rem"
+        width: "14rem",
+        height: "32rem"
       },
       {
         title: "Deployment & Monitoring",
@@ -1485,12 +1488,12 @@ export default UpdateChecker`,
     description: "A mobile application for diabetics to manage their condition done for FYP.",
     year: 2024,
     role: "Project Leader, UI/UX Designer & Frontend Dev",
-    techStack: ["React Native", "TypeScript", "JavaScript", "MongoDB", "Expo", "Figma"],
+    techStack: ["React Native", "TypeScript", "JavaScript", "MongoDB", "Expo", "Figma", "GraphQL"],
     imageUrl: "/projects/nutriwise/nutri1.png", 
     displayType: "mobile",
     src: "/projects/nutriwise/nutri1.png", 
-    liveUrl: "",
-    githubUrl: "",
+    liveUrl: "https://drive.google.com/drive/folders/1qVdahzMV1m-rN6qjeYXviNknV7Wr-uRX",
+    githubUrl: "https://github.com/iamnotzq/Blood-Glucose-Mobile-Application/tree/main",
  
     overview: "Nutriwise is a mobile app developed as part of my Final Year Project (FYP), aimed at tackling the critical need for active diabetes self-management. With no known cure for the condition, empowering users with the right tools is essential. The app enables users to log meals, monitor glucose levels, manage insulin intake, and stay connected with a supportive community. As Project Lead, I oversaw the UI/UX design, guided the development process, architected the backend database, and conducted in-depth user and market research to ensure the app was both effective and user-friendly."
 ,

@@ -207,6 +207,7 @@ export const Compare = ({
                   firstImageClassName
                 )}
                 draggable={false}
+                quality={100}
               />
             </motion.div>
           ) : null}
@@ -227,7 +228,8 @@ export const Compare = ({
                 fill
                 style={{ objectFit: 'cover' }}
                 className="w-full h-full"
-                draggable={false}
+              draggable={false}
+              quality={100}
               />
           </motion.div>
         ) : null}

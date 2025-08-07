@@ -82,6 +82,7 @@ export const MobileScroll = ({
                 alt="Project Screenshot"
                 fill
                 className="h-full w-full object-cover rounded-[1rem]"
+                quality={100}
                 onError={(e) => {
                   e.currentTarget.src = `https://placehold.co/384x576/1F2937/FFFFFF?text=Image+Not+Found`;
                 }}

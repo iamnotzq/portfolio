@@ -10,12 +10,12 @@ export const timelineData = [
     title: "2024 - 2025",
     content: {
       heading: "Props Factory",
-      subheading: "Full Stack Developer & Assistant Project Manager",
+      subheading: "Full Stack Developer & Junior Project Manager",
       listItems: [
-        <>Spearheaded digital transformation by solo-developing a comprehensive Expo React Native app that <span className="text-green-400 font-bold">automated core business operations</span>, including worker check-in/out, expense claims, and payroll.</>,
+        <>Spearheaded digital transformation by solo-developing a comprehensive Expo React Native app that automated core business operations, achieving <span className="text-green-400 font-bold">100% user adoption</span>.</>,
         <>The new system <span className="text-green-400 font-bold">slashed payroll processing time by over 90%</span> and <span className="text-red-500 font-bold">eliminated 100%</span> of manual work hour tracking, boosting operational efficiency.</>,
-        <>Designed and developed the corporate website, implementing SEO best practices that <span className="text-green-400 font-bold">doubled site traffic within 6 months</span> and enhanced online presence.</>,
-        <>As Assistant Project Manager, managed event projects from planning to execution, receiving commendations for <span className="text-blue-400 font-bold">excellent communication and project management</span>, which resulted in significant repeat business.</>,
+        <>Revamped the corporate website with a focus on SEO, resulting in a <span className="text-green-400 font-bold">10% monthly traffic increase</span> and doubling visitor numbers in under six months.</>,
+        <>As Assistant Project Manager, I managed event projects from planning to execution, receiving commendations for <span className="text-blue-400 font-bold">excellent communication and project management</span> that resulted in significant repeat business.</>,
       ],
       images: [
       { src: "/about/hero.png", alt: "University project 3", className: "col-span-2" },
@@ -53,11 +53,11 @@ export const timelineData = [
     title: "2023 - 2024",
     content: {
       heading: "Lagoon Laundry",
-      subheading: "Part-time Customer Service & Front End Developer",
+      subheading: "Part-time Customer Service & Front End Design Assistant",
       listItems: [
-        <>Contributed to a major website overhaul by designing, modeling, and rendering 3D product visuals, which <span className="text-green-400 font-bold">enhanced the site&apos;s UI/UX</span>.</>,
-         <>Honed customer service and communication skills, becoming a familiar face to regulars and contributing to a <span className="text-green-400 font-bold">high rate of repeat customers</span>.</>,
-        <>Leveraged insights on user behavior to assist in designing and developing the <span className="text-blue-400 font-bold">front-end of the POS system</span>, ensuring it met both staff and customer requirements.</>,
+        <>Supported a website redesign by contributing feedback and assisting in content and layout planning to enhance user clarity and experience.</>,
+         <>Collaborated on the design and development of a <span className="text-green-400 font-bold">custom POS system,</span> using insights from staff and customers to shape key interface features.</>,
+        <>Strengthened communication and user empathy through daily service interactions, contributing to improved customer satisfaction and retention.</>,
       ],
       images: [
         { src: "/about/lagoon1.jpg", alt: "Lagoon Laundry POS system", className: "col-span-2" },
@@ -66,7 +66,7 @@ export const timelineData = [
     },
   },
   {
-    title: "2018",
+    title: "2017",
     content: {
       heading: "Aural Aid",
       subheading: "Product Design Intern",

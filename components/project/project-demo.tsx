@@ -2,6 +2,7 @@
 import { DemoScreenshot } from "@/lib/projects-data";
 import { DraggableCardContainer, DraggableCardBody } from "../ui/draggable-card";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 interface ProjectDemoProps {
   screenshots: DemoScreenshot[];
@@ -25,13 +26,19 @@ export const ProjectDemo = ({ screenshots, displayType }: ProjectDemoProps) => {
         {screenshots.map((item, i) => (
           <DraggableCardBody key={i} className={item.className} displayType={displayType}>
          
-            {/* FIX: Replaced <img> with next/image component for optimization */}
-            <div className="pointer-events-none relative z-10 w-full h-full rounded-lg shadow-2xl overflow-hidden">
+            <div className={cn(
+                "pointer-events-none relative z-10 w-full rounded-lg shadow-2xl overflow-hidden",
+                {
+                    "aspect-video": displayType === 'macbook', // 16:9 ratio for widescreen
+                    "aspect-[9/20]": displayType === 'mobile'  // 9:16 ratio for portrait
+                }
+            )}>
                 <Image
                   src={item.image}
                   alt={item.title}
                   fill
                   className="object-cover"
+                  quality={100} // Set image quality to maximum
                 />
             </div>
 

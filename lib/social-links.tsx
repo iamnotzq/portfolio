@@ -26,7 +26,7 @@ export const socialLinks = [
         icon: <IconBrandLinkedin className='w-9 h-9 hover:scale-110 transition-transform duration-200' />
     },
     {
-        href: "/Lam_Zhi_Qiang_Resume.pdf",
+        href: "/Lam-Zhi-Qiang-Resume.pdf",
         title: "Download Resume",
         icon: <IconFileText className='w-9 h-9 hover:scale-110 transition-transform duration-200' />
     },

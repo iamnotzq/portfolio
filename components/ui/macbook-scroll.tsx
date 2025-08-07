@@ -178,6 +178,7 @@ export const Lid = ({
           alt="logo"
           fill
           className="absolute inset-0 h-full w-full rounded-lg object-cover object-center"
+          quality={100}
         />
       </motion.div>
     </div>
@@ -650,6 +651,7 @@ const Logo = () => {
       width={100}
       height={100}
       className="h-25 w-25"
+      quality={100}
     />
   );
 };
