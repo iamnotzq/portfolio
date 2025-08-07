@@ -8,6 +8,33 @@ interface ProjectFeaturesProps {
   features: Feature[];
 }
 
+const FeatureItem = ({ item }: { item: Feature }) => {
+  const [hovering, setHovering] = useState(false);
+
+  // Conditionally render an image or the skeleton loader
+  const headerContent = item.imageUrl ? (
+    <Lens hovering={hovering} setHovering={setHovering}>
+      <img
+        src={item.imageUrl}
+        alt={item.title}
+        className="flex-1 w-full h-full min-h-[10rem] rounded-xl object-cover"
+      />
+    </Lens>
+  ) : (
+    <Skeleton />
+  );
+
+  return (
+    <BentoGridItem
+      title={item.title}
+      description={item.description}
+      header={headerContent} // Pass the dynamic header content
+      icon={ICONS[item.icon] || <></>}
+      className={item.className}
+    />
+  );
+}
+
 export const ProjectFeatures = ({ features }: ProjectFeaturesProps) => {
     
   return (
@@ -23,32 +50,9 @@ export const ProjectFeatures = ({ features }: ProjectFeaturesProps) => {
 
         <div className="flex-grow w-full max-w-7xl mx-auto p-4 flex items-center">
             <BentoGrid className="w-full">
-                  {features.map((item, i) => {
-                    const [hovering, setHovering] = useState(false);
-                    // Conditionally render an image or the skeleton loader
-                    const headerContent = item.imageUrl ? (
-                        <Lens hovering={hovering} setHovering={setHovering}>
-                        <img 
-                            src={item.imageUrl} 
-                            alt={item.title} 
-                            className="flex-1 w-full h-full min-h-[10rem] rounded-xl object-cover"
-                            />
-                            </Lens>
-                    ) : (
-                        <Skeleton />
-                    );
-
-                    return (
-                        <BentoGridItem
-                            key={i}
-                            title={item.title}
-                            description={item.description}
-                            header={headerContent} // Pass the dynamic header content
-                            icon={ICONS[item.icon] || <></>}
-                            className={item.className}
-                        />
-                    );
-                })}
+                {features.map((item, i) => (
+                    <FeatureItem key={i} item={item} />
+                ))}
             </BentoGrid>
         </div>
     </section>

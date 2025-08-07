@@ -23,19 +23,18 @@ import { Input } from './ui/input';
 import { Label } from './ui/label';
 
 // --- TEXTAREA COMPONENT ---
-export interface TextareaProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
+export type TextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, ...props }, ref) => {
     const radius = 100;
     const [visible, setVisible] = React.useState(false);
 
-    let mouseX = useMotionValue(0);
-    let mouseY = useMotionValue(0);
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
 
-    function handleMouseMove({ currentTarget, clientX, clientY }: any) {
-      let { left, top } = currentTarget.getBoundingClientRect();
+    function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent<HTMLDivElement>) {
+      const { left, top } = currentTarget.getBoundingClientRect();
       mouseX.set(clientX - left);
       mouseY.set(clientY - top);
     }
@@ -103,7 +102,9 @@ const CompactFileUpload = ({ onChange, }: { onChange?: (files: File[]) => void; 
 
   const handleFileChange = (newFiles: File[]) => {
     setFiles(newFiles);
-    onChange && onChange(newFiles);
+    if (onChange) {
+        onChange(newFiles);
+    }
   };
 
   const handleClick = () => {
@@ -261,7 +262,7 @@ const ContactContent = () => {
                               <span className="text-blue-400">contact</span><span className="text-white">()</span>
                           </h2>
                           <p className="text-neutral-300 max-w-md mb-4 sm:mb-8 md:text-sm lg:text-base text-xs mx-auto">
-                              I'm always open to new opportunities and collaborations. Feel free to send a message through one of the channels, or fill in the form, and I'll get back to you as soon as possible.
+                              I&apos;m always open to new opportunities and collaborations. Feel free to send a message through one of the channels, or fill in the form, and I&apos;ll get back to you as soon as possible.
                           </p>
                           <div className="flex flex-row items-center justify-center gap-8 ">
                               {socialLinks.map(link => (
@@ -350,7 +351,7 @@ const ProjectsContent = () => (
                 className="text-center"
             >
                 <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-orbitron">
-                    <span className="text-white">{'['}</span><span className="text-orange-400">"projects"</span><span className="text-white">{']'}</span>
+                    <span className="text-white">{'['}</span><span className="text-orange-400">{`"projects"`}</span><span className="text-white">{']'}</span>
                 </h2>
                 <p className="text-neutral-300 md:text-sm lg:text-base text-xs max-w-lg pb-2 mx-auto">
                     Selected works demonstrating my skills in full-stack development and end-to-end project delivery.
@@ -421,8 +422,8 @@ const Menu = ({
     const menuItems = useMemo(() => [
         {
             id: "projects",
-            title: <span className="font-orbitron"><span className="text-white">{'['}</span><span className="text-orange-400">"projects"</span><span className="text-white">{']'}</span></span>,
-            description: <span className="text-green-500 ">// Explore a collection of my work.</span>,
+            title: <span className="font-orbitron"><span className="text-white">{'['}</span><span className="text-orange-400">{`"projects"`}</span><span className="text-white">{']'}</span></span>,
+            description: <span className="text-green-500 ">{/* // Explore a collection of my work. */}</span>,
             header: <div />,
             className: "col-span-2 row-span-5 xl:col-span-5 xl:row-span-1",
             icon: <IconBriefcase className="h-4 w-4 text-neutral-400" />,
@@ -433,7 +434,7 @@ const Menu = ({
         {
             id: "about",
             title: <span className="font-orbitron"><span className="text-yellow-400">about</span><span className="text-white">.me</span></span>,
-            description: <span className="text-green-500">// Learn more about my journey.</span>,
+            description: <span className="text-green-500">{/* // Learn more about my journey. */}</span>,
             header: <div />,
             className: "col-span-2 row-span-5 xl:col-span-3 xl:row-span-1",
             icon: <IconUser className="h-4 w-4 text-neutral-400" />,
@@ -444,7 +445,7 @@ const Menu = ({
         {
             id: "contact",
             title: <span className="font-orbitron"><span className="text-blue-400">contact</span><span className="text-white">()</span></span>,
-            description: <span className="text-green-500">// Let's get in touch now!</span>,
+            description: <span className="text-green-500">{/* // Let&apos;s get in touch now! */}</span>,
             header: <div />,
             className: "col-span-2 row-span-5 xl:col-span-2 xl:row-span-1",
             icon: <IconMail className="h-4 w-4 text-neutral-400" />,

@@ -16,7 +16,7 @@ import {
   MotionValue,
 } from "framer-motion";
 import Menu from "@/components/Menu";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
 
 // --- Pointer Component ---

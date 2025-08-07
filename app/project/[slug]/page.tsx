@@ -15,7 +15,7 @@ import { ProjectOverview } from "@/components/project/project-overview";
 import { ProjectFeatures } from "@/components/project/project-features";
 import { ProjectDemo } from "@/components/project/project-demo";
 import { ProjectLearnings } from "@/components/project/project-learnings";
-import { ProjectFooter } from "@/components/project/project-footer";
+
 import NavbarComponent from "@/components/Navbar";
 import ProjectDocumentation from "@/components/project/project-documentation";
 import { Cover } from "@/components/ui/cover";

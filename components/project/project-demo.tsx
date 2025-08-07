@@ -17,7 +17,7 @@ export const ProjectDemo = ({ screenshots, displayType }: ProjectDemoProps) => {
           Project in Action
         </h2>
         <p className="my-4 text-neutral-400 text-base md:text-xl max-w-2xl mx-auto">
-          Here are some screenshots showcasing the project's interface. Drag the cards around to get a better view.
+          Here are some screenshots showcasing the project&apos;s interface. Drag the cards around to get a better view.
         </p>
       </div>
 

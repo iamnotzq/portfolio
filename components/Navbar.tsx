@@ -30,7 +30,7 @@ const NavbarComponent = ({ onMenuClick, onHomeClick }: NavbarComponentProps) => 
     },
     {
       name: (
-        <span className="font-orbitron"><span className="text-white">{'['}</span><span className="text-orange-400">"projects"</span><span className="text-white">{']'}</span></span>
+        <span className="font-orbitron"><span className="text-white">{'['}</span><span className="text-orange-400">{'"projects"'}</span><span className="text-white">{']'}</span></span>
        ),
       id: "projects" as const,
       key: "projects",

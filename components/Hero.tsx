@@ -64,7 +64,7 @@ const Hero = ({
             transition={{ duration: 0.5, delay: 0.2 }}
             className="pointer-events-auto font-orbitron text-left text-lg sm:text-xl md:text-4xl text-neutral-300 lg:text-5xl"
           >
-           <span className="text-green-600">// Hello, world!</span>
+           <span className="text-green-600">{`// Hello, world!`}</span>
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -72,7 +72,7 @@ const Hero = ({
             transition={{ duration: 0.5, delay: 0.4 }}
             className="pointer-events-auto font-orbitron mt-1 lg:mt-2 text-left text-3xl sm:text-4xl md:text-7xl font-bold tracking-tight text-white lg:text-8xl"
           >
-            I'm Zhi Qiang.
+            I&apos;m Zhi Qiang.
           </motion.h1>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -94,7 +94,7 @@ const Hero = ({
             <span className="text-blue-400 font-semibold">development</span> has enabled me to
             deliver impactful solutions, including a{" "}
             <span className="text-green-400 font-semibold">production mobile app</span> and{" "}
-            <span className="text-green-400 font-semibold">company website</span>. I'm a{" "}
+            <span className="text-green-400 font-semibold">company website</span>. I&apos;m a{" "}
             <span className="text-yellow-400 font-semibold">hands-on problem solver</span>,
             ready to contribute my skills to a great team.
           </motion.p>
@@ -130,7 +130,7 @@ const Hero = ({
               onMouseEnter={() => setPointerText(connectButtonText)}
               onMouseLeave={() => setPointerText(pointerText)}
             >
-              Let's Connect
+              Let&apos;s Connect
             </button>
           </motion.div>
         </div>

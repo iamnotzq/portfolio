@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Use Resend to send the email
-    const { data, error } = await resend.emails.send({
+    const { error } = await resend.emails.send({
       from: 'Portfolio Contact Form <onboarding@resend.dev>', // This 'from' address must be from a domain you've verified with Resend.
       to: [toEmail], // The email address you want to receive messages at.
       subject: `New message from ${name}`,
