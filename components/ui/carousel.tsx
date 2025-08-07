@@ -10,8 +10,23 @@ import React, {
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
-import { CarouselSlideData } from "@/lib/projects-data";
+// import { CarouselSlideData } from "@/lib/projects-data"; // This import is removed as the type will be defined locally.
 import { ExternalLink, GitBranch, ArrowRight } from "lucide-react"; // Import icons
+
+// --- Define the data structure for a slide ---
+// This interface is defined here to resolve the export error.
+export interface CarouselSlideData {
+  slug: string;
+  src: string;
+  title: string;
+  description: string;
+  year: string | number;
+  techStack: string[];
+  role: string;
+  liveUrl?: string;
+  githubUrl?: string;
+}
+
 
 // --- 3D Card Components (remains the same) ---
 const MouseEnterContext = createContext<
