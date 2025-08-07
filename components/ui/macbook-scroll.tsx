@@ -51,33 +51,23 @@ export const MacbookScroll = ({
     }
   }, []);
 
-  // Scale X (Width)
-  // At scroll progress 1 (end), the screen will be scaled to 2.2 times its original size.
   const scaleX = useTransform(
     scrollYProgress,
     [0, 0.3, 1],
     [1.2, isMobile ? 1 : 1.5, isMobile ? 1 : 2.2]
   );
 
-  // Scale Y (Height)
-  // At scroll progress 1 (end), the screen will be scaled to 2.2 times its original size.
   const scaleY = useTransform(
     scrollYProgress,
     [0, 0.3, 1],
     [0.6, isMobile ? 1 : 1.5, isMobile ? 1 : 2.2]
   );
 
-  // ===== ANIMATION LOGIC CHANGE =====
-  // I've changed the translate animation. After the lid opens (at 30% scroll progress),
-  // its vertical translation will remain constant at 450px.
-  // This stops it from moving further up the screen independently.
   const translate = useTransform(
     scrollYProgress,
     [0, 0.3, 1],
     [0, 450, 450]
   );
-  // =====================================
-
 
   const rotate = useTransform(scrollYProgress, [0.1, 0.12, 0.3], [-28, -28, 0]);
   const textTransform = useTransform(scrollYProgress, [0, 0.3], [0, 100]);
@@ -183,9 +173,10 @@ export const Lid = ({
         className="absolute inset-0 h-96 w-[40rem] rounded-2xl bg-[#010101] p-2"
       >
         <div className="absolute inset-0 rounded-lg bg-[#272729]" />
-        <img
+        <Image
           src={src as string}
           alt="logo"
+          fill
           className="absolute inset-0 h-full w-full rounded-lg object-cover object-center"
         />
       </motion.div>

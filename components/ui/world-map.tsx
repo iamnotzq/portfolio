@@ -3,6 +3,7 @@
 import { useMemo, useRef } from "react";
 import { motion } from "motion/react";
 import DottedMap from "dotted-map";
+import Image from "next/image";
 
 interface MapProps {
   dots?: Array<{
@@ -29,6 +30,10 @@ const createCurvedPath = (
   return `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`;
 };
 
+// Custom loader for next/image to handle data URIs
+const dataUriLoader = ({ src }: { src: string }) => {
+    return src;
+};
 
 export function WorldMap({
   dots = [],
@@ -51,12 +56,12 @@ export function WorldMap({
 
   return (
     <div className="w-full h-full bg-transparent rounded-lg relative font-sans">
-      <img
+      <Image
+        loader={dataUriLoader}
         src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
         className="h-full w-full object-cover [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none"
         alt="world map"
-        height="495"
-        width="1056"
+        fill
         draggable={false}
       />
       <svg

@@ -56,7 +56,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       >
         <textarea
           className={cn(
-            `shadow-input dark:placeholder-text-neutral-600 flex w-full rounded-md border-none bg-gray-50 px-3 py-2 text-sm text-black transition duration-400 group-hover/input:shadow-none placeholder:text-neutral-400 focus-visible:ring-[2px] focus-visible:ring-neutral-400 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:bg-zinc-800 dark:text-white dark:shadow-[0px_0px_1px_1px_#404040] dark:focus-visible:ring-neutral-600`,
+            `placeholder-text-neutral-600 flex w-full rounded-md border-none  px-3 py-2 text-sm transition duration-400 group-hover/input:shadow-none placeholder:text-neutral-400 focus-visible:ring-[2px]  focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 bg-zinc-800 text-white shadow-[0px_0px_1px_1px_#404040] focus-visible:ring-neutral-600`,
             className
           )}
           ref={ref}
@@ -77,7 +77,7 @@ function GridPattern() {
   const columns = 41;
   const rows = 11;
   return (
-    <div className="flex bg-gray-100 dark:bg-neutral-900 shrink-0 flex-wrap justify-center items-center gap-x-px gap-y-px  scale-105">
+    <div className="flex  bg-neutral-900 shrink-0 flex-wrap justify-center items-center gap-x-px gap-y-px  scale-105">
       {Array.from({ length: rows }).map((_, row) =>
         Array.from({ length: columns }).map((_, col) => {
           const index = row * columns + col;
@@ -86,8 +86,8 @@ function GridPattern() {
               key={`${col}-${row}`}
               className={`w-10 h-10 flex shrink-0 rounded-[2px] ${
                 index % 2 === 0
-                  ? "bg-gray-50 dark:bg-neutral-950"
-                  : "bg-gray-50 dark:bg-neutral-950 shadow-[0px_0px_1px_3px_rgba(255,255,255,1)_inset] dark:shadow-[0px_0px_1px_3px_rgba(0,0,0,1)_inset]"
+                  ? "bg-neutral-950"
+                  : "bg-neutral-950 shadow-[0px_0px_1px_3px_rgba(0,0,0,1)_inset]"
               }`}
             />
           );
@@ -135,10 +135,10 @@ const CompactFileUpload = ({ onChange, }: { onChange?: (files: File[]) => void; 
           <GridPattern />
         </div>
         <div className="flex flex-col items-center justify-center h-full">
-          <p className="relative z-20 font-sans font-bold text-neutral-700 dark:text-neutral-300 text-sm">
+          <p className="relative z-20 font-sans font-bold text-neutral-300 text-sm">
             Attach File
           </p>
-          <p className="relative z-20 font-sans font-normal text-neutral-400 dark:text-neutral-400 text-xs mt-1">
+          <p className="relative z-20 font-sans font-normal text-neutral-400 text-xs mt-1">
             Drag & drop or click
           </p>
           <div className="relative w-full mt-2 max-w-xl mx-auto">
@@ -147,9 +147,9 @@ const CompactFileUpload = ({ onChange, }: { onChange?: (files: File[]) => void; 
                 <motion.div
                   key={"file" + idx}
                   layoutId={"file-upload"}
-                  className="relative overflow-hidden z-40 bg-white dark:bg-neutral-900 flex items-center justify-center p-2 w-full mx-auto rounded-md shadow-sm"
+                  className="relative overflow-hidden z-40 bg-neutral-900 flex items-center justify-center p-2 w-full mx-auto rounded-md shadow-sm"
                 >
-                    <p className="text-sm text-neutral-700 dark:text-neutral-300 truncate max-w-xs">
+                    <p className="text-sm text-neutral-300 truncate max-w-xs">
                       {file.name}
                     </p>
                 </motion.div>
@@ -158,12 +158,12 @@ const CompactFileUpload = ({ onChange, }: { onChange?: (files: File[]) => void; 
                 layoutId="file-upload"
                 variants={mainVariant}
                 transition={{ type: "spring", stiffness: 300, damping: 20, }}
-                className="relative group-hover/file:shadow-xl z-40 bg-white dark:bg-neutral-900 flex items-center justify-center h-12 w-12 mx-auto rounded-full shadow-md"
+                className="relative group-hover/file:shadow-xl z-40 bg-neutral-900 flex items-center justify-center h-12 w-12 mx-auto rounded-full shadow-md"
               >
                 {isDragActive ? (
                   <p className="text-neutral-600 text-xs">Drop</p>
                 ) : (
-                  <IconUpload className="h-4 w-4 text-neutral-600 dark:text-neutral-300" />
+                  <IconUpload className="h-4 w-4 text-neutral-300" />
                 )}
               </motion.div>
             )}

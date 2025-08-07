@@ -1,6 +1,7 @@
 "use client";
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 
 /**
  * This component showcases a project image within a phone-like frame.
@@ -76,9 +77,10 @@ export const MobileScroll = ({
               style={{ scale: imageScale }}
               className="absolute inset-0 p-1.5"
             >
-              <img
+              <Image
                 src={src as string}
                 alt="Project Screenshot"
+                fill
                 className="h-full w-full object-cover rounded-[1rem]"
                 onError={(e) => {
                   e.currentTarget.src = `https://placehold.co/384x576/1F2937/FFFFFF?text=Image+Not+Found`;

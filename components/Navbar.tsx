@@ -117,7 +117,7 @@ const NavbarComponent = ({ onMenuClick, onHomeClick }: NavbarComponentProps) => 
                   <button
                     key={`mobile-link-${item.key}`}
                     onClick={() => handleLinkClick(item)}
-                    className="relative cursor-pointer text-left text-neutral-600 dark:text-neutral-300"
+                    className="relative cursor-pointer text-lefttext-neutral-300"
                   >
                     <span className="block">{item.name}</span>
                   </button>

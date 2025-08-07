@@ -7,7 +7,8 @@ import {
   AnimatePresence,
   useMotionValue,
   useSpring,
-} from "motion/react";
+} from "framer-motion";
+import Image from "next/image";
 
 export const AnimatedTooltip = ({
   items,
@@ -25,12 +26,12 @@ export const AnimatedTooltip = ({
   // rotate the tooltip
   const rotate = useSpring(
     useTransform(x, [-100, 100], [-45, 45]),
-    springConfig,
+    springConfig
   );
   // translate the tooltip
   const translateX = useSpring(
     useTransform(x, [-100, 100], [-50, 50]),
-    springConfig,
+    springConfig
   );
   const handleMouseMove = (event: React.MouseEvent<HTMLImageElement>) => {
     const halfWidth = event.currentTarget.offsetWidth / 2;
@@ -46,7 +47,7 @@ export const AnimatedTooltip = ({
           onMouseEnter={() => setHoveredIndex(item.id)}
           onMouseLeave={() => setHoveredIndex(null)}
         >
-          <AnimatePresence mode="popLayout">
+          <AnimatePresence>
             {hoveredIndex === item.id && (
               <motion.div
                 initial={{ opacity: 0, y: 20, scale: 0.6 }}
@@ -77,7 +78,7 @@ export const AnimatedTooltip = ({
               </motion.div>
             )}
           </AnimatePresence>
-          <img
+          <Image
             onMouseMove={handleMouseMove}
             height={100}
             width={100}

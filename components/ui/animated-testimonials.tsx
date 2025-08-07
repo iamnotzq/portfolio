@@ -1,9 +1,9 @@
 "use client";
 
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
-import { motion, AnimatePresence } from "motion/react";
-
-import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState, useCallback } from "react";
+import Image from "next/image";
 
 type Testimonial = {
   quote: string;
@@ -20,9 +20,9 @@ export const AnimatedTestimonials = ({
 }) => {
   const [active, setActive] = useState(0);
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     setActive((prev) => (prev + 1) % testimonials.length);
-  };
+  }, [testimonials.length]);
 
   const handlePrev = () => {
     setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length);
@@ -37,7 +37,7 @@ export const AnimatedTestimonials = ({
       const interval = setInterval(handleNext, 5000);
       return () => clearInterval(interval);
     }
-  }, [autoplay]);
+  }, [autoplay, handleNext]);
 
   const randomRotateY = () => {
     return Math.floor(Math.random() * 21) - 10;
@@ -54,23 +54,20 @@ export const AnimatedTestimonials = ({
                   initial={{
                     opacity: 0,
                     scale: 0.9,
-                    z: -100,
+                    zIndex: -100,
                     rotate: randomRotateY(),
                   }}
                   animate={{
                     opacity: isActive(index) ? 1 : 0.7,
                     scale: isActive(index) ? 1 : 0.95,
-                    z: isActive(index) ? 0 : -100,
+                    zIndex: isActive(index) ? 0 : -100,
                     rotate: isActive(index) ? 0 : randomRotateY(),
-                    zIndex: isActive(index)
-                      ? 40
-                      : testimonials.length + 2 - index,
                     y: isActive(index) ? [0, -80, 0] : 0,
                   }}
                   exit={{
                     opacity: 0,
                     scale: 0.9,
-                    z: 100,
+                    zIndex: 100,
                     rotate: randomRotateY(),
                   }}
                   transition={{
@@ -79,7 +76,7 @@ export const AnimatedTestimonials = ({
                   }}
                   className="absolute inset-0 origin-bottom"
                 >
-                  <img
+                  <Image
                     src={testimonial.src}
                     alt={testimonial.name}
                     width={500}

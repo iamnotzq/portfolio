@@ -3,6 +3,7 @@ import { Feature, ICONS, Skeleton } from "@/lib/projects-data";
 import { BentoGrid, BentoGridItem } from "../ui/project-grid";
 import { Lens } from "../ui/lens";
 import { useState } from "react";
+import Image from "next/image";
 
 interface ProjectFeaturesProps {
   features: Feature[];
@@ -14,9 +15,11 @@ const FeatureItem = ({ item }: { item: Feature }) => {
   // Conditionally render an image or the skeleton loader
   const headerContent = item.imageUrl ? (
     <Lens hovering={hovering} setHovering={setHovering}>
-      <img
+      {/* FIX: Replaced <img> with next/image component for optimization */}
+      <Image
         src={item.imageUrl}
         alt={item.title}
+        fill
         className="flex-1 w-full h-full min-h-[10rem] rounded-xl object-cover"
       />
     </Lens>

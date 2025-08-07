@@ -1,5 +1,6 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import Image from "next/image";
 import { useMotionValueEvent, useScroll } from "framer-motion";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -50,9 +51,48 @@ export type ContentItem = {
 };
 
 /**
- * A new component to render the content for each card.
- * By making this a proper React component, it can have its own state (like 'hovering')
- * without violating the rules of hooks.
+ * A new component to render the image with a fallback mechanism.
+ * This uses next/image for optimization and handles potential loading errors,
+ * resolving the `no-img-element` and `alt-text` warnings.
+ * @param src The source URL for the image.
+ * @param alt The alternative text for the image.
+ * @param className Optional additional class names.
+ * @returns A React component.
+ */
+const ImageRenderer = ({
+  src,
+  alt,
+  className,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+}) => {
+  const [imgSrc, setImgSrc] = useState(src);
+  const placeholderSrc = `https://placehold.co/800x600/000000/FFFFFF?text=Image+Not+Found`;
+
+  // When the src prop from the parent changes, we update the state
+  useEffect(() => {
+    setImgSrc(src);
+  }, [src]);
+
+  return (
+    <Image
+      src={imgSrc}
+      alt={alt}
+      fill
+      className={cn("object-cover", className)}
+      onError={() => {
+        setImgSrc(placeholderSrc);
+      }}
+    />
+  );
+};
+
+
+/**
+ * A component to render the content for each card.
+ * It now delegates image rendering to the specialized ImageRenderer component.
  * @param item The ContentItem to render.
  * @returns A React component.
  */
@@ -62,14 +102,8 @@ const ContentRenderer = ({ item }: { item: ContentItem }) => {
       case "image":
         return (
           <Lens hovering={hovering} setHovering={setHovering}>
-          <img
-            {...item.content.props}
-            className={cn("h-full w-full object-cover", item.content.props.className)}
-            onError={(e) => {
-              e.currentTarget.src = `https://placehold.co/800x600/000000/FFFFFF?text=Image+Not+Found`;
-            }}
-            />
-            </Lens>
+            <ImageRenderer {...item.content.props} />
+          </Lens>
         );
       case "compare":
         return <Compare {...item.content.props} />;
@@ -154,7 +188,7 @@ export const StickyScroll = ({
                 height: item.height || DEFAULT_HEIGHT,
               }}
               className={cn(
-                "overflow-hidden rounded-lg bg-slate-900",
+                "overflow-hidden rounded-lg bg-slate-900 relative", // Added relative positioning for next/image fill
                 contentClassName
               )}
             >
@@ -218,7 +252,7 @@ export const StickyScroll = ({
               }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className={cn(
-                "overflow-hidden rounded-lg bg-slate-900",
+                "overflow-hidden rounded-lg bg-slate-900 relative", // Added relative positioning for next/image fill
                 contentClassName
               )}
             >

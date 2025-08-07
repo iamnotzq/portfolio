@@ -1,6 +1,5 @@
 "use client";
 import * as HoverCardPrimitive from "@radix-ui/react-hover-card";
-
 import { encode } from "qss";
 import React from "react";
 import {
@@ -9,10 +8,9 @@ import {
   useMotionValue,
   useSpring,
 } from "framer-motion";
-
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-// The `quality` and `layout` props have been removed from the type definition
 type LinkPreviewProps = {
   children: React.ReactNode;
   url: string;
@@ -22,7 +20,8 @@ type LinkPreviewProps = {
 } & (
   | { isStatic: true; imageSrc: string }
   | { isStatic?: false; imageSrc?: never }
-) & React.AnchorHTMLAttributes<HTMLAnchorElement>; // Allow anchor attributes
+) &
+  React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
 export const LinkPreview = ({
   children,
@@ -30,7 +29,6 @@ export const LinkPreview = ({
   className,
   width = 200,
   height = 125,
-  // The `quality` and `layout` props have been removed from the destructuring
   isStatic = false,
   imageSrc = "",
   ...rest
@@ -77,7 +75,7 @@ export const LinkPreview = ({
     <>
       {isMounted ? (
         <div className="hidden">
-          <img
+          <Image
             src={src}
             width={width}
             height={height}
@@ -93,17 +91,15 @@ export const LinkPreview = ({
           setOpen(open);
         }}
       >
-        <HoverCardPrimitive.Trigger
-            asChild
-        >
-            <a
-              href={url}
-              onMouseMove={handleMouseMove}
-              className={cn("text-black dark:text-white", className)}
-              {...rest}
-            >
-              {children}
-            </a>
+        <HoverCardPrimitive.Trigger asChild>
+          <a
+            href={url}
+            onMouseMove={handleMouseMove}
+            className={cn("text-white", className)}
+            {...rest}
+          >
+            {children}
+          </a>
         </HoverCardPrimitive.Trigger>
 
         <HoverCardPrimitive.Content
@@ -134,12 +130,12 @@ export const LinkPreview = ({
               >
                 <a
                   href={url}
-                  className="block p-1 bg-white border-2 border-transparent shadow rounded-xl hover:border-neutral-200 dark:hover:border-neutral-800"
+                  className="block p-1 bg-white border-2 border-transparent shadow rounded-xl hover:border-neutral-800"
                   style={{ fontSize: 0 }}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img
+                  <Image
                     src={isStatic ? imageSrc : src}
                     width={width}
                     height={height}

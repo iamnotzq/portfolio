@@ -1,11 +1,11 @@
 // components/project/project-demo.tsx
 import { DemoScreenshot } from "@/lib/projects-data";
 import { DraggableCardContainer, DraggableCardBody } from "../ui/draggable-card";
+import Image from "next/image";
 
 interface ProjectDemoProps {
   screenshots: DemoScreenshot[];
   displayType: 'macbook' | 'mobile';
-
 }
 
 export const ProjectDemo = ({ screenshots, displayType }: ProjectDemoProps) => {
@@ -25,11 +25,16 @@ export const ProjectDemo = ({ screenshots, displayType }: ProjectDemoProps) => {
         {screenshots.map((item, i) => (
           <DraggableCardBody key={i} className={item.className} displayType={displayType}>
          
-            <img
-              src={item.image}
-              alt={item.title}
-              className="pointer-events-none relative z-10 w-full h-auto rounded-lg shadow-2xl"
-            />
+            {/* FIX: Replaced <img> with next/image component for optimization */}
+            <div className="pointer-events-none relative z-10 w-full h-full rounded-lg shadow-2xl overflow-hidden">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  className="object-cover"
+                />
+            </div>
+
             <h3 className="mt-4 text-center text-xl font-bold  text-neutral-300">
               {item.title}
             </h3>

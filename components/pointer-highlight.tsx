@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
 export function PointerHighlight({
@@ -18,10 +18,11 @@ export function PointerHighlight({
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
-    if (containerRef.current) {
-      const { width, height } = containerRef.current.getBoundingClientRect();
-      setDimensions({ width, height });
-    }
+    const node = containerRef.current;
+    if (!node) return;
+
+    const { width, height } = node.getBoundingClientRect();
+    setDimensions({ width, height });
 
     const resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
@@ -30,15 +31,9 @@ export function PointerHighlight({
       }
     });
 
-    if (containerRef.current) {
-      resizeObserver.observe(containerRef.current);
-    }
+    resizeObserver.observe(node);
 
-    return () => {
-      if (containerRef.current) {
-        resizeObserver.unobserve(containerRef.current);
-      }
-    };
+    return () => resizeObserver.unobserve(node);
   }, []);
 
   return (
@@ -56,7 +51,7 @@ export function PointerHighlight({
         >
           <motion.div
             className={cn(
-              "absolute inset-0 border border-neutral-800 dark:border-neutral-200",
+              "absolute inset-0 border border-neutral-200",
               rectangleClassName,
             )}
             initial={{

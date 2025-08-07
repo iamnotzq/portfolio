@@ -35,10 +35,17 @@ export const BackgroundGradientAnimation = ({
 }) => {
   const interactiveRef = useRef<HTMLDivElement>(null);
 
-  const [curX, setCurX] = useState(0);
-  const [curY, setCurY] = useState(0);
-  const [tgX, setTgX] = useState(0);
-  const [tgY, setTgY] = useState(0);
+  // REFACTOR: Switched from useState to useRef for animation values.
+  // This prevents re-renders on every animation frame, improving performance.
+  // The animation loop can directly mutate these refs without triggering a component update.
+  const curX = useRef(0);
+  const curY = useRef(0);
+  const tgX = useRef(0);
+  const tgY = useRef(0);
+
+  // FIX 1: Added all dependencies to the useEffect dependency array.
+  // This resolves the first lint warning and ensures that if any of the color or size props change,
+  // the CSS custom properties will be updated correctly.
   useEffect(() => {
     document.body.style.setProperty(
       "--gradient-background-start",
@@ -56,33 +63,63 @@ export const BackgroundGradientAnimation = ({
     document.body.style.setProperty("--pointer-color", pointerColor);
     document.body.style.setProperty("--size", size);
     document.body.style.setProperty("--blending-value", blendingValue);
-  }, []);
+  }, [
+    gradientBackgroundStart,
+    gradientBackgroundEnd,
+    firstColor,
+    secondColor,
+    thirdColor,
+    fourthColor,
+    fifthColor,
+    pointerColor,
+    size,
+    blendingValue,
+  ]);
 
+  // FIX 2: Replaced the previous animation logic with a continuous requestAnimationFrame loop.
+  // This resolves the second lint warning and creates a smooth, constant animation
+  // where the interactive element gracefully follows the mouse cursor.
   useEffect(() => {
-    function move() {
+    const move = () => {
+      // If the ref isn't attached yet, don't run the animation
       if (!interactiveRef.current) {
         return;
       }
-      setCurX(curX + (tgX - curX) / 20);
-      setCurY(curY + (tgY - curY) / 20);
-      interactiveRef.current.style.transform = `translate(${Math.round(
-        curX
-      )}px, ${Math.round(curY)}px)`;
-    }
+      
+      // Linearly interpolate the current position towards the target position for a smooth effect
+      curX.current += (tgX.current - curX.current) / 20;
+      curY.current += (tgY.current - curY.current) / 20;
 
-    move();
-  }, [tgX, tgY]);
+      // Update the transform style of the interactive element directly
+      interactiveRef.current.style.transform = `translate(${Math.round(
+        curX.current
+      )}px, ${Math.round(curY.current)}px)`;
+      
+      // Request the next animation frame to continue the loop
+      requestAnimationFrame(move);
+    };
+
+    // Start the animation loop
+    const animationFrameId = requestAnimationFrame(move);
+    
+    // Clean up the animation frame when the component unmounts to prevent memory leaks
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []); // The empty dependency array ensures this effect runs only once when the component mounts.
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     if (interactiveRef.current) {
       const rect = interactiveRef.current.getBoundingClientRect();
-      setTgX(event.clientX - rect.left);
-      setTgY(event.clientY - rect.top);
+      // Update the target position refs based on the mouse's position relative to the element
+      tgX.current = event.clientX - rect.left;
+      tgY.current = event.clientY - rect.top;
     }
   };
 
   const [isSafari, setIsSafari] = useState(false);
   useEffect(() => {
+    // Detect if the browser is Safari to apply a specific style fallback
     setIsSafari(/^((?!chrome|android).)*safari/i.test(navigator.userAgent));
   }, []);
 
