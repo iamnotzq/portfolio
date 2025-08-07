@@ -9,7 +9,7 @@ import {
 } from "framer-motion";
 
 import React, { useState } from "react";
-
+import Link from "next/link";
 
 interface NavbarProps {
   children: React.ReactNode;
@@ -48,7 +48,6 @@ interface MobileNavMenuProps {
   children: React.ReactNode;
   className?: string;
   isOpen: boolean;
-  onClose: () => void;
 }
 
 export const Navbar = ({ children, className }: NavbarProps) => {
@@ -211,7 +210,6 @@ export const MobileNavMenu = ({
   children,
   className,
   isOpen,
-  onClose,
 }: MobileNavMenuProps) => {
   return (
     <AnimatePresence>
@@ -248,7 +246,7 @@ export const MobileNavToggle = ({
 
 export const NavbarLogo = () => {
   return (
-    <a
+    <Link
       href="/"
       className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal"
     >
@@ -259,7 +257,7 @@ export const NavbarLogo = () => {
         height={30}
       />
       <span className="font-medium text-white">LAM ZHI QIANG</span>
-    </a>
+    </Link>
   );
 };
 

@@ -9,6 +9,7 @@ import React, {
 } from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import Image from "next/image";
 import { CarouselSlideData } from "@/lib/projects-data";
 import { ExternalLink, GitBranch, ArrowRight } from "lucide-react"; // Import icons
 
@@ -121,7 +122,6 @@ export const CardItem = ({
   rotateX?: number | string;
   rotateY?: number | string;
   rotateZ?: number | string;
-  [key: string]: any;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isMouseEntered] = useMouseEnter();
@@ -193,9 +193,11 @@ const Slide = ({ slide, index, current, handleSlideClick }: { slide: CarouselSli
           
           {/* Image container */}
           <CardItem translateZ="80" className="w-full mt-4 flex-grow relative aspect-video">
-            <img
+            <Image
               src={src}
-              className="absolute inset-0 h-full w-full object-cover rounded-xl group-hover/card:shadow-xl"
+              fill
+              style={{ objectFit: 'cover' }}
+              className="rounded-xl group-hover/card:shadow-xl"
               alt={title}
             />
           </CardItem>
