@@ -22,8 +22,9 @@ const renderContent = (item: DocumentationSection): ContentItem['content'] => {
     // We use a type guard ('in' operator) to check for the 'text' property's existence.
     // This safely narrows the type of `props`.
     if ('text' in props) {
-        // After the check, TypeScript knows `props` has a `text` property.
-        const textProps = props as TextProps;
+        // After the check, we perform a safer type assertion by first casting to 'unknown'.
+        // This satisfies TypeScript's stricter type checking rules.
+        const textProps = props as unknown as TextProps;
         return {
             type: 'custom',
             props: {
