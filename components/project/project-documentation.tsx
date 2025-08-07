@@ -8,19 +8,28 @@ interface ProjectDocumentationProps {
     // The 'displayType' prop is no longer needed as dimensions are data-driven.
 }
 
+// Define potential prop types for content items.
+// This helps TypeScript understand the possible shapes of `props`.
+interface TextProps {
+    text: string;
+}
+
 // Helper function to render content based on type
 const renderContent = (item: DocumentationSection): ContentItem['content'] => {
     const { type, props } = item.content;
 
     // This is a special case to handle a simple 'text' prop.
-    // It formats it into a 'custom' content type for StickyScroll.
-    if (props.text) {
+    // We use a type guard ('in' operator) to check for the 'text' property's existence.
+    // This safely narrows the type of `props`.
+    if ('text' in props) {
+        // After the check, TypeScript knows `props` has a `text` property.
+        const textProps = props as TextProps;
         return {
             type: 'custom',
             props: {
                 content: (
                     <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white text-2xl font-bold p-4 rounded-lg">
-                        {props.text}
+                        {textProps.text}
                     </div>
                 )
             }
