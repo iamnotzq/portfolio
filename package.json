@@ -19,6 +19,8 @@
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.8.1",
     "@types/react-syntax-highlighter": "^15.5.13",
+    "@vercel/analytics": "^1.5.0",
+    "@vercel/speed-insights": "^1.2.0",
     "clsx": "^2.1.1",
     "cobe": "^0.6.4",
     "dotted-map": "^2.2.3",
@@ -50,6 +52,6 @@
     "typescript": "^5"
   },
   "lint-staged": {
-  "*.{js,jsx,ts,tsx}": "eslint --fix"
-}
+    "*.{js,jsx,ts,tsx}": "eslint --fix"
+  }
 }
