@@ -343,7 +343,7 @@ const ContactContent = () => {
 
 const ProjectsContent = () => (
     <div className="h-full w-full flex flex-col items-center py-2 lg:pt-4">
-        <div className="my-auto">
+        <div className="my-auto w-full">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -353,7 +353,7 @@ const ProjectsContent = () => (
                 <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-orbitron">
                     <span className="text-white">{'['}</span><span className="text-orange-400">{`"projects"`}</span><span className="text-white">{']'}</span>
                 </h2>
-                <p className="text-neutral-300 md:text-sm lg:text-base text-xs max-w-lg pb-2 mx-auto">
+                <p className="text-neutral-300 md:text-sm lg:text-base text-xs max-w-md pb-2 mx-auto">
                     Selected works demonstrating my skills in full-stack development and end-to-end project delivery.
                 </p>
             </motion.div>
@@ -461,21 +461,21 @@ const Menu = ({
     
    
         if (activeItem === 'projects') {
-            if (item.id === 'projects') return 'col-span-2 row-span-12 xl:col-span-3 xl:row-span-2';
-            if (item.id === 'about')    return 'row-start-1 row-span-3 xl:col-span-1 xl:row-span-2';
-            if (item.id === 'contact')  return 'row-start-1 row-span-3 xl:col-span-1 xl:row-span-2';
+            if (item.id === 'projects') return ' row-span-4 xl:col-span-3 xl:row-span-2';
+            if (item.id === 'about')    return 'row-start-1 row-span-1 xl:col-span-1 xl:row-span-2';
+            if (item.id === 'contact')  return 'row-span-1 xl:col-span-1 xl:row-span-2';
         }
     
         if (activeItem === 'about') {
-            if (item.id === 'about')    return 'col-span-2 row-span-12 xl:col-span-3 xl:row-span-2';
-            if (item.id === 'projects') return 'row-start-1 row-span-3 xl:col-span-2 xl:row-span-1';
-            if (item.id === 'contact')  return 'row-start-1 row-span-3 xl:col-span-2 xl:row-span-1';
+            if (item.id === 'about')    return 'row-span-4 xl:col-span-3 xl:row-span-2';
+            if (item.id === 'projects') return 'row-start-1 xl:col-span-2 xl:row-span-1';
+            if (item.id === 'contact')  return ' xl:col-span-2 xl:row-span-1';
         }
     
         if (activeItem === 'contact') {
-            if (item.id === 'contact')  return 'col-span-2 row-span-12 xl:col-span-3 xl:row-span-2 xl:col-start-3';
-            if (item.id === 'projects') return 'row-span-3 xl:col-span-2 xl:row-span-1 xl:col-start-1';
-            if (item.id === 'about')    return 'row-span-3 xl:col-span-2 xl:row-span-1 xl:row-start-2 xl:col-start-1';
+            if (item.id === 'contact')  return ' row-start-2 row-span-4 xl:col-span-3 xl:row-span-2 xl:col-start-3';
+            if (item.id === 'projects') return 'row-start-1 row-span-1 xl:col-span-2 xl:row-span-1 xl:col-start-1';
+            if (item.id === 'about')    return 'row-span-1 xl:col-span-2 xl:row-span-1 xl:row-start-2 xl:col-start-1';
         }
     
         return item.className;
@@ -540,7 +540,7 @@ const Menu = ({
             >
                 <div className="relative w-full h-full p-6 md:p-8 lg:p-10 xl:p-12 ">
                 <div className="relative w-full h-full rounded-2xl ">
-                        <BentoGrid className="w-full h-full grid-rows-15 xl:grid-rows-2">
+                        <BentoGrid className="w-full h-full grid-rows-6 xl:grid-rows-2">
                             {sortedItems.map((item) => (
                                 <motion.div
                                     key={item.id}
