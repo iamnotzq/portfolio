@@ -325,7 +325,7 @@ export const slideData: ProjectData[] = [
           type: 'compare',
           props: {
             firstImage: "/projects/workforceApp/documentation/wireframe.png",
-            secondImage: "/projects/workforceApp/documentation/homepage.jpg",
+            secondImage: "/projects/workforceApp/documentation/homePage.jpg",
             firstImageClassName: "object-cover ",
             secondImageClassName: "object-cover ",
             className: "h-full w-full rounded-lg",
